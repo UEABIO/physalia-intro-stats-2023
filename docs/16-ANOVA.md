@@ -71,36 +71,10 @@ anova(lsmodel1)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum Sq </th>
-   <th style="text-align:right;"> Mean Sq </th>
-   <th style="text-align:right;"> F value </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> type </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 51.35208 </td>
-   <td style="text-align:right;"> 51.352083 </td>
-   <td style="text-align:right;"> 5.939518 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 242.08333 </td>
-   <td style="text-align:right;"> 8.645833 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-</tbody>
-</table>
+|          | Df|    Sum Sq|   Mean Sq|  F value|    Pr(>F)|
+|:---------|--:|---------:|---------:|--------:|---------:|
+|type      |  1|  51.35208| 51.352083| 5.939518| 0.0214145|
+|Residuals | 28| 242.08333|  8.645833|       NA|        NA|
 
 </div>
 
@@ -178,44 +152,11 @@ anova(lsmodel2)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum Sq </th>
-   <th style="text-align:right;"> Mean Sq </th>
-   <th style="text-align:right;"> F value </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> type </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 51.35208 </td>
-   <td style="text-align:right;"> 51.352083 </td>
-   <td style="text-align:right;"> 4.6138501 </td>
-   <td style="text-align:right;"> 0.0497029 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> as.factor(pair) </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 86.26354 </td>
-   <td style="text-align:right;"> 6.161682 </td>
-   <td style="text-align:right;"> 0.5536109 </td>
-   <td style="text-align:right;"> 0.8597119 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Residuals </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 155.81979 </td>
-   <td style="text-align:right;"> 11.129985 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-</tbody>
-</table>
+|                | Df|    Sum Sq|   Mean Sq|   F value|    Pr(>F)|
+|:---------------|--:|---------:|---------:|---------:|---------:|
+|type            |  1|  51.35208| 51.352083| 4.6138501| 0.0497029|
+|as.factor(pair) | 14|  86.26354|  6.161682| 0.5536109| 0.8597119|
+|Residuals       | 14| 155.81979| 11.129985|        NA|        NA|
 
 </div>
 
@@ -340,48 +281,11 @@ broom::tidy(lsmodel_frogs1, conf.int = T)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 26.3 </td>
-   <td style="text-align:right;"> 0.2571777 </td>
-   <td style="text-align:right;"> 102.26394 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 25.785011 </td>
-   <td style="text-align:right;"> 26.814989 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> temperature18 </td>
-   <td style="text-align:right;"> -5.3 </td>
-   <td style="text-align:right;"> 0.3637041 </td>
-   <td style="text-align:right;"> -14.57228 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -6.028305 </td>
-   <td style="text-align:right;"> -4.571695 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> temperature25 </td>
-   <td style="text-align:right;"> -10.1 </td>
-   <td style="text-align:right;"> 0.3637041 </td>
-   <td style="text-align:right;"> -27.76982 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -10.828305 </td>
-   <td style="text-align:right;"> -9.371695 </td>
-  </tr>
-</tbody>
-</table>
+|term          | estimate| std.error| statistic| p.value|   conf.low| conf.high|
+|:-------------|--------:|---------:|---------:|-------:|----------:|---------:|
+|(Intercept)   |     26.3| 0.2571777| 102.26394|       0|  25.785011| 26.814989|
+|temperature18 |     -5.3| 0.3637041| -14.57228|       0|  -6.028305| -4.571695|
+|temperature25 |    -10.1| 0.3637041| -27.76982|       0| -10.828305| -9.371695|
 
 </div>
 </div></div></div>
@@ -397,7 +301,7 @@ Can you check the assumptions of your model? </div></div>
 plot(lsmodel_frogs1)
 ```
 
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-2.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-3.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-2.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-3.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-4.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 
 ```r
@@ -405,7 +309,7 @@ performance::check_model(lsmodel_frogs1,
                          check = c("qq", "outliers", "homogeneity"))
 ```
 
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-18') </script></div></div></div>
 
 
@@ -437,8 +341,8 @@ frogs %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-25-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-25)Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.</p>
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-28-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-28)Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.</p>
 </div>
 
 Whereas the next figure, uses the `emmeans()` package to produce estimate means and confidence intervals from the `lm()` and therefore is the produce of inferential statistics, this figure illustrates the estimates of our model rather than the parameters of our sample.
@@ -484,8 +388,8 @@ emmeans::emmeans(lsmodel_frogs1, specs = ~temperature) %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-26)Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P < 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.</p>
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-29-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-29)Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P < 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.</p>
 </div>
 </div></div></div>
 

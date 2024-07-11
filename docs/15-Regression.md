@@ -90,7 +90,7 @@ janka %>%
   geom_point()
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 
@@ -134,32 +134,9 @@ janka %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> var1 </th>
-   <th style="text-align:left;"> var2 </th>
-   <th style="text-align:right;"> cor </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-   <th style="text-align:left;"> method </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> dens </td>
-   <td style="text-align:left;"> hardness </td>
-   <td style="text-align:right;"> 0.97 </td>
-   <td style="text-align:right;"> 25.23845 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.949849 </td>
-   <td style="text-align:right;"> 0.9869454 </td>
-   <td style="text-align:left;"> Pearson </td>
-  </tr>
-</tbody>
-</table>
+|var1 |var2     |  cor| statistic|  p| conf.low| conf.high|method  |
+|:----|:--------|----:|---------:|--:|--------:|---------:|:-------|
+|dens |hardness | 0.97|  25.23845|  0| 0.949849| 0.9869454|Pearson |
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-10') </script></div></div></div>
@@ -257,33 +234,10 @@ janka_ls1 %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -1160.49970 </td>
-   <td style="text-align:right;"> 108.579605 </td>
-   <td style="text-align:right;"> -10.68801 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> dens </td>
-   <td style="text-align:right;"> 57.50667 </td>
-   <td style="text-align:right;"> 2.278534 </td>
-   <td style="text-align:right;"> 25.23845 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+|term        |    estimate|  std.error| statistic| p.value|
+|:-----------|-----------:|----------:|---------:|-------:|
+|(Intercept) | -1160.49970| 108.579605| -10.68801|       0|
+|dens        |    57.50667|   2.278534|  25.23845|       0|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-14') </script>
@@ -333,39 +287,10 @@ broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> -1160.49970 </td>
-   <td style="text-align:right;"> 108.579605 </td>
-   <td style="text-align:right;"> -10.68801 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -1381.16001 </td>
-   <td style="text-align:right;"> -939.83940 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> dens </td>
-   <td style="text-align:right;"> 57.50667 </td>
-   <td style="text-align:right;"> 2.278534 </td>
-   <td style="text-align:right;"> 25.23845 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 52.87614 </td>
-   <td style="text-align:right;"> 62.13721 </td>
-  </tr>
-</tbody>
-</table>
+|term        |    estimate|  std.error| statistic| p.value|    conf.low|  conf.high|
+|:-----------|-----------:|----------:|---------:|-------:|-----------:|----------:|
+|(Intercept) | -1160.49970| 108.579605| -10.68801|       0| -1381.16001| -939.83940|
+|dens        |    57.50667|   2.278534|  25.23845|       0|    52.87614|   62.13721|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-16') </script>
@@ -422,40 +347,9 @@ janka_ls1 %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> r.squared </th>
-   <th style="text-align:right;"> adj.r.squared </th>
-   <th style="text-align:right;"> sigma </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> df </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> deviance </th>
-   <th style="text-align:right;"> df.residual </th>
-   <th style="text-align:right;"> nobs </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 0.9493278 </td>
-   <td style="text-align:right;"> 0.9478374 </td>
-   <td style="text-align:right;"> 183.0595 </td>
-   <td style="text-align:right;"> 636.9794 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> -237.6061 </td>
-   <td style="text-align:right;"> 481.2123 </td>
-   <td style="text-align:right;"> 485.9628 </td>
-   <td style="text-align:right;"> 1139366 </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 36 </td>
-  </tr>
-</tbody>
-</table>
+| r.squared| adj.r.squared|    sigma| statistic| p.value| df|    logLik|      AIC|      BIC| deviance| df.residual| nobs|
+|---------:|-------------:|--------:|---------:|-------:|--:|---------:|--------:|--------:|--------:|-----------:|----:|
+| 0.9493278|     0.9478374| 183.0595|  636.9794|       0|  1| -237.6061| 481.2123| 485.9628|  1139366|          34|   36|
 
 </div>
 
@@ -536,82 +430,14 @@ janka_ls1 %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> hardness </th>
-   <th style="text-align:right;"> dens </th>
-   <th style="text-align:right;"> .fitted </th>
-   <th style="text-align:right;"> .resid </th>
-   <th style="text-align:right;"> .hat </th>
-   <th style="text-align:right;"> .sigma </th>
-   <th style="text-align:right;"> .cooksd </th>
-   <th style="text-align:right;"> .std.resid </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 484 </td>
-   <td style="text-align:right;"> 24.7 </td>
-   <td style="text-align:right;"> 259.9152 </td>
-   <td style="text-align:right;"> 224.084837 </td>
-   <td style="text-align:right;"> 0.0963176 </td>
-   <td style="text-align:right;"> 181.2248 </td>
-   <td style="text-align:right;"> 0.0883658 </td>
-   <td style="text-align:right;"> 1.2876929 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 427 </td>
-   <td style="text-align:right;"> 24.8 </td>
-   <td style="text-align:right;"> 265.6658 </td>
-   <td style="text-align:right;"> 161.334170 </td>
-   <td style="text-align:right;"> 0.0956674 </td>
-   <td style="text-align:right;"> 183.4505 </td>
-   <td style="text-align:right;"> 0.0454303 </td>
-   <td style="text-align:right;"> 0.9267658 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 413 </td>
-   <td style="text-align:right;"> 27.3 </td>
-   <td style="text-align:right;"> 409.4325 </td>
-   <td style="text-align:right;"> 3.567483 </td>
-   <td style="text-align:right;"> 0.0804200 </td>
-   <td style="text-align:right;"> 185.8113 </td>
-   <td style="text-align:right;"> 0.0000181 </td>
-   <td style="text-align:right;"> 0.0203224 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 517 </td>
-   <td style="text-align:right;"> 28.4 </td>
-   <td style="text-align:right;"> 472.6899 </td>
-   <td style="text-align:right;"> 44.310140 </td>
-   <td style="text-align:right;"> 0.0743247 </td>
-   <td style="text-align:right;"> 185.6394 </td>
-   <td style="text-align:right;"> 0.0025410 </td>
-   <td style="text-align:right;"> 0.2515831 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 549 </td>
-   <td style="text-align:right;"> 28.4 </td>
-   <td style="text-align:right;"> 472.6899 </td>
-   <td style="text-align:right;"> 76.310140 </td>
-   <td style="text-align:right;"> 0.0743247 </td>
-   <td style="text-align:right;"> 185.2987 </td>
-   <td style="text-align:right;"> 0.0075364 </td>
-   <td style="text-align:right;"> 0.4332720 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 648 </td>
-   <td style="text-align:right;"> 29.0 </td>
-   <td style="text-align:right;"> 507.1939 </td>
-   <td style="text-align:right;"> 140.806136 </td>
-   <td style="text-align:right;"> 0.0711580 </td>
-   <td style="text-align:right;"> 184.0637 </td>
-   <td style="text-align:right;"> 0.0243988 </td>
-   <td style="text-align:right;"> 0.7981020 </td>
-  </tr>
-</tbody>
-</table>
+| hardness| dens|  .fitted|     .resid|      .hat|   .sigma|   .cooksd| .std.resid|
+|--------:|----:|--------:|----------:|---------:|--------:|---------:|----------:|
+|      484| 24.7| 259.9152| 224.084837| 0.0963176| 181.2248| 0.0883658|  1.2876929|
+|      427| 24.8| 265.6658| 161.334170| 0.0956674| 183.4505| 0.0454303|  0.9267658|
+|      413| 27.3| 409.4325|   3.567483| 0.0804200| 185.8113| 0.0000181|  0.0203224|
+|      517| 28.4| 472.6899|  44.310140| 0.0743247| 185.6394| 0.0025410|  0.2515831|
+|      549| 28.4| 472.6899|  76.310140| 0.0743247| 185.2987| 0.0075364|  0.4332720|
+|      648| 29.0| 507.1939| 140.806136| 0.0711580| 184.0637| 0.0243988|  0.7981020|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-21') </script>
@@ -687,14 +513,14 @@ Here you can see it is mostly pretty good, with just one or two data points outs
 plot(janka_ls1, which=c(2,2))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
 
 ```r
 performance::check_model(janka_ls1, check=c("normality","qq"))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-24') </script></div></div></div>
 
 
@@ -713,14 +539,14 @@ Both plots suggests that the residuals **do not** have constant variance, broadl
 plot(janka_ls1, which=c(1,3))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-43-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
 
 ```r
 performance::check_model(janka_ls1, check="homogeneity")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-25') </script></div></div></div>
 
 #### Outliers
@@ -737,14 +563,14 @@ What is it's positional order in the dataframe? <input class='webex-solveme nosp
 plot(janka_ls1, which=c(4,5))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-45-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-50-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 performance::check_model(janka_ls1, check="outliers")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-26') </script></div></div></div>
 
 Check the data, does this make sense?
@@ -821,28 +647,11 @@ broom::augment(janka_ls1,
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> dens </th>
-   <th style="text-align:right;"> .fitted </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 104.6471 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 852.2339 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 2577.4342 </td>
-  </tr>
-</tbody>
-</table>
+| dens|   .fitted|
+|----:|---------:|
+|   22|  104.6471|
+|   35|  852.2339|
+|   65| 2577.4342|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-30') </script></div></div></div>
@@ -860,32 +669,11 @@ broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65)), se=TRUE)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> dens </th>
-   <th style="text-align:right;"> .fitted </th>
-   <th style="text-align:right;"> .se.fit </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 104.6471 </td>
-   <td style="text-align:right;"> 62.09026 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 852.2339 </td>
-   <td style="text-align:right;"> 39.10197 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 2577.4342 </td>
-   <td style="text-align:right;"> 53.46068 </td>
-  </tr>
-</tbody>
-</table>
+| dens|   .fitted|  .se.fit|
+|----:|---------:|--------:|
+|   22|  104.6471| 62.09026|
+|   35|  852.2339| 39.10197|
+|   65| 2577.4342| 53.46068|
 
 </div>
 
@@ -898,36 +686,11 @@ broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65)), interval="confidence
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> dens </th>
-   <th style="text-align:right;"> .fitted </th>
-   <th style="text-align:right;"> .lower </th>
-   <th style="text-align:right;"> .upper </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 22 </td>
-   <td style="text-align:right;"> 104.6471 </td>
-   <td style="text-align:right;"> -21.53544 </td>
-   <td style="text-align:right;"> 230.8297 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 852.2339 </td>
-   <td style="text-align:right;"> 772.76915 </td>
-   <td style="text-align:right;"> 931.6987 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 65 </td>
-   <td style="text-align:right;"> 2577.4342 </td>
-   <td style="text-align:right;"> 2468.78899 </td>
-   <td style="text-align:right;"> 2686.0793 </td>
-  </tr>
-</tbody>
-</table>
+| dens|   .fitted|     .lower|    .upper|
+|----:|---------:|----------:|---------:|
+|   22|  104.6471|  -21.53544|  230.8297|
+|   35|  852.2339|  772.76915|  931.6987|
+|   65| 2577.4342| 2468.78899| 2686.0793|
 
 </div>
 

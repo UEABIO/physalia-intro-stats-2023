@@ -375,38 +375,22 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:right;">
-mean
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="right">mean</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:right;">
-NA
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="right">NA</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:right;">
-3733.088
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="right">3733.088</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:right;">
-NA
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table></div>
@@ -418,38 +402,22 @@ NA
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:right;">
-mean
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="right">mean</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:right;">
-3700.662
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="right">3700.662</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:right;">
-3733.088
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="right">3733.088</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:right;">
-5076.016
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="right">5076.016</td>
 </tr>
 </tbody>
 </table></div>
@@ -461,38 +429,22 @@ Gentoo
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:right;">
-count_na
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="right">count_na</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:right;">
-1
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="right">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="right">0</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:right;">
-1
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="right">1</td>
 </tr>
 </tbody>
 </table></div>
@@ -515,52 +467,36 @@ Gentoo
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-sex
-</th>
+<thead><tr class="header">
+<th align="left">sex</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
+<tr class="odd">
+<td align="left">MALE</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
+<tr class="even">
+<td align="left">FEMALE</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
+<tr class="odd">
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
+<tr class="even">
+<td align="left">Gentoo</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
+<tr class="odd">
+<td align="left">Chinstrap</td>
 </tr>
 </tbody>
 </table></div>
@@ -572,202 +508,90 @@ Chinstrap
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-sex
-</th>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:left;">
-region
-</th>
-<th style="text-align:left;">
-island
-</th>
+<thead><tr class="header">
+<th align="left">sex</th>
+<th align="left">species</th>
+<th align="left">region</th>
+<th align="left">island</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Torgersen
-</td>
+<tr class="odd">
+<td align="left">MALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Torgersen</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Torgersen
-</td>
+<tr class="even">
+<td align="left">FEMALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Torgersen</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Torgersen
-</td>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Torgersen</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
+<tr class="even">
+<td align="left">FEMALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Biscoe</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
+<tr class="odd">
+<td align="left">MALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Biscoe</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Dream
-</td>
+<tr class="even">
+<td align="left">FEMALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Dream</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Dream
-</td>
+<tr class="odd">
+<td align="left">MALE</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Dream</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Dream
-</td>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">Adelie</td>
+<td align="left">Anvers</td>
+<td align="left">Dream</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
+<tr class="odd">
+<td align="left">FEMALE</td>
+<td align="left">Gentoo</td>
+<td align="left">Anvers</td>
+<td align="left">Biscoe</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
+<tr class="even">
+<td align="left">MALE</td>
+<td align="left">Gentoo</td>
+<td align="left">Anvers</td>
+<td align="left">Biscoe</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Biscoe
-</td>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Gentoo</td>
+<td align="left">Anvers</td>
+<td align="left">Biscoe</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Dream
-</td>
+<tr class="even">
+<td align="left">FEMALE</td>
+<td align="left">Chinstrap</td>
+<td align="left">Anvers</td>
+<td align="left">Dream</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-Anvers
-</td>
-<td style="text-align:left;">
-Dream
-</td>
+<tr class="odd">
+<td align="left">MALE</td>
+<td align="left">Chinstrap</td>
+<td align="left">Anvers</td>
+<td align="left">Dream</td>
 </tr>
 </tbody>
 </table></div>
@@ -785,33 +609,23 @@ Dream
 <span>               na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:right;">
-body_mass_g_max
-</th>
-<th style="text-align:right;">
-flipper_length_mm_max
-</th>
-<th style="text-align:right;">
-body_mass_g_min
-</th>
-<th style="text-align:right;">
-flipper_length_mm_min
-</th>
+<colgroup>
+<col width="21%">
+<col width="28%">
+<col width="21%">
+<col width="28%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">body_mass_g_max</th>
+<th align="right">flipper_length_mm_max</th>
+<th align="right">body_mass_g_min</th>
+<th align="right">flipper_length_mm_min</th>
 </tr></thead>
-<tbody><tr>
-<td style="text-align:right;">
-6300
-</td>
-<td style="text-align:right;">
-231
-</td>
-<td style="text-align:right;">
-2700
-</td>
-<td style="text-align:right;">
-172
-</td>
+<tbody><tr class="odd">
+<td align="right">6300</td>
+<td align="right">231</td>
+<td align="right">2700</td>
+<td align="right">172</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -910,38 +724,22 @@ There appear to be more data points to the right of the peak of the histogram th
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:right;">
-n
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="right">n</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:right;">
-152
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="right">152</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:right;">
-68
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="right">68</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:right;">
-124
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="right">124</td>
 </tr>
 </tbody>
 </table></div>
@@ -956,50 +754,26 @@ Gentoo
 <span><span class="va">prob_obs_species</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:right;">
-prob_obs
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="right">n</th>
+<th align="right">prob_obs</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:right;">
-152
-</td>
-<td style="text-align:right;">
-0.4418605
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="right">152</td>
+<td align="right">0.4418605</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:right;">
-68
-</td>
-<td style="text-align:right;">
-0.1976744
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="right">68</td>
+<td align="right">0.1976744</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:right;">
-124
-</td>
-<td style="text-align:right;">
-0.3604651
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="right">124</td>
+<td align="right">0.3604651</td>
 </tr>
 </tbody>
 </table></div>
@@ -1069,132 +843,60 @@ Think about what might be a suitable confounding variable to investigate and gra
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prob_obs <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-species
-</th>
-<th style="text-align:left;">
-sex
-</th>
-<th style="text-align:right;">
-n
-</th>
-<th style="text-align:right;">
-prob_obs
-</th>
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="left">sex</th>
+<th align="right">n</th>
+<th align="right">prob_obs</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:right;">
-73
-</td>
-<td style="text-align:right;">
-0.4802632
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="left">FEMALE</td>
+<td align="right">73</td>
+<td align="right">0.4802632</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:right;">
-73
-</td>
-<td style="text-align:right;">
-0.4802632
-</td>
+<tr class="even">
+<td align="left">Adelie</td>
+<td align="left">MALE</td>
+<td align="right">73</td>
+<td align="right">0.4802632</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Adelie
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-0.0394737
-</td>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="left">NA</td>
+<td align="right">6</td>
+<td align="right">0.0394737</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:right;">
-0.5000000
-</td>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="left">FEMALE</td>
+<td align="right">34</td>
+<td align="right">0.5000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Chinstrap
-</td>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:right;">
-34
-</td>
-<td style="text-align:right;">
-0.5000000
-</td>
+<tr class="odd">
+<td align="left">Chinstrap</td>
+<td align="left">MALE</td>
+<td align="right">34</td>
+<td align="right">0.5000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-FEMALE
-</td>
-<td style="text-align:right;">
-58
-</td>
-<td style="text-align:right;">
-0.4677419
-</td>
+<tr class="even">
+<td align="left">Gentoo</td>
+<td align="left">FEMALE</td>
+<td align="right">58</td>
+<td align="right">0.4677419</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-MALE
-</td>
-<td style="text-align:right;">
-61
-</td>
-<td style="text-align:right;">
-0.4919355
-</td>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="left">MALE</td>
+<td align="right">61</td>
+<td align="right">0.4919355</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Gentoo
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-0.0403226
-</td>
+<tr class="even">
+<td align="left">Gentoo</td>
+<td align="left">NA</td>
+<td align="right">5</td>
+<td align="right">0.0403226</td>
 </tr>
 </tbody>
 </table></div>
@@ -1222,33 +924,17 @@ NA
 <span><span class="va">penguin_body_mass_summary</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:right;">
-mean_body_mass
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-median_body_mass
-</th>
-<th style="text-align:right;">
-iqr
-</th>
+<thead><tr class="header">
+<th align="right">mean_body_mass</th>
+<th align="right">sd</th>
+<th align="right">median_body_mass</th>
+<th align="right">iqr</th>
 </tr></thead>
-<tbody><tr>
-<td style="text-align:right;">
-4201.754
-</td>
-<td style="text-align:right;">
-801.9545
-</td>
-<td style="text-align:right;">
-4050
-</td>
-<td style="text-align:right;">
-1200
-</td>
+<tbody><tr class="odd">
+<td align="right">4201.754</td>
+<td align="right">801.9545</td>
+<td align="right">4050</td>
+<td align="right">1200</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -1379,38 +1065,22 @@ There are is a 'truncated' left tail of our normal distribution. We would predic
 <span>            quantile <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># scales package allows easy converting from data values to perceptual properties</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:right;">
-q_body_mass
-</th>
-<th style="text-align:left;">
-quantile
-</th>
+<thead><tr class="header">
+<th align="right">q_body_mass</th>
+<th align="left">quantile</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-3550
-</td>
-<td style="text-align:left;">
-25%
-</td>
+<tr class="odd">
+<td align="right">3550</td>
+<td align="left">25%</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4050
-</td>
-<td style="text-align:left;">
-50%
-</td>
+<tr class="even">
+<td align="right">4050</td>
+<td align="left">50%</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4750
-</td>
-<td style="text-align:left;">
-75%
-</td>
+<tr class="odd">
+<td align="right">4750</td>
+<td align="left">75%</td>
 </tr>
 </tbody>
 </table></div>
@@ -1706,27 +1376,15 @@ Solution
 <span>              sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">variance</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:right;">
-sum_squares
-</th>
-<th style="text-align:right;">
-variance
-</th>
-<th style="text-align:right;">
-sd
-</th>
+<thead><tr class="header">
+<th align="right">sum_squares</th>
+<th align="right">variance</th>
+<th align="right">sd</th>
 </tr></thead>
-<tbody><tr>
-<td style="text-align:right;">
-219307697
-</td>
-<td style="text-align:right;">
-641249.6
-</td>
-<td style="text-align:right;">
-800.7806
-</td>
+<tbody><tr class="odd">
+<td align="right">219307697</td>
+<td align="right">641249.6</td>
+<td align="right">800.7806</td>
 </tr></tbody>
 </table></div>
 </div>

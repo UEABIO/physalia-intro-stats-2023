@@ -247,39 +247,19 @@ Base R
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel0</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
 </tr></thead>
-<tbody><tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-18.88333
-</td>
-<td style="text-align:right;">
-0.5807599
-</td>
-<td style="text-align:right;">
-32.51487
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tbody><tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">18.88333</td>
+<td align="right">0.5807599</td>
+<td align="right">32.51487</td>
+<td align="right">0</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -310,57 +290,27 @@ p.value
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-20.191667
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-26.595880
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">20.191667</td>
+<td align="right">0.7592028</td>
+<td align="right">26.595880</td>
+<td align="right">0.0000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
--2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">-2.437113</td>
+<td align="right">0.0214145</td>
 </tr>
 </tbody>
 </table></div>
@@ -390,30 +340,18 @@ Solution
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-type
-</th>
-<th style="text-align:right;">
-mean
-</th>
+<thead><tr class="header">
+<th align="left">type</th>
+<th align="right">mean</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Cross
-</td>
-<td style="text-align:right;">
-20.19167
-</td>
+<tr class="odd">
+<td align="left">Cross</td>
+<td align="right">20.19167</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Self
-</td>
-<td style="text-align:right;">
-17.57500
-</td>
+<tr class="even">
+<td align="left">Self</td>
+<td align="right">17.57500</td>
 </tr>
 </tbody>
 </table></div>
@@ -520,75 +458,42 @@ Base R
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-<th style="text-align:right;">
-conf.low
-</th>
-<th style="text-align:right;">
-conf.high
-</th>
+<colgroup>
+<col width="16%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="12%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-20.191667
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-26.595880
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-<td style="text-align:right;">
-18.63651
-</td>
-<td style="text-align:right;">
-21.7468231
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">20.191667</td>
+<td align="right">0.7592028</td>
+<td align="right">26.595880</td>
+<td align="right">0.0000000</td>
+<td align="right">18.63651</td>
+<td align="right">21.7468231</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
--2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
-<td style="text-align:right;">
--4.81599
-</td>
-<td style="text-align:right;">
--0.4173433
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">-2.437113</td>
+<td align="right">0.0214145</td>
+<td align="right">-4.81599</td>
+<td align="right">-0.4173433</td>
 </tr>
 </tbody>
 </table></div>
@@ -629,75 +534,42 @@ treatments is still statistically significant at an of 0.01?
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span>, conf.level<span class="op">=</span><span class="fl">0.99</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-<th style="text-align:right;">
-conf.low
-</th>
-<th style="text-align:right;">
-conf.high
-</th>
+<colgroup>
+<col width="16%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-20.191667
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-26.595880
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-<td style="text-align:right;">
-18.093790
-</td>
-<td style="text-align:right;">
-22.2895433
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">20.191667</td>
+<td align="right">0.7592028</td>
+<td align="right">26.595880</td>
+<td align="right">0.0000000</td>
+<td align="right">18.093790</td>
+<td align="right">22.2895433</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
--2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
-<td style="text-align:right;">
--5.583512
-</td>
-<td style="text-align:right;">
-0.3501789
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">-2.437113</td>
+<td align="right">0.0214145</td>
+<td align="right">-5.583512</td>
+<td align="right">0.3501789</td>
 </tr>
 </tbody>
 </table></div>
@@ -720,57 +592,27 @@ typeSelf
 <span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-17.575000
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-23.149282
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">17.575000</td>
+<td align="right">0.7592028</td>
+<td align="right">23.149282</td>
+<td align="right">0.0000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeCross
-</td>
-<td style="text-align:right;">
-2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
-2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
+<tr class="even">
+<td align="left">typeCross</td>
+<td align="right">2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">2.437113</td>
+<td align="right">0.0214145</td>
 </tr>
 </tbody>
 </table></div>
@@ -847,12 +689,12 @@ Base R
 <div id="option1unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
 <div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-2.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-3.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-4.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-2.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-3.png" width="100%" style="display: block; margin: auto;"><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <script> javascript:hide('option2unnamed-chunk-23') </script>
 </div>

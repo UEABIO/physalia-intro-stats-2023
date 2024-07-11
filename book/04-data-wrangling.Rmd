@@ -9,6 +9,7 @@ library(tidyverse)
 library(janitor)
 library(lubridate)
 library(here)
+library(kableExtra)
 
 penguins <- read_csv(here("book", "files", "penguins_raw.csv"))
 ```
@@ -231,9 +232,9 @@ Name <- c("less than", "less than or equal to", "greater than", "greater than or
 box <- tibble(Operator, Name)
 
 box %>% 
-   kbl(caption = "Boolean expressions", 
+   kable(caption = "Boolean expressions", 
     booktabs = T) %>% 
-   kable_styling(full_width = FALSE, font_size=16)
+   kableExtra::kable_styling(full_width = FALSE, font_size=16)
 
 ```
 

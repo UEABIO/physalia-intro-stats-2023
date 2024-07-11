@@ -19,13 +19,13 @@ fig:unnamed-chunk-52
 fig:unnamed-chunk-56
 fig:unnamed-chunk-26
 tab:unnamed-chunk-20
-fig:unnamed-chunk-25
-fig:unnamed-chunk-42
+fig:unnamed-chunk-28
+fig:unnamed-chunk-29
 fig:unnamed-chunk-41
+fig:unnamed-chunk-42
 fig:unnamed-chunk-14
 fig:unnamed-chunk-16
 tab:unnamed-chunk-27
-fig:unnamed-chunk-28
 tab:unnamed-chunk-36
 fig:unnamed-chunk-37
 fig:unnamed-chunk-11

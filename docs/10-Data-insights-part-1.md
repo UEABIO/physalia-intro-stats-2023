@@ -181,28 +181,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> mean </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 3733.088 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-</tbody>
-</table>
+|species   |     mean|
+|:---------|--------:|
+|Adelie    |       NA|
+|Chinstrap | 3733.088|
+|Gentoo    |       NA|
 
 </div>
 
@@ -217,28 +200,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> mean </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 3700.662 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 3733.088 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 5076.016 </td>
-  </tr>
-</tbody>
-</table>
+|species   |     mean|
+|:---------|--------:|
+|Adelie    | 3700.662|
+|Chinstrap | 3733.088|
+|Gentoo    | 5076.016|
 
 </div>
 
@@ -253,28 +219,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> count_na </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-</tbody>
-</table>
+|species   | count_na|
+|:---------|--------:|
+|Adelie    |        1|
+|Chinstrap |        0|
+|Gentoo    |        1|
 
 </div>
 
@@ -295,45 +244,19 @@ penguins %>% distinct(species)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> sex </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-</tbody>
-</table>
+|sex    |
+|:------|
+|MALE   |
+|FEMALE |
+|NA     |
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-  </tr>
-</tbody>
-</table>
+|species   |
+|:---------|
+|Adelie    |
+|Gentoo    |
+|Chinstrap |
 
 </div>
 
@@ -348,96 +271,21 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> sex </th>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:left;"> region </th>
-   <th style="text-align:left;"> island </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Torgersen </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Torgersen </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Torgersen </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Biscoe </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Biscoe </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Dream </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Dream </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Dream </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Biscoe </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Biscoe </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Biscoe </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Dream </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:left;"> Anvers </td>
-   <td style="text-align:left;"> Dream </td>
-  </tr>
-</tbody>
-</table>
+|sex    |species   |region |island    |
+|:------|:---------|:------|:---------|
+|MALE   |Adelie    |Anvers |Torgersen |
+|FEMALE |Adelie    |Anvers |Torgersen |
+|NA     |Adelie    |Anvers |Torgersen |
+|FEMALE |Adelie    |Anvers |Biscoe    |
+|MALE   |Adelie    |Anvers |Biscoe    |
+|FEMALE |Adelie    |Anvers |Dream     |
+|MALE   |Adelie    |Anvers |Dream     |
+|NA     |Adelie    |Anvers |Dream     |
+|FEMALE |Gentoo    |Anvers |Biscoe    |
+|MALE   |Gentoo    |Anvers |Biscoe    |
+|NA     |Gentoo    |Anvers |Biscoe    |
+|FEMALE |Chinstrap |Anvers |Dream     |
+|MALE   |Chinstrap |Anvers |Dream     |
 
 </div>
 
@@ -455,24 +303,9 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> body_mass_g_max </th>
-   <th style="text-align:right;"> flipper_length_mm_max </th>
-   <th style="text-align:right;"> body_mass_g_min </th>
-   <th style="text-align:right;"> flipper_length_mm_min </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 6300 </td>
-   <td style="text-align:right;"> 231 </td>
-   <td style="text-align:right;"> 2700 </td>
-   <td style="text-align:right;"> 172 </td>
-  </tr>
-</tbody>
-</table>
+| body_mass_g_max| flipper_length_mm_max| body_mass_g_min| flipper_length_mm_min|
+|---------------:|---------------------:|---------------:|---------------------:|
+|            6300|                   231|            2700|                   172|
 
 </div>
 
@@ -565,28 +398,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> n </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 152 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 68 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 124 </td>
-  </tr>
-</tbody>
-</table>
+|species   |   n|
+|:---------|---:|
+|Adelie    | 152|
+|Chinstrap |  68|
+|Gentoo    | 124|
 
 </div>
 
@@ -605,32 +421,11 @@ prob_obs_species
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> prob_obs </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 152 </td>
-   <td style="text-align:right;"> 0.4418605 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 68 </td>
-   <td style="text-align:right;"> 0.1976744 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 124 </td>
-   <td style="text-align:right;"> 0.3604651 </td>
-  </tr>
-</tbody>
-</table>
+|species   |   n|  prob_obs|
+|:---------|---:|---------:|
+|Adelie    | 152| 0.4418605|
+|Chinstrap |  68| 0.1976744|
+|Gentoo    | 124| 0.3604651|
 
 </div>
 
@@ -715,66 +510,16 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:left;"> sex </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> prob_obs </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:right;"> 73 </td>
-   <td style="text-align:right;"> 0.4802632 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:right;"> 73 </td>
-   <td style="text-align:right;"> 0.4802632 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.0394737 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> FEMALE </td>
-   <td style="text-align:right;"> 58 </td>
-   <td style="text-align:right;"> 0.4677419 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> MALE </td>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:right;"> 0.4919355 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.0403226 </td>
-  </tr>
-</tbody>
-</table>
+|species   |sex    |  n|  prob_obs|
+|:---------|:------|--:|---------:|
+|Adelie    |FEMALE | 73| 0.4802632|
+|Adelie    |MALE   | 73| 0.4802632|
+|Adelie    |NA     |  6| 0.0394737|
+|Chinstrap |FEMALE | 34| 0.5000000|
+|Chinstrap |MALE   | 34| 0.5000000|
+|Gentoo    |FEMALE | 58| 0.4677419|
+|Gentoo    |MALE   | 61| 0.4919355|
+|Gentoo    |NA     |  5| 0.0403226|
 
 </div>
 
@@ -802,24 +547,9 @@ penguin_body_mass_summary
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> mean_body_mass </th>
-   <th style="text-align:right;"> sd </th>
-   <th style="text-align:right;"> median_body_mass </th>
-   <th style="text-align:right;"> iqr </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 4201.754 </td>
-   <td style="text-align:right;"> 801.9545 </td>
-   <td style="text-align:right;"> 4050 </td>
-   <td style="text-align:right;"> 1200 </td>
-  </tr>
-</tbody>
-</table>
+| mean_body_mass|       sd| median_body_mass|  iqr|
+|--------------:|--------:|----------------:|----:|
+|       4201.754| 801.9545|             4050| 1200|
 
 </div>
 
@@ -964,28 +694,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> q_body_mass </th>
-   <th style="text-align:left;"> quantile </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 3550 </td>
-   <td style="text-align:left;"> 25% </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4050 </td>
-   <td style="text-align:left;"> 50% </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4750 </td>
-   <td style="text-align:left;"> 75% </td>
-  </tr>
-</tbody>
-</table>
+| q_body_mass|quantile |
+|-----------:|:--------|
+|        3550|25%      |
+|        4050|50%      |
+|        4750|75%      |
 
 </div>
 
@@ -1282,22 +995,9 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> sum_squares </th>
-   <th style="text-align:right;"> variance </th>
-   <th style="text-align:right;"> sd </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 219307697 </td>
-   <td style="text-align:right;"> 641249.6 </td>
-   <td style="text-align:right;"> 800.7806 </td>
-  </tr>
-</tbody>
-</table>
+| sum_squares| variance|       sd|
+|-----------:|--------:|--------:|
+|   219307697| 641249.6| 800.7806|
 
 </div>
 </div></div></div>
@@ -1350,32 +1050,9 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> var1 </th>
-   <th style="text-align:left;"> var2 </th>
-   <th style="text-align:right;"> cor </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-   <th style="text-align:left;"> method </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> -0.24 </td>
-   <td style="text-align:right;"> -4.459093 </td>
-   <td style="text-align:right;"> 1.12e-05 </td>
-   <td style="text-align:right;"> -0.3328072 </td>
-   <td style="text-align:right;"> -0.1323004 </td>
-   <td style="text-align:left;"> Pearson </td>
-  </tr>
-</tbody>
-</table>
+|var1             |var2            |   cor| statistic|        p|   conf.low|  conf.high|method  |
+|:----------------|:---------------|-----:|---------:|--------:|----------:|----------:|:-------|
+|culmen_length_mm |culmen_depth_mm | -0.24| -4.459093| 1.12e-05| -0.3328072| -0.1323004|Pearson |
 
 </div>
 This tells us two features of the association. It's *sign* and *magnitude*. The coefficient is negative, so as bill length increases, bill depth decreases. The value -0.22 indicates that only about 22% of the variation in bill length can be explained by changes in bill depth (and *vice-versa*), suggesting that the variables are not closely related. 
@@ -1417,54 +1094,14 @@ penguins %>% select(culmen_length_mm,
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> culmen_length_mm </th>
-   <th style="text-align:right;"> culmen_depth_mm </th>
-   <th style="text-align:right;"> rank_length </th>
-   <th style="text-align:right;"> rank_depth </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 39.1 </td>
-   <td style="text-align:right;"> 18.7 </td>
-   <td style="text-align:right;"> 43 </td>
-   <td style="text-align:right;"> 57 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 39.5 </td>
-   <td style="text-align:right;"> 17.4 </td>
-   <td style="text-align:right;"> 46 </td>
-   <td style="text-align:right;"> 44 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 40.3 </td>
-   <td style="text-align:right;"> 18.0 </td>
-   <td style="text-align:right;"> 52 </td>
-   <td style="text-align:right;"> 50 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 36.7 </td>
-   <td style="text-align:right;"> 19.3 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 63 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 39.3 </td>
-   <td style="text-align:right;"> 20.6 </td>
-   <td style="text-align:right;"> 45 </td>
-   <td style="text-align:right;"> 75 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 38.9 </td>
-   <td style="text-align:right;"> 17.8 </td>
-   <td style="text-align:right;"> 41 </td>
-   <td style="text-align:right;"> 48 </td>
-  </tr>
-</tbody>
-</table>
+| culmen_length_mm| culmen_depth_mm| rank_length| rank_depth|
+|----------------:|---------------:|-----------:|----------:|
+|             39.1|            18.7|          43|         57|
+|             39.5|            17.4|          46|         44|
+|             40.3|            18.0|          52|         50|
+|             36.7|            19.3|          23|         63|
+|             39.3|            20.6|          45|         75|
+|             38.9|            17.8|          41|         48|
 
 </div>
 
@@ -1481,28 +1118,9 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> var1 </th>
-   <th style="text-align:left;"> var2 </th>
-   <th style="text-align:right;"> cor </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p </th>
-   <th style="text-align:left;"> method </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> -0.22 </td>
-   <td style="text-align:right;"> 8145268 </td>
-   <td style="text-align:right;"> 3.51e-05 </td>
-   <td style="text-align:left;"> Spearman </td>
-  </tr>
-</tbody>
-</table>
+|var1             |var2            |   cor| statistic|        p|method   |
+|:----------------|:---------------|-----:|---------:|--------:|:--------|
+|culmen_length_mm |culmen_depth_mm | -0.22|   8145268| 3.51e-05|Spearman |
 
 </div>
 What we can see in this example is that Pearson's *r* and Spearman's $\rho$ are basically identical. 
@@ -1592,54 +1210,13 @@ island_species_summary
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> island </th>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> n_distinct </th>
-   <th style="text-align:right;"> freq </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Biscoe </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 44 </td>
-   <td style="text-align:right;"> 44 </td>
-   <td style="text-align:right;"> 0.1279070 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Biscoe </td>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 124 </td>
-   <td style="text-align:right;"> 94 </td>
-   <td style="text-align:right;"> 0.3604651 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Dream </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 56 </td>
-   <td style="text-align:right;"> 56 </td>
-   <td style="text-align:right;"> 0.1627907 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Dream </td>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 68 </td>
-   <td style="text-align:right;"> 58 </td>
-   <td style="text-align:right;"> 0.1976744 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Torgersen </td>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 52 </td>
-   <td style="text-align:right;"> 52 </td>
-   <td style="text-align:right;"> 0.1511628 </td>
-  </tr>
-</tbody>
-</table>
+|island    |species   |   n| n_distinct|      freq|
+|:---------|:---------|---:|----------:|---------:|
+|Biscoe    |Adelie    |  44|         44| 0.1279070|
+|Biscoe    |Gentoo    | 124|         94| 0.3604651|
+|Dream     |Adelie    |  56|         56| 0.1627907|
+|Dream     |Chinstrap |  68|         58| 0.1976744|
+|Torgersen |Adelie    |  52|         52| 0.1511628|
 
 </div>
 > **Note - remember that group_by() applies functions which comes after it in a group-specific pattern.
@@ -1859,56 +1436,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:left;"> var1 </th>
-   <th style="text-align:left;"> var2 </th>
-   <th style="text-align:right;"> cor </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-   <th style="text-align:left;"> method </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> 0.39 </td>
-   <td style="text-align:right;"> 5.193285 </td>
-   <td style="text-align:right;"> 7e-07 </td>
-   <td style="text-align:right;"> 0.2472226 </td>
-   <td style="text-align:right;"> 0.5187796 </td>
-   <td style="text-align:left;"> Pearson </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> 0.65 </td>
-   <td style="text-align:right;"> 7.014647 </td>
-   <td style="text-align:right;"> 0e+00 </td>
-   <td style="text-align:right;"> 0.4917326 </td>
-   <td style="text-align:right;"> 0.7717134 </td>
-   <td style="text-align:left;"> Pearson </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> 0.64 </td>
-   <td style="text-align:right;"> 9.244703 </td>
-   <td style="text-align:right;"> 0e+00 </td>
-   <td style="text-align:right;"> 0.5262952 </td>
-   <td style="text-align:right;"> 0.7365271 </td>
-   <td style="text-align:left;"> Pearson </td>
-  </tr>
-</tbody>
-</table>
+|species   |var1             |var2            |  cor| statistic|     p|  conf.low| conf.high|method  |
+|:---------|:----------------|:---------------|----:|---------:|-----:|---------:|---------:|:-------|
+|Adelie    |culmen_length_mm |culmen_depth_mm | 0.39|  5.193285| 7e-07| 0.2472226| 0.5187796|Pearson |
+|Chinstrap |culmen_length_mm |culmen_depth_mm | 0.65|  7.014647| 0e+00| 0.4917326| 0.7717134|Pearson |
+|Gentoo    |culmen_length_mm |culmen_depth_mm | 0.64|  9.244703| 0e+00| 0.5262952| 0.7365271|Pearson |
 
 </div>
 

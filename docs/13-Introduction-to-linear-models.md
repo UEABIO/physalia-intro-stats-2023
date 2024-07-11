@@ -93,26 +93,9 @@ broom::tidy(lsmodel0)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 18.88333 </td>
-   <td style="text-align:right;"> 0.5807599 </td>
-   <td style="text-align:right;"> 32.51487 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+|term        | estimate| std.error| statistic| p.value|
+|:-----------|--------:|---------:|---------:|-------:|
+|(Intercept) | 18.88333| 0.5807599|  32.51487|       0|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-6') </script></div></div></div>
@@ -154,33 +137,10 @@ broom::tidy(lsmodel1)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 20.191667 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 26.595880 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> -2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value|
+|:-----------|---------:|---------:|---------:|---------:|
+|(Intercept) | 20.191667| 0.7592028| 26.595880| 0.0000000|
+|typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145|
 
 </div>
 
@@ -215,24 +175,10 @@ darwin %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> type </th>
-   <th style="text-align:right;"> mean </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Cross </td>
-   <td style="text-align:right;"> 20.19167 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Self </td>
-   <td style="text-align:right;"> 17.57500 </td>
-  </tr>
-</tbody>
-</table>
+|type  |     mean|
+|:-----|--------:|
+|Cross | 20.19167|
+|Self  | 17.57500|
 
 </div>
 </div></div></div>
@@ -333,39 +279,10 @@ broom::tidy(lsmodel1, conf.int=T)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 20.191667 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 26.595880 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 18.63651 </td>
-   <td style="text-align:right;"> 21.7468231 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> -2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-   <td style="text-align:right;"> -4.81599 </td>
-   <td style="text-align:right;"> -0.4173433 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value| conf.low|  conf.high|
+|:-----------|---------:|---------:|---------:|---------:|--------:|----------:|
+|(Intercept) | 20.191667| 0.7592028| 26.595880| 0.0000000| 18.63651| 21.7468231|
+|typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145| -4.81599| -0.4173433|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-15') </script></div></div></div>
@@ -413,39 +330,10 @@ broom::tidy(lsmodel1, conf.int=T, conf.level=0.99)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 20.191667 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 26.595880 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 18.093790 </td>
-   <td style="text-align:right;"> 22.2895433 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> -2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-   <td style="text-align:right;"> -5.583512 </td>
-   <td style="text-align:right;"> 0.3501789 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value|  conf.low|  conf.high|
+|:-----------|---------:|---------:|---------:|---------:|---------:|----------:|
+|(Intercept) | 20.191667| 0.7592028| 26.595880| 0.0000000| 18.093790| 22.2895433|
+|typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145| -5.583512|  0.3501789|
 
 </div>
 
@@ -469,33 +357,10 @@ darwin %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 17.575000 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 23.149282 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeCross </td>
-   <td style="text-align:right;"> 2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> 2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value|
+|:-----------|---------:|---------:|---------:|---------:|
+|(Intercept) | 17.575000| 0.7592028| 23.149282| 0.0000000|
+|typeCross   |  2.616667| 1.0736749|  2.437113| 0.0214145|
 
 </div>
 
@@ -572,14 +437,14 @@ Several functions exist to check assumptions of linear models, and the easiest w
 performance::check_model(lsmodel1)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
 
 ```r
 plot(lsmodel1)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-2.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-3.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-34-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-2.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-3.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-4.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-23') </script></div></div></div>
 
 #### Normal distribution

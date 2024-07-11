@@ -511,6 +511,6 @@ penguins_filtered <- penguins %>%
 `r mcq(c("numerical", answer = "alphabetical", "order in the dataframe"))`
 
 ```{r, echo = F}
-save(penguins, file = here("book", "files", "chapter5.RData"))
+save(penguins, file = here::here("book", "files", "chapter5.RData"))
 ```
 

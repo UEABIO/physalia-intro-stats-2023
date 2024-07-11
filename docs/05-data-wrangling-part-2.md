@@ -73,36 +73,13 @@ We are using summarise and group_by a lot! They are very powerful functions:
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> verb </th>
-   <th style="text-align:left;"> action </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> mean(), median() </td>
-   <td style="text-align:left;"> Center data </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> sd(), IQR() </td>
-   <td style="text-align:left;"> Spread of data </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> min(), max(), quantile() </td>
-   <td style="text-align:left;"> Range of data </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> first(), last(), nth() </td>
-   <td style="text-align:left;"> Position </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> n(), n_distinct() </td>
-   <td style="text-align:left;"> Count </td>
-  </tr>
-</tbody>
-</table>
+|verb                     |action         |
+|:------------------------|:--------------|
+|mean(), median()         |Center data    |
+|sd(), IQR()              |Spread of data |
+|min(), max(), quantile() |Range of data  |
+|first(), last(), nth()   |Position       |
+|n(), n_distinct()        |Count          |
 
 </div>
 
@@ -311,7 +288,7 @@ Depending on how we interpret the date ordering in a file, we can use `ymd()`, `
 * **Question** What is the appropriate function from the above to use on the `date_egg` variable?
 
 
-<div class='webex-radiogroup' id='radio_CIQYJJRHTQ'><label><input type="radio" autocomplete="off" name="radio_CIQYJJRHTQ" value=""></input> <span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_CIQYJJRHTQ" value=""></input> <span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_CIQYJJRHTQ" value=""></input> <span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_CIQYJJRHTQ" value="answer"></input> <span>dmy()</span></label></div>
+<div class='webex-radiogroup' id='radio_ENGYQTXOZF'><label><input type="radio" autocomplete="off" name="radio_ENGYQTXOZF" value=""></input> <span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_ENGYQTXOZF" value=""></input> <span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_ENGYQTXOZF" value=""></input> <span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_ENGYQTXOZF" value="answer"></input> <span>dmy()</span></label></div>
 
 
 
@@ -460,344 +437,64 @@ skimr::skim(penguins)
 ```
 
 
-<table style='width: auto;'
-      class='table table-condensed'>
-<caption>(\#tab:unnamed-chunk-32)Data summary</caption>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Name </td>
-   <td style="text-align:left;"> penguins </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Number of rows </td>
-   <td style="text-align:left;"> 344 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Number of columns </td>
-   <td style="text-align:left;"> 19 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> _______________________ </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Column type frequency: </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> character </td>
-   <td style="text-align:left;"> 10 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Date </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> factor </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> numeric </td>
-   <td style="text-align:left;"> 7 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> ________________________ </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Group variables </td>
-   <td style="text-align:left;"> None </td>
-  </tr>
-</tbody>
-</table>
+Table: (\#tab:unnamed-chunk-32)Data summary
+
+|                         |         |
+|:------------------------|:--------|
+|Name                     |penguins |
+|Number of rows           |344      |
+|Number of columns        |19       |
+|_______________________  |         |
+|Column type frequency:   |         |
+|character                |10       |
+|Date                     |1        |
+|factor                   |1        |
+|numeric                  |7        |
+|________________________ |         |
+|Group variables          |None     |
 
 
 **Variable type: character**
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> skim_variable </th>
-   <th style="text-align:right;"> n_missing </th>
-   <th style="text-align:right;"> complete_rate </th>
-   <th style="text-align:right;"> min </th>
-   <th style="text-align:right;"> max </th>
-   <th style="text-align:right;"> empty </th>
-   <th style="text-align:right;"> n_unique </th>
-   <th style="text-align:right;"> whitespace </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> study_name </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> species </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> region </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> island </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 9 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> stage </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> individual_id </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 190 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> clutch_completion </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> date_egg </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 50 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> sex </td>
-   <td style="text-align:right;"> 11 </td>
-   <td style="text-align:right;"> 0.97 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> comments </td>
-   <td style="text-align:right;"> 290 </td>
-   <td style="text-align:right;"> 0.16 </td>
-   <td style="text-align:right;"> 18 </td>
-   <td style="text-align:right;"> 68 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+|skim_variable     | n_missing| complete_rate| min| max| empty| n_unique| whitespace|
+|:-----------------|---------:|-------------:|---:|---:|-----:|--------:|----------:|
+|study_name        |         0|          1.00|   7|   7|     0|        3|          0|
+|species           |         0|          1.00|   6|   9|     0|        3|          0|
+|region            |         0|          1.00|   6|   6|     0|        1|          0|
+|island            |         0|          1.00|   5|   9|     0|        3|          0|
+|stage             |         0|          1.00|  18|  18|     0|        1|          0|
+|individual_id     |         0|          1.00|   4|   6|     0|      190|          0|
+|clutch_completion |         0|          1.00|   2|   3|     0|        2|          0|
+|date_egg          |         0|          1.00|  10|  10|     0|       50|          0|
+|sex               |        11|          0.97|   4|   6|     0|        2|          0|
+|comments          |       290|          0.16|  18|  68|     0|       10|          0|
 
 
 **Variable type: Date**
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> skim_variable </th>
-   <th style="text-align:right;"> n_missing </th>
-   <th style="text-align:right;"> complete_rate </th>
-   <th style="text-align:left;"> min </th>
-   <th style="text-align:left;"> max </th>
-   <th style="text-align:left;"> median </th>
-   <th style="text-align:right;"> n_unique </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> date_egg_proper </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> 2007-11-09 </td>
-   <td style="text-align:left;"> 2009-12-01 </td>
-   <td style="text-align:left;"> 2008-11-09 </td>
-   <td style="text-align:right;"> 50 </td>
-  </tr>
-</tbody>
-</table>
+|skim_variable   | n_missing| complete_rate|min        |max        |median     | n_unique|
+|:---------------|---------:|-------------:|:----------|:----------|:----------|--------:|
+|date_egg_proper |         0|             1|2007-11-09 |2009-12-01 |2008-11-09 |       50|
 
 
 **Variable type: factor**
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> skim_variable </th>
-   <th style="text-align:right;"> n_missing </th>
-   <th style="text-align:right;"> complete_rate </th>
-   <th style="text-align:left;"> ordered </th>
-   <th style="text-align:right;"> n_unique </th>
-   <th style="text-align:left;"> top_counts </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> flipper_range </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.99 </td>
-   <td style="text-align:left;"> FALSE </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> med: 152, sma: 99, lar: 91 </td>
-  </tr>
-</tbody>
-</table>
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts                 |
+|:-------------|---------:|-------------:|:-------|--------:|:--------------------------|
+|flipper_range |         2|          0.99|FALSE   |        3|med: 152, sma: 99, lar: 91 |
 
 
 **Variable type: numeric**
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> skim_variable </th>
-   <th style="text-align:right;"> n_missing </th>
-   <th style="text-align:right;"> complete_rate </th>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> sd </th>
-   <th style="text-align:right;"> p0 </th>
-   <th style="text-align:right;"> p25 </th>
-   <th style="text-align:right;"> p50 </th>
-   <th style="text-align:right;"> p75 </th>
-   <th style="text-align:right;"> p100 </th>
-   <th style="text-align:left;"> hist </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> sample_number </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 63.15 </td>
-   <td style="text-align:right;"> 40.43 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:right;"> 29.00 </td>
-   <td style="text-align:right;"> 58.00 </td>
-   <td style="text-align:right;"> 95.25 </td>
-   <td style="text-align:right;"> 152.00 </td>
-   <td style="text-align:left;"> ▇▇▆▅▃ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> culmen_length_mm </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.99 </td>
-   <td style="text-align:right;"> 43.92 </td>
-   <td style="text-align:right;"> 5.46 </td>
-   <td style="text-align:right;"> 32.10 </td>
-   <td style="text-align:right;"> 39.23 </td>
-   <td style="text-align:right;"> 44.45 </td>
-   <td style="text-align:right;"> 48.50 </td>
-   <td style="text-align:right;"> 59.60 </td>
-   <td style="text-align:left;"> ▃▇▇▆▁ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> culmen_depth_mm </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.99 </td>
-   <td style="text-align:right;"> 17.15 </td>
-   <td style="text-align:right;"> 1.97 </td>
-   <td style="text-align:right;"> 13.10 </td>
-   <td style="text-align:right;"> 15.60 </td>
-   <td style="text-align:right;"> 17.30 </td>
-   <td style="text-align:right;"> 18.70 </td>
-   <td style="text-align:right;"> 21.50 </td>
-   <td style="text-align:left;"> ▅▅▇▇▂ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> flipper_length_mm </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.99 </td>
-   <td style="text-align:right;"> 200.92 </td>
-   <td style="text-align:right;"> 14.06 </td>
-   <td style="text-align:right;"> 172.00 </td>
-   <td style="text-align:right;"> 190.00 </td>
-   <td style="text-align:right;"> 197.00 </td>
-   <td style="text-align:right;"> 213.00 </td>
-   <td style="text-align:right;"> 231.00 </td>
-   <td style="text-align:left;"> ▂▇▃▅▂ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> body_mass_g </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.99 </td>
-   <td style="text-align:right;"> 4201.75 </td>
-   <td style="text-align:right;"> 801.95 </td>
-   <td style="text-align:right;"> 2700.00 </td>
-   <td style="text-align:right;"> 3550.00 </td>
-   <td style="text-align:right;"> 4050.00 </td>
-   <td style="text-align:right;"> 4750.00 </td>
-   <td style="text-align:right;"> 6300.00 </td>
-   <td style="text-align:left;"> ▃▇▆▃▂ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> delta_15n </td>
-   <td style="text-align:right;"> 14 </td>
-   <td style="text-align:right;"> 0.96 </td>
-   <td style="text-align:right;"> 8.73 </td>
-   <td style="text-align:right;"> 0.55 </td>
-   <td style="text-align:right;"> 7.63 </td>
-   <td style="text-align:right;"> 8.30 </td>
-   <td style="text-align:right;"> 8.65 </td>
-   <td style="text-align:right;"> 9.17 </td>
-   <td style="text-align:right;"> 10.03 </td>
-   <td style="text-align:left;"> ▃▇▆▅▂ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> delta_13c </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 0.96 </td>
-   <td style="text-align:right;"> -25.69 </td>
-   <td style="text-align:right;"> 0.79 </td>
-   <td style="text-align:right;"> -27.02 </td>
-   <td style="text-align:right;"> -26.32 </td>
-   <td style="text-align:right;"> -25.83 </td>
-   <td style="text-align:right;"> -25.06 </td>
-   <td style="text-align:right;"> -23.79 </td>
-   <td style="text-align:left;"> ▆▇▅▅▂ </td>
-  </tr>
-</tbody>
-</table>
+|skim_variable     | n_missing| complete_rate|    mean|     sd|      p0|     p25|     p50|     p75|    p100|hist  |
+|:-----------------|---------:|-------------:|-------:|------:|-------:|-------:|-------:|-------:|-------:|:-----|
+|sample_number     |         0|          1.00|   63.15|  40.43|    1.00|   29.00|   58.00|   95.25|  152.00|▇▇▆▅▃ |
+|culmen_length_mm  |         2|          0.99|   43.92|   5.46|   32.10|   39.23|   44.45|   48.50|   59.60|▃▇▇▆▁ |
+|culmen_depth_mm   |         2|          0.99|   17.15|   1.97|   13.10|   15.60|   17.30|   18.70|   21.50|▅▅▇▇▂ |
+|flipper_length_mm |         2|          0.99|  200.92|  14.06|  172.00|  190.00|  197.00|  213.00|  231.00|▂▇▃▅▂ |
+|body_mass_g       |         2|          0.99| 4201.75| 801.95| 2700.00| 3550.00| 4050.00| 4750.00| 6300.00|▃▇▆▃▂ |
+|delta_15n         |        14|          0.96|    8.73|   0.55|    7.63|    8.30|    8.65|    9.17|   10.03|▃▇▆▅▂ |
+|delta_13c         |        13|          0.96|  -25.69|   0.79|  -27.02|  -26.32|  -25.83|  -25.06|  -23.79|▆▇▅▅▂ |
 
 ## Finished
 

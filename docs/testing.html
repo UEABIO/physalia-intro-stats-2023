@@ -215,7 +215,7 @@ Base R
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, inset<span class="op">=</span><span class="fl">.05</span>, title<span class="op">=</span><span class="st">"Distributions"</span>,</span>
 <span>       <span class="va">labels</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, col<span class="op">=</span><span class="va">colors</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
@@ -237,7 +237,7 @@ Base R
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">value</span>, colour<span class="op">=</span><span class="va">distribution</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype<span class="op">=</span><span class="st">"dashed"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-3') </script>
 </div>
@@ -315,57 +315,27 @@ Base R
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-20.191667
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-26.595880
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">20.191667</td>
+<td align="right">0.7592028</td>
+<td align="right">26.595880</td>
+<td align="right">0.0000000</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
--2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">-2.437113</td>
+<td align="right">0.0214145</td>
 </tr>
 </tbody>
 </table></div>
@@ -445,295 +415,125 @@ Base R
 <span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-21.745833
-</td>
-<td style="text-align:right;">
-2.436389
-</td>
-<td style="text-align:right;">
-8.9254352
-</td>
-<td style="text-align:right;">
-0.0000004
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">21.745833</td>
+<td align="right">2.436389</td>
+<td align="right">8.9254352</td>
+<td align="right">0.0000004</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.218195
-</td>
-<td style="text-align:right;">
--2.1479875
-</td>
-<td style="text-align:right;">
-0.0497029
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.218195</td>
+<td align="right">-2.1479875</td>
+<td align="right">0.0497029</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair2
-</td>
-<td style="text-align:right;">
--4.250000
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--1.2739185
-</td>
-<td style="text-align:right;">
-0.2234352
-</td>
+<tr class="odd">
+<td align="left">pair2</td>
+<td align="right">-4.250000</td>
+<td align="right">3.336163</td>
+<td align="right">-1.2739185</td>
+<td align="right">0.2234352</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair3
-</td>
-<td style="text-align:right;">
-0.062500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
-0.0187341
-</td>
-<td style="text-align:right;">
-0.9853176
-</td>
+<tr class="even">
+<td align="left">pair3</td>
+<td align="right">0.062500</td>
+<td align="right">3.336163</td>
+<td align="right">0.0187341</td>
+<td align="right">0.9853176</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair4
-</td>
-<td style="text-align:right;">
-0.562500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
-0.1686069
-</td>
-<td style="text-align:right;">
-0.8685176
-</td>
+<tr class="odd">
+<td align="left">pair4</td>
+<td align="right">0.562500</td>
+<td align="right">3.336163</td>
+<td align="right">0.1686069</td>
+<td align="right">0.8685176</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair5
-</td>
-<td style="text-align:right;">
--1.687500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.5058206
-</td>
-<td style="text-align:right;">
-0.6208532
-</td>
+<tr class="even">
+<td align="left">pair5</td>
+<td align="right">-1.687500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.5058206</td>
+<td align="right">0.6208532</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair6
-</td>
-<td style="text-align:right;">
--0.375000
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.1124046
-</td>
-<td style="text-align:right;">
-0.9120984
-</td>
+<tr class="odd">
+<td align="left">pair6</td>
+<td align="right">-0.375000</td>
+<td align="right">3.336163</td>
+<td align="right">-0.1124046</td>
+<td align="right">0.9120984</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair7
-</td>
-<td style="text-align:right;">
--0.062500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.0187341
-</td>
-<td style="text-align:right;">
-0.9853176
-</td>
+<tr class="even">
+<td align="left">pair7</td>
+<td align="right">-0.062500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.0187341</td>
+<td align="right">0.9853176</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair8
-</td>
-<td style="text-align:right;">
--2.625000
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.7868320
-</td>
-<td style="text-align:right;">
-0.4444963
-</td>
+<tr class="odd">
+<td align="left">pair8</td>
+<td align="right">-2.625000</td>
+<td align="right">3.336163</td>
+<td align="right">-0.7868320</td>
+<td align="right">0.4444963</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair9
-</td>
-<td style="text-align:right;">
--3.062500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.9179707
-</td>
-<td style="text-align:right;">
-0.3741786
-</td>
+<tr class="even">
+<td align="left">pair9</td>
+<td align="right">-3.062500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.9179707</td>
+<td align="right">0.3741786</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair10
-</td>
-<td style="text-align:right;">
--0.625000
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.1873410
-</td>
-<td style="text-align:right;">
-0.8540813
-</td>
+<tr class="odd">
+<td align="left">pair10</td>
+<td align="right">-0.625000</td>
+<td align="right">3.336163</td>
+<td align="right">-0.1873410</td>
+<td align="right">0.8540813</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair11
-</td>
-<td style="text-align:right;">
--0.687500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.2060750
-</td>
-<td style="text-align:right;">
-0.8396990
-</td>
+<tr class="even">
+<td align="left">pair11</td>
+<td align="right">-0.687500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.2060750</td>
+<td align="right">0.8396990</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair12
-</td>
-<td style="text-align:right;">
--0.937500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.2810114
-</td>
-<td style="text-align:right;">
-0.7828120
-</td>
+<tr class="odd">
+<td align="left">pair12</td>
+<td align="right">-0.937500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.2810114</td>
+<td align="right">0.7828120</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair13
-</td>
-<td style="text-align:right;">
--3.000000
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.8992366
-</td>
-<td style="text-align:right;">
-0.3837329
-</td>
+<tr class="even">
+<td align="left">pair13</td>
+<td align="right">-3.000000</td>
+<td align="right">3.336163</td>
+<td align="right">-0.8992366</td>
+<td align="right">0.3837329</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair14
-</td>
-<td style="text-align:right;">
--1.187500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--0.3559478
-</td>
-<td style="text-align:right;">
-0.7271862
-</td>
+<tr class="odd">
+<td align="left">pair14</td>
+<td align="right">-1.187500</td>
+<td align="right">3.336163</td>
+<td align="right">-0.3559478</td>
+<td align="right">0.7271862</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-pair15
-</td>
-<td style="text-align:right;">
--5.437500
-</td>
-<td style="text-align:right;">
-3.336163
-</td>
-<td style="text-align:right;">
--1.6298663
-</td>
-<td style="text-align:right;">
-0.1254148
-</td>
+<tr class="even">
+<td align="left">pair15</td>
+<td align="right">-5.437500</td>
+<td align="right">3.336163</td>
+<td align="right">-1.6298663</td>
+<td align="right">0.1254148</td>
 </tr>
 </tbody>
 </table></div>
@@ -756,150 +556,84 @@ pair15
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="co"># just show first two rows</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-<th style="text-align:right;">
-conf.low
-</th>
-<th style="text-align:right;">
-conf.high
-</th>
+<colgroup>
+<col width="16%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="12%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-20.191667
-</td>
-<td style="text-align:right;">
-0.7592028
-</td>
-<td style="text-align:right;">
-26.595880
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-<td style="text-align:right;">
-18.63651
-</td>
-<td style="text-align:right;">
-21.7468231
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">20.191667</td>
+<td align="right">0.7592028</td>
+<td align="right">26.595880</td>
+<td align="right">0.0000000</td>
+<td align="right">18.63651</td>
+<td align="right">21.7468231</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.0736749
-</td>
-<td style="text-align:right;">
--2.437113
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
-<td style="text-align:right;">
--4.81599
-</td>
-<td style="text-align:right;">
--0.4173433
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.0736749</td>
+<td align="right">-2.437113</td>
+<td align="right">0.0214145</td>
+<td align="right">-4.81599</td>
+<td align="right">-0.4173433</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-<th style="text-align:right;">
-conf.low
-</th>
-<th style="text-align:right;">
-conf.high
-</th>
+<colgroup>
+<col width="16%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="15%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-21.745833
-</td>
-<td style="text-align:right;">
-2.436389
-</td>
-<td style="text-align:right;">
-8.925435
-</td>
-<td style="text-align:right;">
-0.0000004
-</td>
-<td style="text-align:right;">
-16.520298
-</td>
-<td style="text-align:right;">
-26.9713683
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">21.745833</td>
+<td align="right">2.436389</td>
+<td align="right">8.925435</td>
+<td align="right">0.0000004</td>
+<td align="right">16.520298</td>
+<td align="right">26.9713683</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-typeSelf
-</td>
-<td style="text-align:right;">
--2.616667
-</td>
-<td style="text-align:right;">
-1.218195
-</td>
-<td style="text-align:right;">
--2.147988
-</td>
-<td style="text-align:right;">
-0.0497029
-</td>
-<td style="text-align:right;">
--5.229434
-</td>
-<td style="text-align:right;">
--0.0038992
-</td>
+<tr class="even">
+<td align="left">typeSelf</td>
+<td align="right">-2.616667</td>
+<td align="right">1.218195</td>
+<td align="right">-2.147988</td>
+<td align="right">0.0497029</td>
+<td align="right">-5.229434</td>
+<td align="right">-0.0038992</td>
 </tr>
 </tbody>
 </table></div>
@@ -1034,30 +768,18 @@ Solution
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>`number of experiments` <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-p value &lt; 0.05
-</th>
-<th style="text-align:right;">
-number of experiments
-</th>
+<thead><tr class="header">
+<th align="left">p value &lt; 0.05</th>
+<th align="right">number of experiments</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-non-significant
-</td>
-<td style="text-align:right;">
-6
-</td>
+<tr class="odd">
+<td align="left">non-significant</td>
+<td align="right">6</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-significant
-</td>
-<td style="text-align:right;">
-14
-</td>
+<tr class="even">
+<td align="left">significant</td>
+<td align="right">14</td>
 </tr>
 </tbody>
 </table></div>
@@ -1096,7 +818,7 @@ Solution
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dashed"</span>, yintercept <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co"># Apply a minimal theme to the plot</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="14-Testing_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 </div>

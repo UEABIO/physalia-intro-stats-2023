@@ -150,27 +150,10 @@ darwin %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> type </th>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> sd </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Cross </td>
-   <td style="text-align:right;"> 20.19167 </td>
-   <td style="text-align:right;"> 3.616945 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Self </td>
-   <td style="text-align:right;"> 17.57500 </td>
-   <td style="text-align:right;"> 2.051676 </td>
-  </tr>
-</tbody>
-</table>
+|type  |     mean|       sd|
+|:-----|--------:|--------:|
+|Cross | 20.19167| 3.616945|
+|Self  | 17.57500| 2.051676|
 
 </div>
 
@@ -239,33 +222,10 @@ darwin %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> type </th>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> sd </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> se </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Cross </td>
-   <td style="text-align:right;"> 20.19167 </td>
-   <td style="text-align:right;"> 3.616945 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 0.9338912 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Self </td>
-   <td style="text-align:right;"> 17.57500 </td>
-   <td style="text-align:right;"> 2.051676 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 0.5297405 </td>
-  </tr>
-</tbody>
-</table>
+|type  |     mean|       sd|  n|        se|
+|:-----|--------:|--------:|--:|---------:|
+|Cross | 20.19167| 3.616945| 15| 0.9338912|
+|Self  | 17.57500| 2.051676| 15| 0.5297405|
 
 </div>
 
@@ -306,22 +266,9 @@ difference_summary
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> sd </th>
-   <th style="text-align:right;"> n </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 2.616667 </td>
-   <td style="text-align:right;"> 4.718047 </td>
-   <td style="text-align:right;"> 15 </td>
-  </tr>
-</tbody>
-</table>
+|     mean|       sd|  n|
+|--------:|--------:|--:|
+| 2.616667| 4.718047| 15|
 
 </div>
 
@@ -358,24 +305,9 @@ difference_summary %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> mean </th>
-   <th style="text-align:right;"> sd </th>
-   <th style="text-align:right;"> n </th>
-   <th style="text-align:right;"> se </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 2.616667 </td>
-   <td style="text-align:right;"> 4.718047 </td>
-   <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 1.218195 </td>
-  </tr>
-</tbody>
-</table>
+|     mean|       sd|  n|       se|
+|--------:|--------:|--:|--------:|
+| 2.616667| 4.718047| 15| 1.218195|
 
 </div>
 </div></div></div>

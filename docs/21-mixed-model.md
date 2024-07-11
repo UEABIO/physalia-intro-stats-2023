@@ -214,54 +214,14 @@ data %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> x </th>
-   <th style="text-align:right;"> y </th>
-   <th style="text-align:left;"> group </th>
-   <th style="text-align:left;"> obs </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 4.0584411 </td>
-   <td style="text-align:right;"> -0.5487802 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7.2250893 </td>
-   <td style="text-align:right;"> 17.3260398 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 0.5963383 </td>
-   <td style="text-align:right;"> 41.2256737 </td>
-   <td style="text-align:left;"> 3 </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3.3034922 </td>
-   <td style="text-align:right;"> 16.0958571 </td>
-   <td style="text-align:left;"> 4 </td>
-   <td style="text-align:left;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7.7676400 </td>
-   <td style="text-align:right;"> 32.0586590 </td>
-   <td style="text-align:left;"> 1 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 8.4045935 </td>
-   <td style="text-align:right;"> 50.1274193 </td>
-   <td style="text-align:left;"> 2 </td>
-   <td style="text-align:left;"> 2 </td>
-  </tr>
-</tbody>
-</table>
+|         x|          y|group |obs |
+|---------:|----------:|:-----|:---|
+| 4.0584411| -0.5487802|1     |1   |
+| 7.2250893| 17.3260398|2     |1   |
+| 0.5963383| 41.2256737|3     |1   |
+| 3.3034922| 16.0958571|4     |1   |
+| 7.7676400| 32.0586590|1     |2   |
+| 8.4045935| 50.1274193|2     |2   |
 
 </div>
 
@@ -454,60 +414,13 @@ final_models
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> group </th>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:left;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 3.0643940 </td>
-   <td style="text-align:right;"> 0.3620254 </td>
-   <td style="text-align:right;"> 8.4645823 </td>
-   <td style="text-align:left;"> p &lt; 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 2.5162898 </td>
-   <td style="text-align:right;"> 0.3354848 </td>
-   <td style="text-align:right;"> 7.5004590 </td>
-   <td style="text-align:left;"> p &lt; 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 1.3904720 </td>
-   <td style="text-align:right;"> 0.3192878 </td>
-   <td style="text-align:right;"> 4.3549169 </td>
-   <td style="text-align:left;"> p &lt; 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 1.6856649 </td>
-   <td style="text-align:right;"> 0.3550511 </td>
-   <td style="text-align:right;"> 4.7476686 </td>
-   <td style="text-align:left;"> p &lt; 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> -0.0755633 </td>
-   <td style="text-align:right;"> 0.6576868 </td>
-   <td style="text-align:right;"> -0.1148926 </td>
-   <td style="text-align:left;"> p= 0.909 </td>
-  </tr>
-</tbody>
-</table>
+| group|term |   estimate| std.error|  statistic|p.value   |
+|-----:|:----|----------:|---------:|----------:|:---------|
+|     1|x    |  3.0643940| 0.3620254|  8.4645823|p < 0.001 |
+|     2|x    |  2.5162898| 0.3354848|  7.5004590|p < 0.001 |
+|     3|x    |  1.3904720| 0.3192878|  4.3549169|p < 0.001 |
+|     4|x    |  1.6856649| 0.3550511|  4.7476686|p < 0.001 |
+|     5|x    | -0.0755633| 0.6576868| -0.1148926|p= 0.909  |
 
 </div>
 
@@ -715,54 +628,14 @@ bind_rows(pooled, no_pool, partial_pool) %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:left;"> Approach </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 21.054614 </td>
-   <td style="text-align:right;"> 1.6490185 </td>
-   <td style="text-align:left;"> Pooled </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 2.578217 </td>
-   <td style="text-align:right;"> 0.2853798 </td>
-   <td style="text-align:left;"> Pooled </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 6.812481 </td>
-   <td style="text-align:right;"> 1.8881155 </td>
-   <td style="text-align:left;"> No Pooling </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 3.064394 </td>
-   <td style="text-align:right;"> 0.3378685 </td>
-   <td style="text-align:left;"> No Pooling </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 23.269187 </td>
-   <td style="text-align:right;"> 6.4818211 </td>
-   <td style="text-align:left;"> Mixed Model/Partial Pool </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 2.027065 </td>
-   <td style="text-align:right;"> 0.1703423 </td>
-   <td style="text-align:left;"> Mixed Model/Partial Pool </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error|Approach                 |
+|:-----------|---------:|---------:|:------------------------|
+|(Intercept) | 21.054614| 1.6490185|Pooled                   |
+|x           |  2.578217| 0.2853798|Pooled                   |
+|(Intercept) |  6.812481| 1.8881155|No Pooling               |
+|x           |  3.064394| 0.3378685|No Pooling               |
+|(Intercept) | 23.269187| 6.4818211|Mixed Model/Partial Pool |
+|x           |  2.027065| 0.1703423|Mixed Model/Partial Pool |
 
 </div>
 
@@ -828,30 +701,9 @@ anova(mixed_model)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Sum Sq </th>
-   <th style="text-align:right;"> Mean Sq </th>
-   <th style="text-align:right;"> NumDF </th>
-   <th style="text-align:right;"> DenDF </th>
-   <th style="text-align:right;"> F value </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 14303.23 </td>
-   <td style="text-align:right;"> 14303.23 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 424.0815 </td>
-   <td style="text-align:right;"> 141.6089 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-</tbody>
-</table>
+|   |   Sum Sq|  Mean Sq| NumDF|    DenDF|  F value| Pr(>F)|
+|:--|--------:|--------:|-----:|--------:|--------:|------:|
+|x  | 14303.23| 14303.23|     1| 424.0815| 141.6089|      0|
 
 </div>
 
@@ -1662,45 +1514,10 @@ anova(lmer1, lmer3)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> npar </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:right;"> deviance </th>
-   <th style="text-align:right;"> Chisq </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Pr(&gt;Chisq) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> lmer1 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 3236.091 </td>
-   <td style="text-align:right;"> 3252.347 </td>
-   <td style="text-align:right;"> -1614.046 </td>
-   <td style="text-align:right;"> 3228.091 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> lmer3 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 3228.442 </td>
-   <td style="text-align:right;"> 3252.825 </td>
-   <td style="text-align:right;"> -1608.221 </td>
-   <td style="text-align:right;"> 3216.442 </td>
-   <td style="text-align:right;"> 11.64947 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.0029536 </td>
-  </tr>
-</tbody>
-</table>
+|      | npar|      AIC|      BIC|    logLik| deviance|    Chisq| Df| Pr(>Chisq)|
+|:-----|----:|--------:|--------:|---------:|--------:|--------:|--:|----------:|
+|lmer1 |    4| 3236.091| 3252.347| -1614.046| 3228.091|       NA| NA|         NA|
+|lmer3 |    6| 3228.442| 3252.825| -1608.221| 3216.442| 11.64947|  2|  0.0029536|
 
 </div>
 
@@ -1824,54 +1641,14 @@ head(sleep2)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Reaction </th>
-   <th style="text-align:right;"> Days </th>
-   <th style="text-align:left;"> Subject </th>
-   <th style="text-align:right;"> days_deprived </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 250.8006 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 321.4398 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 356.8519 </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 414.6901 </td>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 382.2038 </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 290.1486 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:left;"> 308 </td>
-   <td style="text-align:right;"> 5 </td>
-  </tr>
-</tbody>
-</table>
+| Reaction| Days|Subject | days_deprived|
+|--------:|----:|:-------|-------------:|
+| 250.8006|    2|308     |             0|
+| 321.4398|    3|308     |             1|
+| 356.8519|    4|308     |             2|
+| 414.6901|    5|308     |             3|
+| 382.2038|    6|308     |             4|
+| 290.1486|    7|308     |             5|
 
 </div>
 
@@ -1938,45 +1715,10 @@ anova(sleep_model_intercept, sleep_model)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> npar </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> BIC </th>
-   <th style="text-align:right;"> logLik </th>
-   <th style="text-align:right;"> deviance </th>
-   <th style="text-align:right;"> Chisq </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Pr(&gt;Chisq) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> sleep_model_intercept </td>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 1446.490 </td>
-   <td style="text-align:right;"> 1458.369 </td>
-   <td style="text-align:right;"> -719.2451 </td>
-   <td style="text-align:right;"> 1438.490 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> sleep_model </td>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 1425.158 </td>
-   <td style="text-align:right;"> 1442.977 </td>
-   <td style="text-align:right;"> -706.5790 </td>
-   <td style="text-align:right;"> 1413.158 </td>
-   <td style="text-align:right;"> 25.33213 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 3.2e-06 </td>
-  </tr>
-</tbody>
-</table>
+|                      | npar|      AIC|      BIC|    logLik| deviance|    Chisq| Df| Pr(>Chisq)|
+|:---------------------|----:|--------:|--------:|---------:|--------:|--------:|--:|----------:|
+|sleep_model_intercept |    4| 1446.490| 1458.369| -719.2451| 1438.490|       NA| NA|         NA|
+|sleep_model           |    6| 1425.158| 1442.977| -706.5790| 1413.158| 25.33213|  2|    3.2e-06|
 
 </div>
 
@@ -2066,30 +1808,9 @@ anova(sleep_model)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Sum Sq </th>
-   <th style="text-align:right;"> Mean Sq </th>
-   <th style="text-align:right;"> NumDF </th>
-   <th style="text-align:right;"> DenDF </th>
-   <th style="text-align:right;"> F value </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> days_deprived </td>
-   <td style="text-align:right;"> 25023.83 </td>
-   <td style="text-align:right;"> 25023.83 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 16.9995 </td>
-   <td style="text-align:right;"> 38.40382 </td>
-   <td style="text-align:right;"> 9.8e-06 </td>
-  </tr>
-</tbody>
-</table>
+|              |   Sum Sq|  Mean Sq| NumDF|   DenDF|  F value|  Pr(>F)|
+|:-------------|--------:|--------:|-----:|-------:|--------:|-------:|
+|days_deprived | 25023.83| 25023.83|     1| 16.9995| 38.40382| 9.8e-06|
 
 </div>
 

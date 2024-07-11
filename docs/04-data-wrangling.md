@@ -224,7 +224,7 @@ filter(.data = new_penguins, species == "Adelie")
 Filter is quite a complicated function, and uses several different operators to assess the way in which it should apply a filter.
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-14)Boolean expressions</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-14)(\#tab:unnamed-chunk-14)Boolean expressions</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Operator </th>
@@ -445,32 +445,11 @@ penguins %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> species </th>
-   <th style="text-align:right;"> total </th>
-   <th style="text-align:right;"> mean </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Adelie </td>
-   <td style="text-align:right;"> 152 </td>
-   <td style="text-align:right;"> 3700.662 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Chinstrap </td>
-   <td style="text-align:right;"> 68 </td>
-   <td style="text-align:right;"> 3733.088 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Gentoo </td>
-   <td style="text-align:right;"> 124 </td>
-   <td style="text-align:right;"> 5076.016 </td>
-  </tr>
-</tbody>
-</table>
+|species   | total|     mean|
+|:---------|-----:|--------:|
+|Adelie    |   152| 3700.662|
+|Chinstrap |    68| 3733.088|
+|Gentoo    |   124| 5076.016|
 
 </div>
 

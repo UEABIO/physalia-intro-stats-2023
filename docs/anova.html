@@ -199,65 +199,30 @@ measuring the distance to the estimates
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Df
-</th>
-<th style="text-align:right;">
-Sum Sq
-</th>
-<th style="text-align:right;">
-Mean Sq
-</th>
-<th style="text-align:right;">
-F value
-</th>
-<th style="text-align:right;">
-Pr(&gt;F)
-</th>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-type
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-51.35208
-</td>
-<td style="text-align:right;">
-51.352083
-</td>
-<td style="text-align:right;">
-5.939518
-</td>
-<td style="text-align:right;">
-0.0214145
-</td>
+<tr class="odd">
+<td align="left">type</td>
+<td align="right">1</td>
+<td align="right">51.35208</td>
+<td align="right">51.352083</td>
+<td align="right">5.939518</td>
+<td align="right">0.0214145</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Residuals
-</td>
-<td style="text-align:right;">
-28
-</td>
-<td style="text-align:right;">
-242.08333
-</td>
-<td style="text-align:right;">
-8.645833
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
+<tr class="even">
+<td align="left">Residuals</td>
+<td align="right">28</td>
+<td align="right">242.08333</td>
+<td align="right">8.645833</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table></div>
@@ -308,85 +273,38 @@ In our example <em>F</em> = 5.9, which means that the estimated signal is nearly
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lsmodel2</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Df
-</th>
-<th style="text-align:right;">
-Sum Sq
-</th>
-<th style="text-align:right;">
-Mean Sq
-</th>
-<th style="text-align:right;">
-F value
-</th>
-<th style="text-align:right;">
-Pr(&gt;F)
-</th>
+<thead><tr class="header">
+<th align="left"></th>
+<th align="right">Df</th>
+<th align="right">Sum Sq</th>
+<th align="right">Mean Sq</th>
+<th align="right">F value</th>
+<th align="right">Pr(&gt;F)</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-type
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-51.35208
-</td>
-<td style="text-align:right;">
-51.352083
-</td>
-<td style="text-align:right;">
-4.6138501
-</td>
-<td style="text-align:right;">
-0.0497029
-</td>
+<tr class="odd">
+<td align="left">type</td>
+<td align="right">1</td>
+<td align="right">51.35208</td>
+<td align="right">51.352083</td>
+<td align="right">4.6138501</td>
+<td align="right">0.0497029</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-as.factor(pair)
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-86.26354
-</td>
-<td style="text-align:right;">
-6.161682
-</td>
-<td style="text-align:right;">
-0.5536109
-</td>
-<td style="text-align:right;">
-0.8597119
-</td>
+<tr class="even">
+<td align="left">as.factor(pair)</td>
+<td align="right">14</td>
+<td align="right">86.26354</td>
+<td align="right">6.161682</td>
+<td align="right">0.5536109</td>
+<td align="right">0.8597119</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Residuals
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-155.81979
-</td>
-<td style="text-align:right;">
-11.129985
-</td>
-<td style="text-align:right;">
-NA
-</td>
-<td style="text-align:right;">
-NA
-</td>
+<tr class="odd">
+<td align="left">Residuals</td>
+<td align="right">14</td>
+<td align="right">155.81979</td>
+<td align="right">11.129985</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
 </tr>
 </tbody>
 </table></div>
@@ -519,98 +437,51 @@ Solution
 <span><span class="co">#___________________________----</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
-<thead><tr>
-<th style="text-align:left;">
-term
-</th>
-<th style="text-align:right;">
-estimate
-</th>
-<th style="text-align:right;">
-std.error
-</th>
-<th style="text-align:right;">
-statistic
-</th>
-<th style="text-align:right;">
-p.value
-</th>
-<th style="text-align:right;">
-conf.low
-</th>
-<th style="text-align:right;">
-conf.high
-</th>
+<colgroup>
+<col width="19%">
+<col width="12%">
+<col width="13%">
+<col width="13%">
+<col width="11%">
+<col width="15%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">term</th>
+<th align="right">estimate</th>
+<th align="right">std.error</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">conf.low</th>
+<th align="right">conf.high</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-26.3
-</td>
-<td style="text-align:right;">
-0.2571777
-</td>
-<td style="text-align:right;">
-102.26394
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-25.785011
-</td>
-<td style="text-align:right;">
-26.814989
-</td>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">26.3</td>
+<td align="right">0.2571777</td>
+<td align="right">102.26394</td>
+<td align="right">0</td>
+<td align="right">25.785011</td>
+<td align="right">26.814989</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-temperature18
-</td>
-<td style="text-align:right;">
--5.3
-</td>
-<td style="text-align:right;">
-0.3637041
-</td>
-<td style="text-align:right;">
--14.57228
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
--6.028305
-</td>
-<td style="text-align:right;">
--4.571695
-</td>
+<tr class="even">
+<td align="left">temperature18</td>
+<td align="right">-5.3</td>
+<td align="right">0.3637041</td>
+<td align="right">-14.57228</td>
+<td align="right">0</td>
+<td align="right">-6.028305</td>
+<td align="right">-4.571695</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-temperature25
-</td>
-<td style="text-align:right;">
--10.1
-</td>
-<td style="text-align:right;">
-0.3637041
-</td>
-<td style="text-align:right;">
--27.76982
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
--10.828305
-</td>
-<td style="text-align:right;">
--9.371695
-</td>
+<tr class="odd">
+<td align="left">temperature25</td>
+<td align="right">-10.1</td>
+<td align="right">0.3637041</td>
+<td align="right">-27.76982</td>
+<td align="right">0</td>
+<td align="right">-10.828305</td>
+<td align="right">-9.371695</td>
 </tr>
 </tbody>
 </table></div>
@@ -646,13 +517,13 @@ Base R
 <div id="option1unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 <div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-2.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-3.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-4.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-2.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-3.png" width="100%" style="display: block; margin: auto;"><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-4.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">lsmodel_frogs1</span>,</span>
 <span>                         check <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"qq"</span>, <span class="st">"outliers"</span>, <span class="st">"homogeneity"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="16-ANOVA_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="16-ANOVA_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <script> javascript:hide('option2unnamed-chunk-18') </script>
 </div>
@@ -694,8 +565,8 @@ Solution
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="st">'Temperature ('</span><span class="op">*</span><span class="op">~</span><span class="va">degree</span><span class="op">*</span><span class="va">C</span><span class="op">*</span><span class="st">')'</span><span class="op">)</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Number of days to spawn hatching"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-25"></span>
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-25-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-28"></span>
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-28-1.png" alt="Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns." width="100%"><p class="caption">
 Figure 11.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.
 </p>
 </div>
@@ -738,9 +609,9 @@ Figure 11.1: Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="st">'Temperature ('</span><span class="op">*</span><span class="op">~</span><span class="va">degree</span><span class="op">*</span><span class="va">C</span><span class="op">*</span><span class="st">')'</span><span class="op">)</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Number of days to spawn hatching"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-26"></span>
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%"><p class="caption">
-Figure 8.1: Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.
+<span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-29-1.png" alt="Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F~1,28~ = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points." width="100%"><p class="caption">
+Figure 11.2: Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.
 </p>
 </div>
 </div>

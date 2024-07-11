@@ -107,54 +107,14 @@ summary(biomass)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Fert </th>
-   <th style="text-align:left;"> Light </th>
-   <th style="text-align:left;"> FL </th>
-   <th style="text-align:right;"> Biomass.m2 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 254.2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 202.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 392.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 455.3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 359.1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-   <td style="text-align:left;"> L- </td>
-   <td style="text-align:left;"> F-L- </td>
-   <td style="text-align:right;"> 386.5 </td>
-  </tr>
-</tbody>
-</table>
+|Fert |Light |FL   | Biomass.m2|
+|:----|:-----|:----|----------:|
+|F-   |L-    |F-L- |      254.2|
+|F-   |L-    |F-L- |      202.0|
+|F-   |L-    |F-L- |      392.4|
+|F-   |L-    |F-L- |      455.3|
+|F-   |L-    |F-L- |      359.1|
+|F-   |L-    |F-L- |      386.5|
 
 </div>
 
@@ -165,80 +125,32 @@ summary(biomass)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> min </th>
-   <th style="text-align:right;"> max </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 152.3 </td>
-   <td style="text-align:right;"> 750.4 </td>
-  </tr>
-</tbody>
-</table>
+|   min|   max|
+|-----:|-----:|
+| 152.3| 750.4|
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Fert </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> F- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F+ </td>
-  </tr>
-</tbody>
-</table>
+|Fert |
+|:----|
+|F-   |
+|F+   |
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Light </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> L- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> L+ </td>
-  </tr>
-</tbody>
-</table>
+|Light |
+|:-----|
+|L-    |
+|L+    |
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> FL </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> F-L- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F+L- </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F-L+ </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> F+L+ </td>
-  </tr>
-</tbody>
-</table>
+|FL   |
+|:----|
+|F-L- |
+|F+L- |
+|F-L+ |
+|F+L+ |
 
 </div>
 
@@ -294,9 +206,9 @@ summary(ls_1)
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept)   355.79      23.14  15.376  < 2e-16 ***
-## FLF-L+         30.12      32.72   0.921  0.36095    
+## FLF-L+         30.13      32.72   0.921  0.36095    
 ## FLF+L-         93.69      32.72   2.863  0.00577 ** 
-## FLF+L+        219.22      32.72   6.699 8.13e-09 ***
+## FLF+L+        219.23      32.72   6.699 8.13e-09 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -339,7 +251,7 @@ coef(ls_1)[4]
 
 ```
 ##   FLF-L+ 
-## 123.8187 
+## 123.8188 
 ##  FLF+L+ 
 ## 219.225
 ```
@@ -492,72 +404,17 @@ drop1(ls_2, test = "F")
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:right;"> 550407.1 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 60 </td>
-   <td style="text-align:right;"> 513997.7 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 36409.41 </td>
-   <td style="text-align:right;"> 4.250144 </td>
-   <td style="text-align:right;"> 0.0435871 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|      RSS| Df| Sum of Sq|        F|    Pr(>F)|
+|------:|--------:|--:|---------:|--------:|---------:|
+|     61| 550407.1| NA|        NA|       NA|        NA|
+|     60| 513997.7|  1|  36409.41| 4.250144| 0.0435871|
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> AIC </th>
-   <th style="text-align:right;"> F value </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> &lt;none&gt; </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> 513997.7 </td>
-   <td style="text-align:right;"> 583.4298 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Fert:Light </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 36409.41 </td>
-   <td style="text-align:right;"> 550407.1 </td>
-   <td style="text-align:right;"> 585.8099 </td>
-   <td style="text-align:right;"> 4.250144 </td>
-   <td style="text-align:right;"> 0.0435871 </td>
-  </tr>
-</tbody>
-</table>
+|           | Df| Sum of Sq|      RSS|      AIC|  F value|    Pr(>F)|
+|:----------|--:|---------:|--------:|--------:|--------:|---------:|
+|<none>     | NA|        NA| 513997.7| 583.4298|       NA|        NA|
+|Fert:Light |  1|  36409.41| 550407.1| 585.8099| 4.250144| 0.0435871|
 
 </div>
 
@@ -593,69 +450,17 @@ anova(ls_4b, ls_3, test = "F")
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 62 </td>
-   <td style="text-align:right;"> 647322.6 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:right;"> 550407.1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 96915.47 </td>
-   <td style="text-align:right;"> 10.74086 </td>
-   <td style="text-align:right;"> 0.0017322 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|      RSS| Df| Sum of Sq|        F|    Pr(>F)|
+|------:|--------:|--:|---------:|--------:|---------:|
+|     62| 647322.6| NA|        NA|       NA|        NA|
+|     61| 550407.1|  1|  96915.47| 10.74086| 0.0017322|
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 62 </td>
-   <td style="text-align:right;"> 870296.4 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 61 </td>
-   <td style="text-align:right;"> 550407.1 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 319889.2 </td>
-   <td style="text-align:right;"> 35.45238 </td>
-   <td style="text-align:right;"> 1e-07 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|      RSS| Df| Sum of Sq|        F| Pr(>F)|
+|------:|--------:|--:|---------:|--------:|------:|
+|     62| 870296.4| NA|        NA|       NA|     NA|
+|     61| 550407.1|  1|  319889.2| 35.45238|  1e-07|
 
 </div>
 
@@ -770,54 +575,14 @@ biomass %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Stress </th>
-   <th style="text-align:right;"> SO2 </th>
-   <th style="text-align:right;"> O3 </th>
-   <th style="text-align:right;"> William </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 8.623533 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.05 </td>
-   <td style="text-align:right;"> 8.690642 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.07 </td>
-   <td style="text-align:right;"> 8.360071 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.08 </td>
-   <td style="text-align:right;"> 8.151910 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.00 </td>
-   <td style="text-align:right;"> 0.10 </td>
-   <td style="text-align:right;"> 8.032685 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 0.02 </td>
-   <td style="text-align:right;"> 8.535426 </td>
-  </tr>
-</tbody>
-</table>
+|Stress       |  SO2|   O3|  William|
+|:------------|----:|----:|--------:|
+|Well-watered | 0.00| 0.02| 8.623533|
+|Well-watered | 0.00| 0.05| 8.690642|
+|Well-watered | 0.00| 0.07| 8.360071|
+|Well-watered | 0.00| 0.08| 8.151910|
+|Well-watered | 0.00| 0.10| 8.032685|
+|Well-watered | 0.02| 0.02| 8.535426|
 
 </div>
 
@@ -835,21 +600,10 @@ biomass %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Stress </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Well-watered </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Stressed </td>
-  </tr>
-</tbody>
-</table>
+|Stress       |
+|:------------|
+|Well-watered |
+|Stressed     |
 
 </div>
 
@@ -877,7 +631,7 @@ pollution %>%
        y = expression(paste(Log~Yield~(kg~ha^-1))))
 ```
 
-<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 
@@ -897,57 +651,12 @@ William_ls1 %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 8.4902296 </td>
-   <td style="text-align:right;"> 0.0974956 </td>
-   <td style="text-align:right;"> 87.0832015 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 8.2898245 </td>
-   <td style="text-align:right;"> 8.6906347 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> O3 </td>
-   <td style="text-align:right;"> -6.4671581 </td>
-   <td style="text-align:right;"> 1.4014008 </td>
-   <td style="text-align:right;"> -4.6147812 </td>
-   <td style="text-align:right;"> 0.0000929 </td>
-   <td style="text-align:right;"> -9.3477788 </td>
-   <td style="text-align:right;"> -3.5865375 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> StressWell-watered </td>
-   <td style="text-align:right;"> 0.2642307 </td>
-   <td style="text-align:right;"> 0.1378796 </td>
-   <td style="text-align:right;"> 1.9163870 </td>
-   <td style="text-align:right;"> 0.0663707 </td>
-   <td style="text-align:right;"> -0.0191849 </td>
-   <td style="text-align:right;"> 0.5476463 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> O3:StressWell-watered </td>
-   <td style="text-align:right;"> -1.3472822 </td>
-   <td style="text-align:right;"> 1.9818801 </td>
-   <td style="text-align:right;"> -0.6798001 </td>
-   <td style="text-align:right;"> 0.5026393 </td>
-   <td style="text-align:right;"> -5.4210950 </td>
-   <td style="text-align:right;"> 2.7265306 </td>
-  </tr>
-</tbody>
-</table>
+|term                  |   estimate| std.error|  statistic|   p.value|   conf.low|  conf.high|
+|:---------------------|----------:|---------:|----------:|---------:|----------:|----------:|
+|(Intercept)           |  8.4902296| 0.0974956| 87.0832015| 0.0000000|  8.2898245|  8.6906347|
+|O3                    | -6.4671581| 1.4014008| -4.6147812| 0.0000929| -9.3477788| -3.5865375|
+|StressWell-watered    |  0.2642307| 0.1378796|  1.9163870| 0.0663707| -0.0191849|  0.5476463|
+|O3:StressWell-watered | -1.3472822| 1.9818801| -0.6798001| 0.5026393| -5.4210950|  2.7265306|
 
 </div>
 It looks as though there is no strong evidence here for an interaction effect, but before we proceed any further we should check that the model is a good fit for our data. </div></div></div>
@@ -965,7 +674,7 @@ Check the residuals of your model </div></div>
 performance::check_model(William_ls1)
 ```
 
-<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="17-Multiple-regression_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 #### Simplify the model
@@ -987,36 +696,10 @@ anova(William_ls2, William_ls1, test = "F")
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 0.5799809 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 26 </td>
-   <td style="text-align:right;"> 0.5698523 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.0101286 </td>
-   <td style="text-align:right;"> 0.4621281 </td>
-   <td style="text-align:right;"> 0.5026393 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|       RSS| Df| Sum of Sq|         F|    Pr(>F)|
+|------:|---------:|--:|---------:|---------:|---------:|
+|     27| 0.5799809| NA|        NA|        NA|        NA|
+|     26| 0.5698523|  1| 0.0101286| 0.4621281| 0.5026393|
 
 </div>
 
@@ -1035,69 +718,17 @@ anova(William_ls3b, William_ls2, test = "F")
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 1.7181003 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 0.5799809 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1.138119 </td>
-   <td style="text-align:right;"> 52.98317 </td>
-   <td style="text-align:right;"> 1e-07 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|       RSS| Df| Sum of Sq|        F| Pr(>F)|
+|------:|---------:|--:|---------:|--------:|------:|
+|     28| 1.7181003| NA|        NA|       NA|     NA|
+|     27| 0.5799809|  1|  1.138119| 52.98317|  1e-07|
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Res.Df </th>
-   <th style="text-align:right;"> RSS </th>
-   <th style="text-align:right;"> Df </th>
-   <th style="text-align:right;"> Sum of Sq </th>
-   <th style="text-align:right;"> F </th>
-   <th style="text-align:right;"> Pr(&gt;F) </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 28 </td>
-   <td style="text-align:right;"> 0.8176233 </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 27 </td>
-   <td style="text-align:right;"> 0.5799809 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2376424 </td>
-   <td style="text-align:right;"> 11.06303 </td>
-   <td style="text-align:right;"> 0.0025466 </td>
-  </tr>
-</tbody>
-</table>
+| Res.Df|       RSS| Df| Sum of Sq|        F|    Pr(>F)|
+|------:|---------:|--:|---------:|--------:|---------:|
+|     28| 0.8176233| NA|        NA|       NA|        NA|
+|     27| 0.5799809|  1| 0.2376424| 11.06303| 0.0025466|
 
 </div>
 
@@ -1111,48 +742,11 @@ William_ls2 %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 8.5333427 </td>
-   <td style="text-align:right;"> 0.0733079 </td>
-   <td style="text-align:right;"> 116.404189 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 8.3829273 </td>
-   <td style="text-align:right;"> 8.6837580 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> O3 </td>
-   <td style="text-align:right;"> -7.1407992 </td>
-   <td style="text-align:right;"> 0.9810200 </td>
-   <td style="text-align:right;"> -7.278954 </td>
-   <td style="text-align:right;"> 0.0000001 </td>
-   <td style="text-align:right;"> -9.1536861 </td>
-   <td style="text-align:right;"> -5.1279124 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> StressWell-watered </td>
-   <td style="text-align:right;"> 0.1780046 </td>
-   <td style="text-align:right;"> 0.0535173 </td>
-   <td style="text-align:right;"> 3.326113 </td>
-   <td style="text-align:right;"> 0.0025466 </td>
-   <td style="text-align:right;"> 0.0681962 </td>
-   <td style="text-align:right;"> 0.2878131 </td>
-  </tr>
-</tbody>
-</table>
+|term               |   estimate| std.error|  statistic|   p.value|   conf.low|  conf.high|
+|:------------------|----------:|---------:|----------:|---------:|----------:|----------:|
+|(Intercept)        |  8.5333427| 0.0733079| 116.404189| 0.0000000|  8.3829273|  8.6837580|
+|O3                 | -7.1407992| 0.9810200|  -7.278954| 0.0000001| -9.1536861| -5.1279124|
+|StressWell-watered |  0.1780046| 0.0535173|   3.326113| 0.0025466|  0.0681962|  0.2878131|
 
 </div>
 </div></div></div>

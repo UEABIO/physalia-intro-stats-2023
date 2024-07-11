@@ -59,7 +59,7 @@ legend("topright", inset=.05, title="Distributions",
        labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
 
 ```r
@@ -83,7 +83,7 @@ combined %>%
   theme_classic()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-3') </script></div></div></div>
 
 A potential source of confusion when discussing *t* is that there are two values that must be considered. There is *critical t* the value which must be **exceeded** for the test to be significant (e.g. generates a *P* value that is less than our predefined $\alpha$). The critical value for *t* is defined by the *df*. Then there is the *observed * value of *t*, this is the value returned by your statistical test, calculated by $\frac{difference}{SE}$. When $observed~t > critical~t$ the result can be declared significantly different at that threshold for $\alpha$. 
@@ -158,33 +158,10 @@ broom::tidy(lsmodel1)
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 20.191667 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 26.595880 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> -2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value|
+|:-----------|---------:|---------:|---------:|---------:|
+|(Intercept) | 20.191667| 0.7592028| 26.595880| 0.0000000|
+|typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-7') </script></div></div></div>
@@ -268,131 +245,24 @@ darwin %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 21.745833 </td>
-   <td style="text-align:right;"> 2.436389 </td>
-   <td style="text-align:right;"> 8.9254352 </td>
-   <td style="text-align:right;"> 0.0000004 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.218195 </td>
-   <td style="text-align:right;"> -2.1479875 </td>
-   <td style="text-align:right;"> 0.0497029 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair2 </td>
-   <td style="text-align:right;"> -4.250000 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -1.2739185 </td>
-   <td style="text-align:right;"> 0.2234352 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair3 </td>
-   <td style="text-align:right;"> 0.062500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> 0.0187341 </td>
-   <td style="text-align:right;"> 0.9853176 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair4 </td>
-   <td style="text-align:right;"> 0.562500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> 0.1686069 </td>
-   <td style="text-align:right;"> 0.8685176 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair5 </td>
-   <td style="text-align:right;"> -1.687500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.5058206 </td>
-   <td style="text-align:right;"> 0.6208532 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair6 </td>
-   <td style="text-align:right;"> -0.375000 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.1124046 </td>
-   <td style="text-align:right;"> 0.9120984 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair7 </td>
-   <td style="text-align:right;"> -0.062500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.0187341 </td>
-   <td style="text-align:right;"> 0.9853176 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair8 </td>
-   <td style="text-align:right;"> -2.625000 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.7868320 </td>
-   <td style="text-align:right;"> 0.4444963 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair9 </td>
-   <td style="text-align:right;"> -3.062500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.9179707 </td>
-   <td style="text-align:right;"> 0.3741786 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair10 </td>
-   <td style="text-align:right;"> -0.625000 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.1873410 </td>
-   <td style="text-align:right;"> 0.8540813 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair11 </td>
-   <td style="text-align:right;"> -0.687500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.2060750 </td>
-   <td style="text-align:right;"> 0.8396990 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair12 </td>
-   <td style="text-align:right;"> -0.937500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.2810114 </td>
-   <td style="text-align:right;"> 0.7828120 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair13 </td>
-   <td style="text-align:right;"> -3.000000 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.8992366 </td>
-   <td style="text-align:right;"> 0.3837329 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair14 </td>
-   <td style="text-align:right;"> -1.187500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -0.3559478 </td>
-   <td style="text-align:right;"> 0.7271862 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> pair15 </td>
-   <td style="text-align:right;"> -5.437500 </td>
-   <td style="text-align:right;"> 3.336163 </td>
-   <td style="text-align:right;"> -1.6298663 </td>
-   <td style="text-align:right;"> 0.1254148 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error|  statistic|   p.value|
+|:-----------|---------:|---------:|----------:|---------:|
+|(Intercept) | 21.745833|  2.436389|  8.9254352| 0.0000004|
+|typeSelf    | -2.616667|  1.218195| -2.1479875| 0.0497029|
+|pair2       | -4.250000|  3.336163| -1.2739185| 0.2234352|
+|pair3       |  0.062500|  3.336163|  0.0187341| 0.9853176|
+|pair4       |  0.562500|  3.336163|  0.1686069| 0.8685176|
+|pair5       | -1.687500|  3.336163| -0.5058206| 0.6208532|
+|pair6       | -0.375000|  3.336163| -0.1124046| 0.9120984|
+|pair7       | -0.062500|  3.336163| -0.0187341| 0.9853176|
+|pair8       | -2.625000|  3.336163| -0.7868320| 0.4444963|
+|pair9       | -3.062500|  3.336163| -0.9179707| 0.3741786|
+|pair10      | -0.625000|  3.336163| -0.1873410| 0.8540813|
+|pair11      | -0.687500|  3.336163| -0.2060750| 0.8396990|
+|pair12      | -0.937500|  3.336163| -0.2810114| 0.7828120|
+|pair13      | -3.000000|  3.336163| -0.8992366| 0.3837329|
+|pair14      | -1.187500|  3.336163| -0.3559478| 0.7271862|
+|pair15      | -5.437500|  3.336163| -1.6298663| 0.1254148|
 
 </div>
 </div><script> javascript:hide('option2= T') </script>
@@ -421,75 +291,17 @@ lm(height ~ type + factor(pair), data = darwin) %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 20.191667 </td>
-   <td style="text-align:right;"> 0.7592028 </td>
-   <td style="text-align:right;"> 26.595880 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 18.63651 </td>
-   <td style="text-align:right;"> 21.7468231 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.0736749 </td>
-   <td style="text-align:right;"> -2.437113 </td>
-   <td style="text-align:right;"> 0.0214145 </td>
-   <td style="text-align:right;"> -4.81599 </td>
-   <td style="text-align:right;"> -0.4173433 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value| conf.low|  conf.high|
+|:-----------|---------:|---------:|---------:|---------:|--------:|----------:|
+|(Intercept) | 20.191667| 0.7592028| 26.595880| 0.0000000| 18.63651| 21.7468231|
+|typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145| -4.81599| -0.4173433|
 
 </div><div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> term </th>
-   <th style="text-align:right;"> estimate </th>
-   <th style="text-align:right;"> std.error </th>
-   <th style="text-align:right;"> statistic </th>
-   <th style="text-align:right;"> p.value </th>
-   <th style="text-align:right;"> conf.low </th>
-   <th style="text-align:right;"> conf.high </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:right;"> 21.745833 </td>
-   <td style="text-align:right;"> 2.436389 </td>
-   <td style="text-align:right;"> 8.925435 </td>
-   <td style="text-align:right;"> 0.0000004 </td>
-   <td style="text-align:right;"> 16.520298 </td>
-   <td style="text-align:right;"> 26.9713683 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> typeSelf </td>
-   <td style="text-align:right;"> -2.616667 </td>
-   <td style="text-align:right;"> 1.218195 </td>
-   <td style="text-align:right;"> -2.147988 </td>
-   <td style="text-align:right;"> 0.0497029 </td>
-   <td style="text-align:right;"> -5.229434 </td>
-   <td style="text-align:right;"> -0.0038992 </td>
-  </tr>
-</tbody>
-</table>
+|term        |  estimate| std.error| statistic|   p.value|  conf.low|  conf.high|
+|:-----------|---------:|---------:|---------:|---------:|---------:|----------:|
+|(Intercept) | 21.745833|  2.436389|  8.925435| 0.0000004| 16.520298| 26.9713683|
+|typeSelf    | -2.616667|  1.218195| -2.147988| 0.0497029| -5.229434| -0.0038992|
 
 </div>
 
@@ -619,24 +431,10 @@ y %>%
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> p value &lt; 0.05 </th>
-   <th style="text-align:right;"> number of experiments </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> non-significant </td>
-   <td style="text-align:right;"> 6 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> significant </td>
-   <td style="text-align:right;"> 14 </td>
-  </tr>
-</tbody>
-</table>
+|p value < 0.05  | number of experiments|
+|:---------------|---------------------:|
+|non-significant |                     6|
+|significant     |                    14|
 
 </div>
 </div></div></div>
@@ -666,7 +464,7 @@ y %>%
   theme_minimal()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 By illustrating this visually, it is clearer to see that the results are not really inconsistent, the negative effects of inbreeding depression are clear to see in all of the experiments - we are simply observing the effect of sampling error. 
