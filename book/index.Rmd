@@ -25,8 +25,8 @@ favicon: images/logos/favicon.ico
 # automatically create a bib database for R packages
 # add any packages you want to cite here
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness'
-), 'packages.bib')
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'pwr', 'simr')
+, 'packages.bib')
 
 ```
 
@@ -58,7 +58,8 @@ This course will introduce scientists and practitioners interested in applying s
 ## Packages
 
 ```{r, eval = FALSE}
-
+library(car)
+library(arm)
 library(tidyverse)
 library(janitor)
 library(rstatix)
@@ -75,4 +76,6 @@ library(report)
 library(MuMIn)
 library(GGally)
 library(colorBlindness)
+library(pwr)
+library(simr)
 ```

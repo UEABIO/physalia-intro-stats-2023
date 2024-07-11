@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 1 Loading data | Introduction to Statistics</title>
 <meta name="author" content="Philip T. Leftwich">
-<meta name="description" content="In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data. As a biologist you should be used to asking questions...">
+<meta name="description" content="In this workshop, we focus on loading data. Once we have a curated and cleaned dataset, we can start deriving insights from it. As a biologist, you are accustomed to asking questions and gathering...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
 <meta property="og:title" content="Chapter 1 Loading data | Introduction to Statistics">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/physalia-intro-stats-2023/loading-data.html">
 <meta property="og:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
-<meta property="og:description" content="In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data. As a biologist you should be used to asking questions...">
+<meta property="og:description" content="In this workshop, we focus on loading data. Once we have a curated and cleaned dataset, we can start deriving insights from it. As a biologist, you are accustomed to asking questions and gathering...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 1 Loading data | Introduction to Statistics">
-<meta name="twitter:description" content="In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data. As a biologist you should be used to asking questions...">
+<meta name="twitter:description" content="In this workshop, we focus on loading data. Once we have a curated and cleaned dataset, we can start deriving insights from it. As a biologist, you are accustomed to asking questions and gathering...">
 <meta name="twitter:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -118,8 +118,8 @@
 <li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">3</span> Data wrangling part two</a></li>
 <li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data visualisation with ggplot2</a></li>
 <li class="book-part">Descriptive Statistics</li>
-<li><a class="" href="data-insights-part-one.html"><span class="header-section-number">5</span> Data Insights part one</a></li>
-<li><a class="" href="data-insights-part-two.html"><span class="header-section-number">6</span> Data insights part two</a></li>
+<li><a class="" href="data-quality.html"><span class="header-section-number">5</span> Data Quality</a></li>
+<li><a class="" href="data-insights.html"><span class="header-section-number">6</span> Data insights</a></li>
 <li class="book-part">Linear models</li>
 <li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">7</span> Introduction to statistics</a></li>
 <li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">8</span> Introduction to Linear Models</a></li>
@@ -128,20 +128,21 @@
 <li><a class="" href="anova.html"><span class="header-section-number">11</span> ANOVA</a></li>
 <li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">12</span> Multivariate linear models</a></li>
 <li><a class="" href="complex-models.html"><span class="header-section-number">13</span> Complex models</a></li>
+<li><a class="" href="introduction-to-power-analysis.html"><span class="header-section-number">14</span> Introduction to Power Analysis</a></li>
 <li class="book-part">Generalized Linear Models</li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">14</span> Generalized Linear Models</a></li>
-<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">15</span> Poisson regression (for count data or rate data)</a></li>
-<li><a class="" href="logistic-regression-for-binary-data.html"><span class="header-section-number">16</span> Logistic regression (for binary data)</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">15</span> Generalized Linear Models</a></li>
+<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">16</span> Poisson regression (for count data or rate data)</a></li>
+<li><a class="" href="logistic-regression-for-binary-data.html"><span class="header-section-number">17</span> Logistic regression (for binary data)</a></li>
 <li class="book-part">Mixed Models</li>
-<li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">17</span> Foundations of Mixed Modelling</a></li>
-<li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">18</span> Worked Example 1 - Dolphins</a></li>
-<li><a class="" href="multiple-random-effects.html"><span class="header-section-number">19</span> Multiple random effects</a></li>
-<li><a class="" href="worked-example-2---nested-design.html"><span class="header-section-number">20</span> Worked Example 2 - Nested design</a></li>
-<li><a class="" href="types-of-random-effects.html"><span class="header-section-number">21</span> Types of Random Effects</a></li>
-<li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">22</span> Worked Example 3 - Sleep study</a></li>
-<li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">23</span> Reporting Mixed Model Results</a></li>
-<li><a class="" href="worked-example-4.html"><span class="header-section-number">24</span> Worked Example 4</a></li>
-<li><a class="" href="summary-10.html"><span class="header-section-number">25</span> Summary</a></li>
+<li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">18</span> Foundations of Mixed Modelling</a></li>
+<li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">19</span> Worked Example 1 - Dolphins</a></li>
+<li><a class="" href="multiple-random-effects.html"><span class="header-section-number">20</span> Multiple random effects</a></li>
+<li><a class="" href="worked-example-2---nested-design.html"><span class="header-section-number">21</span> Worked Example 2 - Nested design</a></li>
+<li><a class="" href="types-of-random-effects.html"><span class="header-section-number">22</span> Types of Random Effects</a></li>
+<li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">23</span> Worked Example 3 - Sleep study</a></li>
+<li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">24</span> Reporting Mixed Model Results</a></li>
+<li><a class="" href="worked-example-4.html"><span class="header-section-number">25</span> Worked Example 4</a></li>
+<li><a class="" href="summary-10.html"><span class="header-section-number">26</span> Summary</a></li>
 </ul>
 
         <div class="book-extra">
@@ -153,15 +154,15 @@
 <h1>
 <span class="header-section-number">1</span> Loading data<a class="anchor" aria-label="anchor" href="#loading-data"><i class="fas fa-link"></i></a>
 </h1>
-<p>In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data.</p>
-<p>As a biologist you should be used to asking questions and gathering data. It is also important that you learn all aspects of the research process. This includes responsible data management (understanding data files &amp; spreadsheet organisation, keeping data safe) and data analysis.</p>
-<p>In this chapter we will look at the structure of data files, and how to read these with R. We will also continue to develop reproducible scripts. This means that we are writing scripts that are well organised and easy to read, and also making sure that our scripts are complete and capable of reproducing an analysis from start to finish.</p>
-<p>Transparency and reproducibility are key values in scientific research, when you analyse data in a reproducible way it means that others can understand and check your work. It also means that the most important person can benefit from your work, YOU! When you return to an analysis after even a short break, you will be thanking your earlier self if you have worked in a clear and reproducible way, as you can pick up right where you left off.</p>
+<p>In this workshop, we focus on loading data. Once we have a curated and cleaned dataset, we can start deriving insights from it.</p>
+<p>As a biologist, you are accustomed to asking questions and gathering data. It's crucial to grasp every facet of the research process, including responsible data management (understanding data files and spreadsheet organization, ensuring data security) and data analysis.</p>
+<p>In this chapter, we will explore the structure of data files and how to read them using R. Additionally, we will continue developing reproducible scripts. This involves writing well-organized and legible scripts that can fully reproduce an analysis from start to finish.</p>
+<p>Transparency and reproducibility are fundamental in scientific research. When you analyze data in a reproducible manner, it enables others to understand and verify your work. Moreover, it benefits you directly; returning to an analysis later becomes seamless if you've worked in a clear and reproducible manner.</p>
 <div id="meet-the-penguins" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Meet the Penguins<a class="anchor" aria-label="anchor" href="#meet-the-penguins"><i class="fas fa-link"></i></a>
 </h2>
-<p>This data, taken from the <code>palmerpenguins</code> (<span class="citation">Horst et al. (<a href="summary-10.html#ref-R-palmerpenguins" role="doc-biblioref">2022</a>)</span>) package was originally published by <span class="citation">Gorman et al. (<a href="summary-10.html#ref-Antarctic" role="doc-biblioref">2014</a>)</span>. In our course we will work with real data that has been shared by other researchers.</p>
+<p>This data, taken from the <code>palmerpenguins</code> (<span class="citation">Horst et al. (<a href="summary-10.html#ref-R-palmerpenguins">2022</a>)</span>) package was originally published by <span class="citation">Gorman et al. (<a href="summary-10.html#ref-Antarctic">2014</a>)</span>. In our course we will work with real data that has been shared by other researchers.</p>
 <p>The palmer penguins data contains size measurements, clutch observations, and blood isotope ratios for three penguin species observed on three islands in the Palmer Archipelago, Antarctica over a study period of three years.</p>
 <div class="inline-figure"><img src="images/gorman-penguins.jpg" alt="Photo of three penguin species, Chinstrap, Gentoo, Adelie" width="80%" style="display: block; margin: auto;"></div>
 <p>These data were collected from 2007 - 2009 by Dr. Kristen Gorman with the Palmer Station Long Term Ecological Research Program, part of the US Long Term Ecological Research Network. The data were imported directly from the Environmental Data Initiative (EDI) Data Portal, and are available for use by CC0 license (“No Rights Reserved”) in accordance with the Palmer Station Data Policy. We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license &amp; use. Here is our intrepid package co-author, Dr. Gorman, in action collecting some penguin data:</p>
@@ -173,9 +174,9 @@
 <h2>
 <span class="header-section-number">1.2</span> Activity 1: Organising our workspace<a class="anchor" aria-label="anchor" href="#activity-1-organising-our-workspace"><i class="fas fa-link"></i></a>
 </h2>
-<p>Before we can begin working with the data, we need to do some set-up.</p>
+<p>Before diving into the data, let's set up our workspace:</p>
 <ul>
-<li><p>Go to RStudio Cloud and open the <code>Penguins</code> R project</p></li>
+<li><p>Go to Posit Cloud and open the <code>Penguins</code> R project</p></li>
 <li>
 <p>Create the following folders using the + New Folder button in the Files tab</p>
 <ul>
@@ -190,9 +191,8 @@
 R is case-sensitive so type everything EXACTLY as printed here
 </p>
 </div>
-<p>Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.</p>
-<p>The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space.</p>
-<p>We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, a series of linked experiments or particular research project might be its own project.</p>
+<p>Organizing these subfolders keeps your workspace tidy, minimizes the risk of losing files, and helps R locate data easily.</p>
+<p>Each new data project in Posit Cloud/RStudio automatically sets up a project space, simplifying file management.</p>
 <p>A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-6"></span>
@@ -200,7 +200,7 @@ R is case-sensitive so type everything EXACTLY as printed here
 Figure 1.1: An example of a typical R project set-up
 </p>
 </div>
-<p>Within this project you will notice there is already one file <em>.Rproj</em>. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;More on projects can be found in the R4DS book (&lt;a href="https://r4ds.had.co.nz/workflow-projects.html" class="uri"&gt;https://r4ds.had.co.nz/workflow-projects.html&lt;/a&gt;)&lt;/p&gt;'><sup>1</sup></a>.</p>
+<p>Within this project you will notice there is already one file <em>.Rproj</em>. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer. It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;More on projects can be found in the R4DS book (&lt;a href="https://r4ds.had.co.nz/workflow-projects.html" class="uri"&gt;https://r4ds.had.co.nz/workflow-projects.html&lt;/a&gt;)&lt;/p&gt;'><sup>1</sup></a>.</p>
 <div class="warning">
 <p>
 It is very important to NEVER to move the .Rproj file, this may
@@ -212,18 +212,18 @@ prevent your workspace from opening properly.
 <h2>
 <span class="header-section-number">1.3</span> Activity 2: Access our data<a class="anchor" aria-label="anchor" href="#activity-2-access-our-data"><i class="fas fa-link"></i></a>
 </h2>
-<p>Now that we have a project workspace, we are ready to import some data.</p>
+<p>Now that our project workspace is set, let's import some data:</p>
 <ul>
 <li><p>Use the link below to open a page in your browser with the data open</p></li>
 <li><p>Right-click Save As to download in csv format to your computer (Make a note of <strong>where</strong> the file is being downloaded to e.g. Downloads)</p></li>
-<li><p>Compare how the data looks in "raw" format to when you open the same data with Excel</p></li>
+<li><p>Compare how the data looks in "raw" CSV format to when you open the same data with Excel</p></li>
 </ul>
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/penguins_raw.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download penguin data as csv</button>
 </a>
-<p>At first glance the data might look quite strange and messy. It has been stored as a <strong>CSV</strong> or comma-separated values file. CSV files are plain text files that can store large amounts of data, and can readily be imported into a spreadsheet or storage database.</p>
-<p>These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma.</p>
+<p>CSV files are plain text files that store large amounts of data without formatting or formulas. They are ideal for data storage because they preserve raw data integrity.</p>
 <p>This file format helps us maintain an ethos <strong>Keep Raw Data Raw</strong> -</p>
+<p>It's recommended to avoid Excel for data analysis due to potential formatting issues and data loss with large files.</p>
 <p>In many cases, the captured or collected data may be unique and impossible to reproduce, such as measurements in a lab or field observations. For this reason, they should be protected from any possible loss. Every time a change is made to a raw data file it threatens the integrity of that information.</p>
 <p>In practice, that means we only use our data file for data entry and storage. All the data manipulation, cleaning and analysis happens in R, using transparent and reproducible scripts.</p>
 <div class="info">
@@ -264,7 +264,7 @@ with a .csv format your data is more open and accessible.
 </h2>
 <ul>
 <li><p>The data is now in your Downloads folder on your computer</p></li>
-<li><p>We need to upload the data to our remote cloud-server (RStudio Cloud), select the upload files to server button in the Files tab</p></li>
+<li><p>We need to upload the data to our remote cloud-server (Posit Cloud), select the upload files to server button in the Files tab</p></li>
 <li><p>Put your file into the data folder - if you make a mistake select the tickbox for your file, go to the cogs button and choose the option Move.</p></li>
 </ul>
 <div class="figure" style="text-align: center">
@@ -278,8 +278,11 @@ Figure 1.3: Highlighted the buttons to upload files, and more options
 <h2>
 <span class="header-section-number">1.5</span> Activity 4: Make a script<a class="anchor" aria-label="anchor" href="#activity-4-make-a-script"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File &gt; New Script menu item and select an R Script.</p>
-<p>Add the following:</p>
+<p>Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures.</p>
+<ul>
+<li><p>Go to File &gt; New Script menu item and select an R Script.</p></li>
+<li><p>Add the following content to your script file:</p></li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#___________________________----</span></span>
 <span><span class="co"># SET UP ----</span></span>
@@ -291,11 +294,11 @@ Figure 1.3: Highlighted the buttons to upload files, and more options
 <p>Add the following to your script:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># PACKAGES ----</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># tidy data packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># packages for tidy data</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span> <span class="co"># cleans variable names</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span> <span class="co"># make sure dates are processed properly</span></span>
-<span><span class="co">#__________________________----</span></span></code></pre></div>
-<p>Save this file inside the scripts folder and call it <code>01_import_penguins_data.R</code></p>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span> <span class="co"># ensures proper date processing</span></span>
+<span><span class="co">#-----------------------</span></span></code></pre></div>
+<p>Save this file inside the scripts folder as <code>01_import_penguins_data.R</code></p>
 <div class="try">
 <p>
 Click on the document outline button (top right of script pane). This
@@ -314,11 +317,7 @@ useful when using longer scripts.
 <h2>
 <span class="header-section-number">1.6</span> Activity 5: Read in data<a class="anchor" aria-label="anchor" href="#activity-5-read-in-data"><i class="fas fa-link"></i></a>
 </h2>
-<p>Now we can read in the data. To do this we will use the function <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.</p>
-<ul>
-<li><p>First, we will create an object called <code>penguins_data</code> that contains the data in the <code>penguins_raw.csv</code> file.</p></li>
-<li><p>Add the following to your script, and check the document outline:</p></li>
-</ul>
+<p>Let's read in the data using the <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># IMPORT DATA ----</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span> <span class="op">(</span><span class="st">"data/penguins_raw.csv"</span><span class="op">)</span></span>
@@ -342,6 +341,7 @@ they have different ways of naming columns.
 <li><p>"data/" - specifies the directory in which to look for the file</p></li>
 <li><p>"penguins_raw.csv" - specifies the name and format of the file</p></li>
 </ul>
+<p>Understanding directories (folders) and filepaths is crucial for locating and managing files in R.</p>
 <div id="directories" class="section level4" number="1.7.0.1">
 <h4>
 <span class="header-section-number">1.7.0.1</span> Directories<a class="anchor" aria-label="anchor" href="#directories"><i class="fas fa-link"></i></a>
@@ -392,7 +392,7 @@ not Found</a>
 <p>This filepath is shorter <em>and</em> it means you could share your project with someone else and the script would run without any editing.</p>
 <div class="info">
 <p>
-For those of you using RStudio Cloud, remember you are working on a
+For those of you using Posit Cloud, remember you are working on a
 Linux OS cloud server, each of you will have a different absolute
 filepath - but the scripts for the project you are working on right now
 work because you are using relative filepaths
@@ -400,9 +400,9 @@ work because you are using relative filepaths
 </div>
 </div>
 </div>
-<div id="activity-5-check-your-script" class="section level2" number="1.8">
+<div id="activity-6-check-your-script" class="section level2" number="1.8">
 <h2>
-<span class="header-section-number">1.8</span> Activity 5: Check your script<a class="anchor" aria-label="anchor" href="#activity-5-check-your-script"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> Activity 6: Check your script<a class="anchor" aria-label="anchor" href="#activity-6-check-your-script"><i class="fas fa-link"></i></a>
 </h2>
 <div class="webex-solution">
 <button>
@@ -669,7 +669,7 @@ $( document ).ready(function() {
 <li>
 <a class="nav-link" href="#filepaths"><span class="header-section-number">1.7</span> Filepaths</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#absolute-vs-relative-filepaths"><span class="header-section-number">1.7.1</span> Absolute vs Relative filepaths</a></li></ul>
 </li>
-<li><a class="nav-link" href="#activity-5-check-your-script"><span class="header-section-number">1.8</span> Activity 5: Check your script</a></li>
+<li><a class="nav-link" href="#activity-6-check-your-script"><span class="header-section-number">1.8</span> Activity 6: Check your script</a></li>
 <li><a class="nav-link" href="#activity-7-test-yourself"><span class="header-section-number">1.9</span> Activity 7: Test yourself</a></li>
 </ul>
 
@@ -688,7 +688,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2023-07-19.</p>
+    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

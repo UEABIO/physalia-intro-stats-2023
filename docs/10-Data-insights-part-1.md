@@ -1,6 +1,6 @@
 # (PART\*) Descriptive Statistics {.unnumbered}
 
-# Data Insights part one
+# Data Quality
 
 
 
@@ -8,24 +8,24 @@
 
 
 
-In these last chapters we are concentrating on generating insights into our data using visualisations and descriptive statistics. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
 
-For this exercise we will propose that our task is to generate insights into the body mass of our penguins, in order to answer the question
+Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality data leads to accurate analyses and valid conclusions, while poor-quality data can result in misleading findings and faulty decisions. This introductory guide outlines key dimensions of data quality, including completeness, consistency, accuracy, validity, uniformity, distribution, redundancy, integrity, temporal consistency, and bias checks. Understanding and evaluating these dimensions is an essential first step in generating insights from our data.
 
-* How is body mass associated with bill length and depth in penguins?
+| Dimension                | Importance                                                                                      | Action                                                                                                    |
+|--------------------------|-------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Tidy data | Most of our dplyr functions and later modelling work on the assumption that data is tidy (each column is a unique variable, each row is a unique observation)      | Check that data visually conforms to tidy data principles            |
+| Completeness: Missing Data and Duplicates | Missing data and duplicates can skew analysis results and reduce the reliability of insights.          | Identify and address missing values and duplicates to ensure a complete and accurate dataset.             |
+| Accuracy: Range Checks and Outlier Detection | Inaccurate data can distort analysis outcomes and lead to incorrect conclusions.                          | Perform range checks and outlier detection to validate the accuracy of the data.                          |
+| Validity: Data Types  | Data that does not conform to expected types can cause errors in analysis.          | Verify that each column of data is in the correct format.                         |
+| Uniformity: Units, Formats, and Text Consistency | Inconsistent units, formatting, and text can complicate data integration and analysis.                        | Standardize units, formats, and text to ensure uniformity and facilitate seamless analysis.               |
+| Distribution: Analyzing Variable Distributions | Understanding the distribution of variables is key to selecting appropriate analysis techniques.            | Analyze variable distributions to identify patterns, trends, and potential anomalies.                     |
+| Bias Checks: Representativeness and Selection Bias | Biases can skew results and lead to misleading conclusions.                                                | Evaluate the representativeness of the data and check for selection bias to ensure unbiased analysis.      |
 
-In order to answer this question properly we should first understand our different variables and how they might relate to each other. 
 
-* Distribution of data types
-* Central tendency
-* Relationship between variables 
-* Confounding variables
-
-This inevitably leads to more and a variety of questions. Each new question that you ask will expose you to a *new aspect* of your data.
 
 #### Data wrangling
 
-Importantly you should have already generated an understanding of the variables contained within your dataset during the [data wrangling](#data-wrangling-part-one) steps. Including: 
+Importantly you should have already generated an understanding of data checking and validation of your dataset during the [data wrangling](#data-wrangling-part-one) steps. Including gaining insights on: 
 
 * The number of variables
 
@@ -87,10 +87,470 @@ Let's take a look at some of our variables, these functions will give a quick sn
 glimpse(penguins)
 summary(penguins)
 ```
+Here we get insights into whether each variable is in a valid data type, information on range and the extent of any missingness.
 
-We can see that bill length contains numbers, and that many of these are fractions, but only down to 0.1mm. By comparison body mass all appear to be discrete number variables. Does this make body mass an integer? The underlying quantity (bodyweight) is clearly continuous, it is clearly possible for a penguin to weigh 3330.7g but it might *look* like an integer because of the way it was measured. This illustrates the importance of understanding the the type of variable you are working with - just looking at the values isn't enough. 
+Q. We can see that bill length contains numbers, and that many of these are fractions, but only down to 0.1mm. By comparison body mass all appear to be discrete number variables. Does this make body mass an integer? 
+
+The underlying quantity (bodyweight) is clearly continuous, it is clearly possible for a penguin to weigh 3330.7g but it might *look* like an integer because of the way it was measured. This illustrates the importance of understanding the the type of variable you are working with - just looking at the values isn't enough. 
 
 On the other hand, how we choose to measure and record data *can* change the way it is presented in a dataset. If the researchers had decided to simply record small, medium and large classes of bodyweight, then we would be dealing with ordinal categorical variables (factors). These distinctions can become less clear if we start to deal with multiple classes of ordinal categories - for example if the researchers were measuring body mass to the nearest 10g. It might be reasonable to treat these as integers...
+
+## Missing data
+
+The first issue we will cover is missing data. There is a whole host of reasons that your data could have missing values. 
+
+This can be broken down into three broad categories: 
+
+| Missing Data Mechanism            | Description                                                                 | Example                                                                                  |
+|-----------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| **MCAR (Missing Completely at Random)** | The probability of missing data is independent of any observed or unobserved data.       | Leaf samples lost randomly due to a labeling error in a plant growth study.              |
+| **MAR (Missing at Random)**       | The probability of missing data is related to some observed data but not to the missing data itself. | Blood pressure readings missing more frequently for older patients in a drug trial.      |
+| **MNAR (Missing Not at Random)**  | The probability of missing data is related to the value of the missing data itself.       | Heavier birds in a wildlife study are harder to capture and weigh, leading to missing weight data. |
+
+Understanding which type of process is causing your missing data is important, for any type of missingness at random we can process our data accordingly. But if the missing data is Not at Random we may have to consider collecting more data. 
+
+### Deletion
+
+
+```r
+penguins_listwise <- drop_na(penguins)
+```
+
+As you can see, penguins_listwise now only contains data for penguins with a complete set of data—i.e., observations in each column.
+
+While this might seem beneficial and sometimes is the most appropriate option, there are a couple of important points to consider.
+
+First, let's say the blood isotopes might not be part of our primary analysis; it might just be there as additional information. If we don't plan to include these in any of our analyses, using listwise deletion (removing rows with any missing values) might unnecessarily exclude observations that are otherwise complete for the relevant variables. This means we might be discarding valuable data.
+
+Additionally, using a listwise deletion approach can result in significant data loss. Compare the original penguins dataset to penguins_listwise. The original dataset had 344 observations. After using drop_na(), we only have 34 observations, meaning we've lost a huge portion of our data with this approach! Only a handful of observations have accompanying notes in the comments column
+
+Note: If you use a listwise deletion approach, it's also important to check that the missing values are not concentrated in a particular group (i.e., ensure the missing data is random and not biased).
+
+To address these issues, you can modify the use of drop_na() to exclude specific columns, such as comments and isotopes, from the deletion criteria. This ensures you don't exclude observations based on irrelevant columns. For example, run the code below:
+
+
+```r
+penguins_listwise2 <- drop_na(penguins, -delta_15n, -delta_13c, -comments)
+```
+
+
+Q. How many observations does `penguins_listwise2` have?
+
+<select class='webex-select'><option value='blank'></option><option value=''>34</option><option value=''>323</option><option value='answer'>333</option><option value=''>344</option></select>
+
+This approach removes rows with NAs based on all columns except comments and isotopes.
+Alternatively, you could choose to remove participants with NAs based only on specific columns relevant to your analysis, such as bill length and flipper length:
+
+This demonstrates the flexibility of `drop_na()` — you have a lot of control as long as you plan your approach in advance.
+
+### Pairwise deletion
+
+An alternative to listwise deletion is pairwise deletion. This method removes cases depending on the analysis. For example, if we calculate correlations between bill length, flipper length, and body mass without first removing observations with missing data, we'll use different numbers of observations in each correlation based on the available data for each pair of variables.
+
+Consider the following correlations:
+
+
+```r
+# Correlation between bill_length_mm and flipper_length_mm
+cor.test(penguins$body_mass_g, penguins$delta_15n)
+# Output example:
+# t = 11.556, df = 328, p-value < 2.2e-16
+# cor = -0.537
+
+# Correlation between bill_length_mm and body_mass_g
+cor.test(penguins$body_mass_g, penguins$delta_13c)
+# Output example:
+# t = -7.32, df = 329, p-value = 1.808e-12
+# cor = -0.37
+```
+
+You can see that the correlation between body mass and delta_15n has df = 328, whereas the correlation between body mass and delta_13c has df = 329. This indicates that the correlation is calculated only on the observations with available data for both columns—pairwise deletion.
+
+The challenge here is to remember to report the degrees of freedom (dfs) accordingly, as they change and may differ from the total number of observations mentioned in your methods section. Therefore, it is crucial to thoroughly examine your data!
+
+### Summarising data with missing values
+
+When running inferential tests like correlations, and later, linear models, the analysis will usually know to ignore missing values. However, when calculating descriptive statistics or if you want to calculate the average score of a number of different items, you need to explicitly state to ignore the missing values. We can do this through `na.rm = TRUE`
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  summarise(mean = mean(body_mass_g))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> mean </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 3733.088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+As you can see, the mean score for body mass in Adelie and Gentoo penguins shows as `NA`. This is because we are trying to calculate an average of a variable that has missing data and that just isn't doable. As such we need to calculate the mean but ignoring the missing values by adding `na.rm = TRUE`
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  summarise(mean = mean(body_mass_g, na.rm = T))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> mean </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 3700.662 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 3733.088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 5076.016 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+When working with data, it’s crucial to consider whether you want to calculate your descriptive statistics from observations with missing data. For instance, if you are calculating the average body mass from hundreds of measurements, a few missing data points won’t significantly impact the validity of the mean. However, if the missing data is biased in some way, or you only have values for 30% of the total dataset, it may not be appropriate to calculate a mean score from the remaining data. 
+
+
+```r
+penguins %>% 
+    group_by(species) %>% 
+    summarise(count_na = is.na(body_mass_g) %>% sum())
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> count_na </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 1 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+## Implausible values
+
+### Categorical data
+
+Along with looking for missing values, an additional crucial step of data screening is checking for implausible values - values that should not exist in your data. What is implausible depends on the data you've collected!
+
+The first place to look for implausible values is in character and factorial data - typos will be incorrectly processed as unique levels to a variable
+
+
+```r
+penguins %>% distinct(sex)
+
+penguins %>% distinct(species)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NA </td>
+  </tr>
+</tbody>
+</table>
+
+</div><div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+Or you could combine these into a single run
+
+
+```r
+penguins %>% 
+  dplyr::select(sex, species, region, island) %>% 
+  distinct()
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> sex </th>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:left;"> region </th>
+   <th style="text-align:left;"> island </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Torgersen </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Torgersen </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Torgersen </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Biscoe </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Biscoe </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Dream </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Dream </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Dream </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Biscoe </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Biscoe </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Biscoe </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> FEMALE </td>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Dream </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> MALE </td>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:left;"> Anvers </td>
+   <td style="text-align:left;"> Dream </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+### Continuous data
+
+Additional functions we can put inside a `summarise()` function are `min()` and `max()`.
+
+
+```r
+penguins %>%
+    summarise_at(c("body_mass_g", "flipper_length_mm"),
+               c(max = max, min = min),
+               na.rm = TRUE)
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> body_mass_g_max </th>
+   <th style="text-align:right;"> flipper_length_mm_max </th>
+   <th style="text-align:right;"> body_mass_g_min </th>
+   <th style="text-align:right;"> flipper_length_mm_min </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 6300 </td>
+   <td style="text-align:right;"> 231 </td>
+   <td style="text-align:right;"> 2700 </td>
+   <td style="text-align:right;"> 172 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+Or we could use `summary` or `skimr::skim`
+
+### Visualise continuous data
+
+There are a number of different ways to visualise the data as you know and this depends on the data, and your preferences. You could produce histograms, or violin-boxplots with the data points on top to check the distributions as follows:
+
+
+```r
+penguins %>% 
+  ggplot()+
+  geom_histogram(aes(x=body_mass_g),
+                 bins=10)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+
+<div class="try">
+<p>Change the value specified to the bins argument and observe how the
+figure changes. It is usually a very good idea to try more than one set
+of bins in order to have better insights into the data</p>
+</div>
+
+
+
+```r
+penguins %>% 
+  ggplot(aes(x=body_mass_g, y = 0))+
+  geom_boxplot()+
+  geom_jitter(height =.2)
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+To get the most out of your data, combine data you collected from the `summary()` function and your visuals here 
+
+* Which values are the most common? <select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value='answer'>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value=''>>6500g</option></select>
+
+* Which values are rare? Why? Does that match your expectations?
+<select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value=''>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value='answer'>>6500g</option></select>
+
+* Can you see any unusual patterns? <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
+
+* How many observations are missing body mass information? <input class='webex-solveme nospaces' size='1' data-answer='["2"]'/>
+
+
+<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+Penguins weighing less than 3kg and more than 6kg are rare. 
+The most common weight appears to be just under 4kg. 
+
+There appear to be more data points to the right of the peak of the histogram than there are too the left. E.g. the histogram is not symmetrical. But there is no evidence for any extreme outliers. </div></div></div>
+
+
+If you found atypical values at this point, you could decide to exclude them from the dataset (using `filter()`, or impute the data (see below)). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier. 
+
+### Impute data
+
+One method for dealing with NA or implausible data is to remove it. An alternative method for dealing with implausible data is to impute the data, i.e., to replace missing data with substituted values. There are many methods of doing this, for example, you can replace missing values with the mean value of the distribution. Although there are more sophisticated methods available [see here](https://www.r-bloggers.com/2015/10/imputing-missing-data-with-r-mice-package/).
+
+The code for imputing missing data uses `mutate()` and `replace_na()`: 
+
+
+```r
+penguins_imputed <- penguins %>% 
+                    group_by(species, sex) %>% 
+                    mutate(body_mass_g = replace_na(body_mass_g, mean(body_mass_g, na.rm = T))) %>% 
+                    ungroup()
+```
+
+If you check the dataset, you can see that they have been given the value of the mean of the distribution in this new variable and then can be used in different analyses!
+
 
 ## Categorical variables
 
@@ -173,7 +633,10 @@ prob_obs_species
 </table>
 
 </div>
-So about 44% of our sample is made up of observations from Adelie penguins. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions. 
+
+So about 44% of our sample is made up of observations from Adelie penguins. We also know that our Chinstrap penguins make up less than 20% of the dataset. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions. 
+
+Here it is important to consider whether we have any evidence for sampling bias. Or just to understand that the power of any analyses might be limited by the least abundant group. Either way it will be important to record and report these numbers when producing any analyses. 
 
 
 ```r
@@ -182,7 +645,7 @@ penguins %>%
   geom_bar(aes(x=species))
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
 
 This chart is ok - but can we make anything better?
 
@@ -203,7 +666,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
 
 This graph is OK *but not great*, the height of each section of the bar represents the relative proportions of each species in the dataset, but this type of chart becomes increasingly difficult to read as more categories are included. Colours become increasingly samey,and it is difficult to read where on the y-axis a category starts and stops, you then have to do some subtraction to work out the values. 
 
@@ -230,7 +693,7 @@ penguins %>%
   theme_minimal()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability. 
 
@@ -317,51 +780,6 @@ penguins %>%
 
 ## Continuous variables
 
-#### Visualising distributions
-
-**Variation** is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement. Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualise the distribution of the variable’s values.
-
-This is the script to plot a frequency distribution, we only specify an x variable, because we intend to plot a histogram, and the y variable is always the count of observations. Here we ask the data to be presented in 10 equally sized bins of data. In this case chopping the x axis range into 10 equal parts and counting the number of observations that fall within each one. 
-
-
-```r
-penguins %>% 
-  ggplot()+
-  geom_histogram(aes(x=body_mass_g),
-                 bins=10)
-```
-
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;" />
-
-<div class="try">
-<p>Change the value specified to the bins argument and observe how the
-figure changes. It is usually a very good idea to try more than one set
-of bins in order to have better insights into the data</p>
-</div>
-
-To get the most out of your data, combine data you collected from the `summary()` function and the histogram here 
-
-* Which values are the most common? <select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value='answer'>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value=''>>6500g</option></select>
-
-* Which values are rare? Why? Does that match your expectations?
-<select class='webex-select'><option value='blank'></option><option value=''>< 3500g</option><option value=''>3500-4000g</option><option value=''>4000-4500g</option><option value=''>4500-5000g</option><option value=''>5000-5500g</option><option value=''>5500-6000g</option><option value='answer'>>6500g</option></select>
-
-* Can you see any unusual patterns? <select class='webex-select'><option value='blank'></option><option value=''>Yes</option><option value='answer'>No</option></select>
-
-* How many observations are missing body mass information? <input class='webex-solveme nospaces' size='1' data-answer='["2"]'/>
-
-
-<button id="displayTextunnamed-chunk-14" onclick="javascript:toggle('unnamed-chunk-14');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-14" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
-Penguins weighing less than 3kg and more than 6kg are rare. 
-The most common weight appears to be just under 4kg. 
-
-There appear to be more data points to the right of the peak of the histogram than there are too the left. E.g. the histogram is not symmetrical. But there is no evidence for any extreme outliers. </div></div></div>
-
-#### Atypical values
-
-If you found atypical values at this point, you could decide to exclude them from the dataset (using `filter()`). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier. 
 
 #### Central tendency
 
@@ -428,8 +846,8 @@ ggplot()+
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-16-1.png" alt="Red dashed line represents the mean, Black dashed line is the median value" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-16)Red dashed line represents the mean, Black dashed line is the median value</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-27-1.png" alt="Red dashed line represents the mean, Black dashed line is the median value" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-27)Red dashed line represents the mean, Black dashed line is the median value</p>
 </div>
 
 
@@ -464,7 +882,7 @@ norm_mass %>%
                  bins = 10)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
 
 #### QQ-plot
 
@@ -474,7 +892,7 @@ Watch this video to see [QQ plots explained](https://www.youtube.com/watch?v=okj
 
 <div class="figure" style="text-align: center">
 <img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-19)Examples of qqplots with different deviations from a normal distribution</p>
+<p class="caption">(\#fig:unnamed-chunk-30)Examples of qqplots with different deviations from a normal distribution</p>
 </div>
 
 In our example we can see that *most* of our residuals can be explained by a normal distribution, except at the low end of our data. 
@@ -488,7 +906,7 @@ ggplot(penguins, aes(sample = body_mass_g))+
   stat_qq_line()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
 
 **How do we know how much deviation from an idealised distribution is ok?**
 
@@ -499,7 +917,7 @@ penguins %>%
   car::qqPlot()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```
 ## [1] 170 186
@@ -510,9 +928,9 @@ The qqPlot() function from the R package car provides 95% confidence interval ma
 
 With the information from the qqPlot which section of the distribution deviates most clearly from a normal distribution <select class='webex-select'><option value='blank'></option><option value='answer'><3500g</option><option value=''>3500-4000g</option><option value=''>4000-4500g</option><option value=''>5000-5500g</option><option value=''>>5500g</option></select>
 
-<button id="displayTextunnamed-chunk-22" onclick="javascript:toggle('unnamed-chunk-22');">Show Solution</button>
+<button id="displayTextunnamed-chunk-33" onclick="javascript:toggle('unnamed-chunk-33');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-22" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-33" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 There are is a 'truncated' left tail of our normal distribution. We would predict more penguins with body masses lower than 3000g under the normal distribution.</div></div></div>
 
 
@@ -587,9 +1005,9 @@ deviation</p>
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 If we know we have a normal distribution, then we can use `summarise()` to quickly produce a mean and standard deviation. </div></div>
 
-<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
+<button id="displayTextunnamed-chunk-37" onclick="javascript:toggle('unnamed-chunk-37');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-37" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```
 penguins %>% 
@@ -600,13 +1018,11 @@ penguins %>%
 </div></div></div>
 
 
-
-
 #### Visualising dispersion
 
 <div class="figure" style="text-align: center">
 <img src="images/distribution_gif.gif" alt="Visualising dispersion with different figures" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-27)Visualising dispersion with different figures</p>
+<p class="caption">(\#fig:unnamed-chunk-38)Visualising dispersion with different figures</p>
 </div>
 
 
@@ -658,19 +1074,9 @@ plot_3 <- penguin_body_mass_summary %>%
 plot_1 + plot_2 + plot_3 
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
-
-#### drop_na
-
-We first met `NA` back in [Chapter 4](#missing-values-na) and you will hopefully have noticed, either here or in those previous chapters, that missing values `NA` can really mess up our calculations. There are a few different ways we can deal with missing data:
-
-* `drop_na()` on everything before we start. This runs the risk that we lose **a lot** of data as *every* row, with an NA in *any column* will be removed
-
-* `drop_na()` on a particular variable. This is fine, but we should approach this cautiously - if we do this in a way where we write this data into a new object e.g. `penguins <- penguins %>% drop_na(body_mass_g)` then we have removed this data forever - perhaps we only want to drop those rows for a specific calculation - again they might contain useful information in other variables. 
-
-* `drop_na()` for a specific task - this is a more cautious approach **but** we need to be aware of another phenomena. Is the data **missing at random**? You might need to investigate *where* your missing values are in a dataset. Data that is truly **missing at random** can be removed from a dataset without introducing bias. However, if bad weather conditions meant that researchers could not get to a particular island to measure one set of penguins that data is **missing not at random** this should be treated with caution. If that island contained one particular species of penguin, it might mean we have complete data for only two out of three penguin species. There is nothing you can do about incomplete data other than be aware that data not missing at random could influence your distributions. 
 
 
 ## Categorical and continuous variables
@@ -684,7 +1090,7 @@ It’s common to want to explore the distribution of a continuous variable broke
 
 <div class="figure" style="text-align: center">
 <img src="images/body-mass-interaction.png" alt="Species and sex are both likely to affect body mass" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-29)Species and sex are both likely to affect body mass</p>
+<p class="caption">(\#fig:unnamed-chunk-40)Species and sex are both likely to affect body mass</p>
 </div>
 
 
@@ -703,9 +1109,9 @@ Let's start by looking at the distribution of body mass by species.
 ## Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species
 
 
-<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
+<button id="displayTextunnamed-chunk-41" onclick="javascript:toggle('unnamed-chunk-41');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-41" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 jitter_plot <- penguins %>% 
@@ -736,7 +1142,7 @@ histogram_plot <- penguins %>%
 jitter_plot/box_plot/histogram_plot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;" />
 
 So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent `ggridges` package to help out
 </div></div></div>
@@ -747,9 +1153,9 @@ So it is reasonable to think that perhaps either species or sex might affect bod
 
 The package `ggridges` (@R-ggridges) provides some excellent extra geoms to supplement `ggplot`. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed. 
 
-<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">Show Solution</button>
+<button id="displayTextunnamed-chunk-42" onclick="javascript:toggle('unnamed-chunk-42');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-31" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-42" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 library(ggridges)
@@ -759,7 +1165,7 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
                 alpha = 0.8)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-69-1.png" width="100%" style="display: block; margin: auto;" />
 
 </div></div></div>
 
@@ -771,9 +1177,9 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
 
 * Adelie <select class='webex-select'><option value='blank'></option><option value='answer'>Yes</option><option value=''>No</option></select>
 
-<button id="displayTextunnamed-chunk-32" onclick="javascript:toggle('unnamed-chunk-32');">Show Solution</button>
+<button id="displayTextunnamed-chunk-43" onclick="javascript:toggle('unnamed-chunk-43');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-32" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-43" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 penguins %>% 
@@ -782,7 +1188,7 @@ penguins %>%
       %>% car::qqPlot())
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-3.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-3.png" width="100%" style="display: block; margin: auto;" />
 
 ```
 ## [[1]]
@@ -808,7 +1214,7 @@ penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) +
                         bandwidth = 175)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 # try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
@@ -857,9 +1263,9 @@ Note how we are able to understand our data better, by spending time making data
 
 * $s=\sqrt{Variance}$
 
-<button id="displayTextunnamed-chunk-34" onclick="javascript:toggle('unnamed-chunk-34');">Show Solution</button>
+<button id="displayTextunnamed-chunk-45" onclick="javascript:toggle('unnamed-chunk-45');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-34" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-45" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 mean <- penguins %>% 
@@ -897,14 +1303,14 @@ penguins %>%
 </div></div></div>
 
 
-# Data insights part two
+# Data insights
 
 
 
 
 
 
-In the previous chapter we looked at individual variables, and understanding the different types of data. We made numeric and graphical summaries of the distributions of features within each variable. This week we will continue to work in the same space, and extend our understanding to include relationships between variables. 
+In this chapter we are concentrating on generating insights into our data using visualisations and descriptive statistics. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
 
 Understanding the relationship between two or more variables is often the basis of most of our scientific questions. These might include comparing variables of the same type (numeric against numeric) or different types (numeric against categorical). In this chapter we will see how we can use descriptive statistics and visuals to explore associations
 
@@ -977,7 +1383,7 @@ This tells us two features of the association. It's *sign* and *magnitude*. The 
 
 <div class="figure" style="text-align: center">
 <img src="images/correlation_examples.png" alt="Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-37)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
+<p class="caption">(\#fig:unnamed-chunk-48)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
 </div>
 
 * Because Pearson's coefficient is designed to summarise the strength of a linear relationship, this can be misleading if the relationship is *not linear* e.g. curved or humped. This is why it's always a good idea to plot the relationship *first* (see above).
@@ -1117,8 +1523,8 @@ length_depth_scatterplot
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-40-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-40)A scatter plot of bill depth against bill length in mm</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-51-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-51)A scatter plot of bill depth against bill length in mm</p>
 </div>
 
 > **Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g). 
@@ -1155,8 +1561,8 @@ bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of pl
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-41-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-41)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-52-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-52)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
 </div>
 
 These efforts allow us to capture details about the spread and distribution of both variables **and** how they relate to each other. This figure provides us with insights into
@@ -1251,7 +1657,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-43-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument. 
 
@@ -1265,7 +1671,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
 > **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read. 
 
 An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look. 
@@ -1295,8 +1701,8 @@ penguins %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-45)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-56)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
 </div>
 
 ## Associations between Categorical-numerical variables
@@ -1311,7 +1717,7 @@ penguins %>%
          x= "Species")
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -1325,23 +1731,64 @@ penguins %>%
              ncol=1)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Complexity
+## Avoiding Bias
+
+When evaluating data, it's crucial to consider the presence of bias at every stage of analysis. Bias refers to systematic errors or distortions in data collection, analysis, interpretation, and reporting that can skew conclusions and affect the reliability of findings.  We already considered issues like data quality problems (such as missing data or measurement errors) - but must remain aware of the need to address biases that may influence our insights.
+
+Common issues include:
+
+- **Confirmation bias**: This bias is often considered the most important and common because it can affect every stage of the research process—from hypothesis formation to data collection, analysis, and interpretation. We can reduce this by subjecting our hypotheses to carefully constructed statistical models that test for weight of evidence against the null hypothesis of no effect
+
+- **Sampling bias**: Occurs when samples are collected leading to some members of the population being less likely to be included than others. We need to be aware of potential sampling bias, and report numbers in our data clearly. 
+
+- **Multicollinearity**: When multiple variables are highly correlated, making it difficult to separate cause and effect roles.
+
+- **Sample size issues**: Small sample sizes can lead to unreliable estimates and a low statistical power
+
+- **Omitted variable bias**: Occurs when we fail to include important variables leading to biased estimates
+
+
+### Multicollinearity
+
+Using correlation plots is a quick and effective method to check for collinearity in your data. Collinearity occurs when predictor variables in a regression model are highly correlated with each other, which can lead to unstable estimates and inflated standard errors. A correlation plot visually displays the strength and direction of relationships between pairs of variables. High correlations (close to +1 or -1) indicate potential collinearity issues. By examining these plots, you can identify pairs of variables that may need further investigation or consideration for exclusion from your analysis to improve the robustness of your statistical models.
+
+
+```r
+penguins %>%  
+  dplyr::select(culmen_length_mm, culmen_depth_mm, flipper_length_mm, body_mass_g) %>%  
+  GGally::ggpairs()
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" />
+
+Here for example we can see that several morphological features are highly correlated in size, not unsurprising - but we should therefore think carefully about using both body mass and flipper length as predictor variables in the same model. There are formal checks of multicollinearity we can also apply later. 
+
+```r
+penguins %>% 
+  GGally::ggpairs(columns = 10:12, ggplot2::aes(colour = species))
+```
+
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-60-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Omitted variable bias
+
+Visualizations, such as scatterplots allow you to inspect relationships between variables that may not be captured by numerical summaries alone. By visually examining these relationships, you can identify potential confounding variables that should be included in your analyses to ensure accurate and unbiased estimates.
 
 <img src="images/complexity.png" alt="Variables such as species or sex may directly or indirectly affect the relationship between body mass and beak length" width="80%" style="display: block; margin: auto;" />
 
-It is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
+For example it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).
 
-Failure to account for complex interactions can lead to misleading insights about your data. 
+Failure to account for complex interactions can lead to misleading insights about your data including biased estimates of models and type 1 and 2 statistical errors. One of the most striking examples of omitted variable bias is "Simpson's paradox".  
 
 
-### Simpson's Paradox
+#### Simpson's Paradox
 
 Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
 
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-62-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour. 
 
@@ -1366,7 +1813,7 @@ length_depth_scatterplot_2 <- ggplot(penguins, aes(x= culmen_length_mm,
 length_depth_scatterplot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 bill_depth_marginal_2 <- penguins %>% 
@@ -1397,7 +1844,7 @@ bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order
   plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-50-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-63-2.png" width="100%" style="display: block; margin: auto;" />
 
 We now clearly see a striking reversal of our previous trend, that in fact *within* each species of penguin there is an overall positive association between bill length and depth. 
 
@@ -1492,7 +1939,7 @@ ggplot(aes(x= culmen_length_mm,
          y="Bill depth (mm)")
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" />
 
 2. Use facets to construct multipanel plots according to the values of a categorical variable
 
@@ -1516,7 +1963,7 @@ ggplot(aes(x= culmen_length_mm,
   facet_wrap(~species, ncol=1) # specify plots are stacked split by species
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;" />
 
 Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?
 

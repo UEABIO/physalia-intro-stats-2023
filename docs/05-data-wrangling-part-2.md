@@ -6,6 +6,7 @@
 
 
 
+
 ## Load your workspace
 
 You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. 
@@ -310,12 +311,10 @@ Depending on how we interpret the date ordering in a file, we can use `ymd()`, `
 * **Question** What is the appropriate function from the above to use on the `date_egg` variable?
 
 
-<div class='webex-radiogroup' id='radio_GRIOGBTFNK'><label><input type="radio" autocomplete="off" name="radio_GRIOGBTFNK" value=""></input> <span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_GRIOGBTFNK" value=""></input> <span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_GRIOGBTFNK" value=""></input> <span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_GRIOGBTFNK" value="answer"></input> <span>dmy()</span></label></div>
+<div class='webex-radiogroup' id='radio_QRJCEUXJUI'><label><input type="radio" autocomplete="off" name="radio_QRJCEUXJUI" value=""></input> <span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_QRJCEUXJUI" value=""></input> <span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_QRJCEUXJUI" value=""></input> <span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_QRJCEUXJUI" value="answer"></input> <span>dmy()</span></label></div>
 
 
 
-
-<div class='webex-solution'><button>Solution</button>
 
 
 
@@ -328,8 +327,6 @@ penguins <- penguins %>%
 
 Here we use the `mutate` function from `dplyr` to create a *new variable* called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
 
-
-</div>
 
 
 Once we have established our date data, we are able to perform calculations. Such as the date range across which our data was collected.  
@@ -451,6 +448,357 @@ appropriate choice, and by changing this to an ordered
 </div>
 
 
+## Automated data exploration with `skim()`
+
+`Skimr` is my preferred R package for quickly assessing data quality, serving as my initial step in exploratory data analysis. Before proceeding with any other tasks, I rely on `skimr::skim()` to conduct a thorough data quality check.
+
+
+```r
+install.packages("skimr")
+library(skimr)
+skimr::skim(penguins)
+```
+
+
+<table style='width: auto;'
+      class='table table-condensed'>
+<caption>(\#tab:unnamed-chunk-32)Data summary</caption>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Name </td>
+   <td style="text-align:left;"> penguins </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Number of rows </td>
+   <td style="text-align:left;"> 344 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Number of columns </td>
+   <td style="text-align:left;"> 19 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> _______________________ </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Column type frequency: </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> character </td>
+   <td style="text-align:left;"> 10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Date </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> factor </td>
+   <td style="text-align:left;"> 1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> numeric </td>
+   <td style="text-align:left;"> 7 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ________________________ </td>
+   <td style="text-align:left;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Group variables </td>
+   <td style="text-align:left;"> None </td>
+  </tr>
+</tbody>
+</table>
+
+
+**Variable type: character**
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> skim_variable </th>
+   <th style="text-align:right;"> n_missing </th>
+   <th style="text-align:right;"> complete_rate </th>
+   <th style="text-align:right;"> min </th>
+   <th style="text-align:right;"> max </th>
+   <th style="text-align:right;"> empty </th>
+   <th style="text-align:right;"> n_unique </th>
+   <th style="text-align:right;"> whitespace </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> study_name </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> species </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> region </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> island </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> stage </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> individual_id </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 190 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> clutch_completion </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> date_egg </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sex </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 0.97 </td>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> comments </td>
+   <td style="text-align:right;"> 290 </td>
+   <td style="text-align:right;"> 0.16 </td>
+   <td style="text-align:right;"> 18 </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+</tbody>
+</table>
+
+
+**Variable type: Date**
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> skim_variable </th>
+   <th style="text-align:right;"> n_missing </th>
+   <th style="text-align:right;"> complete_rate </th>
+   <th style="text-align:left;"> min </th>
+   <th style="text-align:left;"> max </th>
+   <th style="text-align:left;"> median </th>
+   <th style="text-align:right;"> n_unique </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> date_egg_proper </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> 2007-11-09 </td>
+   <td style="text-align:left;"> 2009-12-01 </td>
+   <td style="text-align:left;"> 2008-11-09 </td>
+   <td style="text-align:right;"> 50 </td>
+  </tr>
+</tbody>
+</table>
+
+
+**Variable type: factor**
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> skim_variable </th>
+   <th style="text-align:right;"> n_missing </th>
+   <th style="text-align:right;"> complete_rate </th>
+   <th style="text-align:left;"> ordered </th>
+   <th style="text-align:right;"> n_unique </th>
+   <th style="text-align:left;"> top_counts </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> flipper_range </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> med: 152, sma: 99, lar: 91 </td>
+  </tr>
+</tbody>
+</table>
+
+
+**Variable type: numeric**
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> skim_variable </th>
+   <th style="text-align:right;"> n_missing </th>
+   <th style="text-align:right;"> complete_rate </th>
+   <th style="text-align:right;"> mean </th>
+   <th style="text-align:right;"> sd </th>
+   <th style="text-align:right;"> p0 </th>
+   <th style="text-align:right;"> p25 </th>
+   <th style="text-align:right;"> p50 </th>
+   <th style="text-align:right;"> p75 </th>
+   <th style="text-align:right;"> p100 </th>
+   <th style="text-align:left;"> hist </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> sample_number </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 63.15 </td>
+   <td style="text-align:right;"> 40.43 </td>
+   <td style="text-align:right;"> 1.00 </td>
+   <td style="text-align:right;"> 29.00 </td>
+   <td style="text-align:right;"> 58.00 </td>
+   <td style="text-align:right;"> 95.25 </td>
+   <td style="text-align:right;"> 152.00 </td>
+   <td style="text-align:left;"> ▇▇▆▅▃ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> culmen_length_mm </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 43.92 </td>
+   <td style="text-align:right;"> 5.46 </td>
+   <td style="text-align:right;"> 32.10 </td>
+   <td style="text-align:right;"> 39.23 </td>
+   <td style="text-align:right;"> 44.45 </td>
+   <td style="text-align:right;"> 48.50 </td>
+   <td style="text-align:right;"> 59.60 </td>
+   <td style="text-align:left;"> ▃▇▇▆▁ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> culmen_depth_mm </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 17.15 </td>
+   <td style="text-align:right;"> 1.97 </td>
+   <td style="text-align:right;"> 13.10 </td>
+   <td style="text-align:right;"> 15.60 </td>
+   <td style="text-align:right;"> 17.30 </td>
+   <td style="text-align:right;"> 18.70 </td>
+   <td style="text-align:right;"> 21.50 </td>
+   <td style="text-align:left;"> ▅▅▇▇▂ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> flipper_length_mm </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 200.92 </td>
+   <td style="text-align:right;"> 14.06 </td>
+   <td style="text-align:right;"> 172.00 </td>
+   <td style="text-align:right;"> 190.00 </td>
+   <td style="text-align:right;"> 197.00 </td>
+   <td style="text-align:right;"> 213.00 </td>
+   <td style="text-align:right;"> 231.00 </td>
+   <td style="text-align:left;"> ▂▇▃▅▂ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> body_mass_g </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.99 </td>
+   <td style="text-align:right;"> 4201.75 </td>
+   <td style="text-align:right;"> 801.95 </td>
+   <td style="text-align:right;"> 2700.00 </td>
+   <td style="text-align:right;"> 3550.00 </td>
+   <td style="text-align:right;"> 4050.00 </td>
+   <td style="text-align:right;"> 4750.00 </td>
+   <td style="text-align:right;"> 6300.00 </td>
+   <td style="text-align:left;"> ▃▇▆▃▂ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> delta_15n </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 0.96 </td>
+   <td style="text-align:right;"> 8.73 </td>
+   <td style="text-align:right;"> 0.55 </td>
+   <td style="text-align:right;"> 7.63 </td>
+   <td style="text-align:right;"> 8.30 </td>
+   <td style="text-align:right;"> 8.65 </td>
+   <td style="text-align:right;"> 9.17 </td>
+   <td style="text-align:right;"> 10.03 </td>
+   <td style="text-align:left;"> ▃▇▆▅▂ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> delta_13c </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 0.96 </td>
+   <td style="text-align:right;"> -25.69 </td>
+   <td style="text-align:right;"> 0.79 </td>
+   <td style="text-align:right;"> -27.02 </td>
+   <td style="text-align:right;"> -26.32 </td>
+   <td style="text-align:right;"> -25.83 </td>
+   <td style="text-align:right;"> -25.06 </td>
+   <td style="text-align:right;"> -23.79 </td>
+   <td style="text-align:left;"> ▆▇▅▅▂ </td>
+  </tr>
+</tbody>
+</table>
+
 ## Finished
 
 * Make sure you have **saved your script 💾**  and given it the filename "01_import_penguins_data.R" in the ["scripts" folder](#activity-1-organising-our-workspace).
@@ -459,12 +807,12 @@ appropriate choice, and by changing this to an ordered
 
 <div class="figure" style="text-align: center">
 <img src="images/project_penguin.png" alt="My neat project layout" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-31)My neat project layout</p>
+<p class="caption">(\#fig:unnamed-chunk-33)My neat project layout</p>
 </div>
 
 <div class="figure" style="text-align: center">
 <img src="images/r_script.png" alt="My scripts and file subdirectory" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-32)My scripts and file subdirectory</p>
+<p class="caption">(\#fig:unnamed-chunk-34)My scripts and file subdirectory</p>
 </div>
 
 ## Activity: Test yourself

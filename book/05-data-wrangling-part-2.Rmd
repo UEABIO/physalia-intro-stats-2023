@@ -12,6 +12,7 @@ library(janitor)
 library(lubridate)
 ```
 
+
 ## Load your workspace
 
 You should have a workspace ready to work with the Palmer penguins data. Load this workspace now. 
@@ -299,7 +300,7 @@ Depending on how we interpret the date ordering in a file, we can use `ymd()`, `
 `r longmcq(c("ymd()", "ydm()", "mdy()", answer="dmy()"))`
 
 
-`r hide("Solution")`
+
 
 
 ```{r, eval = T, warning = F, message = F}
@@ -312,7 +313,7 @@ penguins <- penguins %>%
 
 Here we use the `mutate` function from `dplyr` to create a *new variable* called `date_egg_proper` based on the output of converting the characters in `date_egg` to date format. The original variable is left intact, if we had specified the "new" variable was also called `date_egg` then it would have overwritten the original variable. 
 
-`r unhide()`
+
 
 Once we have established our date data, we are able to perform calculations. Such as the date range across which our data was collected.  
 
@@ -417,6 +418,25 @@ Factors will also be important when we build linear models a bit later. The refe
 
 ```
 
+
+## Automated data exploration with `skim()`
+
+`Skimr` is my preferred R package for quickly assessing data quality, serving as my initial step in exploratory data analysis. Before proceeding with any other tasks, I rely on `skimr::skim()` to conduct a thorough data quality check.
+
+```{r, eval = F, echo = T}
+
+install.packages("skimr")
+library(skimr)
+skimr::skim(penguins)
+
+```
+
+```{r, eval = T, echo = F}
+
+library(skimr)
+skimr::skim(penguins)
+
+```
 
 ## Finished
 

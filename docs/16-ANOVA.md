@@ -397,7 +397,7 @@ Can you check the assumptions of your model? </div></div>
 plot(lsmodel_frogs1)
 ```
 
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-2.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-3.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-26-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-2.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-3.png" width="100%" style="display: block; margin: auto;" /><img src="16-ANOVA_files/figure-html/unnamed-chunk-24-4.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 
 ```r
@@ -405,7 +405,7 @@ performance::check_model(lsmodel_frogs1,
                          check = c("qq", "outliers", "homogeneity"))
 ```
 
-<img src="16-ANOVA_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="16-ANOVA_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-18') </script></div></div></div>
 
 

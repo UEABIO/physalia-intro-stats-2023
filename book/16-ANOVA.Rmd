@@ -205,6 +205,8 @@ frogs <- frogs %>%
   pivot_longer(`13`:`25`, names_to="temperature", values_to="days") %>% 
   drop_na(days)
 
+lsmodel_frogs1 <- lm(days ~ temperature, data = frogs)
+
 ```
 
 ```{r, eval = TRUE, echo = FALSE}

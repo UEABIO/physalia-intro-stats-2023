@@ -14,6 +14,27 @@ In short, you will not thrive as a scientist if you do not learn some key data w
 
 In this chapter you will see how data science skills will allow you to efficiently get answers to nearly any question you might want to ask about your data. By learning how to properly make your computer do the hard and boring work for you, you can focus on the bigger issues.
 
+## Tidyverse
+
+In the first chapter, we introduced a package called tidyverse, which forms the foundation of many data skills you will develop. The tidyverse, developed by a team led by the renowned data scientist Hadley Wickham (Wickham, 2017), is a collection of packages. Its core packages include dplyr, tidyr, readr, purrr, ggplot2, and tibble. These packages provide a comprehensive set of functions that cover data wrangling and visualization tasks.
+
+When you load library(tidyverse) in your code, all these packages are loaded simultaneously. While you'll learn to use various functions from tidyverse progressively, this chapter focuses on dplyr for data wrangling and ggplot2 for visualization—creating images and figures.
+
+Specifically, dplyr offers six essential functions, referred to as the "Wickham Six" or "one-table verbs." These functions are named based on common English verbs, making code more readable:
+
+| Function  | Description                                            |
+|-----------|--------------------------------------------------------|
+| `select()`  | Include or exclude certain variables (columns)          |
+| `filter()`  | Include or exclude certain observations (rows)          |
+| `mutate()`  | Create new variables (columns)                          |
+| `arrange()` | Change the order of observations (rows)                 |
+| `group_by()`| Organize the observations (rows) into groups            |
+| `summarise()`| Create summary variables for groups of observations    |
+
+
+These functions perform actions on single tables of data. Despite their apparent simplicity, combining these operations can accomplish complex data analyses. Hadley Wickham famously stated that 90% of data analysis tasks can be accomplished using these functions. Throughout this chapter, we'll introduce these functions to demonstrate their capabilities.
+
+
 ## Activity 1: Change column names
 
 We are going to learn how to organise data using the *tidy* format^[(http://vita.had.co.nz/papers/tidy-data.pdf)]. This is because we are using the `tidyverse` packages @R-tidyverse. This is an opinionated, but highly effective method for generating reproducible analyses with a wide-range of data manipulation tools. Tidy data is an easy format for computers to read. It is also the required data structure for our **statistical tests** that we will work with later.
@@ -113,18 +134,16 @@ penguins <- rename(penguins,
 ```
 
 
-## Check data
+## Activity 2: Look at the data
 
-#### glimpse: check data format 
-
-When we run `glimpse()` we get several lines of output. The number of observations "rows", the number of variables "columns". Check this against the csv file you have - they should be the same. In the next lines we see variable names and the type of data. 
+Have a look at your data by typing the word `penguins` into your console window and running it.
 
 
 ```r
-glimpse(penguins)
+penguins
 ```
 
-We can see a dataset with 345 rows (including the headers) and 17 variables
+We can see a dataset with 345 rows (including the headers) and 19 variables
 It also provides information on the *type* of data in each column
 
 * `<chr>` - means character or text data
@@ -144,6 +163,7 @@ penguins <- penguins %>%
                              species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
 ```
 
+
 <div class="warning">
 <p>Have you checked that the above code block worked? Inspect your new
 tibble and check the variables have been renamed as you wanted.</p>
@@ -152,48 +172,9 @@ tibble and check the variables have been renamed as you wanted.</p>
 
 ## dplyr verbs
 
-In this section we will be introduced to some of the most commonly used data wrangling functions, these come from the `dplyr` package (part of the `tidyverse`). These are functions you are likely to become *very* familiar with. 
+Ok so now we have a fair understanding of the penguins data, let's use it to learn a bit more about the six functions from dplyr that make up a lot of data wrangling!
 
-<div class="kable-table">
-
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> verb </th>
-   <th style="text-align:left;"> action </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> select() </td>
-   <td style="text-align:left;"> take a subset of columns </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> filter() </td>
-   <td style="text-align:left;"> take a subset of rows </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> arrange() </td>
-   <td style="text-align:left;"> reorder the rows </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> summarise() </td>
-   <td style="text-align:left;"> reduce raw data to user defined summaries </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> group_by() </td>
-   <td style="text-align:left;"> group the rows by a specified column </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> mutate() </td>
-   <td style="text-align:left;"> create a new variable </td>
-  </tr>
-</tbody>
-</table>
-
-</div>
-
-### Select
+### Activity 3: selecting variables with `select()`
 
 If we wanted to create a dataset that only includes certain variables, we can use the `select()` function from the `dplyr` package. 
 
@@ -229,7 +210,7 @@ new_penguins <- select(.data = penguins,
        species, sex, flipper_length_mm, body_mass_g)
 ```
 
-### Filter
+### Activity 4: using `filter()` to choose observations
 
 Having previously used `select()` to select certain variables, we will now use `filter()` to select only certain rows or observations. For example only Adelie penguins. 
 
@@ -237,13 +218,13 @@ We can do this with the equivalence operator `==`
 
 
 ```r
-filter(.data = new_penguins, species == "Adelie Penguin (Pygoscelis adeliae)")
+filter(.data = new_penguins, species == "Adelie")
 ```
 
-Filter is quite a complicate function, and uses several differe operators to assess the way in which it should apply a filter.
+Filter is quite a complicated function, and uses several different operators to assess the way in which it should apply a filter.
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-15)Boolean expressions</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-14)Boolean expressions</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Operator </th>
@@ -295,6 +276,7 @@ This is the same as
 ```r
 filter(.data = new_penguins, species %in% c("Chinstrap", "Gentoo"))
 ```
+
 You can include multiple expressions within `filter()` and it will pull out only those rows that evaluate to `TRUE` for all of your conditions. 
 
 For example the below code will pull out only those observations of Adelie penguins where flipper length was measured as greater than 190mm. 
@@ -304,7 +286,7 @@ For example the below code will pull out only those observations of Adelie pengu
 filter(.data = new_penguins, species == "Adelie", flipper_length_mm > 190)
 ```
 
-### Arrange
+### Activity 5: Arranging data with `arrange()`
 
 The function `arrange()` sorts the rows in the table according to the columns supplied. For example
 
@@ -332,7 +314,7 @@ arrange(.data = new_penguins,
         desc(flipper_length_mm))
 ```
 
-### Mutate
+### Activity 6: Create new variables with `mutate()`
 
 Sometimes we need to create a new variable that doesn't exist in our dataset. For example we might want to figure out what the flipper length is when factoring in body mass. 
 
@@ -346,7 +328,49 @@ new_penguins <- mutate(.data = new_penguins,
                        body_mass_kg = body_mass_g/1000)
 ```
 
-## Pipes
+
+
+### Activity 7: data summaries with `summarise()`
+
+- `summarise()` is the function we use to create summaries of the data, as per usual the first argument is the object we want to use, in this case `penguins`.
+
+- The second argument is the name of the summary column, in this case `total`, and the summary value we want to create, in this case the total number of rows, using `n()`, we then made a third column of the mean body mass of the penguins (ignoring missing values).
+
+
+```r
+summarise(
+  .data = penguins,     # The dataset to summarize
+  total = n(),          # Calculate the total number of rows
+  mean = mean(body_mass_g, na.rm = TRUE)  # Calculate the mean of 'body_mass_g', ignoring NA values
+)
+```
+
+The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use `summarise` again to calculate other metrics in the future. 
+
+<div class="info">
+<p>our first data insight, the difference the smallest adult penguin in
+our dataset is nearly half the size of the largest penguin.</p>
+</div>
+
+### Activity 8: grouping calculations with `group_by()`
+
+Many data analysis tasks can be approached using the “split-apply-combine” paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy with the `group_by()` function. In the `summarise` example above we were able to find the max-min body mass values for the penguins in our dataset. But what if we wanted to break that down by a grouping such as species of penguin. This is where `group_by()` comes in.
+
+
+```r
+group_penguins <- group_by(penguins, species) # subsequent functions are perform "by group"
+
+summarise(
+  .data = group_penguins,     # The dataset to summarize
+  total = n(),          # Calculate the total number of rows
+  mean = mean(body_mass_g, na.rm = TRUE)  # Calculate the mean of 'body_mass_g', ignoring NA values
+)
+```
+
+Now we know a little more about our data, the mean weight of our Gentoo penguins is much larger than the other two species. And there are around half as many Chinstrap penguins in our dataset as Gentoo or Adelie. 
+
+
+## Introducing Pipes
 
 <img src="images/pipe_order.jpg" alt="Pipes make code more human readable" width="80%" style="display: block; margin: auto;" />
 
@@ -409,6 +433,47 @@ site</a> does a good job of explaining</p>
 </div>
 
 
+### Activity 9: Using pipes to group and summarise
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  summarise(total = n(),    
+  mean = mean(body_mass_g, na.rm = TRUE))
+```
+
+<div class="kable-table">
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> species </th>
+   <th style="text-align:right;"> total </th>
+   <th style="text-align:right;"> mean </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Adelie </td>
+   <td style="text-align:right;"> 152 </td>
+   <td style="text-align:right;"> 3700.662 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Chinstrap </td>
+   <td style="text-align:right;"> 68 </td>
+   <td style="text-align:right;"> 3733.088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Gentoo </td>
+   <td style="text-align:right;"> 124 </td>
+   <td style="text-align:right;"> 5076.016 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
 ## A few more handy functions
 
 ### Check for duplication
@@ -427,40 +492,6 @@ penguins %>%
 [1] 0
 ```
 Great! 
-
-### Summarise
-
-We can also  explore our data for very obvious typos by checking for implausibly small or large values, this is a simple use of the `summarise` function.
-
-
-```r
-# use summarise to make calculations
-penguins %>% 
-  summarise(min=min(body_mass_g, na.rm=TRUE), 
-            max=max(body_mass_g, na.rm=TRUE))
-```
-
-The minimum weight for our penguins is 2.7kg, and the max is 6.3kg - not outrageous. If the min had come out at 27g we might have been suspicious. We will use `summarise` again to calculate other metrics in the future. 
-
-<div class="info">
-<p>our first data insight, the difference the smallest adult penguin in
-our dataset is nearly half the size of the largest penguin.</p>
-</div>
-
-### Group By
-
-Many data analysis tasks can be approached using the “split-apply-combine” paradigm: split the data into groups, apply some analysis to each group, and then combine the results. `dplyr` makes this very easy with the `group_by()` function. In the `summarise` example above we were able to find the max-min body mass values for the penguins in our dataset. But what if we wanted to break that down by a grouping such as species of penguin. This is where `group_by()` comes in.
-
-
-```r
-penguins %>% 
-  group_by(species) %>%  # subsequent functions are perform "by group"
-  summarise(min=min(body_mass_g, na.rm=TRUE), 
-            max=max(body_mass_g, na.rm=TRUE))
-```
-
-Now we know a little more about our data, the max weight of our Gentoo penguins is much larger than the other two species. In fact, the minimum weight of a Gentoo penguin is not far off the max weight of the other two species. 
-
 
 ### Distinct
 

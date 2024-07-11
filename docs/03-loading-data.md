@@ -5,13 +5,13 @@
 
 
 
-In this workshop we work through loading data. Once we have a curated and cleaned dataset we can work on generating insights from the data.
+In this workshop, we focus on loading data. Once we have a curated and cleaned dataset, we can start deriving insights from it.
 
-As a biologist you should be used to asking questions and gathering data. It is also important that you learn all aspects of the research process. This includes responsible data management (understanding data files & spreadsheet organisation, keeping data safe) and data analysis.
+As a biologist, you are accustomed to asking questions and gathering data. It's crucial to grasp every facet of the research process, including responsible data management (understanding data files and spreadsheet organization, ensuring data security) and data analysis.
 
-In this chapter we will look at the structure of data files, and how to read these with R. We will also continue to develop reproducible scripts. This means that we are writing scripts that are well organised and easy to read, and also making sure that our scripts are complete and capable of reproducing an analysis from start to finish. 
+In this chapter, we will explore the structure of data files and how to read them using R. Additionally, we will continue developing reproducible scripts. This involves writing well-organized and legible scripts that can fully reproduce an analysis from start to finish.
 
-Transparency and reproducibility are key values in scientific research, when you analyse data in a reproducible way it means that others can understand and check your work. It also means that the most important person can benefit from your work, YOU! When you return to an analysis after even a short break, you will be thanking your earlier self if you have worked in a clear and reproducible way, as you can pick up right where you left off.  
+Transparency and reproducibility are fundamental in scientific research. When you analyze data in a reproducible manner, it enables others to understand and verify your work. Moreover, it benefits you directly; returning to an analysis later becomes seamless if you've worked in a clear and reproducible manner.  
 
 
 ## Meet the Penguins
@@ -32,9 +32,9 @@ Here is a map of the study site
 
 ## Activity 1: Organising our workspace
 
-Before we can begin working with the data, we need to do some set-up. 
+Before diving into the data, let's set up our workspace:
 
-* Go to RStudio Cloud and open the `Penguins` R project
+* Go to Posit Cloud and open the `Penguins` R project
 
 * Create the following folders using the + New Folder button in the Files tab
 
@@ -46,11 +46,9 @@ Before we can begin working with the data, we need to do some set-up.
 <p>R is case-sensitive so type everything EXACTLY as printed here</p>
 </div>
 
-Having these separate subfolders within our project helps keep things tidy, means it's harder to lose things, and lets you easily tell R exactly where to go to retrieve data.  
+Organizing these subfolders keeps your workspace tidy, minimizes the risk of losing files, and helps R locate data easily.
 
-The next step of our workflow is to have a well organised project space. RStudio Cloud does a lot of the hard work for you, each new data project can be set up with its own Project space. 
-
-We will define a project as a series of linked questions that uses one (or sometimes several) datasets. For example a coursework assignment for a particular module would be its own project, a series of linked experiments or particular research project might be its own project.
+Each new data project in Posit Cloud/RStudio automatically sets up a project space, simplifying file management.
 
 A Project will contain several files, possibly organised into sub-folders containing data, R scripts and final outputs. You might want to keep any information (wider reading) you have gathered that is relevant to your project.
 
@@ -59,7 +57,7 @@ A Project will contain several files, possibly organised into sub-folders contai
 <p class="caption">(\#fig:unnamed-chunk-6)An example of a typical R project set-up</p>
 </div>
 
-Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer (in this case the cloud server we have dialed into). It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
+Within this project you will notice there is already one file *.Rproj*. This is an R project file, this is a very useful feature, it interacts with R to tell it you are working in a very specific place on the computer. It means R will automatically treat the location of your project file as the 'working directory' and makes importing and exporting easier^[More on projects can be found in the R4DS book (https://r4ds.had.co.nz/workflow-projects.html)]. 
 
 <div class="warning">
 <p>It is very important to NEVER to move the .Rproj file, this may
@@ -68,13 +66,13 @@ prevent your workspace from opening properly.</p>
 
 ## Activity 2: Access our data
 
-Now that we have a project workspace, we are ready to import some data.
+Now that our project workspace is set, let's import some data:
 
 * Use the link below to open a page in your browser with the data open
 
 * Right-click Save As to download in csv format to your computer (Make a note of **where** the file is being downloaded to e.g. Downloads)
 
-* Compare how the data looks in "raw" format to when you open the same data with Excel
+* Compare how the data looks in "raw" CSV format to when you open the same data with Excel
 
 
 ```{=html}
@@ -84,11 +82,11 @@ Now that we have a project workspace, we are ready to import some data.
 ```
 
 
-At first glance the data might look quite strange and messy. It has been stored as a **CSV** or comma-separated values file. CSV files are plain text files that can store large amounts of data, and can readily be imported into a spreadsheet or storage database. 
-
-These files are the simplest form of database, no coloured cells, no formulae, no text formatting. Each row is a row of the data, each value of a row (previously separate columns) is separated by a comma. 
+CSV files are plain text files that store large amounts of data without formatting or formulas. They are ideal for data storage because they preserve raw data integrity.
 
 This file format helps us maintain an ethos **Keep Raw Data Raw** - 
+
+It's recommended to avoid Excel for data analysis due to potential formatting issues and data loss with large files.
 
 In many cases, the captured or collected data may be unique and impossible to reproduce, such as measurements in a lab or field observations. For this reason, they should be protected from any possible loss. Every time a change is made to a raw data file it threatens the integrity of that information.
 
@@ -124,7 +122,7 @@ with a .csv format your data is more open and accessible.</p>
 
 * The data is now in your Downloads folder on your computer
 
-* We need to upload the data to our remote cloud-server (RStudio Cloud), select the upload files to server button in the Files tab
+* We need to upload the data to our remote cloud-server (Posit Cloud), select the upload files to server button in the Files tab
 
 * Put your file into the data folder - if you make a mistake select the tickbox for your file, go to the cogs button and choose the option Move.
 
@@ -135,9 +133,11 @@ with a .csv format your data is more open and accessible.</p>
 
 ## Activity 4: Make a script
 
-Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. Use the File > New Script menu item and select an R Script. 
+Let's now create a new R script file in which we will write instructions and store comments for manipulating data, developing tables and figures. 
 
-Add the following:
+- Go to File > New Script menu item and select an R Script. 
+
+- Add the following content to your script file:
 
 
 ```r
@@ -156,13 +156,13 @@ Add the following to your script:
 
 ```r
 # PACKAGES ----
-library(tidyverse) # tidy data packages
+library(tidyverse) # packages for tidy data
 library(janitor) # cleans variable names
-library(lubridate) # make sure dates are processed properly
-#__________________________----
+library(lubridate) # ensures proper date processing
+#-----------------------
 ```
 
-Save this file inside the scripts folder and call it `01_import_penguins_data.R`
+Save this file inside the scripts folder as `01_import_penguins_data.R`
 
 <div class="try">
 <p>Click on the document outline button (top right of script pane). This
@@ -174,11 +174,7 @@ useful when using longer scripts.</p>
 
 ## Activity 5: Read in data
 
-Now we can read in the data. To do this we will use the function `readr::read_csv()` that allows us to read in .csv files. There are also functions that allow you to read in .xlsx files and other formats, however in this course we will only use .csv files.
-
-* First, we will create an object called `penguins_data` that contains the data in the `penguins_raw.csv` file. 
-
-* Add the following to your script, and check the document outline:
+Let's read in the data using the `readr::read_csv()` function:
 
 
 ```r
@@ -203,6 +199,8 @@ In the example above the `read_csv()` function requires you to provide a filepat
 * "data/" - specifies the directory in which to look for the file
 
 * "penguins_raw.csv" - specifies the name and format of the file
+
+Understanding directories (folders) and filepaths is crucial for locating and managing files in R.
 
 #### Directories
 
@@ -257,14 +255,14 @@ When you use RStudio Projects, wherever the `.Rproj` file is located is set to t
 This filepath is shorter *and* it means you could share your project with someone else and the script would run without any editing. 
 
 <div class="info">
-<p>For those of you using RStudio Cloud, remember you are working on a
+<p>For those of you using Posit Cloud, remember you are working on a
 Linux OS cloud server, each of you will have a different absolute
 filepath - but the scripts for the project you are working on right now
 work because you are using relative filepaths</p>
 </div>
 
 
-## Activity 5: Check your script
+## Activity 6: Check your script
 
 
 <div class='webex-solution'><button>Solution</button>

@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Data Quality | Introduction to Statistics</title>
+<meta name="author" content="Philip T. Leftwich">
+<meta name="description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
+<meta name="generator" content="bookdown 0.34 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Data Quality | Introduction to Statistics">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://ueabio.github.io/physalia-intro-stats-2023/data-quality.html">
+<meta property="og:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
+<meta property="og:description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Data Quality | Introduction to Statistics">
+<meta name="twitter:description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
+<meta name="twitter:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.0/transition.js"></script><script src="libs/bs3compat-0.5.0/tabs.js"></script><script src="libs/bs3compat-0.5.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/font-awesome-5.13.0/js/script.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="libs/grViz-binding-1.0.10/grViz.js"></script><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-6NP3MF25W3"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6NP3MF25W3');
+    </script><script language="javascript"> 
+        function toggle(id) {
+            var ele = document.getElementById("toggleText" + id);
+            var text = document.getElementById("displayText" + id);
+            var buttonText = text.innerHTML.replace("Show ", "");
+            buttonText = buttonText.replace("Hide ", "");
+            if(ele.style.display == "block") {
+                ele.style.display = "none";
+                text.innerHTML = "Show " + buttonText;
+            } else {
+                ele.style.display = "block";
+                text.innerHTML = "Hide " + buttonText;
+            }
+        } 
+    </script><script language="javascript">
+        function openCode(evt, codeName, id) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent" + id);
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks" + id);
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(codeName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script><script language="javascript">
+        function hide(id){
+            document.getElementById(id).style.display = "none";
+        }
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="include/psyteachr.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="A guide for Biologists and Ecologists">Introduction to Statistics</a>:
+        <small class="text-muted">A guide for Biologists and Ecologists</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Exploring Data</li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">1</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">2</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">3</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data visualisation with ggplot2</a></li>
+<li class="book-part">Descriptive Statistics</li>
+<li><a class="active" href="data-quality.html"><span class="header-section-number">5</span> Data Quality</a></li>
+<li><a class="" href="data-insights.html"><span class="header-section-number">6</span> Data insights</a></li>
+<li class="book-part">Linear models</li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">7</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">8</span> Introduction to Linear Models</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">9</span> Testing</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">11</span> ANOVA</a></li>
+<li><a class="" href="multivariate-linear-models.html"><span class="header-section-number">12</span> Multivariate linear models</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">13</span> Complex models</a></li>
+<li><a class="" href="introduction-to-power-analysis.html"><span class="header-section-number">14</span> Introduction to Power Analysis</a></li>
+<li class="book-part">Generalized Linear Models</li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">15</span> Generalized Linear Models</a></li>
+<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">16</span> Poisson regression (for count data or rate data)</a></li>
+<li><a class="" href="logistic-regression-for-binary-data.html"><span class="header-section-number">17</span> Logistic regression (for binary data)</a></li>
+<li class="book-part">Mixed Models</li>
+<li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">18</span> Foundations of Mixed Modelling</a></li>
+<li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">19</span> Worked Example 1 - Dolphins</a></li>
+<li><a class="" href="multiple-random-effects.html"><span class="header-section-number">20</span> Multiple random effects</a></li>
+<li><a class="" href="worked-example-2---nested-design.html"><span class="header-section-number">21</span> Worked Example 2 - Nested design</a></li>
+<li><a class="" href="types-of-random-effects.html"><span class="header-section-number">22</span> Types of Random Effects</a></li>
+<li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">23</span> Worked Example 3 - Sleep study</a></li>
+<li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">24</span> Reporting Mixed Model Results</a></li>
+<li><a class="" href="worked-example-4.html"><span class="header-section-number">25</span> Worked Example 4</a></li>
+<li><a class="" href="summary-10.html"><span class="header-section-number">26</span> Summary</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/UEABIO/physalia-intro-stats-2023">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-quality" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Data Quality<a class="anchor" aria-label="anchor" href="#data-quality"><i class="fas fa-link"></i></a>
+</h1>
+<p>Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality data leads to accurate analyses and valid conclusions, while poor-quality data can result in misleading findings and faulty decisions. This introductory guide outlines key dimensions of data quality, including completeness, consistency, accuracy, validity, uniformity, distribution, redundancy, integrity, temporal consistency, and bias checks. Understanding and evaluating these dimensions is an essential first step in generating insights from our data.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="11%">
+<col width="42%">
+<col width="46%">
+</colgroup>
+<thead><tr class="header">
+<th>Dimension</th>
+<th>Importance</th>
+<th>Action</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Tidy data</td>
+<td>Most of our dplyr functions and later modelling work on the assumption that data is tidy (each column is a unique variable, each row is a unique observation)</td>
+<td>Check that data visually conforms to tidy data principles</td>
+</tr>
+<tr class="even">
+<td>Completeness: Missing Data and Duplicates</td>
+<td>Missing data and duplicates can skew analysis results and reduce the reliability of insights.</td>
+<td>Identify and address missing values and duplicates to ensure a complete and accurate dataset.</td>
+</tr>
+<tr class="odd">
+<td>Accuracy: Range Checks and Outlier Detection</td>
+<td>Inaccurate data can distort analysis outcomes and lead to incorrect conclusions.</td>
+<td>Perform range checks and outlier detection to validate the accuracy of the data.</td>
+</tr>
+<tr class="even">
+<td>Validity: Data Types</td>
+<td>Data that does not conform to expected types can cause errors in analysis.</td>
+<td>Verify that each column of data is in the correct format.</td>
+</tr>
+<tr class="odd">
+<td>Uniformity: Units, Formats, and Text Consistency</td>
+<td>Inconsistent units, formatting, and text can complicate data integration and analysis.</td>
+<td>Standardize units, formats, and text to ensure uniformity and facilitate seamless analysis.</td>
+</tr>
+<tr class="even">
+<td>Distribution: Analyzing Variable Distributions</td>
+<td>Understanding the distribution of variables is key to selecting appropriate analysis techniques.</td>
+<td>Analyze variable distributions to identify patterns, trends, and potential anomalies.</td>
+</tr>
+<tr class="odd">
+<td>Bias Checks: Representativeness and Selection Bias</td>
+<td>Biases can skew results and lead to misleading conclusions.</td>
+<td>Evaluate the representativeness of the data and check for selection bias to ensure unbiased analysis.</td>
+</tr>
+</tbody>
+</table></div>
+<div id="data-wrangling" class="section level4" number="5.0.0.1">
+<h4>
+<span class="header-section-number">5.0.0.1</span> Data wrangling<a class="anchor" aria-label="anchor" href="#data-wrangling"><i class="fas fa-link"></i></a>
+</h4>
+<p>Importantly you should have already generated an understanding of data checking and validation of your dataset during the <a href="data-wrangling-part-one.html#data-wrangling-part-one">data wrangling</a> steps. Including gaining insights on:</p>
+<ul>
+<li><p>The number of variables</p></li>
+<li><p>The data format of each variable</p></li>
+<li><p>Checked for missing data</p></li>
+<li><p>Checked for typos, duplications or other data errors</p></li>
+<li><p>Cleaned column or factor names</p></li>
+</ul>
+<div class="warning">
+<p>
+It is very important to not lose site of the questions you are
+asking
+</p>
+<p>
+You should also play close attention to the data, and remind yourself
+<strong>frequently</strong> how many variables do you have and what are
+their names?
+</p>
+<p>
+How many rows/observations do you have?
+</p>
+<p>
+Pay close attention to the outputs, errors and warnings from the R
+console.
+</p>
+</div>
+</div>
+<div id="variable-types" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Variable types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
+</h2>
+<p>A quick refresher:</p>
+<div id="numerical" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Numerical<a class="anchor" aria-label="anchor" href="#numerical"><i class="fas fa-link"></i></a>
+</h3>
+<p>You <strong>should</strong> already be familiar with the concepts of numerical and categorical data. <strong>Numeric</strong> variables have values that describe a measure or quantity. This is also known as quantitative data. We can subdivide numerical data further:</p>
+<ul>
+<li>
+<strong>Continuous numeric variables.</strong> This is where observations can take any value within a range of numbers. Examples might include body mass (g), age, temperature or flipper length (mm).
+While in theory these values can have any numbers, within a dataset they are likely bounded (set within a minimum/maximum of observed or measurable values), and the accuracy may only be as precise as the measurement protocol allows.</li>
+</ul>
+<p>In a tibble these will be represented by the header <code>&lt;dbl&gt;</code>.</p>
+<ul>
+<li>
+<strong>Discrete numeric variables</strong> Observations are numeric but restricted to <em>whole values</em> e.g. 1,2,3,4,5 etc. These are also known as <strong>integers</strong>. Discrete variables could include the number of individuals in a population, number of eggs laid etc. Anything where it would make no sense to describe in fractions e.g. a penguin cannot lay 2 and a half eggs. Counting!</li>
+</ul>
+<p>In a tibble these will be represented by the header <code>&lt;int&gt;</code>.</p>
+</div>
+<div id="categorical" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Categorical<a class="anchor" aria-label="anchor" href="#categorical"><i class="fas fa-link"></i></a>
+</h3>
+<p>Values that describe a characteristic of data such as 'what type' or 'which category'. Categorical variables are mutually exclusive - one observation should not be able to fall into two categories at once - and should be exhaustive - there should not be data which does not <em>fit</em> a category (not the same as NA - not recorded). Categorical variables are qualitative, and often represented by non-numeric values such as words. It's a bad idea to represent categorical variables as numbers (R won't treat it correctly). Categorical variables can be defined further as:</p>
+<ul>
+<li><p><strong>Nominal variables</strong> Observations that can take values that are not logically ordered. Examples include Species or Sex in the Penguins data.
+In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p></li>
+<li><p><strong>Ordinal variables</strong> Observations can take values that can be logically ordered or ranked. Examples include - activity levels (sedentary, moderately active, very active); size classes (small, medium, large).</p></li>
+</ul>
+<p>These will have to be coded manually see <a href="data-wrangling-part-two.html#factors">Factors</a>, and will then be represented in a tibble by the header <code>&lt;fct&gt;</code></p>
+<p>It is important to order Ordinal variables in the their logical order value when plotting data visuals or tables. Nominal variables are more flexible and could be ordered in whatever pattern works best for your data ( by default they will plot alphabetically, but perhaps you could order them according to the values of another numeric variable).</p>
+<div id="quick-view-of-variables" class="section level4" number="5.1.2.1">
+<h4>
+<span class="header-section-number">5.1.2.1</span> Quick view of variables<a class="anchor" aria-label="anchor" href="#quick-view-of-variables"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let's take a look at some of our variables, these functions will give a quick snapshot overview.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
+<p>Here we get insights into whether each variable is in a valid data type, information on range and the extent of any missingness.</p>
+<p>Q. We can see that bill length contains numbers, and that many of these are fractions, but only down to 0.1mm. By comparison body mass all appear to be discrete number variables. Does this make body mass an integer?</p>
+<p>The underlying quantity (bodyweight) is clearly continuous, it is clearly possible for a penguin to weigh 3330.7g but it might <em>look</em> like an integer because of the way it was measured. This illustrates the importance of understanding the the type of variable you are working with - just looking at the values isn't enough.</p>
+<p>On the other hand, how we choose to measure and record data <em>can</em> change the way it is presented in a dataset. If the researchers had decided to simply record small, medium and large classes of bodyweight, then we would be dealing with ordinal categorical variables (factors). These distinctions can become less clear if we start to deal with multiple classes of ordinal categories - for example if the researchers were measuring body mass to the nearest 10g. It might be reasonable to treat these as integers...</p>
+</div>
+</div>
+</div>
+<div id="missing-data" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Missing data<a class="anchor" aria-label="anchor" href="#missing-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>The first issue we will cover is missing data. There is a whole host of reasons that your data could have missing values.</p>
+<p>This can be broken down into three broad categories:</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="17%">
+<col width="38%">
+<col width="44%">
+</colgroup>
+<thead><tr class="header">
+<th>Missing Data Mechanism</th>
+<th>Description</th>
+<th>Example</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>MCAR (Missing Completely at Random)</strong></td>
+<td>The probability of missing data is independent of any observed or unobserved data.</td>
+<td>Leaf samples lost randomly due to a labeling error in a plant growth study.</td>
+</tr>
+<tr class="even">
+<td><strong>MAR (Missing at Random)</strong></td>
+<td>The probability of missing data is related to some observed data but not to the missing data itself.</td>
+<td>Blood pressure readings missing more frequently for older patients in a drug trial.</td>
+</tr>
+<tr class="odd">
+<td><strong>MNAR (Missing Not at Random)</strong></td>
+<td>The probability of missing data is related to the value of the missing data itself.</td>
+<td>Heavier birds in a wildlife study are harder to capture and weigh, leading to missing weight data.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Understanding which type of process is causing your missing data is important, for any type of missingness at random we can process our data accordingly. But if the missing data is Not at Random we may have to consider collecting more data.</p>
+<div id="deletion" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Deletion<a class="anchor" aria-label="anchor" href="#deletion"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins_listwise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
+<p>As you can see, penguins_listwise now only contains data for penguins with a complete set of data—i.e., observations in each column.</p>
+<p>While this might seem beneficial and sometimes is the most appropriate option, there are a couple of important points to consider.</p>
+<p>First, let's say the blood isotopes might not be part of our primary analysis; it might just be there as additional information. If we don't plan to include these in any of our analyses, using listwise deletion (removing rows with any missing values) might unnecessarily exclude observations that are otherwise complete for the relevant variables. This means we might be discarding valuable data.</p>
+<p>Additionally, using a listwise deletion approach can result in significant data loss. Compare the original penguins dataset to penguins_listwise. The original dataset had 344 observations. After using drop_na(), we only have 34 observations, meaning we've lost a huge portion of our data with this approach! Only a handful of observations have accompanying notes in the comments column</p>
+<p>Note: If you use a listwise deletion approach, it's also important to check that the missing values are not concentrated in a particular group (i.e., ensure the missing data is random and not biased).</p>
+<p>To address these issues, you can modify the use of drop_na() to exclude specific columns, such as comments and isotopes, from the deletion criteria. This ensures you don't exclude observations based on irrelevant columns. For example, run the code below:</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins_listwise2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="op">-</span><span class="va">delta_15n</span>, <span class="op">-</span><span class="va">delta_13c</span>, <span class="op">-</span><span class="va">comments</span><span class="op">)</span></span></code></pre></div>
+<p>Q. How many observations does <code>penguins_listwise2</code> have?</p>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="">34</option>
+<option value="">323</option>
+<option value="answer">333</option>
+<option value="">344</option></select></p>
+<p>This approach removes rows with NAs based on all columns except comments and isotopes.
+Alternatively, you could choose to remove participants with NAs based only on specific columns relevant to your analysis, such as bill length and flipper length:</p>
+<p>This demonstrates the flexibility of <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> — you have a lot of control as long as you plan your approach in advance.</p>
+</div>
+<div id="pairwise-deletion" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Pairwise deletion<a class="anchor" aria-label="anchor" href="#pairwise-deletion"><i class="fas fa-link"></i></a>
+</h3>
+<p>An alternative to listwise deletion is pairwise deletion. This method removes cases depending on the analysis. For example, if we calculate correlations between bill length, flipper length, and body mass without first removing observations with missing data, we'll use different numbers of observations in each correlation based on the available data for each pair of variables.</p>
+<p>Consider the following correlations:</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Correlation between bill_length_mm and flipper_length_mm</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">delta_15n</span><span class="op">)</span></span>
+<span><span class="co"># Output example:</span></span>
+<span><span class="co"># t = 11.556, df = 328, p-value &lt; 2.2e-16</span></span>
+<span><span class="co"># cor = -0.537</span></span>
+<span></span>
+<span><span class="co"># Correlation between bill_length_mm and body_mass_g</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">delta_13c</span><span class="op">)</span></span>
+<span><span class="co"># Output example:</span></span>
+<span><span class="co"># t = -7.32, df = 329, p-value = 1.808e-12</span></span>
+<span><span class="co"># cor = -0.37</span></span></code></pre></div>
+<p>You can see that the correlation between body mass and delta_15n has df = 328, whereas the correlation between body mass and delta_13c has df = 329. This indicates that the correlation is calculated only on the observations with available data for both columns—pairwise deletion.</p>
+<p>The challenge here is to remember to report the degrees of freedom (dfs) accordingly, as they change and may differ from the total number of observations mentioned in your methods section. Therefore, it is crucial to thoroughly examine your data!</p>
+</div>
+<div id="summarising-data-with-missing-values" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Summarising data with missing values<a class="anchor" aria-label="anchor" href="#summarising-data-with-missing-values"><i class="fas fa-link"></i></a>
+</h3>
+<p>When running inferential tests like correlations, and later, linear models, the analysis will usually know to ignore missing values. However, when calculating descriptive statistics or if you want to calculate the average score of a number of different items, you need to explicitly state to ignore the missing values. We can do this through <code>na.rm = TRUE</code></p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+mean
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:right;">
+3733.088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>As you can see, the mean score for body mass in Adelie and Gentoo penguins shows as <code>NA</code>. This is because we are trying to calculate an average of a variable that has missing data and that just isn't doable. As such we need to calculate the mean but ignoring the missing values by adding <code>na.rm = TRUE</code></p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+mean
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:right;">
+3700.662
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:right;">
+3733.088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:right;">
+5076.016
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>When working with data, it’s crucial to consider whether you want to calculate your descriptive statistics from observations with missing data. For instance, if you are calculating the average body mass from hundreds of measurements, a few missing data points won’t significantly impact the validity of the mean. However, if the missing data is biased in some way, or you only have values for 30% of the total dataset, it may not be appropriate to calculate a mean score from the remaining data.</p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+count_na
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div id="implausible-values" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Implausible values<a class="anchor" aria-label="anchor" href="#implausible-values"><i class="fas fa-link"></i></a>
+</h2>
+<div id="categorical-data" class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Categorical data<a class="anchor" aria-label="anchor" href="#categorical-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Along with looking for missing values, an additional crucial step of data screening is checking for implausible values - values that should not exist in your data. What is implausible depends on the data you've collected!</p>
+<p>The first place to look for implausible values is in character and factorial data - typos will be incorrectly processed as unique levels to a variable</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+sex
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Or you could combine these into a single run</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">species</span>, <span class="va">region</span>, <span class="va">island</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:left;">
+region
+</th>
+<th style="text-align:left;">
+island
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Torgersen
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Torgersen
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Torgersen
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Biscoe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Biscoe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Dream
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Dream
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Dream
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Biscoe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Biscoe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Biscoe
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Dream
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:left;">
+Anvers
+</td>
+<td style="text-align:left;">
+Dream
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div id="continuous-data" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> Continuous data<a class="anchor" aria-label="anchor" href="#continuous-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Additional functions we can put inside a <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> function are <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>max <span class="op">=</span> <span class="va">max</span>, min <span class="op">=</span> <span class="va">min</span><span class="op">)</span>,</span>
+<span>               na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+body_mass_g_max
+</th>
+<th style="text-align:right;">
+flipper_length_mm_max
+</th>
+<th style="text-align:right;">
+body_mass_g_min
+</th>
+<th style="text-align:right;">
+flipper_length_mm_min
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+6300
+</td>
+<td style="text-align:right;">
+231
+</td>
+<td style="text-align:right;">
+2700
+</td>
+<td style="text-align:right;">
+172
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<p>Or we could use <code>summary</code> or <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skimr::skim</a></code></p>
+</div>
+<div id="visualise-continuous-data" class="section level3" number="5.3.3">
+<h3>
+<span class="header-section-number">5.3.3</span> Visualise continuous data<a class="anchor" aria-label="anchor" href="#visualise-continuous-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are a number of different ways to visualise the data as you know and this depends on the data, and your preferences. You could produce histograms, or violin-boxplots with the data points on top to check the distributions as follows:</p>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span><span class="op">)</span>,</span>
+<span>                 bins<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="try">
+<p>
+Change the value specified to the bins argument and observe how the
+figure changes. It is usually a very good idea to try more than one set
+of bins in order to have better insights into the data
+</p>
+</div>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>height <span class="op">=</span><span class="fl">.2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>To get the most out of your data, combine data you collected from the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and your visuals here</p>
+<ul>
+<li><p>Which values are the most common? <select class="webex-select"><option value="blank"></option>
+<option value="">&lt; 3500g</option>
+<option value="answer">3500-4000g</option>
+<option value="">4000-4500g</option>
+<option value="">4500-5000g</option>
+<option value="">5000-5500g</option>
+<option value="">5500-6000g</option>
+<option value="">&gt;6500g</option></select></p></li>
+<li><p>Which values are rare? Why? Does that match your expectations?
+<select class="webex-select"><option value="blank"></option>
+<option value="">&lt; 3500g</option>
+<option value="">3500-4000g</option>
+<option value="">4000-4500g</option>
+<option value="">4500-5000g</option>
+<option value="">5000-5500g</option>
+<option value="">5500-6000g</option>
+<option value="answer">&gt;6500g</option></select></p></li>
+<li><p>Can you see any unusual patterns? <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p></li>
+<li><p>How many observations are missing body mass information? <input class="webex-solveme nospaces" size="1" data-answer='["2"]'></p></li>
+</ul>
+<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-17" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<p>Penguins weighing less than 3kg and more than 6kg are rare.
+The most common weight appears to be just under 4kg.</p>
+There appear to be more data points to the right of the peak of the histogram than there are too the left. E.g. the histogram is not symmetrical. But there is no evidence for any extreme outliers.
+</div>
+</div>
+</div>
+<p>If you found atypical values at this point, you could decide to exclude them from the dataset (using <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, or impute the data (see below)). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier.</p>
+</div>
+<div id="impute-data" class="section level3" number="5.3.4">
+<h3>
+<span class="header-section-number">5.3.4</span> Impute data<a class="anchor" aria-label="anchor" href="#impute-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>One method for dealing with NA or implausible data is to remove it. An alternative method for dealing with implausible data is to impute the data, i.e., to replace missing data with substituted values. There are many methods of doing this, for example, you can replace missing values with the mean value of the distribution. Although there are more sophisticated methods available <a href="https://www.r-bloggers.com/2015/10/imputing-missing-data-with-r-mice-package/">see here</a>.</p>
+<p>The code for imputing missing data uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na()</a></code>:</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins_imputed</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>body_mass_g <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">body_mass_g</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>If you check the dataset, you can see that they have been given the value of the mean of the distribution in this new variable and then can be used in different analyses!</p>
+</div>
+</div>
+<div id="categorical-variables" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Categorical variables<a class="anchor" aria-label="anchor" href="#categorical-variables"><i class="fas fa-link"></i></a>
+</h2>
+<div id="frequency" class="section level4" number="5.4.0.1">
+<h4>
+<span class="header-section-number">5.4.0.1</span> Frequency<a class="anchor" aria-label="anchor" href="#frequency"><i class="fas fa-link"></i></a>
+</h4>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:right;">
+152
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:right;">
+124
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>It might be useful for us to make some quick data summaries here, like relative frequency</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prob_obs_species</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prob_obs <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">prob_obs_species</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+prob_obs
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:right;">
+152
+</td>
+<td style="text-align:right;">
+0.4418605
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+0.1976744
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:right;">
+124
+</td>
+<td style="text-align:right;">
+0.3604651
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>So about 44% of our sample is made up of observations from Adelie penguins. We also know that our Chinstrap penguins make up less than 20% of the dataset. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions.</p>
+<p>Here it is important to consider whether we have any evidence for sampling bias. Or just to understand that the power of any analyses might be limited by the least abundant group. Either way it will be important to record and report these numbers when producing any analyses.</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>This chart is ok - but can we make anything better?</p>
+<p>We could go for a stacked bar approach</p>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">""</span>,</span>
+<span>             fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="co"># specify fill = species to ensure colours are defined by species</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position<span class="op">=</span><span class="st">"fill"</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="co"># specify fill forces geom_bar to calculate percentages</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="co">#use scales package to turn y axis into percentages easily</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">""</span>,</span>
+<span>       y<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>This graph is OK <em>but not great</em>, the height of each section of the bar represents the relative proportions of each species in the dataset, but this type of chart becomes increasingly difficult to read as more categories are included. Colours become increasingly samey,and it is difficult to read where on the y-axis a category starts and stops, you then have to do some subtraction to work out the values.</p>
+<p>The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this.</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>species<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">species</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>,</span>
+<span>                                          <span class="st">"Gentoo"</span>,</span>
+<span>                                          <span class="st">"Chinstrap"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># set as factor and provide levels</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">species</span><span class="op">)</span>,</span>
+<span>           fill<span class="op">=</span><span class="st">"steelblue"</span>,</span>
+<span>           width<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Species"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Number of observations"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">prob_obs_species</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="op">(</span><span class="va">n</span><span class="op">+</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>                x<span class="op">=</span><span class="va">species</span>,</span>
+<span>                label<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="va">prob_obs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability.</p>
+</div>
+<div id="two-categorical-variables" class="section level4" number="5.4.0.2">
+<h4>
+<span class="header-section-number">5.4.0.2</span> Two categorical variables<a class="anchor" aria-label="anchor" href="#two-categorical-variables"><i class="fas fa-link"></i></a>
+</h4>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+Think about what might be a suitable confounding variable to investigate and graph here?
+</div>
+</div>
+<p>Understanding how frequency is broken down by species and sex might be useful information to have.</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prob_obs <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+prob_obs
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+0.4802632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+0.4802632
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Adelie
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0394737
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chinstrap
+</td>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+FEMALE
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+0.4677419
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+MALE
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+0.4919355
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gentoo
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.0403226
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div id="continuous-variables" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Continuous variables<a class="anchor" aria-label="anchor" href="#continuous-variables"><i class="fas fa-link"></i></a>
+</h2>
+<div id="central-tendency" class="section level4" number="5.5.0.1">
+<h4>
+<span class="header-section-number">5.5.0.1</span> Central tendency<a class="anchor" aria-label="anchor" href="#central-tendency"><i class="fas fa-link"></i></a>
+</h4>
+<p>Central tendency is a descriptive summary of a dataset through a single value that reflects the center of the data distribution. The three most widely used measures of central tendency are <strong>mean</strong>, <strong>median</strong> and <strong>mode</strong>.</p>
+<p>The <strong>mean</strong> is defined as the sum of all values of the variable divided by the total number of values. The <strong>median</strong> is the middle value. If N is odd and if N is even, it is the average of the two middle values. The <strong>mode</strong> is the most frequently occurring observation in a data set, but is arguable least useful for understanding biological datasets.</p>
+<p>We can find both the mean and median easily with the summarise function. The <strong>mean</strong> is usually the best measure of central tendency when the distribution is symmetrical, and the <strong>mode</strong> is the best measure when the distribution is asymmetrical/skewed.</p>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguin_body_mass_summary</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_body_mass<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, </span>
+<span>              sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
+<span>              median_body_mass<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, </span>
+<span>              iqr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/IQR.html">IQR</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">penguin_body_mass_summary</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+mean_body_mass
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+median_body_mass
+</th>
+<th style="text-align:right;">
+iqr
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+4201.754
+</td>
+<td style="text-align:right;">
+801.9545
+</td>
+<td style="text-align:right;">
+4050
+</td>
+<td style="text-align:right;">
+1200
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span><span class="op">)</span>,</span>
+<span>               alpha<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span>               bins <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>               fill<span class="op">=</span><span class="st">"steelblue"</span>,</span>
+<span>               colour<span class="op">=</span><span class="st">"darkgrey"</span><span class="op">)</span><span class="op">+</span></span>
+<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">penguin_body_mass_summary</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="va">mean_body_mass</span><span class="op">)</span>,</span>
+<span>             colour<span class="op">=</span><span class="st">"red"</span>,</span>
+<span>             linetype<span class="op">=</span><span class="st">"dashed"</span><span class="op">)</span><span class="op">+</span></span>
+<span>     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">penguin_body_mass_summary</span>,</span>
+<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="va">median_body_mass</span><span class="op">)</span>,</span>
+<span>             colour<span class="op">=</span><span class="st">"black"</span>,</span>
+<span>             linetype<span class="op">=</span><span class="st">"dashed"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Body mass (g)"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-27-1.png" alt="Red dashed line represents the mean, Black dashed line is the median value" width="100%"><p class="caption">
+Figure 5.1: Red dashed line represents the mean, Black dashed line is the median value
+</p>
+</div>
+</div>
+<div id="normal-distribution" class="section level4" number="5.5.0.2">
+<h4>
+<span class="header-section-number">5.5.0.2</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution"><i class="fas fa-link"></i></a>
+</h4>
+<p>From our histogram we can likely already tell whether we have normally distributed data.</p>
+<div class="info">
+<p>
+Normal distribution, also known as the “Gaussian distribution”, is a
+probability distribution that is symmetric about the mean, showing that
+data near the mean are more frequent in occurrence than data far from
+the mean. In graphical form, the normal distribution appears as a “bell
+curve”.
+</p>
+</div>
+<p>If our data follows a normal distribution, then we can predict the spread of our data, and the likelihood of observing a datapoint of any given value with only the mean and standard deviation.</p>
+<p>Here we can simulate what a normally distributed dataset would look like with our sample size, mean and standard deviation.</p>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">norm_mass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">344</span>,</span>
+<span>      mean <span class="op">=</span> <span class="fl">4201.754</span>,</span>
+<span>      sd <span class="op">=</span> <span class="fl">801.9545</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">norm_mass</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span><span class="op">)</span>,</span>
+<span>                 bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="qq-plot" class="section level4" number="5.5.0.3">
+<h4>
+<span class="header-section-number">5.5.0.3</span> QQ-plot<a class="anchor" aria-label="anchor" href="#qq-plot"><i class="fas fa-link"></i></a>
+</h4>
+<p>A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.</p>
+<p>Watch this video to see <a href="https://www.youtube.com/watch?v=okjYjClSjOg">QQ plots explained</a></p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%"><p class="caption">
+Figure 5.2: Examples of qqplots with different deviations from a normal distribution
+</p>
+</div>
+<p>In our example we can see that <em>most</em> of our residuals can be explained by a normal distribution, except at the low end of our data.</p>
+<p>So the fit is not perfect, but it is also not terrible!</p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p><strong>How do we know how much deviation from an idealised distribution is ok?</strong></p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-32-1.png" width="100%" style="display: block; margin: auto;"></div>
+<pre><code>## [1] 170 186</code></pre>
+<p>The qqPlot() function from the R package car provides 95% confidence interval margins to help you determine how severely your quantiles deviate from your idealised distribution.</p>
+<p>With the information from the qqPlot which section of the distribution deviates most clearly from a normal distribution <select class="webex-select"><option value="blank"></option>
+<option value="answer">&lt;3500g</option>
+<option value="">3500-4000g</option>
+<option value="">4000-4500g</option>
+<option value="">5000-5500g</option>
+<option value="">&gt;5500g</option></select></p>
+<button id="displayTextunnamed-chunk-33" onclick="javascript:toggle('unnamed-chunk-33');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-33" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+There are is a 'truncated' left tail of our normal distribution. We would predict more penguins with body masses lower than 3000g under the normal distribution.
+</div>
+</div>
+</div>
+</div>
+<div id="variation" class="section level4" number="5.5.0.4">
+<h4>
+<span class="header-section-number">5.5.0.4</span> Variation<a class="anchor" aria-label="anchor" href="#variation"><i class="fas fa-link"></i></a>
+</h4>
+<p>Dispersion (how spread out the data is) is an important component towards understanding any numeric variable. While measures of central tendency are used to estimate the central value of a dataset, measures of dispersion are important for describing the spread of data.</p>
+<p>Two data sets can have an equal mean (that is, measure of central tendency) but vastly different variability.</p>
+<p>Important measures for dispersion are <strong>range</strong>, <strong>interquartile range</strong>, <strong>variance</strong> and <strong>standard deviation</strong>.</p>
+<ul>
+<li><p>The <strong>range</strong> is defined as the difference between the highest and lowest values in a dataset. The disadvantage of defining range as a measure of dispersion is that it does not take into account all values for calculation.</p></li>
+<li><p>The <strong>interquartile range</strong> is defined as the difference between the third quartile denoted by 𝑸_𝟑 and the lower quartile denoted by 𝑸_𝟏 . 75% of observations lie below the third quartile and 25% of observations lie below the first quartile.</p></li>
+<li><p><strong>Variance</strong> is defined as the sum of squares of deviations from the mean, divided by the total number of observations. The standard deviation is the positive square root of the variance. The <strong>standard deviation</strong> is preferred instead of variance as it has the same units as the original values.</p></li>
+</ul>
+</div>
+<div id="interquartile-range" class="section level4" number="5.5.0.5">
+<h4>
+<span class="header-section-number">5.5.0.5</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+</h4>
+<p>We used the IQR function in <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to find the interquartile range of the body mass variable.</p>
+<p>The IQR is also useful when applied to the summary plots 'box and whisker plots'. We can also calculate the values of the IQR margins, and add labels with <code>scales</code> <span class="citation">Wickham &amp; Seidel (<a href="summary-10.html#ref-R-scales">2022</a>)</span>.</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>q_body_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">body_mass_g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>            quantile <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># scales package allows easy converting from data values to perceptual properties</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+q_body_mass
+</th>
+<th style="text-align:left;">
+quantile
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+3550
+</td>
+<td style="text-align:left;">
+25%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4050
+</td>
+<td style="text-align:left;">
+50%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4750
+</td>
+<td style="text-align:left;">
+75%
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>We can see for ourselves the IQR is obtained by subtracting the body mass at tht 75% quantile from the 25% quantile (4750-3550 = 1200).</p>
+</div>
+<div id="standard-deviation" class="section level4" number="5.5.0.6">
+<h4>
+<span class="header-section-number">5.5.0.6</span> Standard deviation<a class="anchor" aria-label="anchor" href="#standard-deviation"><i class="fas fa-link"></i></a>
+</h4>
+<p>standard deviation (or <span class="math inline">\(s\)</span>) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency.</p>
+<div class="info">
+<p>
+<span class="math inline"><span class="math inline">\(\sigma\)</span></span> = a known population
+standard deviation
+</p>
+<p>
+<span class="math inline"><span class="math inline">\(s\)</span></span> = a sample standard
+deviation
+</p>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+Task
+</div>
+<div class="panel-body">
+If we know we have a normal distribution, then we can use <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to quickly produce a mean and standard deviation.
+</div>
+</div>
+<button id="displayTextunnamed-chunk-37" onclick="javascript:toggle('unnamed-chunk-37');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-37" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<pre><code>penguins %&gt;% 
+  summarise(mean = mean(body_mass_g, na.rm = T),
+            sd = sd(body_mass_g, na.rm = T),
+            n = n())</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="visualising-dispersion" class="section level4" number="5.5.0.7">
+<h4>
+<span class="header-section-number">5.5.0.7</span> Visualising dispersion<a class="anchor" aria-label="anchor" href="#visualising-dispersion"><i class="fas fa-link"></i></a>
+</h4>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-38"></span>
+<img src="images/distribution_gif.gif" alt="Visualising dispersion with different figures" width="80%"><p class="caption">
+Figure 5.3: Visualising dispersion with different figures
+</p>
+</div>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">colour_fill</span> <span class="op">&lt;-</span> <span class="st">"darkorange"</span></span>
+<span><span class="va">colour_line</span> <span class="op">&lt;-</span> <span class="st">"steelblue"</span></span>
+<span><span class="va">lims</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">7000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">body_weight_plot</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">""</span>,</span>
+<span>             y<span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span> <span class="st">" "</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Mass (g)"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="va">lims</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">plot_1</span> <span class="op">&lt;-</span> <span class="fu">body_weight_plot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>               colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>               width <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>              shape <span class="op">=</span> <span class="fl">21</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_2</span> <span class="op">&lt;-</span> <span class="fu">body_weight_plot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>               colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>               width <span class="op">=</span> <span class="fl">0.4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_3</span> <span class="op">&lt;-</span> <span class="va">penguin_body_mass_summary</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">" "</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">mean_body_mass</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>           fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>           colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>               width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">penguin_body_mass_summary</span>,</span>
+<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean_body_mass</span> <span class="op">-</span> <span class="va">sd</span>,</span>
+<span>                    ymax <span class="op">=</span> <span class="va">mean_body_mass</span> <span class="op">+</span> <span class="va">sd</span><span class="op">)</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">" "</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Body mass (g)"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="va">lims</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#library(patchwork)</span></span>
+<span><span class="va">plot_1</span> <span class="op">+</span> <span class="va">plot_2</span> <span class="op">+</span> <span class="va">plot_3</span> </span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can <em>and should</em> generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables.</p>
+</div>
+</div>
+<div id="categorical-and-continuous-variables" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Categorical and continuous variables<a class="anchor" aria-label="anchor" href="#categorical-and-continuous-variables"><i class="fas fa-link"></i></a>
+</h2>
+<p>It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable.</p>
+<div class="webex-solution">
+<button>
+Think about which other variables might affect body mass?
+</button>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-40"></span>
+<img src="images/body-mass-interaction.png" alt="Species and sex are both likely to affect body mass" width="80%"><p class="caption">
+Figure 5.4: Species and sex are both likely to affect body mass
+</p>
+</div>
+<p>So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
+</div>
+<p>The best and simplest place to start exploring these possible relationships is by producing simple figures.</p>
+<p>Let's start by looking at the distribution of body mass by species.</p>
+</div>
+<div id="activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species" class="section level2" number="5.7">
+<h2>
+<span class="header-section-number">5.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species<a class="anchor" aria-label="anchor" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><i class="fas fa-link"></i></a>
+</h2>
+<button id="displayTextunnamed-chunk-41" onclick="javascript:toggle('unnamed-chunk-41');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-41" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">jitter_plot</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>,</span>
+<span>               y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>                fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">box_plot</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>,</span>
+<span>               y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>                width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">histogram_plot</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>,</span>
+<span>                       y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span>,</span>
+<span>                   position <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>                   alpha <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">colour_line</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">jitter_plot</span><span class="op">/</span><span class="va">box_plot</span><span class="op">/</span><span class="va">histogram_plot</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent <code>ggridges</code> package to help out</p>
+</div>
+</div>
+</div>
+</div>
+<div id="ggridges" class="section level2" number="5.8">
+<h2>
+<span class="header-section-number">5.8</span> GGridges<a class="anchor" aria-label="anchor" href="#ggridges"><i class="fas fa-link"></i></a>
+</h2>
+<p>The package <code>ggridges</code> (<span class="citation">Wilke (<a href="summary-10.html#ref-R-ggridges">2022</a>)</span>) provides some excellent extra geoms to supplement <code>ggplot</code>. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed.</p>
+<button id="displayTextunnamed-chunk-42" onclick="javascript:toggle('unnamed-chunk-42');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-42" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
+<span>                colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>                alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-69-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+</div>
+<p><strong>Q. Does each species have a data distribution that appears to be normally distributed?</strong></p>
+<ul>
+<li><p>Gentoo <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p></li>
+<li><p>Chinstrap <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p></li>
+<li><p>Adelie <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p></li>
+</ul>
+<button id="displayTextunnamed-chunk-43" onclick="javascript:toggle('unnamed-chunk-43');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-43" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">body_mass_g</span><span class="op">)</span> </span>
+<span>      <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-2.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-3.png" width="100%" style="display: block; margin: auto;"></p>
+<pre><code>## [[1]]
+## [1] 110 102
+## 
+## [[2]]
+## [1] 38 39
+## 
+## [[3]]
+## [1] 18 41</code></pre>
+<p>While the Gentoo density plot appears to show two peaks, our qqplot indicates this does not deviate from what me might expect from a normal distribution. But we could still investigate whether there are "two populations" here.</p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>    <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,</span>
+<span>                        colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
+<span>                        alpha <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>                        bandwidth <span class="op">=</span> <span class="fl">175</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram</span></span></code></pre></div>
+</div>
+<div id="activity-2-test-yourself" class="section level2" number="5.9">
+<h2>
+<span class="header-section-number">5.9</span> Activity 2: Test yourself<a class="anchor" aria-label="anchor" href="#activity-2-test-yourself"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>Question 1.</strong> Write down some insights you have made about the data and relationships you have observed. Compare these to the ones below. Do you agree with these? Did you miss any? What observations did you make that are <strong>not</strong> in the list below.</p>
+<div class="webex-solution">
+<button>
+What data insights have you made?
+</button>
+<p>This is revealing some really interesting insights into the shape and distribution of body sizes in our penguin populations now.</p>
+<p>For example:</p>
+<ul>
+<li><p>Gentoo penguins appear to show strong sexual dimorphism with almost all males being larger than females (little overlap on density curves).</p></li>
+<li><p>Gentoo males and females are on average larger than the other two penguin species</p></li>
+<li><p>Gentoo females have two distinct peaks of body mass.</p></li>
+<li><p>Chinstrap penguins also show evidence of sexual dimorphism, though with greater overlap.</p></li>
+<li><p>Adelie penguins have larger males than females on average, but a wide spread of male body mass, (possibly two groups?)</p></li>
+</ul>
+<p>Note how we are able to understand our data better, by spending time making data visuals. While descriptive data statistics (mean, median) and measures of variance (range, IQR, sd) are important. They are not substitutes for spending time thinking about data and making exploratory analyses.</p>
+</div>
+<p><strong>Question 2.</strong> Using <code>summarise</code> we can quickly calculate <span class="math inline">\(s\)</span> but can you replicate this by hand with <code>dplyr</code> functions? - do this for total <span class="math inline">\(s\)</span> (not by category).</p>
+<ul>
+<li><p>Residuals</p></li>
+<li><p>Squared residuals</p></li>
+<li><p>Sum of squares</p></li>
+<li><p>Variance = SS/df</p></li>
+<li><p><span class="math inline">\(s=\sqrt{Variance}\)</span></p></li>
+</ul>
+<button id="displayTextunnamed-chunk-45" onclick="javascript:toggle('unnamed-chunk-45');">
+Show Solution
+</button>
+<div id="toggleTextunnamed-chunk-45" style="display: none">
+<div class="panel panel-default">
+<div class="panel-heading panel-heading1">
+Solution
+</div>
+<div class="panel-body">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>residuals <span class="op">=</span> <span class="op">(</span><span class="va">body_mass_g</span> <span class="op">-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>           sqrd_resid <span class="op">=</span> <span class="va">residuals</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">sqrd_resid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sum_squares <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sqrd_resid</span><span class="op">)</span>,</span>
+<span>              variance <span class="op">=</span> <span class="va">sum_squares</span><span class="op">/</span><span class="op">(</span><span class="va">n</span><span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>,</span>
+<span>              sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">variance</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr>
+<th style="text-align:right;">
+sum_squares
+</th>
+<th style="text-align:right;">
+variance
+</th>
+<th style="text-align:right;">
+sd
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:right;">
+219307697
+</td>
+<td style="text-align:right;">
+641249.6
+</td>
+<td style="text-align:right;">
+800.7806
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  if (t = document.getElementById("webex-total_correct")) {
+    var correct = document.getElementsByClassName("webex-correct").length;
+    var solvemes = document.getElementsByClassName("webex-solveme").length;
+    var radiogroups = document.getElementsByClassName("webex-radiogroup").length;
+    var selects = document.getElementsByClassName("webex-select").length;
+    
+    t.innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+  
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+  
+  var cl = this.classList
+  
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+  
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+  
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+  
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+  }
+  
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+  
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+$( document ).ready(function() {
+  var cite = ' ';
+  var license = ' <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a>';
+
+  $("footer div.row div:eq(1) p").html(
+    license
+  );
+});
+</script><div class="chapter-nav">
+<div class="prev"><a href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data visualisation with ggplot2</a></div>
+<div class="next"><a href="data-insights.html"><span class="header-section-number">6</span> Data insights</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-quality"><span class="header-section-number">5</span> Data Quality</a></li>
+<li>
+<a class="nav-link" href="#variable-types"><span class="header-section-number">5.1</span> Variable types</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#numerical"><span class="header-section-number">5.1.1</span> Numerical</a></li>
+<li><a class="nav-link" href="#categorical"><span class="header-section-number">5.1.2</span> Categorical</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#missing-data"><span class="header-section-number">5.2</span> Missing data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#deletion"><span class="header-section-number">5.2.1</span> Deletion</a></li>
+<li><a class="nav-link" href="#pairwise-deletion"><span class="header-section-number">5.2.2</span> Pairwise deletion</a></li>
+<li><a class="nav-link" href="#summarising-data-with-missing-values"><span class="header-section-number">5.2.3</span> Summarising data with missing values</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#implausible-values"><span class="header-section-number">5.3</span> Implausible values</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#categorical-data"><span class="header-section-number">5.3.1</span> Categorical data</a></li>
+<li><a class="nav-link" href="#continuous-data"><span class="header-section-number">5.3.2</span> Continuous data</a></li>
+<li><a class="nav-link" href="#visualise-continuous-data"><span class="header-section-number">5.3.3</span> Visualise continuous data</a></li>
+<li><a class="nav-link" href="#impute-data"><span class="header-section-number">5.3.4</span> Impute data</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#categorical-variables"><span class="header-section-number">5.4</span> Categorical variables</a></li>
+<li><a class="nav-link" href="#continuous-variables"><span class="header-section-number">5.5</span> Continuous variables</a></li>
+<li><a class="nav-link" href="#categorical-and-continuous-variables"><span class="header-section-number">5.6</span> Categorical and continuous variables</a></li>
+<li><a class="nav-link" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><span class="header-section-number">5.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species</a></li>
+<li><a class="nav-link" href="#ggridges"><span class="header-section-number">5.8</span> GGridges</a></li>
+<li><a class="nav-link" href="#activity-2-test-yourself"><span class="header-section-number">5.9</span> Activity 2: Test yourself</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/UEABIO/physalia-intro-stats-2023/blob/main/book/10-Data-insights-part-1.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/UEABIO/physalia-intro-stats-2023/edit/main/book/10-Data-insights-part-1.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

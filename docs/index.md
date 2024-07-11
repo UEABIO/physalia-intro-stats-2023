@@ -1,7 +1,7 @@
 --- 
 title: "Introduction to Statistics"
 author: "Philip T. Leftwich"
-date: "2023-07-19"
+date: "2024-07-11"
 subtitle: A guide for Biologists and Ecologists
 site: bookdown::bookdown_site
 documentclass: book
@@ -52,6 +52,8 @@ This course will introduce scientists and practitioners interested in applying s
 
 
 ```r
+library(car)
+library(arm)
 library(tidyverse)
 library(janitor)
 library(rstatix)
@@ -68,4 +70,6 @@ library(report)
 library(MuMIn)
 library(GGally)
 library(colorBlindness)
+library(pwr)
+library(simr)
 ```
