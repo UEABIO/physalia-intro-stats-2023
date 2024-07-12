@@ -187,7 +187,7 @@ tidy_model1[[2,2]] / tidy_model1[[2,3]]
 
 Which should be the same as the value for *t* in our model summary.
 
-## Paired t
+# Paired designs
 
 The structure of our linear model so far has produced the output for a standard two-sample Student's *t*-test. However, when we *first* [calculated our estimates by hand](#differences-between-groups) - we started by making an average of the paired differences in height. To generate the equivalent of a paired *t*-test, we simply have to add the factor for pairs to our linear model formula:
 
@@ -276,6 +276,25 @@ The table of coefficients suddenly looks a lot more complicated! This is because
 
 Again the linear model computes every possible combination of *t*-statistic and *P*-value, however the only one we care about is the difference in Cross and Self-pollinated plant heights. If we ignore the pair comparisons the second row gives us a *paired t*-test. 'What is the difference in height between Cross and Self-pollinated plants when we hold pairs constant.'
 
+## Activity 1: Compare paired model designs
+
+We previously compared the difference in plant heights by subtracting the difference between each pair of plants. Check our reasoning on the model design above by making another linear model based on the difference between pairs and check whether this is significantly different from 0, `lm(difference ~ 1)`
+
+<button id="displayTextunnamed-chunk-9" onclick="javascript:toggle('unnamed-chunk-9');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-9" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+darwin_wide <- darwin %>% 
+  # pivot/reshape the data from long to wide format
+  pivot_wider(names_from = type, values_from = height) %>% 
+  # Calculate the difference between 'Cross' and 'Self' heights for each pair
+  mutate(difference = Cross - Self)
+
+wide_model <- lm(difference ~ 1, data = darwin_wide)
+
+summary(wide_model)
+</div></div></div>
+
 For completeness let's generate the confidence intervals for the *paired t*-test and compare them to our *unpaired t*-test. 
 
 
@@ -327,16 +346,14 @@ rbind(m1,m2) %>%
   coord_flip()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="info">
 <p>Choosing the right model</p>
-<p>In future sessions we will work through model building and
-simplification, in this case we had a good <em>a priori</em> reason to
-include pair in our initial model, there are then simple tests we can do
-to see if it is safe to remove it, if it doesn’t appear to be adding to
-our explanation of the difference in heights between self and
-cross-fertilised plants.</p>
+<p>In this case we had a good <em>a priori</em> reason to include pair
+in our model, so I would argue that it should stay - alternative
+approaches are model simplification and stepwise removal. We will
+discuss these later.</p>
 </div>
 
 ## Effect sizes
@@ -408,16 +425,16 @@ y$`experiment number` <- rep(1:20)
 # the new dataframe y contains the results of 20 new experiments
 ```
 
-## Activity 1: Experimental Repeatability
+## Activity 2: Experimental Repeatability
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
-Using this newly generated data how many experiments found a significant difference and how many did not? - What would you conclue from this? </div></div>
+Using this newly generated data how many experiments found a significant difference and how many did not? - What would you conclude from this? </div></div>
 
 
 
-<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-16" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # Mutate a new column `p value < 0.05` based on the condition of p.value
@@ -446,9 +463,9 @@ A **better** way would be to look at the estimates and calculated confidence int
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
 Using this newly generated data compare the estimates and confidence intervals? - What do you conclude from this? </div></div>
 
-<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-18" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # Create a plot using ggplot
@@ -464,12 +481,26 @@ y %>%
   theme_minimal()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 By illustrating this visually, it is clearer to see that the results are not really inconsistent, the negative effects of inbreeding depression are clear to see in all of the experiments - we are simply observing the effect of sampling error. 
 
 All 20 studies showed the effect of inbreeding depression, and all the experiments have identical levels of uncertainty. We can clearly see that estimates and intervals are a substantial improvement in the way we report experiments, and that they make comparisons across repeated studies more valuable. 
+
+## Activity 3: Write-up
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you write a summary of the **Results**? </div></div>
+
+
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+We analysed the difference in heights between selfed and cross-pollinated maize plants using a paired analysis of 15 pairs of plants. On average we found plants that have been cross pollinated (20.2 inches [18.3, 22], (mean [95% CI])) were taller than the self-pollinated plants (t(14) = -2.148, p = 0.0497), with a mean difference in height of 2.62 [0.004, 5.23] inches .
+</div></div></div>
+
 
 ## Summary
 

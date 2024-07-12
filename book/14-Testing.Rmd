@@ -160,7 +160,7 @@ tidy_model1[[2,2]] / tidy_model1[[2,3]]
 
 Which should be the same as the value for *t* in our model summary.
 
-## Paired t
+# Paired designs
 
 The structure of our linear model so far has produced the output for a standard two-sample Student's *t*-test. However, when we *first* [calculated our estimates by hand](#differences-between-groups) - we started by making an average of the paired differences in height. To generate the equivalent of a paired *t*-test, we simply have to add the factor for pairs to our linear model formula:
 
@@ -192,6 +192,24 @@ The table of coefficients suddenly looks a lot more complicated! This is because
 * rows three to 16 compare the average difference of each pair (Crossed and Selfed combined) against pair 1
 
 Again the linear model computes every possible combination of *t*-statistic and *P*-value, however the only one we care about is the difference in Cross and Self-pollinated plant heights. If we ignore the pair comparisons the second row gives us a *paired t*-test. 'What is the difference in height between Cross and Self-pollinated plants when we hold pairs constant.'
+
+## Activity 1: Compare paired model designs
+
+We previously compared the difference in plant heights by subtracting the difference between each pair of plants. Check our reasoning on the model design above by making another linear model based on the difference between pairs and check whether this is significantly different from 0, `lm(difference ~ 1)`
+
+```{solution}
+
+darwin_wide <- darwin %>% 
+  # pivot/reshape the data from long to wide format
+  pivot_wider(names_from = type, values_from = height) %>% 
+  # Calculate the difference between 'Cross' and 'Self' heights for each pair
+  mutate(difference = Cross - Self)
+
+wide_model <- lm(difference ~ 1, data = darwin_wide)
+
+summary(wide_model)
+
+```
 
 For completeness let's generate the confidence intervals for the *paired t*-test and compare them to our *unpaired t*-test. 
 
@@ -232,7 +250,7 @@ rbind(m1,m2) %>%
 ```{block, type = "info"}
 Choosing the right model
 
-In future sessions we will work through model building and simplification, in this case we had a good *a priori* reason to include pair in our initial model, there are then simple tests we can do to see if it is safe to remove it, if it doesn't appear to be adding to our explanation of the difference in heights between self and cross-fertilised plants.
+In this case we had a good *a priori* reason to include pair in our model, so I would argue that it should stay - alternative approaches are model simplification and stepwise removal. We will discuss these later. 
 ```
 
 ## Effect sizes
@@ -300,10 +318,10 @@ y$`experiment number` <- rep(1:20)
 # the new dataframe y contains the results of 20 new experiments
 ```
 
-## Activity 1: Experimental Repeatability
+## Activity 2: Experimental Repeatability
 
 ```{task}
-Using this newly generated data how many experiments found a significant difference and how many did not? - What would you conclue from this?
+Using this newly generated data how many experiments found a significant difference and how many did not? - What would you conclude from this?
 ```
 
 
@@ -355,6 +373,20 @@ y %>%
 By illustrating this visually, it is clearer to see that the results are not really inconsistent, the negative effects of inbreeding depression are clear to see in all of the experiments - we are simply observing the effect of sampling error. 
 
 All 20 studies showed the effect of inbreeding depression, and all the experiments have identical levels of uncertainty. We can clearly see that estimates and intervals are a substantial improvement in the way we report experiments, and that they make comparisons across repeated studies more valuable. 
+
+## Activity 3: Write-up
+
+```{task}
+Can you write a summary of the **Results**?
+```
+
+
+```{solution}
+
+We analysed the difference in heights between selfed and cross-pollinated maize plants using a paired analysis of 15 pairs of plants. On average we found plants that have been cross pollinated (20.2 inches [18.3, 22], (mean [95% CI])) were taller than the self-pollinated plants (t(14) = -2.148, p = 0.0497), with a mean difference in height of 2.62 [0.004, 5.23] inches .
+
+```
+
 
 ## Summary
 

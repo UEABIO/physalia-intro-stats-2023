@@ -1,4 +1,6 @@
-# Multivariate linear models
+# (PART\*) Multiple regression {.unnumbered}
+
+# Multi factor ANOVA
 
 
 ```{r, child='_setup.Rmd'}
@@ -298,9 +300,11 @@ drop1(ls_2, test = "F")
 
 This *F*-test is testing the *null hypothesis* that there is no true interaction effect. The significance test rejects the null hypothesis (just). It also provides the **Akaike information criterion (AIC)**, an alternative method of model selection (more on this later). 
 
+### Write-up
+
 We could now write this up as follows:
 
-> There was an interactive effect of light and fertiliser treatments (ANOVA *F*~1,60~ = 4.25, *P* = 0.044) in which combining treatments produced substantially more biomass (95.4g [95% CI: 2.8 - 188]) than expected from the additive effects alone (Fertiliser 93.7g [28.2 - 159.2], Light 30.1g [-35.3 - 95.6]). 
+> There was an interaction effect of light and fertiliser treatments (ANOVA *F*~1,60~ = 4.25, *P* = 0.044) in which combining treatments produced substantially more biomass (95.4g [95% CI: 2.8 - 188]) than expected from the additive effects alone (Fertiliser 93.7g [28.2 - 159.2], Light 30.1g [-35.3 - 95.6]). 
 
 Do not make the mistake of *just* reporting the statistics, the interesting bit is the size of the effect (estimate) and the uncertainty (confidence intervals). 
 

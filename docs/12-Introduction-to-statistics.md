@@ -5,20 +5,21 @@
 
 
 
-This term we will be focusing more on *statistics*. We actually did quite a lot of *descriptive statistics* work last term. Every time we summarised or described our data, by calculating a **mean**, **median**, **standard deviation**, **frequency/count**, or **distribution** we were carrying out *descriptive statistics* that helped us understand our data better. 
+We have previously covered a lot of descriptive statistics. Whenever we summarized or described our data by calculating the mean, median, standard deviation, frequency/count, or distribution, we were performing descriptive statistics. These methods helped us understand our data better.
 
-We are building on this to develop our skills in *inferential statistics*. Inferential statistics allow us to make generalisations - taking a descriptive statistics from our data such as the **sample mean**, and using it to say something about a population parameter (i.e. the **population mean**).
+Building on this, we will develop our skills in inferential statistics. Inferential statistics allow us to make generalizations. For instance, we can take a descriptive statistic, such as the sample mean, and use it to say something about a population parameter (i.e., the population mean).
 
-For example we might measure the measure the heights of some plants that have been outcrossed and inbred and make some summaries and figures to construct an average difference in height (this is **descriptive**). Or we could use this to produce some estimates of the general effect of outcrossing vs inbreeding on plant heights (this is **inferential**). 
+For example, we might measure the heights of some plants that have been outcrossed and inbred, summarize the data, and create figures to show an average difference in height (this is descriptive statistics). Then, we could use this data to estimate the general effect of outcrossing versus inbreeding on plant heights (this is inferential statistics).
 
 
 ## Darwin's maize data
 
-Loss of genetic diversity is an important issue in the conservation of species. Declines in population size due to over exploitation, habitat fragmentation lead to loss of genetic diversity. Even populations restored to viable numbers through conservation efforts may suffer from continued loss of population fitness because of inbreeding depression.
+Loss of genetic diversity is crucial in species conservation. Population declines due to overexploitation and habitat fragmentation lead to genetic diversity loss. Even populations restored through conservation efforts may suffer from reduced fitness due to inbreeding depression.
 
-Charles Darwin even wrote a book on the subject *"The Effects of Cross and Self-Fertilisation in the Vegetable Kingdom"*. In this he describes how he produced seeds of maize (*Zea mays*) that were fertilised with pollen from the same individual or from a different plant. The height of the seedlings that were produced from these were then measured as a proxy for their evolutionary fitness.
+Charles Darwin wrote a book on this subject, *"The Effects of Cross and Self-Fertilisation in the Vegetable Kingdom."* In it, he describes producing seeds of maize (*Zea mays*) fertilized with pollen from the same individual or a different plant. The height of the resulting seedlings was measured as a proxy for their evolutionary fitness.
 
-Darwin wanted to know whether inbreeding reduced the fitness of the selfed plants - this was his **hypothesis**. The data we are going to use today is from Darwin's original dataset.
+Darwin's **hypothesis** was that inbreeding reduced the fitness of the selfed plants. Today, we will use data from Darwin's original dataset to explore this hypothesis.
+
 
 
 ```{=html}
@@ -100,6 +101,15 @@ darwin %>%
 # quick summary
 
 summary(darwin)
+
+
+# check normality according to type
+
+darwin %>% 
+    group_split(type) %>% 
+    map(~pull(.x, height) %>% 
+            car::qqPlot())
+# indicates two potential outliers in the outbred cross that cause deviation from a normal distribution
 ```
 </div></div></div>
 
@@ -115,7 +125,7 @@ darwin %>%
   # set x axis to type (selfed or crossed), and y axis to continuous variable height
   ggplot(aes(x = type, y = height)) +
   # Add points to the plot
-  geom_point()
+  geom_jitter(width = .1)
 ```
 
 <img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
@@ -128,14 +138,14 @@ darwin %>%
 # Why not have a go and see what you can make?
 ```
 
-The graph clearly shows that the average height of the 'crossed' plants is greater than that of the 'selfed' plants. But we need to investigate further in order to determine whether the signal (any apparent differences in mean values) is greater than the level of noise (variance within the different groups). 
+The graph clearly shows that the average height of the 'crossed' plants is greater than that of the 'selfed' plants. But we need to investigate further to determine whether the signal (any apparent differences in mean values) is greater than the level of noise (variance within the different groups).
 
-The variance appears to be roughly similar between the two groups - though by making a graph we can now clearly see that in the crossed group, there is a *potential* outlier with a value of 12. 
+The variance appears to be roughly similar between the two groups, though by making a graph, we can now clearly see that in the crossed group, there are two *potential* outliers both with a value of 12.
+
 
 #### Comparing groups
 
 As we have seen previously we can use various tidy functions to determine the mean and standard deviations of our groups. 
-
 
 
 
@@ -163,7 +173,6 @@ darwin %>%
 standard deviation.</p>
 </div>
 
-
 Summary statistics like these could be presented as figures or tables. We normally reserve tables for **very** simple sets of numbers, and this instance we could present either.
 
 
@@ -186,6 +195,41 @@ darwin_summary %>%
 <img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;" />
 
 Descriptive statistics and careful data checking are often skipped steps in the rush to answer the **big** questions. However, description is an essential part of early phase analysis. 
+
+## Activity 2: Alternative summary descriptives
+
+When faced with data that does not conform to a normal distribution, we might consider using alternative statistical measures instead of the mean and standard deviation. What might be a suitable alternative?
+
+
+<button id="displayTextunnamed-chunk-11" onclick="javascript:toggle('unnamed-chunk-11');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-11" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+When dealing with non-normally distributed data, boxplots are a useful tool for visualizing data distribution and identifying outliers. Reporting the interquartile range (IQR) instead of standard deviation provides a robust measure of variability, as it focuses on the middle 50% of the data and is less influenced by outliers. This approach helps ensure a more accurate representation of the spread in the data
+
+```r
+darwin %>% 
+  group_by(type) %>% 
+  summarise(median = median(height),
+            iqr = IQR(height))
+
+# Create a summary plot using ggplot
+darwin %>% 
+  ggplot(aes(x = type, y = height)) +
+  # Add error bars representing the standard deviation
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = .2) +
+  # Apply a black and white theme to the plot
+  theme_bw()
+```
+
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-26-1.png" width="100%" style="display: block; margin: auto;" /><div class="kable-table">
+
+|type  | median|   iqr|
+|:-----|------:|-----:|
+|Cross |   21.5| 2.375|
+|Self  |   18.0| 2.250|
+
+</div></div></div></div>
 
 ## Estimation
 
@@ -237,7 +281,7 @@ Darwin's data used match pairs - each pair shared one parent. So that in pair 1 
 
 In order to calculate the differences in height between each pair we need to do some data wrangling with `tidyr::pivot_wider()` and calculations with `mutate`.
 
-## Activity 2: Differences
+## Activity 3: Differences
 
 Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant. 
 
@@ -294,9 +338,9 @@ As sample size increases the standard error should reduce - reflecting an increa
 
 We can calculate the standard error for our sample by applying this equation to our `difference_summary` object, can you complete this?
 
-<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+<button id="displayTextunnamed-chunk-16" onclick="javascript:toggle('unnamed-chunk-16');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-16" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 difference_summary %>% 
@@ -322,14 +366,14 @@ greater than the uncertainty in either mean.</p>
 </div>
 
 
-## Activity 3: Communicate
+## Activity 4: Communicate
 
 With the information above, how would you present a short sentence describing the average different in height?
 
 
-<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-18" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 *... the average difference in height was 2.62 ± 1.22 inches (mean ± SE).*</div></div></div>
 
 ## Uncertainty
@@ -385,27 +429,28 @@ plot(x, y, type = "l", lwd = 2, axes = FALSE, xlab = "", ylab = "")
 axis(1, at = -3:3, labels = c("-3s", "-2s", "-1s", "mean", "1s", "2s", "3s"))
 ```
 
-<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
-
-How do we convert this information into how likely we are to observe a difference of 2.62 inches in plant heights if the 'true' difference between crosses and selfed plants is *zero*? 
-
-The **central limit theorem** states that if you have a population with mean and standard deviation, and take sufficiently large random samples from the population, then the distribution of the sample means will be approximately normally distributed. Standard error then is our measure of variability around our sample mean, and we will assume that we can apply a normal distribution to our ability to estimate the mean (*we will revisit this assumption later*). 
-
-So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.
-
 <img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 
-Taking a look at this figure we can ask ourselves where is zero on our normal distribution? One way to think about this is, if the true difference between our plant groups is zero, how surprising is it that we estimated a difference between the groups of 2.62 inches? 
+How do we determine how likely it is to observe a difference of 2.62 inches in plant heights if the *true* difference between crossed and selfed plants is zero?
 
-If zero was close to the center of the bell curve, then our observed mean would not be surprising at all (**if the null hypothesis is true**). However in this case it is not in the middle of the bell. It falls in the left-hand tail, and it is > than two standard deviations from our estimated mean. 
+The **central limit theorem** helps us here. It states that if you take sufficiently large random samples from a population, the distribution of the sample means will be approximately normally distributed, even if the population itself is not. The standard error measures the variability around our sample mean, and we assume it follows a normal distribution (we'll revisit this assumption later).
+
+If we center our bell curve on the mean estimate (2.62 inches), then about two-thirds of the area under the curve will be within ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.
+
+
+<img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+
+Looking at this figure, we can ask: Where is zero on our normal distribution? If the true difference between our plant groups is zero, how surprising is it that we estimated a difference of 2.62 inches?
+
+If zero was near the center of the bell curve, our observed mean wouldn't be surprising at all (**if the null hypothesis is true**). However, in this case, zero falls in the left-hand tail, more than two standard deviations from our estimated mean.
 
 We can describe this in two ways:
 
-* We estimate that if we ran this experiment 100 times then >95 of our experiments would estimate a mean difference between our plant groups that is > 0. 
+* If we ran this experiment 100 times, over 95 of our experiments would estimate a mean difference greater than zero between our plant groups.
+* This is usually the minimum threshold to *reject* a null hypothesis. The probability of estimating this mean difference, if the true mean difference was zero, is p < 0.05.
 
-* This is also usually taken as the minimum threshold needed to *reject* a null hypothesis. We can think of the probability of estimating this mean difference, if our true mean difference was zero, as p < 0.05. 
+You may be familiar with a null hypothesis rejection threshold of $\alpha$ = 0.05. This is the lowest confidence level for passing a statistical test. If we require a stricter test with $\alpha$ = 0.001 or 99% confidence, we wouldn't have enough confidence to reject the null hypothesis (zero is within 3 standard deviations of our estimated mean).
 
-You will probably be very used to a threshold for null hypothesis rejection of $\alpha$ = 0.05, but this only the very lowest level of confidence at which we can pass a statistical test. If we increase the severity of our test so that the minimum we require is $\alpha$ = 0.001 or 99% confidence, we can see that we no longer believe we have enough confidence to reject the null hypothesis (0 is within 3 s.d. of our estimated mean). 
 
 ### Confidence Intervals
 

@@ -262,13 +262,53 @@ of <em>x</em> from every data point, the intercept (when <em>x</em> is
 known as mean-centered regression</p>
 </div>
 
+### Activity 3:  Mean-centering
 
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you use your data wrangling skills to mean centre the density predictor and produce a more realistic model intercept? </div></div>
+
+
+<button id="displayTextunnamed-chunk-17" onclick="javascript:toggle('unnamed-chunk-17');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-17" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+```r
+janka_centered <-  janka %>% 
+  mutate(centered_dens = dens - mean(dens))
+
+centered_model <- lm(hardness ~ dens, data = janka_centered) 
+
+summary(centered_model)
+```
+
+```
+## 
+## Call:
+## lm(formula = hardness ~ dens, data = janka_centered)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -338.40  -96.98  -15.71   92.71  625.06 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) -1160.500    108.580  -10.69 2.07e-12 ***
+## dens           57.507      2.279   25.24  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 183.1 on 34 degrees of freedom
+## Multiple R-squared:  0.9493,	Adjusted R-squared:  0.9478 
+## F-statistic:   637 on 1 and 34 DF,  p-value: < 2.2e-16
+```
+
+</div></div></div>
 
 #### Confidence intervals
 
 Just like with the maize data, we can produce upper and lower bounds of confidence intervals: 
 
-<div class="tab"><button class="tablinksunnamed-chunk-16 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-16', 'unnamed-chunk-16');">Base R</button><button class="tablinksunnamed-chunk-16" onclick="javascript:openCode(event, 'option2unnamed-chunk-16', 'unnamed-chunk-16');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-16" class="tabcontentunnamed-chunk-16">
+<div class="tab"><button class="tablinksunnamed-chunk-18 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-18', 'unnamed-chunk-18');">Base R</button><button class="tablinksunnamed-chunk-18" onclick="javascript:openCode(event, 'option2unnamed-chunk-18', 'unnamed-chunk-18');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 
 ```r
 confint(janka_ls1)
@@ -279,7 +319,7 @@ confint(janka_ls1)
 ## (Intercept) -1381.16001 -939.83940
 ## dens           52.87614   62.13721
 ```
-</div><div id="option2unnamed-chunk-16" class="tabcontentunnamed-chunk-16">
+</div><div id="option2unnamed-chunk-18" class="tabcontentunnamed-chunk-18">
 
 ```r
 broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
@@ -293,7 +333,7 @@ broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
 |dens        |    57.50667|   2.278534|  25.23845|       0|    52.87614|   62.13721|
 
 </div>
-</div><script> javascript:hide('option2unnamed-chunk-16') </script>
+</div><script> javascript:hide('option2unnamed-chunk-18') </script>
 
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
@@ -301,9 +341,9 @@ What would you say is the minimum effect size (at 95% confidence) of density on 
 
 <select class='webex-select'><option value='blank'></option><option value='answer'>52.9</option><option value=''>62.1</option><option value=''>57.5</option><option value=''>2.28</option></select>
 
-<button id="displayTextunnamed-chunk-18" onclick="javascript:toggle('unnamed-chunk-18');">Show Solution</button>
+<button id="displayTextunnamed-chunk-20" onclick="javascript:toggle('unnamed-chunk-20');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-18" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-20" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 Here we can say that at $\alpha$ = 0.05 we think there is at least a 52.9 unit increase on the janka scale for every unit increase in density ($\rho$). Because our 95% confidence intervals do not span 0, we know that there is a significant relationship at $\alpha$ = 0.05. </div></div></div>
 
 #### Effect size
@@ -312,7 +352,7 @@ With a regression model, we can also produce a standardised effect size. The est
 
 The value of $R^2$ can be found in the model summaries as follows
 
-<div class="tab"><button class="tablinksunnamed-chunk-19 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-19', 'unnamed-chunk-19');">Base R</button><button class="tablinksunnamed-chunk-19" onclick="javascript:openCode(event, 'option2unnamed-chunk-19', 'unnamed-chunk-19');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
+<div class="tab"><button class="tablinksunnamed-chunk-21 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-21', 'unnamed-chunk-21');">Base R</button><button class="tablinksunnamed-chunk-21" onclick="javascript:openCode(event, 'option2unnamed-chunk-21', 'unnamed-chunk-21');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
 
 ```r
 summary(janka_ls1)
@@ -338,7 +378,7 @@ summary(janka_ls1)
 ## Multiple R-squared:  0.9493,	Adjusted R-squared:  0.9478 
 ## F-statistic:   637 on 1 and 34 DF,  p-value: < 2.2e-16
 ```
-</div><div id="option2unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
+</div><div id="option2unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
 
 ```r
 janka_ls1 %>% 
@@ -355,11 +395,11 @@ janka_ls1 %>%
 
 
 
-</div><script> javascript:hide('option2unnamed-chunk-19') </script>
+</div><script> javascript:hide('option2unnamed-chunk-21') </script>
 
 
 <table class="table table-striped" style="width: auto !important; ">
-<caption>(\#tab:unnamed-chunk-20)R squared effect size</caption>
+<caption>(\#tab:unnamed-chunk-22)R squared effect size</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Effect size </th>
@@ -388,7 +428,7 @@ Regression models make ALL the same assumptions as all linear models - that the 
 
 Remember, the residuals are the *difference* between the observed values and the fitted values predicted by the model. Or in other words it is the *vertical* distance between a data point and the fitted value on the regression line. We can take a look at this with another function in the `broom` package `augment()`. This generates the predicted value for each data point according to the regression, and calculates the residuals for each data point. 
 
-<div class="tab"><button class="tablinksunnamed-chunk-21 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-21', 'unnamed-chunk-21');">Base R</button><button class="tablinksunnamed-chunk-21" onclick="javascript:openCode(event, 'option2unnamed-chunk-21', 'unnamed-chunk-21');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
+<div class="tab"><button class="tablinksunnamed-chunk-23 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-23', 'unnamed-chunk-23');">Base R</button><button class="tablinksunnamed-chunk-23" onclick="javascript:openCode(event, 'option2unnamed-chunk-23', 'unnamed-chunk-23');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
 
 ```r
 predict(janka_ls1)
@@ -420,7 +460,7 @@ resid(janka_ls1)
 ##           31           32           33           34           35           36 
 ## -338.3994472  625.0591692  -15.4501754   94.0404799  -73.2115225  326.7884775
 ```
-</div><div id="option2unnamed-chunk-21" class="tabcontentunnamed-chunk-21">
+</div><div id="option2unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
 
 ```r
 janka_ls1 %>% 
@@ -440,7 +480,7 @@ janka_ls1 %>%
 |      648| 29.0| 507.1939| 140.806136| 0.0711580| 184.0637| 0.0243988|  0.7981020|
 
 </div>
-</div><script> javascript:hide('option2unnamed-chunk-21') </script>
+</div><script> javascript:hide('option2unnamed-chunk-23') </script>
 
 If we plot this, with a black fitted regression line and red dashed lines representing the residuals:
 
@@ -462,7 +502,7 @@ augmented_ls1 %>%
                linetype="dashed", colour="red")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
 
 We can use this augmented data to really help us understand what residual variance looks like, and how it can be used to diagnose our models. A perfect model would mean that all of our residual values = 0, but this is incredibly unlikely to ever occur. Instead we would like to see 
 
@@ -496,7 +536,7 @@ library(patchwork)
 p1+p2+p3
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 
@@ -505,23 +545,23 @@ p1+p2+p3
 We can use the same model diagnostic plots as we used for the maize data.
 Here you can see it is mostly pretty good, with just one or two data points outside of the confidence intervals
 
-<button id="displayTextunnamed-chunk-24" onclick="javascript:toggle('unnamed-chunk-24');">Show Solution</button>
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-24" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-24 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-24', 'unnamed-chunk-24');">Base R</button><button class="tablinksunnamed-chunk-24" onclick="javascript:openCode(event, 'option2unnamed-chunk-24', 'unnamed-chunk-24');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 plot(janka_ls1, which=c(2,2))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+<img src="15-Regression_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 performance::check_model(janka_ls1, check=c("normality","qq"))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-24') </script></div></div></div>
+<img src="15-Regression_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-26') </script></div></div></div>
 
 
 #### Equal variance
@@ -531,47 +571,73 @@ You should see that this is similar to the `p3` plot we constructed manually. Wi
 
 Both plots suggests that the residuals **do not** have constant variance, broadly speaking the amount of variance *y* increases as *x* increases. This means we have less confidence in our predictions at high values of density. Later we will see what we can do to improve the fit of this model
 
-<button id="displayTextunnamed-chunk-25" onclick="javascript:toggle('unnamed-chunk-25');">Show Solution</button>
+<button id="displayTextunnamed-chunk-27" onclick="javascript:toggle('unnamed-chunk-27');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-25" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-25 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-25', 'unnamed-chunk-25');">Base R</button><button class="tablinksunnamed-chunk-25" onclick="javascript:openCode(event, 'option2unnamed-chunk-25', 'unnamed-chunk-25');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+<div id="toggleTextunnamed-chunk-27" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-27 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-27', 'unnamed-chunk-27');">Base R</button><button class="tablinksunnamed-chunk-27" onclick="javascript:openCode(event, 'option2unnamed-chunk-27', 'unnamed-chunk-27');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
 
 ```r
 plot(janka_ls1, which=c(1,3))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-48-2.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+<img src="15-Regression_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-49-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
 
 ```r
 performance::check_model(janka_ls1, check="homogeneity")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-25') </script></div></div></div>
+<img src="15-Regression_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-27') </script></div></div></div>
+
+#### Linearity
+
+<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-28 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-28', 'unnamed-chunk-28');">Base R</button><button class="tablinksunnamed-chunk-28" onclick="javascript:openCode(event, 'option2unnamed-chunk-28', 'unnamed-chunk-28');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+
+```r
+plot(janka_ls1, which=c(1,3))
+```
+
+<img src="15-Regression_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-51-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+
+```r
+performance::check_model(janka_ls1, check="linearity")
+```
+
+<img src="15-Regression_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-28') </script></div></div></div>
+
+
+It would appear that we have some curvature in our residuals - indicating that our relationship is not a perfectly linear one. We will revist this later. 
+
 
 #### Outliers
 
-Here we can see there is just one potential outlier. 
 
-What is it's positional order in the dataframe? <input class='webex-solveme nospaces' size='2' data-answer='["32"]'/>
 
-<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">Show Solution</button>
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-26" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+<div id="toggleTextunnamed-chunk-29" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-29 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-29', 'unnamed-chunk-29');">Base R</button><button class="tablinksunnamed-chunk-29" onclick="javascript:openCode(event, 'option2unnamed-chunk-29', 'unnamed-chunk-29');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 plot(janka_ls1, which=c(4,5))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-50-2.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+<img src="15-Regression_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-53-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 performance::check_model(janka_ls1, check="outliers")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-26') </script></div></div></div>
+<img src="15-Regression_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-29') </script></div></div></div>
+
+Here we can see there is just one potential outlier. 
+
+What is it's positional order in the dataframe? <input class='webex-solveme nospaces' size='2' data-answer='["32"]'/>
 
 Check the data, does this make sense?
 
@@ -595,9 +661,9 @@ Now imagine we have a new wood samples with a density of 65, how can we use the 
 
 $$ y = a + bx $$
 
-<button id="displayTextunnamed-chunk-28" onclick="javascript:toggle('unnamed-chunk-28');">Show Solution</button>
+<button id="displayTextunnamed-chunk-31" onclick="javascript:toggle('unnamed-chunk-31');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-28" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-31" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 # a + bx
@@ -626,9 +692,9 @@ coef(janka_ls1)[1] + coef(janka_ls1)[2] * 65
 
 But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `broom::augment()`
 
-<button id="displayTextunnamed-chunk-30" onclick="javascript:toggle('unnamed-chunk-30');">Show Solution</button>
+<button id="displayTextunnamed-chunk-33" onclick="javascript:toggle('unnamed-chunk-33');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-30" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-30 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-30', 'unnamed-chunk-30');">Base R</button><button class="tablinksunnamed-chunk-30" onclick="javascript:openCode(event, 'option2unnamed-chunk-30', 'unnamed-chunk-30');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
+<div id="toggleTextunnamed-chunk-33" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-33 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-33', 'unnamed-chunk-33');">Base R</button><button class="tablinksunnamed-chunk-33" onclick="javascript:openCode(event, 'option2unnamed-chunk-33', 'unnamed-chunk-33');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-33" class="tabcontentunnamed-chunk-33">
 
 ```r
 predict(janka_ls1, newdata=list(dens=c(22,35,65)))
@@ -638,7 +704,7 @@ predict(janka_ls1, newdata=list(dens=c(22,35,65)))
 ##         1         2         3 
 ##  104.6471  852.2339 2577.4342
 ```
-</div><div id="option2unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
+</div><div id="option2unnamed-chunk-33" class="tabcontentunnamed-chunk-33">
 
 ```r
 broom::augment(janka_ls1, 
@@ -654,7 +720,7 @@ broom::augment(janka_ls1,
 |   65| 2577.4342|
 
 </div>
-</div><script> javascript:hide('option2unnamed-chunk-30') </script></div></div></div>
+</div><script> javascript:hide('option2unnamed-chunk-33') </script></div></div></div>
 
 
 
@@ -722,6 +788,18 @@ emmeans::emmeans(janka_ls1,
 
 
 
+## Activity 4
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you write a summary of the **Results**? </div></div>
+
+
+<button id="displayTextunnamed-chunk-38" onclick="javascript:toggle('unnamed-chunk-38');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-38" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+
+We analysed the relationship between wood density and timber hardness on the janka scale with a linear regression model and found that wood density is an excellent predictor of timber harndess (R^2 = 0.95). With an average wood density of 45.7, this produced a timber hardness of 1469 [1407, 1531]  (mean [95% CI]) on the janka scale, and for every unit of density, timber hardness increases by 57.5 [52.9, 62.1] (t(34) = 25.24, p <0.001).
+</div></div></div>
 
 ## Summary
 

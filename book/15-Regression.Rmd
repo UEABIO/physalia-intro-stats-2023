@@ -229,7 +229,28 @@ In many ways the intercept makes more intuitive sense in a regression model than
 One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. This is known as mean-centered regression 
 ```
 
+### Activity 3:  Mean-centering
 
+```{task}
+Can you use your data wrangling skills to mean centre the density predictor and produce a more realistic model intercept?
+```
+
+
+```{solution}
+
+``{r}
+
+janka_centered <-  janka %>% 
+  mutate(centered_dens = dens - mean(dens))
+
+centered_model <- lm(hardness ~ dens, data = janka_centered) 
+
+summary(centered_model)
+
+``
+
+
+```
 
 #### Confidence intervals
 
@@ -431,11 +452,32 @@ performance::check_model(janka_ls1, check="homogeneity")
 
 ```
 
+#### Linearity
+
+```{solution, multCode = T}
+
+``{r, eval=T}
+plot(janka_ls1, which=c(1,3))
+
+``
+
+####
+
+``{r}
+
+performance::check_model(janka_ls1, check="linearity")
+
+``
+
+```
+
+
+It would appear that we have some curvature in our residuals - indicating that our relationship is not a perfectly linear one. We will revist this later. 
+
+
 #### Outliers
 
-Here we can see there is just one potential outlier. 
 
-What is it's positional order in the dataframe? `r fitb("32")`
 
 ```{solution, multCode = T}
 
@@ -451,6 +493,10 @@ performance::check_model(janka_ls1, check="outliers")
 ``
 
 ```
+
+Here we can see there is just one potential outlier. 
+
+What is it's positional order in the dataframe? `r fitb("32")`
 
 Check the data, does this make sense?
 
@@ -546,6 +592,18 @@ emmeans::emmeans(janka_ls1,
 `r unhide()`
 
 
+## Activity 4
+
+```{task}
+Can you write a summary of the **Results**?
+```
+
+
+```{solution}
+
+We analysed the relationship between wood density and timber hardness on the janka scale with a linear regression model and found that wood density is an excellent predictor of timber harndess (R^2 = 0.95). With an average wood density of 45.7, this produced a timber hardness of 1469 [1407, 1531]  (mean [95% CI]) on the janka scale, and for every unit of density, timber hardness increases by 57.5 [52.9, 62.1] (t(34) = 25.24, p <0.001).
+
+```
 
 ## Summary
 

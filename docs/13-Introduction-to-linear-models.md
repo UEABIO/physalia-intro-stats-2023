@@ -119,6 +119,9 @@ This simple model allows us to understand what the `lm()` function does.
 
 What we really want is a linear model that analyses the *difference* in average plant height as a function of pollination type. We can use the `lm()` function to fit this as a linear model as follows:
 
+<button id="displayTextunnamed-chunk-8" onclick="javascript:toggle('unnamed-chunk-8');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-8" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-8 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-8', 'unnamed-chunk-8');">Base R</button><button class="tablinksunnamed-chunk-8" onclick="javascript:openCode(event, 'option2unnamed-chunk-8', 'unnamed-chunk-8');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
 
 ```r
 lsmodel1 <- lm(height ~ type, data=darwin)
@@ -126,12 +129,35 @@ lsmodel1 <- lm(height ~ type, data=darwin)
 # note that the following is identical
 
 # lsmodel1 <- lm(height ~ 1 + type, data=darwin)
+
+summary(lsmodel1)
 ```
 
-Now the model formula contains the pollination type in addition to an intercept.
-
+```
+## 
+## Call:
+## lm(formula = height ~ type, data = darwin)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.1917 -1.0729  0.8042  1.9021  3.3083 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  20.1917     0.7592  26.596   <2e-16 ***
+## typeSelf     -2.6167     1.0737  -2.437   0.0214 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.94 on 28 degrees of freedom
+## Multiple R-squared:  0.175,	Adjusted R-squared:  0.1455 
+## F-statistic:  5.94 on 1 and 28 DF,  p-value: 0.02141
+```
+</div><div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
 
 ```r
+lsmodel1 <- lm(height ~ type, data=darwin)
+
 broom::tidy(lsmodel1)
 ```
 
@@ -143,7 +169,18 @@ broom::tidy(lsmodel1)
 |typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145|
 
 </div>
+</div><script> javascript:hide('option2unnamed-chunk-8') </script></div></div></div>
 
+
+```r
+lsmodel1 <- lm(height ~ type, data=darwin)
+
+# note that the following is identical
+
+# lsmodel1 <- lm(height ~ 1 + type, data=darwin)
+```
+
+Now the model formula contains the pollination type in addition to an intercept.
 
 Some things to notice about the above:
 
@@ -415,117 +452,9 @@ significance.</p>
 
 Because of this pooled variance, there is an assumption that variance is equal across the groups, this and other assumptions of the linear model should be checked. We cannot trust our results if the assumptions of the model are not adequately met. 
 
-## Assumption checking
-
-So now we have been through the main parts of a linear model analysis, we have results and inferences. But we need to check whether the assumptions of the model are adequately met so that we know whether our analysis can be trusted. 
-
-In this first part we are going to check two of our assumptions: 
-
-1) that the residual/unexplained variance in our data is approximately *normally distributed*.
-
-2) that the residual/unexplained variance is approximately *equal* between our groups
-
-Residuals are the differences between the observed values and the fitted values produced by the model - in this case the heights of the plants against the treatment means. The assumption of a normal distribution applies because the linear model uses this to calculate the standard errors (and therefore confidence intervals). The assumption of equal variance applies because of this pooled variance approach (e.g. we have two treatments with 15 replicates - but by pooling the variance across treatments we have a sample size of 30).
-
-Several functions exist to check assumptions of linear models, and the easiest way to do this is to make graphs. We can do this in several ways, in base R with the `plot()` function, and by using the `performance::check_model()` function. 
-
-<button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">Show Solution</button>
-
-<div id="toggleTextunnamed-chunk-23" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-23 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-23', 'unnamed-chunk-23');">Base R</button><button class="tablinksunnamed-chunk-23" onclick="javascript:openCode(event, 'option2unnamed-chunk-23', 'unnamed-chunk-23');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
-
-```r
-performance::check_model(lsmodel1)
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-23" class="tabcontentunnamed-chunk-23">
-
-```r
-plot(lsmodel1)
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-2.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-3.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-4.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-23') </script></div></div></div>
-
-#### Normal distribution
-
-
-```r
-performance::check_model(lsmodel1, check=c("normality","qq"))
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
-
-
-```r
-plot(lsmodel1, which=c(2,2))
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" />
-
-#### What is a Quantile-Quantile (QQ) plot?
-
-A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.
-
-Watch this video to see [QQ plots explained](https://www.youtube.com/watch?v=okjYjClSjOg)
-
-<div class="figure" style="text-align: center">
-<img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-26)Examples of qqplots with different deviations from a normal distribution</p>
-</div>
-
-In our example we can see that *most* of our residuals can be explained by a normal distribution, except at the extreme low end of our data. This is not surprising, as we already identified some potential outliers. 
-
-So the fit is not perfect, but it is also not terrible! 
-
-#### Equal variance
-
-
-```r
-performance::check_model(lsmodel1, check="homogeneity")
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" />
-
-
-```r
-plot(lsmodel1, which=c(1,3))
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-28-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-28-2.png" width="100%" style="display: block; margin: auto;" />
-
-In order to assess if variances are equal we can plot the residuals (variance) of our data against the fitted (predicted) values. If the residuals were zero, this would mean there is no error, and our data exactly matches our estimates. In reality, there will always be residual error, but as long as it is evenly distributed between treatments this is ok. 
-
-The `check_models` plot provides what we call 'standardized residuals' where we divide the residual error by the standard deviation. 
-
-In this instance we can see that the higher fitted values (Cross treatment) appears to be more variable than the lower fitted values. Again, this is not too bad, but not perfect. This is probably being influence at least partially by the potential outliers. 
-
-#### Outliers
-
-We have talked a lot about the potential effect of outliers, we can see that they are potentially affecting our estimates of error/variance. However, we should also check how much of an effect they might be having on the model estimates (means). This is where formal outlier tests are useful. 
-
-
-```r
-performance::check_model(lsmodel1, check="outliers")
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;" />
-
-
-
-```r
-plot(lsmodel1, which=c(4,4))
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;" />
-
-The value which the data points are being measured against is called Cook's distance. This is a measure of how much 'leverage' a single data point is exerting on the model, if it is too high, it may be having an outsized effect on the estimates. The `check_model()` function gives contours to indicate whether data points fall inside or outside the margins for affecting fit, but a rough estimate for an acceptable Cook's Distance is either $\frac{4}{N}$ or $\frac{4}{df}$, but you are unlikely to have to calculate this by hand. 
-
-
-
 ## Summary
 
-So what can we determine from this analysis? Our model is not perfect, however it is reasonably good. However, we have not addressed an important part of our experimental design yet. The fact that the plants are paired, so in this example we have basically carried out a Student's t-test, not a paired t-test. Later we will add pair as another explanatory variable and see how this affects our model. 
+However, we have not addressed an important part of our experimental design yet. The fact that the plants are paired, so in this example we have basically carried out a Student's t-test, not a paired t-test. Later we will add pair as another explanatory variable and see how this affects our model. 
 
 So remember a linear model sets one factor level as the 'intercept' estimates its mean, then draws a line from the first treatment to the second treatment, the slope of the line is the difference in means between the two treatments. 
 
@@ -547,5 +476,251 @@ darwin %>%
   stat_summary(fun.y = mean, geom = "crossbar", width = 0.2)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+
+# Assumption checking
+
+After conducting a linear model analysis, we often find ourselves with results and inferences. However, before we can fully trust our analysis, it’s essential to check whether the underlying assumptions of the model are adequately met. In this chapter, we will focus on two critical assumptions: the normality of residuals and the homogeneity of variance. We will also discuss the impact of outliers on our model and the formal tests available for these assumptions.
+
+## Assumption 1: Normality of Residuals
+
+### Understanding Residuals
+
+Residuals are the differences between observed values and the fitted values produced by the model. In our case, this involves analyzing plant heights against treatment means. The normality of residuals is crucial because the linear model relies on this assumption to compute standard errors, which in turn affects confidence intervals and hypothesis testing.
+
+### Graphical Checks for Normality
+
+To visually assess the normality of residuals, we can utilize various plotting functions in R. Two effective methods are:
+
+Quantile-Quantile (QQ) Plot: This plot compares the distribution of residuals to a theoretical normal distribution. If the residuals follow a normal distribution, they should approximately align along a diagonal line.
+
+<div class="tab"><button class="tablinksunnamed-chunk-24 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-24', 'unnamed-chunk-24');">Base R</button><button class="tablinksunnamed-chunk-24" onclick="javascript:openCode(event, 'option2unnamed-chunk-24', 'unnamed-chunk-24');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+
+```r
+plot(lsmodel1, which=c(2,2))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+
+```r
+performance::check_model(lsmodel1, check=c("normality","qq"),
+                         detrend = F)
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-24') </script>
+### Formal test of Normality
+
+<div class="tab"><button class="tablinksunnamed-chunk-25 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-25', 'unnamed-chunk-25');">Base R</button><button class="tablinksunnamed-chunk-25" onclick="javascript:openCode(event, 'option2unnamed-chunk-25', 'unnamed-chunk-25');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+
+```r
+shapiro.test(residuals(lsmodel1))
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuals(lsmodel1)
+## W = 0.83089, p-value = 0.0002531
+```
+</div><div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+
+```r
+performance::check_normality(lsmodel1)
+```
+
+```
+## Warning: Non-normality of residuals detected (p < .001).
+```
+</div><script> javascript:hide('option2unnamed-chunk-25') </script>
+
+
+
+## Assumption 2: Homogeneity of Variance
+
+### Assessing Equal Variance
+
+The assumption of homogeneity of variance (or homoscedasticity) states that the residual variance should be constant across all levels of the independent variable(s). This is important because linear models often pool variance across groups to make inferences.
+
+### Graphical Checks for Homogeneity
+
+To assess this assumption, we can plot the residuals against the fitted values:
+
+<div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+
+```r
+plot(lsmodel1, which=c(1,3))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-40-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+
+```r
+performance::check_model(lsmodel1, check=c("homogeneity"))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-26') </script>
+
+
+### Formal Tests for Homogeneity of Variance
+
+To formally test for homogeneity of variance, we can use:
+
+Breusch-Pagan Test: This test evaluates whether the variance of residuals is constant.
+
+<div class="tab"><button class="tablinksunnamed-chunk-27 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-27', 'unnamed-chunk-27');">Base R</button><button class="tablinksunnamed-chunk-27" onclick="javascript:openCode(event, 'option2unnamed-chunk-27', 'unnamed-chunk-27');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
+
+```r
+library(lmtest)
+
+bptest(lsmodel1, varformula = ~fitted.values(lsmodel1), studentize = F )
+```
+
+```
+## 
+## 	Breusch-Pagan test
+## 
+## data:  lsmodel1
+## BP = 3.9496, df = 1, p-value = 0.04688
+```
+</div><div id="option2unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
+
+```r
+performance::check_heteroscedasticity(lsmodel1)
+```
+
+```
+## Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.047).
+```
+</div><script> javascript:hide('option2unnamed-chunk-27') </script>
+
+## Assumption 3: Linearity
+
+Linear regression assumes a linear relationship between the predictor(s) and the response variable. If this assumption is violated, the model may produce biased or inaccurate predictions.
+
+### Graphical checks for linearity
+
+To assess this assumption, we can plot the residuals against the fitted values:
+
+<div class="tab"><button class="tablinksunnamed-chunk-28 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-28', 'unnamed-chunk-28');">Base R</button><button class="tablinksunnamed-chunk-28" onclick="javascript:openCode(event, 'option2unnamed-chunk-28', 'unnamed-chunk-28');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+
+```r
+plot(lsmodel1, which=c(1,3))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+
+```r
+performance::check_model(lsmodel1, check=c("linearity"))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-28') </script>
+
+Checking for linearity can be difficult when we only have two groups in our model:
+
+- **Limited Data Points**: With only two levels, you have a limited number of data points, which may not adequately capture the underlying relationship. This makes it hard to assess linearity visually or statistically.
+
+- **No Intermediate Values**: A binary predictor means there are no intermediate values to examine. This limits the ability to see a continuous trend or relationship.
+
+## Outliers and Their Impact
+
+Outliers can significantly affect the estimates of a model, influencing both residuals and overall model fit. Therefore, it’s essential to assess the presence and impact of outliers on our analysis.
+
+### Identifying Outliers
+
+To identify outliers, we can employ Cook's Distance, which measures the influence of each data point on the model fit. Large values of Cook's Distance suggest that a point may be having an outsized effect.
+
+<div class="tab"><button class="tablinksunnamed-chunk-29 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-29', 'unnamed-chunk-29');">Base R</button><button class="tablinksunnamed-chunk-29" onclick="javascript:openCode(event, 'option2unnamed-chunk-29', 'unnamed-chunk-29');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
+
+```r
+plot(lsmodel1, which=c(4,4))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
+
+```r
+performance::check_model(lsmodel1, check=c("outliers"))
+```
+
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-29') </script>
+
+### Formal Tests for Outliers
+
+
+```r
+performance::check_outliers(lsmodel1)
+```
+
+```
+## OK: No outliers detected.
+## - Based on the following method and threshold: cook (0.5).
+## - For variable: (Whole model)
+```
+
+
+## Multicollinearity
+
+Check: Assess whether predictors are highly correlated with each other, which can affect the stability of coefficient estimates. In this model we only have a single predictor, so this test is not required - we will revisit this with more complex models later. 
+
+<div class="tab"><button class="tablinksunnamed-chunk-31 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-31', 'unnamed-chunk-31');">Base R</button><button class="tablinksunnamed-chunk-31" onclick="javascript:openCode(event, 'option2unnamed-chunk-31', 'unnamed-chunk-31');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-31" class="tabcontentunnamed-chunk-31">
+
+```r
+library(car)
+vif(lsmodel1)
+```
+</div><div id="option2unnamed-chunk-31" class="tabcontentunnamed-chunk-31">
+
+```r
+performance::check_model(lsmodel1, check=c("vif"))
+```
+</div><script> javascript:hide('option2unnamed-chunk-31') </script>
+
+
+## Summary
+
+So what can we determine from this analysis? Our model is not perfect, however it is reasonably good. Many of the statistical violations are likely because of the small sample size - and collecting more data might be a good idea.
+
+Linear models are powerful tools for analyzing relationships between variables, but their validity hinges on several key assumptions. Checking these assumptions is crucial to ensure the reliability and interpretability of the model's results.
+
+By systematically checking these assumptions, researchers can ensure that their linear models are robust, reliable, and capable of providing meaningful insights into the relationships between variables. Ignoring these checks can lead to flawed analyses and misguided conclusions, underscoring the necessity of thorough model evaluation.
+
+In this chapter, we covered essential steps for checking linear model assumptions, including:
+
+- Assessing the normality of residuals through QQ plots and formal tests (e.g., Shapiro-Wilk).
+
+- Evaluating homogeneity of variance using residual plots and formal tests (e.g., Breusch-Pagan).
+
+- Testing for model linearity
+
+- Identifying outliers through Cook's Distance.
+
+We can check all our model assumptions at once, as well as looking at individual plots as shown above. 
+
+<div class="tab"><button class="tablinksunnamed-chunk-32 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-32', 'unnamed-chunk-32');">Base R</button><button class="tablinksunnamed-chunk-32" onclick="javascript:openCode(event, 'option2unnamed-chunk-32', 'unnamed-chunk-32');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
+
+```r
+plot(lsmodel1)
+```
+</div><div id="option2unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
+
+```r
+performance::check_model(lsmodel1, detrend = F)
+```
+</div><script> javascript:hide('option2unnamed-chunk-32') </script>
+
+While graphical checks provide a valuable first step, complementing them with formal tests strengthens our analysis. 
+
+Conversely when sample sizes are very low or very large we can often see deviations from normality through formal tests which we might decide to tolerate based on on the graphical checks of model fit. 
+
+By thoroughly checking these assumptions, we can ensure the reliability of our linear model analysis and make informed decisions based on the results obtained.
+
 
