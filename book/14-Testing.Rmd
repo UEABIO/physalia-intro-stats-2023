@@ -199,6 +199,8 @@ We previously compared the difference in plant heights by subtracting the differ
 
 ```{solution}
 
+``{r}
+
 darwin_wide <- darwin %>% 
   # pivot/reshape the data from long to wide format
   pivot_wider(names_from = type, values_from = height) %>% 
@@ -208,6 +210,7 @@ darwin_wide <- darwin %>%
 wide_model <- lm(difference ~ 1, data = darwin_wide)
 
 summary(wide_model)
+``
 
 ```
 

@@ -643,6 +643,14 @@ plot_1 + plot_2 + plot_3
 
 We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
 
+### What is an outlier?
+
+Outliers are data points that deviate significantly from other observations in a dataset. They can be identified using various methods, such as the Interquartile Range (IQR), which defines outliers as values lying outside 1.5 times the IQR above the third quartile or below the first quartile. 
+
+Other definitions may include standard deviations from the mean or z-scores.
+
+However, it's crucial to approach outliers with caution. Removing them without context can lead to the loss of valuable information, as these points might reveal important insights or reflect underlying trends. Additionally, outliers can change when data transformations are applied or when models are fitted. Therefore, a thoughtful analysis of outliers is essential, considering their potential impact on conclusions and the overall integrity of the data.
+
 
 ## Categorical and continuous variables
 
@@ -747,6 +755,18 @@ While the Gentoo density plot appears to show two peaks, our qqplot indicates th
 
 ```
 
+If we wanted to we could also apply more formal tests of normality here: 
+
+```{r}
+
+penguins %>% 
+  group_by(species) %>% 
+  rstatix::shapiro_test(body_mass_g)
+
+```
+
+What's interesting to note here is that the qqplots were very similar to each other, and Shapiro's W is basically the same for all three species. Therefore the difference comes down to sample size. There are over twice as many Adelie penguins as Chinstrap's - so the power to detect small deviations from normality is higher. 
+
 
 ```{r}
 penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) + 
@@ -759,6 +779,15 @@ penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) +
 
 ```
 
+If we take important subpopulations into account such as species and sex (these penguins have sexual dimorphism) - we see no evidence for any deviation from normality (despite the unexplained peaks we can still observe).
+
+```{r}
+penguins %>% 
+    group_by(species,sex) %>% 
+  drop_na()%>% 
+  shapiro_test(body_mass_g)
+
+```
 
 
 ## Activity 2: Test yourself

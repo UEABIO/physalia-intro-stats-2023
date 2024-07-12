@@ -13,10 +13,10 @@ fig:unnamed-chunk-27
 fig:unnamed-chunk-30
 fig:unnamed-chunk-38
 fig:unnamed-chunk-40
-fig:unnamed-chunk-48
-fig:unnamed-chunk-51
-fig:unnamed-chunk-52
-fig:unnamed-chunk-56
+fig:unnamed-chunk-50
+fig:unnamed-chunk-53
+fig:unnamed-chunk-54
+fig:unnamed-chunk-58
 tab:unnamed-chunk-22
 fig:unnamed-chunk-28
 fig:unnamed-chunk-29
@@ -26,12 +26,10 @@ fig:unnamed-chunk-43
 fig:unnamed-chunk-44
 tab:unnamed-chunk-26
 tab:unnamed-chunk-53
-fig:unnamed-chunk-54
 fig:unnamed-chunk-11
 fig:unnamed-chunk-13
 fig:unnamed-chunk-15
-fig:unnamed-chunk-50
-fig:unnamed-chunk-53
+fig:unnamed-chunk-52
 learning-outcomes
 packages
 loading-data
@@ -147,6 +145,7 @@ variation
 interquartile-range
 standard-deviation
 visualising-dispersion
+what-is-an-outlier
 categorical-and-continuous-variables
 activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species
 ggridges
@@ -287,7 +286,6 @@ generalized-linear-models
 motivation
 generalised-linear-models-glms
 section-2
-sqrt-transformation
 workflow-for-fitting-a-glm
 poisson-regression-for-count-data-or-rate-data
 example-cuckoos
@@ -352,7 +350,6 @@ reporting-mixed-model-results
 tables
 figures
 write-ups
-worked-example-4
 summary-11
 mixed-model-extensions
 practical-problems

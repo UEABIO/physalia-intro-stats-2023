@@ -791,6 +791,14 @@ plot_1 + plot_2 + plot_3
 
 We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can *and should* generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables. 
 
+### What is an outlier?
+
+Outliers are data points that deviate significantly from other observations in a dataset. They can be identified using various methods, such as the Interquartile Range (IQR), which defines outliers as values lying outside 1.5 times the IQR above the third quartile or below the first quartile. 
+
+Other definitions may include standard deviations from the mean or z-scores.
+
+However, it's crucial to approach outliers with caution. Removing them without context can lead to the loss of valuable information, as these points might reveal important insights or reflect underlying trends. Additionally, outliers can change when data transformations are applied or when models are fitted. Therefore, a thoughtful analysis of outliers is essential, considering their potential impact on conclusions and the overall integrity of the data.
+
 
 ## Categorical and continuous variables
 
@@ -917,6 +925,27 @@ penguins %>%
 While the Gentoo density plot appears to show two peaks, our qqplot indicates this does not deviate from what me might expect from a normal distribution. But we could still investigate whether there are "two populations" here. 
 </div></div></div>
 
+If we wanted to we could also apply more formal tests of normality here: 
+
+
+```r
+penguins %>% 
+  group_by(species) %>% 
+  rstatix::shapiro_test(body_mass_g)
+```
+
+<div class="kable-table">
+
+|species   |variable    | statistic|         p|
+|:---------|:-----------|---------:|---------:|
+|Adelie    |body_mass_g | 0.9807079| 0.0323970|
+|Chinstrap |body_mass_g | 0.9844938| 0.5605082|
+|Gentoo    |body_mass_g | 0.9859276| 0.2336165|
+
+</div>
+
+What's interesting to note here is that the qqplots were very similar to each other, and Shapiro's W is basically the same for all three species. Therefore the difference comes down to sample size. There are over twice as many Adelie penguins as Chinstrap's - so the power to detect small deviations from normality is higher. 
+
 
 
 ```r
@@ -927,12 +956,34 @@ penguins %>% drop_na %>% ggplot(aes(x = body_mass_g, y = species)) +
                         bandwidth = 175)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 # try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram
 ```
 
+If we take important subpopulations into account such as species and sex (these penguins have sexual dimorphism) - we see no evidence for any deviation from normality (despite the unexplained peaks we can still observe).
+
+
+```r
+penguins %>% 
+    group_by(species,sex) %>% 
+  drop_na()%>% 
+  shapiro_test(body_mass_g)
+```
+
+<div class="kable-table">
+
+|species   |sex    |variable    | statistic|         p|
+|:---------|:------|:-----------|---------:|---------:|
+|Adelie    |FEMALE |body_mass_g | 0.9465622| 0.6983379|
+|Adelie    |MALE   |body_mass_g | 0.9121815| 0.4509030|
+|Chinstrap |FEMALE |body_mass_g | 0.9135586| 0.4210624|
+|Chinstrap |MALE   |body_mass_g | 0.9377618| 0.6186508|
+|Gentoo    |FEMALE |body_mass_g | 0.9622138| 0.7928330|
+|Gentoo    |MALE   |body_mass_g | 1.0000000| 1.0000000|
+
+</div>
 
 
 ## Activity 2: Test yourself
@@ -976,9 +1027,9 @@ Note how we are able to understand our data better, by spending time making data
 
 * $s=\sqrt{Variance}$
 
-<button id="displayTextunnamed-chunk-45" onclick="javascript:toggle('unnamed-chunk-45');">Show Solution</button>
+<button id="displayTextunnamed-chunk-47" onclick="javascript:toggle('unnamed-chunk-47');">Show Solution</button>
 
-<div id="toggleTextunnamed-chunk-45" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+<div id="toggleTextunnamed-chunk-47" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
 ```r
 mean <- penguins %>% 
@@ -1060,7 +1111,7 @@ This tells us two features of the association. It's *sign* and *magnitude*. The 
 
 <div class="figure" style="text-align: center">
 <img src="images/correlation_examples.png" alt="Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-48)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
+<p class="caption">(\#fig:unnamed-chunk-50)Different relationships between two numeric variables. Each number represents the Pearson's correlation coefficient of each association</p>
 </div>
 
 * Because Pearson's coefficient is designed to summarise the strength of a linear relationship, this can be misleading if the relationship is *not linear* e.g. curved or humped. This is why it's always a good idea to plot the relationship *first* (see above).
@@ -1141,8 +1192,8 @@ length_depth_scatterplot
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-51-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-51)A scatter plot of bill depth against bill length in mm</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-53-1.png" alt="A scatter plot of bill depth against bill length in mm" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-53)A scatter plot of bill depth against bill length in mm</p>
 </div>
 
 > **Note - Remember there are a number of different options available when constructing a plot including changing alpha to produce transparency if plots are lying on top of each other, colours (and shapes) to separate subgroups and ways to present third numerical variables such as setting aes(size=body_mass_g). 
@@ -1179,8 +1230,8 @@ bill_length_marginal+length_depth_scatterplot+bill_depth_marginal+ # order of pl
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-52-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-52)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" alt="Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-54)Using patchwork we can easily arrange extra plots to fit as marginals - these could be boxplots, histograms or density plots</p>
 </div>
 
 These efforts allow us to capture details about the spread and distribution of both variables **and** how they relate to each other. This figure provides us with insights into
@@ -1234,7 +1285,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is fine, but it looks a bit odd, because the bars expand to fill the available space on the category axis. Luckily there is an advanced version of the postion_dodge argument. 
 
@@ -1248,7 +1299,7 @@ penguins%>%
   coord_flip()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" />
 > **Note the default for bar charts would have been a stacked option, but we have already seen how that can produce graphs that are difficult to read. 
 
 An alternative approach would be to look at the 'relative proportions' of each population in our overall dataset. Using the same methods as we used previously when looking at single variables. Let's add in a few aesthetic tweaks to improve the look. 
@@ -1278,8 +1329,8 @@ penguins %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-56-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-56)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-1.png" alt="A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-58)A dodged barplot showing the numbers and relative proportions of data observations recorded by penguin species and location</p>
 </div>
 
 ## Associations between Categorical-numerical variables
@@ -1294,7 +1345,7 @@ penguins %>%
          x= "Species")
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -1308,7 +1359,7 @@ penguins %>%
              ncol=1)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-60-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Avoiding Bias
 
@@ -1338,7 +1389,7 @@ penguins %>%
   GGally::ggpairs()
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-61-1.png" width="100%" style="display: block; margin: auto;" />
 
 Here for example we can see that several morphological features are highly correlated in size, not unsurprising - but we should therefore think carefully about using both body mass and flipper length as predictor variables in the same model. There are formal checks of multicollinearity we can also apply later. 
 
@@ -1347,7 +1398,7 @@ penguins %>%
   GGally::ggpairs(columns = 10:12, ggplot2::aes(colour = species))
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-60-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-62-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Omitted variable bias
 
@@ -1365,7 +1416,7 @@ Failure to account for complex interactions can lead to misleading insights abou
 Remember when we first correlated bill length and bill depth against each other we found an overall negative correlation of -0.22. However, this is because of a confounding variable we had not accounted for - species. 
 
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-62-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-64-1.png" width="100%" style="display: block; margin: auto;" />
 
 This is another example of why carefully studying your data - and carefully considering those variables which are likely to affect each other are studied or controlled for. It is an entirely reasonable hypothesis that different penguin species might have different bill shapes that might make an overall trend misleading. We can easily check the effect of a categoricial variable on our two numeric variables by assigning the aesthetic colour. 
 
@@ -1390,7 +1441,7 @@ length_depth_scatterplot_2 <- ggplot(penguins, aes(x= culmen_length_mm,
 length_depth_scatterplot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 bill_depth_marginal_2 <- penguins %>% 
@@ -1421,7 +1472,7 @@ bill_length_marginal_2+length_depth_scatterplot_2+bill_depth_marginal_2+ # order
   plot_layout(design=layout2) # uses the layout argument defined above to arrange the size and position of plots
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-63-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-65-2.png" width="100%" style="display: block; margin: auto;" />
 
 We now clearly see a striking reversal of our previous trend, that in fact *within* each species of penguin there is an overall positive association between bill length and depth. 
 
@@ -1471,7 +1522,7 @@ ggplot(aes(x= culmen_length_mm,
          y="Bill depth (mm)")
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-67-1.png" width="100%" style="display: block; margin: auto;" />
 
 2. Use facets to construct multipanel plots according to the values of a categorical variable
 
@@ -1495,7 +1546,7 @@ ggplot(aes(x= culmen_length_mm,
   facet_wrap(~species, ncol=1) # specify plots are stacked split by species
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;" />
 
 Here we can see that the trends are the same across the different penguin sexes. Although by comparing the slopes of the lines, lengths of the lines and amounts of overlap we can make insights into how "sexually dimorphic" these different species are e.g. in terms of beak morphology do some species show greater differences between males and females than others?
 

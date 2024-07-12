@@ -143,8 +143,7 @@
 <li><a class="" href="types-of-random-effects.html"><span class="header-section-number">23</span> Types of Random Effects</a></li>
 <li><a class="active" href="worked-example-3---sleep-study.html"><span class="header-section-number">24</span> Worked Example 3 - Sleep study</a></li>
 <li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">25</span> Reporting Mixed Model Results</a></li>
-<li><a class="" href="worked-example-4.html"><span class="header-section-number">26</span> Worked Example 4</a></li>
-<li><a class="" href="summary-11.html"><span class="header-section-number">27</span> Summary</a></li>
+<li><a class="" href="summary-11.html"><span class="header-section-number">26</span> Summary</a></li>
 </ul>
 
         <div class="book-extra">
@@ -159,7 +158,7 @@
 <p>In this chapter, we'll be working with some real data from a study looking at the effects of sleep deprivation on psychomotor performance <span class="citation">Belenky et al. (<a href="summary-11.html#ref-belenky_2003">2003</a>)</span>. The dataset <code>sleepstudy</code> is built-in to the lme4 package.</p>
 <p>Access the documentation by typing <code>??sleepstudy</code> in the console</p>
 <p>A good way to start every analysis is to plot the data.</p>
-<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">sleepstudy</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Days</span>, y <span class="op">=</span> <span class="va">Reaction</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="op">+</span></span>
@@ -187,7 +186,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sleep2</span> <span class="op">&lt;-</span> <span class="va">sleepstudy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">Days</span> <span class="op">&gt;=</span> <span class="fl">2L</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>days_deprived <span class="op">=</span> <span class="va">Days</span> <span class="op">-</span> <span class="fl">2L</span><span class="op">)</span></span>
@@ -270,7 +269,7 @@ Solution
 </tbody>
 </table></div>
 <p>The most reasonable model is Model 2 - different patients may have different initial reaction times &amp; they may respond to sleep deprivation differently.</p>
-<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sleep_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">days_deprived</span> <span class="op">+</span> <span class="op">(</span><span class="va">days_deprived</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleep2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">sleep_model</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
@@ -302,7 +301,7 @@ Solution
 ##             (Intr)
 ## days_deprvd -0.062</code></pre>
 <p>We can compare this against a simpler intercept model to check this fit</p>
-<div class="sourceCode" id="cb445"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sleep_model_intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">days_deprived</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleep2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">sleep_model_intercept</span>, <span class="va">sleep_model</span><span class="op">)</span></span></code></pre></div>

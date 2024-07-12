@@ -143,8 +143,7 @@
 <li><a class="" href="types-of-random-effects.html"><span class="header-section-number">23</span> Types of Random Effects</a></li>
 <li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">24</span> Worked Example 3 - Sleep study</a></li>
 <li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">25</span> Reporting Mixed Model Results</a></li>
-<li><a class="" href="worked-example-4.html"><span class="header-section-number">26</span> Worked Example 4</a></li>
-<li><a class="" href="summary-11.html"><span class="header-section-number">27</span> Summary</a></li>
+<li><a class="" href="summary-11.html"><span class="header-section-number">26</span> Summary</a></li>
 </ul>
 
         <div class="book-extra">
@@ -1189,6 +1188,14 @@ Figure 5.3: Visualising dispersion with different figures
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can <em>and should</em> generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables.</p>
 </div>
+<div id="what-is-an-outlier" class="section level3" number="5.5.1">
+<h3>
+<span class="header-section-number">5.5.1</span> What is an outlier?<a class="anchor" aria-label="anchor" href="#what-is-an-outlier"><i class="fas fa-link"></i></a>
+</h3>
+<p>Outliers are data points that deviate significantly from other observations in a dataset. They can be identified using various methods, such as the Interquartile Range (IQR), which defines outliers as values lying outside 1.5 times the IQR above the third quartile or below the first quartile.</p>
+<p>Other definitions may include standard deviations from the mean or z-scores.</p>
+<p>However, it's crucial to approach outliers with caution. Removing them without context can lead to the loss of valuable information, as these points might reveal important insights or reflect underlying trends. Additionally, outliers can change when data transformations are applied or when models are fitted. Therefore, a thoughtful analysis of outliers is essential, considering their potential impact on conclusions and the overall integrity of the data.</p>
+</div>
 </div>
 <div id="categorical-and-continuous-variables" class="section level2" number="5.6">
 <h2>
@@ -1319,15 +1326,112 @@ Solution
 </div>
 </div>
 </div>
+<p>If we wanted to we could also apply more formal tests of normality here:</p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="left">variable</th>
+<th align="right">statistic</th>
+<th align="right">p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9807079</td>
+<td align="right">0.0323970</td>
+</tr>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9844938</td>
+<td align="right">0.5605082</td>
+</tr>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9859276</td>
+<td align="right">0.2336165</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>What's interesting to note here is that the qqplots were very similar to each other, and Shapiro's W is basically the same for all three species. Therefore the difference comes down to sample size. There are over twice as many Adelie penguins as Chinstrap's - so the power to detect small deviations from normality is higher.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,</span>
 <span>                        colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
 <span>                        alpha <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>                        bandwidth <span class="op">=</span> <span class="fl">175</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-44-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram</span></span></code></pre></div>
+<p>If we take important subpopulations into account such as species and sex (these penguins have sexual dimorphism) - we see no evidence for any deviation from normality (despite the unexplained peaks we can still observe).</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>,<span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th align="left">species</th>
+<th align="left">sex</th>
+<th align="left">variable</th>
+<th align="right">statistic</th>
+<th align="right">p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Adelie</td>
+<td align="left">FEMALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9465622</td>
+<td align="right">0.6983379</td>
+</tr>
+<tr class="even">
+<td align="left">Adelie</td>
+<td align="left">MALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9121815</td>
+<td align="right">0.4509030</td>
+</tr>
+<tr class="odd">
+<td align="left">Chinstrap</td>
+<td align="left">FEMALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9135586</td>
+<td align="right">0.4210624</td>
+</tr>
+<tr class="even">
+<td align="left">Chinstrap</td>
+<td align="left">MALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9377618</td>
+<td align="right">0.6186508</td>
+</tr>
+<tr class="odd">
+<td align="left">Gentoo</td>
+<td align="left">FEMALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">0.9622138</td>
+<td align="right">0.7928330</td>
+</tr>
+<tr class="even">
+<td align="left">Gentoo</td>
+<td align="left">MALE</td>
+<td align="left">body_mass_g</td>
+<td align="right">1.0000000</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 <div id="activity-2-test-yourself" class="section level2" number="5.9">
 <h2>
@@ -1357,16 +1461,16 @@ What data insights have you made?
 <li><p>Variance = SS/df</p></li>
 <li><p><span class="math inline">\(s=\sqrt{Variance}\)</span></p></li>
 </ul>
-<button id="displayTextunnamed-chunk-45" onclick="javascript:toggle('unnamed-chunk-45');">
+<button id="displayTextunnamed-chunk-47" onclick="javascript:toggle('unnamed-chunk-47');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-45" style="display: none">
+<div id="toggleTextunnamed-chunk-47" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1604,7 +1708,9 @@ $( document ).ready(function() {
 </ul>
 </li>
 <li><a class="nav-link" href="#categorical-variables"><span class="header-section-number">5.4</span> Categorical variables</a></li>
-<li><a class="nav-link" href="#continuous-variables"><span class="header-section-number">5.5</span> Continuous variables</a></li>
+<li>
+<a class="nav-link" href="#continuous-variables"><span class="header-section-number">5.5</span> Continuous variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#what-is-an-outlier"><span class="header-section-number">5.5.1</span> What is an outlier?</a></li></ul>
+</li>
 <li><a class="nav-link" href="#categorical-and-continuous-variables"><span class="header-section-number">5.6</span> Categorical and continuous variables</a></li>
 <li><a class="nav-link" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><span class="header-section-number">5.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species</a></li>
 <li><a class="nav-link" href="#ggridges"><span class="header-section-number">5.8</span> GGridges</a></li>

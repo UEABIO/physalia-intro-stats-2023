@@ -1933,38 +1933,6 @@ The mean reaction time at Day 0 was  267.97ms (95% CI[250.53, 285.41], t(17) = 3
 These 95% Confidence Intervals (CIs) and p-values were computed using a satterthwaite approximation of the degrees of freedom and a t-distribution approximation.
 
 
-# Worked Example 4
-
-A microbiologist wishes to know which of four growth media is best for rearing large populations of anthrax, quickly. However, this poorly funded scientist does not own a large enough incubator in which to grow lots of replicate populations. Instead he requests space in five different incubators owned by other, better-funded researchers. Each incubator just has space for four bottles of medium. Our scientist allocates each growth medium to one bottle per incubator at random, inoculates with anthrax then monitors population growth rate.
-
-     
-<img src="images/bacCabinets.png" alt="Schematic for bacterial growth example" width="50%" style="display: block; margin: auto;" />
-     
-The data are available here: 
-
-
-
-
-
-```{=html}
-<a href="https://raw.githubusercontent.com/UEABIO/intro-mixed-models/main/book/files/bacCabinets.rds">
-<button class="btn btn-success"><i class="fa fa-save"></i> Download bacteria data</button>
-</a>
-```
-
-
-
-```r
-bacteria <- readRDS("bacCabinets.rds")
-```
-
-<div class="try">
-<p>Can you produce a suitable linear mixed model analysis for this data,
-to answer the question “Which of four growth media is best for rearing
-large populations of anthrax?”</p>
-</div>
-
-
 
 # Summary
 

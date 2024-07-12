@@ -284,6 +284,7 @@ We previously compared the difference in plant heights by subtracting the differ
 
 <div id="toggleTextunnamed-chunk-9" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
 
+```r
 darwin_wide <- darwin %>% 
   # pivot/reshape the data from long to wide format
   pivot_wider(names_from = type, values_from = height) %>% 
@@ -293,6 +294,25 @@ darwin_wide <- darwin %>%
 wide_model <- lm(difference ~ 1, data = darwin_wide)
 
 summary(wide_model)
+```
+
+```
+## 
+## Call:
+## lm(formula = difference ~ 1, data = darwin_wide)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -10.9917  -1.2417   0.3833   3.0083   6.7583 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)  
+## (Intercept)    2.617      1.218   2.148   0.0497 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.718 on 14 degrees of freedom
+```
 </div></div></div>
 
 For completeness let's generate the confidence intervals for the *paired t*-test and compare them to our *unpaired t*-test. 

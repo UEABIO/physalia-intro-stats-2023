@@ -143,8 +143,7 @@
 <li><a class="" href="types-of-random-effects.html"><span class="header-section-number">23</span> Types of Random Effects</a></li>
 <li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">24</span> Worked Example 3 - Sleep study</a></li>
 <li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">25</span> Reporting Mixed Model Results</a></li>
-<li><a class="" href="worked-example-4.html"><span class="header-section-number">26</span> Worked Example 4</a></li>
-<li><a class="" href="summary-11.html"><span class="header-section-number">27</span> Summary</a></li>
+<li><a class="" href="summary-11.html"><span class="header-section-number">26</span> Summary</a></li>
 </ul>
 
         <div class="book-extra">
@@ -196,12 +195,12 @@ Y  &amp; \sim \mathcal{Bern}(p)\\
 \]</span></p>
 <p>Again, note that we are still "only" fitting straight lines through our data, but this time in the log odds space.
 As a shorthand notation we write <span class="math inline">\(\log\left(\frac{p}{1 - p}\right) = \text{logit}(p) = \beta_0 + \beta_1 X\)</span>.</p>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We can also re-arrange the above equation so that we get an expression for <span class="math inline">\(p\)</span></p>
 <p><span class="math display">\[
 p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 \]</span></p>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Note how <span class="math inline">\(p\)</span> can only vary between 0 and 1.</p>
 <p>To implement the logistic regression model in R, we choose <code>family=binomial(link=logit)</code> (the Bernoulli distribution is a special case of the Binomial distribution).</p>
 <pre><code>glm(response ~ explanatory, family=binomial(link=logit))</code></pre>
@@ -214,7 +213,7 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/Challenger.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download Challenger data as csv</button>
 </a>
-<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">challenger</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -273,31 +272,31 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 </ul>
 <p>It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles.
 One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights <strong>where a failure had occurred</strong></p>
-<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Temperature on flight launches where an O-ring incident occurred"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.</p>
 <p>However when we compare this to the full data that was available a very different picture emerges.</p>
-<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, </span>
 <span>           x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">"lm"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"All launch data"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When we include the flights without incident <em>and</em> those with incident, we can see that there is a very clear relationship between temperature and the risk of an o-ring failure. It has been argued that the clear presentation of this data should have allowed even the casual observer to determine the high risk of disaster.</p>
 <p>However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range).</p>
 <p>We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of <strong>having a flight with o-ring failure vs. no failure</strong>. Then we should implement a GLM with a Binomial distribution.</p>
 <p>We can use dplyr to generate a binary column of no incident '0' and fail '1' for anything &gt;0.</p>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">challenger</span> <span class="op">&lt;-</span> <span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>oring_binary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">==</span><span class="st">'0'</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Fitting a binary GLM</p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></span>
 <span><span class="va">binary_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
@@ -351,7 +350,7 @@ Y \sim Bern(p)
 \log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
 \]</span></p>
 <p>Which in R will look like this:</p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Intercept = <span class="math inline">\(\beta_{0}\)</span> = 23.77</li>
@@ -425,25 +424,25 @@ Y \sim Bern(p)
 <span class="header-section-number">18.1.1</span> Activity 3: Make predictions<a class="anchor" aria-label="anchor" href="#activity-3-make-predictions"><i class="fas fa-link"></i></a>
 </h3>
 <p>Can you use our prediction functions <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> or <code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code> to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?</p>
-<button id="displayTextunnamed-chunk-46" onclick="javascript:toggle('unnamed-chunk-46');">
+<button id="displayTextunnamed-chunk-44" onclick="javascript:toggle('unnamed-chunk-44');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-46" style="display: none">
+<div id="toggleTextunnamed-chunk-44" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <div class="tab">
-<button class="tablinksunnamed-chunk-46 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-46', 'unnamed-chunk-46');">
+<button class="tablinksunnamed-chunk-44 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-44', 'unnamed-chunk-44');">
 Base R
 </button>
-<button class="tablinksunnamed-chunk-46" onclick="javascript:openCode(event, 'option2unnamed-chunk-46', 'unnamed-chunk-46');">
+<button class="tablinksunnamed-chunk-44" onclick="javascript:openCode(event, 'option2unnamed-chunk-44', 'unnamed-chunk-44');">
 <tt>tidyverse</tt>
 </button>
 </div>
-<div id="option1unnamed-chunk-46" class="tabcontentunnamed-chunk-46">
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<div id="option1unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">binary_model</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ## 0.394769696 0.130776531 0.178373050 0.238538593 0.311308842 0.067388639 
@@ -454,8 +453,8 @@ Base R
 ##          19          20          21          22          23 
 ## 0.016393905 0.005516836 0.023485304 0.016393905 0.924582363</code></pre>
 </div>
-<div id="option2unnamed-chunk-46" class="tabcontentunnamed-chunk-46">
-<div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
+<div id="option2unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>               type.predict <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
@@ -715,7 +714,7 @@ Base R
 </table></div>
 </div>
 </div>
-<script> javascript:hide('option2unnamed-chunk-46') </script>
+<script> javascript:hide('option2unnamed-chunk-44') </script>
 </div>
 </div>
 </div>
@@ -726,7 +725,7 @@ Base R
 </h3>
 <p>If we use the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> function it will convert <em>log-odds</em> to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals!</p>
 <p>But how do log-odds and probability actually relate?</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, specs<span class="op">=</span><span class="op">~</span><span class="va">temp</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  temp prob     SE  df asymp.LCL asymp.UCL
 ##  69.6 0.15 0.0985 Inf    0.0373     0.445
@@ -738,7 +737,7 @@ Base R
 P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 69.6)}}{1+e^{23.77+(-0.37 \times 69.6)}} \right]
 \]</span></p>
 <p>Which produces the following result and we can confirm the risk of an o-ring failure on an <em>average</em> day is 0.15</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">odds_at_69.6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">69.6</span><span class="op">)</span></span>
 <span><span class="co"># To convert from odds to a probability, divide the odds by one plus the odds</span></span>
 <span></span>
@@ -756,7 +755,7 @@ P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 6
 <p>In our example the <strong>maximum difference</strong> in probability from a one degree change in Temp is <span class="math inline">\(-0.37/4 = -0.09\)</span></p>
 <p>So the <strong>maximum difference</strong> in probability of failure corresponding to a one degree change is 9%</p>
 <p>Remember if you want to augment your data with the model, you can use the <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> function, remembering to specify <code>type.predict = "response</code> to get probabilities of o-ring failure (not log odds).</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>               type.predict<span class="op">=</span><span class="st">"response"</span>, </span>
 <span>               se_fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -857,7 +856,7 @@ P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 6
 </div>
 <p>Annoyingly a limitation of the augment function is that it won't produce 95% CI for predictions on glms.</p>
 <p>Alternatively we can also do this calculation via emmeans</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">66</span><span class="op">:</span><span class="fl">27</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -870,16 +869,16 @@ Task
 Use the emmeans output to make a ggplot of the changing probability of O-ring failure with temperature
 </div>
 </div>
-<button id="displayTextunnamed-chunk-53" onclick="javascript:toggle('unnamed-chunk-53');">
+<button id="displayTextunnamed-chunk-51" onclick="javascript:toggle('unnamed-chunk-51');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-53" style="display: none">
+<div id="toggleTextunnamed-chunk-51" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27</span><span class="op">:</span><span class="fl">80</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -890,7 +889,7 @@ Solution
 </div>
 </div>
 </div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="predictions" class="section level2" number="18.2">
@@ -911,17 +910,17 @@ Task
 Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-56" onclick="javascript:toggle('unnamed-chunk-56');">
+<button id="displayTextunnamed-chunk-54" onclick="javascript:toggle('unnamed-chunk-54');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-56" style="display: none">
+<div id="toggleTextunnamed-chunk-54" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <p>First - we make a new dataset with the temperature on the day of the Challenger Launch <strong>36°F</strong></p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="fl">36</span><span class="op">)</span>,                  </span>
@@ -952,7 +951,7 @@ Base R
 </button>
 </div>
 <div id="option1= T" class="tabcontent= T">
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://CRAN.R-project.org/package=arm">arm</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span></span>
@@ -961,7 +960,7 @@ Base R
 <div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2= T" class="tabcontent= T">
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-67-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
