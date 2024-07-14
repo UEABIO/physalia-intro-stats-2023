@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 18 Logistic regression (for binary data) | Introduction to Statistics</title>
+<title>Chapter 17 Logistic regression (for binary data) | Introduction to Statistics</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="When our response variable is binary, we can use a glm with a binomial error distribution So far we have only considered continuous and discrete data as response variables. What if our response is...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 18 Logistic regression (for binary data) | Introduction to Statistics">
+<meta property="og:title" content="Chapter 17 Logistic regression (for binary data) | Introduction to Statistics">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/physalia-intro-stats-2023/logistic-regression-for-binary-data.html">
 <meta property="og:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
 <meta property="og:description" content="When our response variable is binary, we can use a glm with a binomial error distribution So far we have only considered continuous and discrete data as response variables. What if our response is...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 18 Logistic regression (for binary data) | Introduction to Statistics">
+<meta name="twitter:title" content="Chapter 17 Logistic regression (for binary data) | Introduction to Statistics">
 <meta name="twitter:description" content="When our response variable is binary, we can use a glm with a binomial error distribution So far we have only considered continuous and discrete data as response variables. What if our response is...">
 <meta name="twitter:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -133,8 +133,8 @@
 <li><a class="" href="complex-models.html"><span class="header-section-number">15</span> Complex models</a></li>
 <li class="book-part">Generalized Linear Models</li>
 <li><a class="" href="generalized-linear-models.html"><span class="header-section-number">16</span> Generalized Linear Models</a></li>
-<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">17</span> Poisson regression (for count data or rate data)</a></li>
-<li><a class="active" href="logistic-regression-for-binary-data.html"><span class="header-section-number">18</span> Logistic regression (for binary data)</a></li>
+<li><a class="active" href="logistic-regression-for-binary-data.html"><span class="header-section-number">17</span> Logistic regression (for binary data)</a></li>
+<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">18</span> Poisson regression (for count data or rate data)</a></li>
 <li class="book-part">Mixed Models</li>
 <li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">19</span> Foundations of Mixed Modelling</a></li>
 <li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">20</span> Worked Example 1 - Dolphins</a></li>
@@ -151,9 +151,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="logistic-regression-for-binary-data" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="logistic-regression-for-binary-data" class="section level1" number="17">
 <h1>
-<span class="header-section-number">18</span> Logistic regression (for binary data)<a class="anchor" aria-label="anchor" href="#logistic-regression-for-binary-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17</span> Logistic regression (for binary data)<a class="anchor" aria-label="anchor" href="#logistic-regression-for-binary-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>When our response variable is binary, we can use a glm with a <strong>binomial</strong> error distribution</p>
 <p>So far we have only considered continuous and discrete data as response variables. What if our response is a categorical variable (e.g passing or failing an exam, voting yes or no in a referendum, whether an egg has successfully fledged or been predated, infected/uninfected, alive/dead)?</p>
@@ -195,12 +195,12 @@ Y  &amp; \sim \mathcal{Bern}(p)\\
 \]</span></p>
 <p>Again, note that we are still "only" fitting straight lines through our data, but this time in the log odds space.
 As a shorthand notation we write <span class="math inline">\(\log\left(\frac{p}{1 - p}\right) = \text{logit}(p) = \beta_0 + \beta_1 X\)</span>.</p>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-33-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We can also re-arrange the above equation so that we get an expression for <span class="math inline">\(p\)</span></p>
 <p><span class="math display">\[
 p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 \]</span></p>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-34-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Note how <span class="math inline">\(p\)</span> can only vary between 0 and 1.</p>
 <p>To implement the logistic regression model in R, we choose <code>family=binomial(link=logit)</code> (the Bernoulli distribution is a special case of the Binomial distribution).</p>
 <pre><code>glm(response ~ explanatory, family=binomial(link=logit))</code></pre>
@@ -213,7 +213,7 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <a href="https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/Challenger.csv">
 <button class="btn btn-success"><i class="fa fa-save"></i> Download Challenger data as csv</button>
 </a>
-<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">challenger</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -272,40 +272,40 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 </ul>
 <p>It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles.
 One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights <strong>where a failure had occurred</strong></p>
-<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Temperature on flight launches where an O-ring incident occurred"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.</p>
 <p>However when we compare this to the full data that was available a very different picture emerges.</p>
-<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">oring_dt</span>, </span>
 <span>           x<span class="op">=</span><span class="va">temp</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="st">"lm"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"All launch data"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When we include the flights without incident <em>and</em> those with incident, we can see that there is a very clear relationship between temperature and the risk of an o-ring failure. It has been argued that the clear presentation of this data should have allowed even the casual observer to determine the high risk of disaster.</p>
 <p>However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range).</p>
 <p>We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of <strong>having a flight with o-ring failure vs. no failure</strong>. Then we should implement a GLM with a Binomial distribution.</p>
 <p>We can use dplyr to generate a binary column of no incident '0' and fail '1' for anything &gt;0.</p>
-<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">challenger</span> <span class="op">&lt;-</span> <span class="va">challenger</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>oring_binary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">oring_dt</span> <span class="op">==</span><span class="st">'0'</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">challenger</span> <span class="op">&lt;-</span> <span class="va">challenger</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>oring_int <span class="op">=</span> <span class="va">oring_tot</span> <span class="op">-</span> <span class="va">oring_dt</span><span class="op">)</span> <span class="co"># create variable containing orings left intact</span></span></code></pre></div>
 <p>Fitting a binary GLM</p>
-<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">oring_dt</span>, <span class="va">oring_int</span><span class="op">)</span> <span class="op">~</span> <span class="va">temp</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">challenger</span><span class="op">)</span></span>
 <span><span class="va">binary_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span>conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="15%">
+<col width="16%">
 <col width="14%">
-<col width="14%">
+<col width="13%">
 <col width="13%">
 <col width="13%">
 <col width="14%">
@@ -323,21 +323,21 @@ One of the biggest mistakes made in assessing the flight risk for the Challenger
 <tbody>
 <tr class="odd">
 <td align="left">(Intercept)</td>
-<td align="right">23.7749552</td>
-<td align="right">11.8203514</td>
-<td align="right">2.011358</td>
-<td align="right">0.0442877</td>
-<td align="right">7.2430347</td>
-<td align="right">58.1947978</td>
+<td align="right">8.8169241</td>
+<td align="right">3.6069715</td>
+<td align="right">2.444412</td>
+<td align="right">0.0145089</td>
+<td align="right">1.9549041</td>
+<td align="right">16.4913814</td>
 </tr>
 <tr class="even">
 <td align="left">temp</td>
-<td align="right">-0.3667009</td>
-<td align="right">0.1751673</td>
-<td align="right">-2.093432</td>
-<td align="right">0.0363106</td>
-<td align="right">-0.8772585</td>
-<td align="right">-0.1217173</td>
+<td align="right">-0.1794922</td>
+<td align="right">0.0582182</td>
+<td align="right">-3.083096</td>
+<td align="right">0.0020486</td>
+<td align="right">-0.3073739</td>
+<td align="right">-0.0725742</td>
 </tr>
 </tbody>
 </table></div>
@@ -350,19 +350,19 @@ Y \sim Bern(p)
 \log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
 \]</span></p>
 <p>Which in R will look like this:</p>
-<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">oring_binary</span><span class="op">~</span><span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">binary_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">oring_dt</span>, <span class="va">oring_int</span><span class="op">)</span> <span class="op">~</span> <span class="va">temp</span>, family<span class="op">=</span><span class="va">binomial</span>, data<span class="op">=</span><span class="va">challenger</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Intercept = <span class="math inline">\(\beta_{0}\)</span> = 23.77</li>
 </ul>
-<p>When the temperature is 0°F the mean <em>log-odds</em> are 23.77 [95%CI: 7.24- 58.19] for a failure incident in the O-rings</p>
+<p>When the temperature is 0°F the mean <em>log-odds</em> are 8.82 [95%CI: 1.95- 16.5] for a failure incident in the O-rings</p>
 <ul>
-<li>Temp = <span class="math inline">\(\beta_{1}\)</span> = -0.37 [95%CI: -0.87 - -0.12]</li>
+<li>Temp = <span class="math inline">\(\beta_{1}\)</span> = -0.179 [95%CI: -0.307 - -0.0726]</li>
 </ul>
-<p>For every rise in the temperature by 1°F, the <em>log-odds</em> of a critical incident fall by 0.37.</p>
-<div id="interpreting-model-coefficients" class="section level3" number="18.0.1">
+<p>For every rise in the temperature by 1°F, the <em>log-odds</em> of a critical incident fall by 0.179.</p>
+<div id="interpreting-model-coefficients" class="section level3" number="17.0.1">
 <h3>
-<span class="header-section-number">18.0.1</span> Interpreting model coefficients<a class="anchor" aria-label="anchor" href="#interpreting-model-coefficients"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.0.1</span> Interpreting model coefficients<a class="anchor" aria-label="anchor" href="#interpreting-model-coefficients"><i class="fas fa-link"></i></a>
 </h3>
 <p>We first consider why we are dealing with odds <span class="math inline">\(\frac{p}{1-p}\)</span> instead of just <span class="math inline">\(p\)</span>. They contain the same information, so the choice is somewhat arbitrary, however we’ve been using probabilities for so long that it feels unnatural to switch to odds. There are good reasons for this, however. Odds <span class="math inline">\(\frac{p}{1-p}\)</span> can take on any value from 0 to ∞ and so part of our translation of <span class="math inline">\(p\)</span> to an unrestricted domain is already done (<span class="math inline">\(P\)</span> is restricted to 0-1). Take a look at some examples below:</p>
 <div class="inline-table"><table style="width:99%;" class="table table-sm">
@@ -414,35 +414,35 @@ Y \sim Bern(p)
 <p>We can interpret <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> as the increase in the log odds for every unit increase in <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>. We could alternatively interpret <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> using the notion that a one unit change in <span class="math inline">\(x_{1}\)</span> as a percent change of <span class="math inline">\(e^{\beta_{1}}\)</span> in the odds. That is to say, <span class="math inline">\(e^{\beta_{1}}\)</span> is the odds ratio of that change.</p>
 <p>If you want to find out more about <a href="https://www.youtube.com/watch?v=8nm0G-1uJzA">Odds and log-odds head here</a></p>
 </div>
-<div id="probability" class="section level2" number="18.1">
+<div id="probability" class="section level2" number="17.1">
 <h2>
-<span class="header-section-number">18.1</span> Probability<a class="anchor" aria-label="anchor" href="#probability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1</span> Probability<a class="anchor" aria-label="anchor" href="#probability"><i class="fas fa-link"></i></a>
 </h2>
 <p>A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data?</p>
-<div id="activity-3-make-predictions" class="section level3" number="18.1.1">
+<div id="activity-1-make-predictions" class="section level3" number="17.1.1">
 <h3>
-<span class="header-section-number">18.1.1</span> Activity 3: Make predictions<a class="anchor" aria-label="anchor" href="#activity-3-make-predictions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.1</span> Activity 1: Make predictions<a class="anchor" aria-label="anchor" href="#activity-1-make-predictions"><i class="fas fa-link"></i></a>
 </h3>
 <p>Can you use our prediction functions <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> or <code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code> to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?</p>
-<button id="displayTextunnamed-chunk-44" onclick="javascript:toggle('unnamed-chunk-44');">
+<button id="displayTextunnamed-chunk-19" onclick="javascript:toggle('unnamed-chunk-19');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-44" style="display: none">
+<div id="toggleTextunnamed-chunk-19" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <div class="tab">
-<button class="tablinksunnamed-chunk-44 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-44', 'unnamed-chunk-44');">
+<button class="tablinksunnamed-chunk-19 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-19', 'unnamed-chunk-19');">
 Base R
 </button>
-<button class="tablinksunnamed-chunk-44" onclick="javascript:openCode(event, 'option2unnamed-chunk-44', 'unnamed-chunk-44');">
+<button class="tablinksunnamed-chunk-19" onclick="javascript:openCode(event, 'option2unnamed-chunk-19', 'unnamed-chunk-19');">
 <tt>tidyverse</tt>
 </button>
 </div>
-<div id="option1unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div id="option1unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">binary_model</span>, type <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##           1           2           3           4           5           6 
 ## 0.394769696 0.130776531 0.178373050 0.238538593 0.311308842 0.067388639 
@@ -453,8 +453,8 @@ Base R
 ##          19          20          21          22          23 
 ## 0.016393905 0.005516836 0.023485304 0.016393905 0.924582363</code></pre>
 </div>
-<div id="option2unnamed-chunk-44" class="tabcontentunnamed-chunk-44">
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div id="option2unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>               type.predict <span class="op">=</span> <span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
@@ -714,48 +714,48 @@ Base R
 </table></div>
 </div>
 </div>
-<script> javascript:hide('option2unnamed-chunk-44') </script>
+<script> javascript:hide('option2unnamed-chunk-19') </script>
 </div>
 </div>
 </div>
 </div>
-<div id="emmeans-1" class="section level3" number="18.1.2">
+<div id="emmeans-1" class="section level3" number="17.1.2">
 <h3>
-<span class="header-section-number">18.1.2</span> Emmeans<a class="anchor" aria-label="anchor" href="#emmeans-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.2</span> Emmeans<a class="anchor" aria-label="anchor" href="#emmeans-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we use the <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> function it will convert <em>log-odds</em> to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals!</p>
 <p>But how do log-odds and probability actually relate?</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, specs<span class="op">=</span><span class="op">~</span><span class="va">temp</span>, type<span class="op">=</span><span class="st">"response"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##  temp prob     SE  df asymp.LCL asymp.UCL
-##  69.6 0.15 0.0985 Inf    0.0373     0.445
+<pre><code>##  temp   prob     SE  df asymp.LCL asymp.UCL
+##  69.6 0.0249 0.0151 Inf   0.00745    0.0797
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the logit scale</code></pre>
 <p>This is the equation to work out probability using the <strong>exponent</strong> of the linear regression equation:</p>
 <p><span class="math display">\[
-P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 69.6)}}{1+e^{23.77+(-0.37 \times 69.6)}} \right]
+P(\operatorname{risk of failure at }  X=69.6)\left[ \frac{e^{8.81+(-0.18 \times 69.6)}}{1+e^{8.81+(-0.18 \times 69.6)}} \right]
 \]</span></p>
-<p>Which produces the following result and we can confirm the risk of an o-ring failure on an <em>average</em> day is 0.15</p>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<p>Which produces the following result and we can confirm the risk of an o-ring failure on an <em>average</em> day is 0.025</p>
+<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">odds_at_69.6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">69.6</span><span class="op">)</span></span>
 <span><span class="co"># To convert from odds to a probability, divide the odds by one plus the odds</span></span>
 <span></span>
 <span><span class="va">probability</span> <span class="op">&lt;-</span>  <span class="va">odds_at_69.6</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">odds_at_69.6</span><span class="op">)</span></span>
 <span><span class="va">probability</span></span></code></pre></div>
 <pre><code>## (Intercept) 
-##   0.1483717</code></pre>
+##  0.02470508</code></pre>
 </div>
-<div id="changes-in-probability" class="section level3" number="18.1.3">
+<div id="changes-in-probability" class="section level3" number="17.1.3">
 <h3>
-<span class="header-section-number">18.1.3</span> Changes in probability<a class="anchor" aria-label="anchor" href="#changes-in-probability"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1.3</span> Changes in probability<a class="anchor" aria-label="anchor" href="#changes-in-probability"><i class="fas fa-link"></i></a>
 </h3>
 <p>A useful <em>rule-of-thumb</em> can be the <strong>divide-by-four</strong> rule.</p>
 <p>This can be described as the <strong>maximum</strong> difference in probability for a unit change in <span class="math inline">\(X\)</span> is <span class="math inline">\(\beta/4\)</span>.</p>
-<p>In our example the <strong>maximum difference</strong> in probability from a one degree change in Temp is <span class="math inline">\(-0.37/4 = -0.09\)</span></p>
-<p>So the <strong>maximum difference</strong> in probability of failure corresponding to a one degree change is 9%</p>
+<p>In our example the <strong>maximum difference</strong> in probability from a one degree change in Temp is <span class="math inline">\(-0.18/4 = -0.045\)</span></p>
+<p>So the <strong>maximum difference</strong> in probability of failure corresponding to a one degree change is 4.5%</p>
 <p>Remember if you want to augment your data with the model, you can use the <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code> function, remembering to specify <code>type.predict = "response</code> to get probabilities of o-ring failure (not log odds).</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>               type.predict<span class="op">=</span><span class="st">"response"</span>, </span>
 <span>               se_fit <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -763,18 +763,18 @@ P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 6
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="14%">
-<col width="5%">
-<col width="11%">
-<col width="11%">
-<col width="12%">
-<col width="11%">
-<col width="11%">
-<col width="11%">
-<col width="12%">
+<col width="26%">
+<col width="4%">
+<col width="7%">
+<col width="9%">
+<col width="9%">
+<col width="10%">
+<col width="9%">
+<col width="9%">
+<col width="10%">
 </colgroup>
 <thead><tr class="header">
-<th align="right">oring_binary</th>
+<th align="right">cbind(oring_dt, oring_int)</th>
 <th align="right">temp</th>
 <th align="right">.fitted</th>
 <th align="right">.se.fit</th>
@@ -787,76 +787,76 @@ P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 6
 <tbody>
 <tr class="odd">
 <td align="right">0</td>
+<td align="right">6</td>
 <td align="right">66</td>
-<td align="right">0.3947697</td>
-<td align="right">0.1701810</td>
-<td align="right">-1.0021439</td>
-<td align="right">0.1212153</td>
-<td align="right">0.8149531</td>
-<td align="right">0.0511900</td>
-<td align="right">-1.0690274</td>
+<td align="right">0.0461082</td>
+<td align="right">0.0214882</td>
+<td align="right">-0.7526358</td>
+<td align="right">0.0629905</td>
+<td align="right">0.6679262</td>
+<td align="right">0.0104037</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
+<td align="right">5</td>
 <td align="right">70</td>
-<td align="right">0.1307765</td>
-<td align="right">0.0924586</td>
-<td align="right">2.0170599</td>
-<td align="right">0.0752029</td>
-<td align="right">0.7080401</td>
-<td align="right">0.2922222</td>
-<td align="right">2.0974690</td>
+<td align="right">0.0230329</td>
+<td align="right">0.0144731</td>
+<td align="right">1.5388142</td>
+<td align="right">0.0558531</td>
+<td align="right">0.5924111</td>
+<td align="right">0.1723350</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
+<td align="right">6</td>
 <td align="right">69</td>
-<td align="right">0.1783731</td>
-<td align="right">0.1067906</td>
-<td align="right">-0.6268474</td>
-<td align="right">0.0778149</td>
-<td align="right">0.8366510</td>
-<td align="right">0.0099323</td>
-<td align="right">-0.6527589</td>
+<td align="right">0.0274372</td>
+<td align="right">0.0160055</td>
+<td align="right">-0.5777952</td>
+<td align="right">0.0576011</td>
+<td align="right">0.6772295</td>
+<td align="right">0.0054891</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
+<td align="right">6</td>
 <td align="right">68</td>
-<td align="right">0.2385386</td>
-<td align="right">0.1234222</td>
-<td align="right">-0.7382625</td>
-<td align="right">0.0838649</td>
-<td align="right">0.8315908</td>
-<td align="right">0.0156510</td>
-<td align="right">-0.7713137</td>
+<td align="right">0.0326554</td>
+<td align="right">0.0176625</td>
+<td align="right">-0.6311943</td>
+<td align="right">0.0592545</td>
+<td align="right">0.6746684</td>
+<td align="right">0.0067807</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
+<td align="right">6</td>
 <td align="right">67</td>
-<td align="right">0.3113088</td>
-<td align="right">0.1444333</td>
-<td align="right">-0.8636693</td>
-<td align="right">0.0973013</td>
-<td align="right">0.8246049</td>
-<td align="right">0.0269880</td>
-<td align="right">-0.9090255</td>
+<td align="right">0.0388265</td>
+<td align="right">0.0194731</td>
+<td align="right">-0.6893508</td>
+<td align="right">0.0609662</td>
+<td align="right">0.6716023</td>
+<td align="right">0.0083787</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
+<td align="right">6</td>
 <td align="right">72</td>
-<td align="right">0.0673886</td>
-<td align="right">0.0661208</td>
-<td align="right">-0.3735417</td>
-<td align="right">0.0695651</td>
-<td align="right">0.8448617</td>
-<td align="right">0.0029032</td>
-<td align="right">-0.3872542</td>
+<td align="right">0.0161984</td>
+<td align="right">0.0117305</td>
+<td align="right">-0.4426876</td>
+<td align="right">0.0518093</td>
+<td align="right">0.6826554</td>
+<td align="right">0.0028464</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <p>Annoyingly a limitation of the augment function is that it won't produce 95% CI for predictions on glms.</p>
 <p>Alternatively we can also do this calculation via emmeans</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">66</span><span class="op">:</span><span class="fl">27</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -869,16 +869,16 @@ Task
 Use the emmeans output to make a ggplot of the changing probability of O-ring failure with temperature
 </div>
 </div>
-<button id="displayTextunnamed-chunk-51" onclick="javascript:toggle('unnamed-chunk-51');">
+<button id="displayTextunnamed-chunk-26" onclick="javascript:toggle('unnamed-chunk-26');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-51" style="display: none">
+<div id="toggleTextunnamed-chunk-26" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27</span><span class="op">:</span><span class="fl">80</span><span class="op">)</span><span class="op">)</span>, </span>
@@ -889,18 +889,18 @@ Solution
 </div>
 </div>
 </div>
-<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="predictions" class="section level2" number="18.2">
+<div id="predictions" class="section level2" number="17.2">
 <h2>
-<span class="header-section-number">18.2</span> Predictions<a class="anchor" aria-label="anchor" href="#predictions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2</span> Predictions<a class="anchor" aria-label="anchor" href="#predictions"><i class="fas fa-link"></i></a>
 </h2>
 <p>On the day the Challenger launched the outside air temperature was 36°F</p>
 <p>We can use augment to add our model to new data - and make predictions about the risk of o-ring failure</p>
-<div id="activity-4-more-predictions" class="section level3" number="18.2.1">
+<div id="activity-2-more-predictions" class="section level3" number="17.2.1">
 <h3>
-<span class="header-section-number">18.2.1</span> Activity 4: More predictions<a class="anchor" aria-label="anchor" href="#activity-4-more-predictions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2.1</span> Activity 2: More predictions<a class="anchor" aria-label="anchor" href="#activity-2-more-predictions"><i class="fas fa-link"></i></a>
 </h3>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -910,17 +910,17 @@ Task
 Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure?
 </div>
 </div>
-<button id="displayTextunnamed-chunk-54" onclick="javascript:toggle('unnamed-chunk-54');">
+<button id="displayTextunnamed-chunk-29" onclick="javascript:toggle('unnamed-chunk-29');">
 Show Solution
 </button>
-<div id="toggleTextunnamed-chunk-54" style="display: none">
+<div id="toggleTextunnamed-chunk-29" style="display: none">
 <div class="panel panel-default">
 <div class="panel-heading panel-heading1">
 Solution
 </div>
 <div class="panel-body">
 <p>First - we make a new dataset with the temperature on the day of the Challenger Launch <strong>36°F</strong></p>
-<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">binary_model</span>, </span>
 <span>                 specs <span class="op">=</span> <span class="op">~</span> <span class="va">temp</span>, </span>
 <span>                 at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>temp <span class="op">=</span> <span class="fl">36</span><span class="op">)</span>,                  </span>
@@ -930,15 +930,15 @@ Solution
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the logit scale</code></pre>
-<p>We can see from our fitted model, an O-ring failure on the day of the Challenger launch could have been predicted with a probability of &gt;0.999 [95%CI: 0.43-1]</p>
+<p>We can see from our fitted model, an O-ring failure on the day of the Challenger launch could have been predicted with a probability of &gt;0.91 [91.3%CI: 0.34-99.5]</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div id="assumptions-1" class="section level2" number="18.3">
+<div id="assumptions-1" class="section level2" number="17.3">
 <h2>
-<span class="header-section-number">18.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>The standard model checks from <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> cannot be used on binomial glms, they are usually a mess!</p>
 <p>Luckily the <code>performance</code> package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks</p>
@@ -951,7 +951,7 @@ Base R
 </button>
 </div>
 <div id="option1= T" class="tabcontent= T">
-<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://CRAN.R-project.org/package=arm">arm</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span></span>
@@ -960,13 +960,13 @@ Base R
 <div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="option2= T" class="tabcontent= T">
-<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/check_model.html">check_model</a></span><span class="op">(</span><span class="va">binary_model</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-67-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<script> javascript:hide('option2= T') </script><div id="activity-5-write-up" class="section level3" number="18.3.1">
+<script> javascript:hide('option2= T') </script><div id="activity-3-write-up-2" class="section level3" number="17.3.1">
 <h3>
-<span class="header-section-number">18.3.1</span> Activity 5: Write-up<a class="anchor" aria-label="anchor" href="#activity-5-write-up"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3.1</span> Activity 3: Write-up<a class="anchor" aria-label="anchor" href="#activity-3-write-up-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>How would you write up for findings from this analysis?</p>
 <div class="webex-solution">
@@ -982,49 +982,7 @@ Write-up
 </div>
 </div>
 </div>
-<div id="summary-10" class="section level2" number="18.4">
-<h2>
-<span class="header-section-number">18.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-10"><i class="fas fa-link"></i></a>
-</h2>
-<p><strong>GLMs</strong> are powerful and flexible.</p>
-<p>They can be used to fit a wide variety of data types.</p>
-<p>Model checking becomes trickier.</p>
-<p>Extensions include:</p>
-<ul>
-<li>
-<strong>mixed models</strong>;</li>
-<li>
-<strong>survival models</strong>;</li>
-<li>
-<strong>generalized additive models</strong> (GAMs).</li>
-</ul>
-<p>For more information on Poisson and Binomial GLMs check out:</p>
-<p><a href="https://bookdown.org/dereksonderegger/571/11-binomial-regression.html#confidence-intervals-1" class="uri">https://bookdown.org/dereksonderegger/571/11-binomial-regression.html#confidence-intervals-1</a></p>
-<p><a href="https://bookdown.org/ronsarafian/IntrotoDS/glm.html#poisson-regression" class="uri">https://bookdown.org/ronsarafian/IntrotoDS/glm.html#poisson-regression</a></p>
 </div>
-<div id="final-checklist" class="section level2" number="18.5">
-<h2>
-<span class="header-section-number">18.5</span> Final checklist<a class="anchor" aria-label="anchor" href="#final-checklist"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li><p>Think carefully about the hypotheses to test, use your scientific knowledge and background reading to support this</p></li>
-<li><p>Import, clean and understand your dataset: use data visuals to investigate trends and determine if there is clear support for your hypotheses</p></li>
-<li><p><strong>Decide on the appropriate error structure for your model (Gaussian = continuous, Poisson = count, Binomial = binary)</strong></p></li>
-<li><p><strong>Start with canonical link functions, but these can be altered if needed</strong></p></li>
-<li><p>Fit a (generalized) linear model, including interaction terms with caution</p></li>
-<li><p>Investigate the fit of your model, understand that parameters may never be perfect, but that classic patterns in residuals may indicate a poorly fitting model - sometimes this can be fixed with careful consideration of missing variables or through data transformation</p></li>
-<li><p><strong>Check for overdispersion in models where variance is not estimated independently of the mean (Poisson and Binomial) - may have to use quasi-likelihood fitting</strong></p></li>
-<li><p>Test the removal of any interaction terms from a model, look at AIC and significance tests (Remember test = "F" for Gaussian and Quasilikelihood models, "Chisq" for Poisson and Binomial models)</p></li>
-<li><p>Make sure you understand the output of a model summary, sense check this against the graphs you have made - Do estimates need converting back to the original response scale?</p></li>
-<li><p>The direction and size of any effects are the priority - produce estimates and uncertainties. Make sure the observations are clear.</p></li>
-<li><p>Write-up your significance test results, taking care to report not just significance (and all required parts of a significance test). Do you know <em>what</em> to report? Within a complex model - reporting <em>t/z</em> will indicate the slope of the line for that single term against the intercept, <em>F/Chi</em> is the overall effect of a predictor across all levels, <em>post-hoc</em> if you wish to compare across all levels.</p></li>
-<li><p>Well described tables and figures can enhance your results sections - take the time to make sure these are informative and attractive.</p></li>
-</ul>
-</div>
-</div>
-
-
-
 <script>
 
 /* update total correct if #webex-total_correct exists */
@@ -1205,29 +1163,27 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">17</span> Poisson regression (for count data or rate data)</a></div>
-<div class="next"><a href="foundations-of-mixed-modelling.html"><span class="header-section-number">19</span> Foundations of Mixed Modelling</a></div>
+<div class="prev"><a href="generalized-linear-models.html"><span class="header-section-number">16</span> Generalized Linear Models</a></div>
+<div class="next"><a href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">18</span> Poisson regression (for count data or rate data)</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li>
-<a class="nav-link" href="#logistic-regression-for-binary-data"><span class="header-section-number">18</span> Logistic regression (for binary data)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#interpreting-model-coefficients"><span class="header-section-number">18.0.1</span> Interpreting model coefficients</a></li></ul>
+<a class="nav-link" href="#logistic-regression-for-binary-data"><span class="header-section-number">17</span> Logistic regression (for binary data)</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#interpreting-model-coefficients"><span class="header-section-number">17.0.1</span> Interpreting model coefficients</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#probability"><span class="header-section-number">18.1</span> Probability</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#activity-3-make-predictions"><span class="header-section-number">18.1.1</span> Activity 3: Make predictions</a></li>
-<li><a class="nav-link" href="#emmeans-1"><span class="header-section-number">18.1.2</span> Emmeans</a></li>
-<li><a class="nav-link" href="#changes-in-probability"><span class="header-section-number">18.1.3</span> Changes in probability</a></li>
+<a class="nav-link" href="#probability"><span class="header-section-number">17.1</span> Probability</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#activity-1-make-predictions"><span class="header-section-number">17.1.1</span> Activity 1: Make predictions</a></li>
+<li><a class="nav-link" href="#emmeans-1"><span class="header-section-number">17.1.2</span> Emmeans</a></li>
+<li><a class="nav-link" href="#changes-in-probability"><span class="header-section-number">17.1.3</span> Changes in probability</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#predictions"><span class="header-section-number">18.2</span> Predictions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-4-more-predictions"><span class="header-section-number">18.2.1</span> Activity 4: More predictions</a></li></ul>
+<a class="nav-link" href="#predictions"><span class="header-section-number">17.2</span> Predictions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-2-more-predictions"><span class="header-section-number">17.2.1</span> Activity 2: More predictions</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#assumptions-1"><span class="header-section-number">18.3</span> Assumptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-5-write-up"><span class="header-section-number">18.3.1</span> Activity 5: Write-up</a></li></ul>
+<a class="nav-link" href="#assumptions-1"><span class="header-section-number">17.3</span> Assumptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#activity-3-write-up-2"><span class="header-section-number">17.3.1</span> Activity 3: Write-up</a></li></ul>
 </li>
-<li><a class="nav-link" href="#summary-10"><span class="header-section-number">18.4</span> Summary</a></li>
-<li><a class="nav-link" href="#final-checklist"><span class="header-section-number">18.5</span> Final checklist</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1245,7 +1201,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-12.</p>
+    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

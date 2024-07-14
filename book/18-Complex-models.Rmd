@@ -343,6 +343,8 @@ fruitfly <- fruitfly %>%
 
 flyls1 <- lm(longevity ~ type + thorax_centered + sleep_centered + type:sleep_centered, data = fruitfly)
 
+performance::check_model(flyls1, check = "vif")
+
 ```
 
 ## Data transformations
@@ -419,6 +421,8 @@ drop1(flyls1, test = "F")
 
 Based on this ANOVA table, we do not appear to have a strong rationale for keeping the interaction term in the model (AIC or F-test). Therefore we can confidently remove the interaction, simplifying our model and making interpretation easier. 
 
+> Here I have not used the mean-centered variable for thorax - remember this makes no difference to the model except for interpreting the intercept value
+
 ```{r, eval = TRUE, echo = F}
 flyls2 <- lm(longevity ~ type + thorax + sleep, data = fruitfly)
 
@@ -459,6 +463,18 @@ emmeans::emmeans(flyls2, specs = pairwise ~ type + thorax + sleep)
 
 ```{block, type = "info"}
 For continuous variables (sleep and thorax) - `emmeans` has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables. 
+```
+
+If we provide the data ranges, then we can get predictions built from the model across the observed range of predictor variables
+
+```{r}
+
+
+  emmeans::emmeans(flyls2, specs = ~ type + thorax + sleep,
+                 at=list(thorax=c(.64:.94),
+                         sleep = c(1:83))) %>% 
+  as_tibble()
+
 ```
 
 ## Activity 3: Write-up
@@ -607,6 +623,8 @@ In this chapter we have worked with our scientific knowledge to develop testable
 library(sjPlot)
 tab_model(flyls2)
 ```
+
+`gtsummary` Provides a similar function
 
 ```{r}
 library(gtsummary)

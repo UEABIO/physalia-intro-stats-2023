@@ -150,6 +150,442 @@ GLMs model the mean and variability independently. So a link function produces a
 ```
 
 
+
+# Logistic regression (for binary data)
+
+When our response variable is binary, we can use a glm with a **binomial** error distribution
+
+So far we have only considered continuous and discrete data as response variables. What if our response is a categorical variable (e.g passing or failing an exam, voting yes or no in a referendum, whether an egg has successfully fledged or been predated, infected/uninfected, alive/dead)? 
+
+We can model the **probability** $p$ of being in a particular class as a function of other
+explanatory variables.
+
+These type of **binary** data are assumed to follow a **Bernoulli** distribution (which is a special case of *Binomial*) which has the following characteristics:
+
+$$
+Y \sim \mathcal{Bern}(p)
+$$
+
+* **Binary** variable, taking the values 0 or 1 (yes/no, pass/fail).
+* A **probability** parameter $p$, where $0 < p < 1$.
+* **Mean** = $p$  
+* **Variance** = $p(1 - p)$
+
+```{r bernplot, echo=F, eval = T, fig.width=9, fig.height=3}
+par(mfrow = c(1, 3))
+x <- 0:1
+p <- c(0.1, 0.5, 0.8)
+barplot(dbinom(x, size = 1, prob = p[1]), col = cols[1], ylab = "Probability", xlab = "X", main = paste0("p = ", p[1]), ylim = c(0, 1), names.arg = x)
+for(i in 2:length(p)) barplot(dbinom(x, size = 1, prob = p[i]), col = cols[i], ylab = "Probability", xlab = "X", main = paste0("p = ", p[i]), ylim = c(0, 1), names.arg = x)
+par(mfrow = c(1, 1))
+```
+
+Let us now place the Gaussian (simple linear regression), Poisson and logistic models next to each other:
+
+
+$$
+\begin{aligned}
+Y & \sim \mathcal{N}(\mu, \sigma^2) &&& Y  \sim \mathcal{Pois}(\lambda) &&& Y  \sim \mathcal{Bern}(p)\\
+\mu & = \beta_0 + \beta_1X &&& \log{\lambda} = \beta_0 + \beta_1X &&& ?? = \beta_0 + \beta_1X
+\end{aligned}
+$$
+
+Now we need to fill in the `??` with the appropriate term. Similar to the Poisson regression case, 
+we cannot simply model the probabiliy as $p = \beta_0 + \beta_1X$, because $p$ **cannot** be negative.
+$\log{p} = \beta_0 + \beta_1X$ won't work either, because $p$ cannot be greater than 1. Instead we 
+model the **log odds** $\log\left(\frac{p}{1 - p}\right)$ as a linear function. So our logistic regression model looks
+like this:
+
+$$
+\begin{aligned}
+Y  & \sim \mathcal{Bern}(p)\\
+\log\left(\frac{p}{1 - p}\right) &  = \beta_0 + \beta_1 X
+\end{aligned}
+$$
+
+Again, note that we are still "only" fitting straight lines through our data, but this time in the log odds space.
+As a shorthand notation we write $\log\left(\frac{p}{1 - p}\right) = \text{logit}(p) = \beta_0 + \beta_1 X$.
+
+```{r, echo=F, fig.width=5, fig.height = 5}
+x <- seq(-10, 10, length = 100)
+plot(x, x, lwd=2, col='black', xlab="X", ylab="logit(p)", type = "l")
+```
+
+We can also re-arrange the above equation so that we get an expression for $p$
+
+$$
+p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
+$$
+
+```{r, echo=F, fig.width=5, fig.height=5}
+plot(x, exp(x) / (1 + exp(x)), lwd = 2, col = 'black', xlab = "X", ylab = "p", type = "l")
+```
+
+Note how $p$ can only vary between 0 and 1. 
+
+To implement the logistic regression model in R, we choose `family=binomial(link=logit)` (the Bernoulli distribution is a special case of the Binomial distribution).
+
+```
+glm(response ~ explanatory, family=binomial(link=logit))
+```
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Space shuttle at launch"}
+knitr::include_graphics("images/space-shuttle.jpg")
+```
+
+[The Challenger Disaster](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster#O-ring_concerns)
+
+In 1985, NASA made the decision to send the first civilian into space. 
+
+This decision brought a huge amount of public attention to the STS-51-L mission, which would be Challenger’s 25th trip to space and school teacher Christa McAuliffe’s 1st. On the afternoon of January 28th, 1986 students around America tuned in to watch McAuliffe and six other astronauts launch from Cape Canaveral, Florida. 73 seconds into the flight, the shuttle experienced a critical failure and broke apart in mid air, resulting in the deaths of all seven crewmembers: Christa McAuliffe, Dick Scobee, Judy Resnik, Ellison Onizuka, Ronald McNair, Gregory Jarvis, and Michael Smith.
+
+After an investigation into the incident, it was discovered that the failure was caused by an O-ring in the solid rocket booster. Additionally, it was revealed that such an incident was foreseeable.
+
+In this half of the worksheet we will discuss how the right statistical model could have predicted the critical failure of an O-ring on that day. 
+
+
+```{r, echo = FALSE}
+challenger <- read_csv(here::here("book", "files" , "Challenger.csv"))
+```
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/Challenger.csv",
+  button_label = "Download Challenger data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+```{r}
+head(challenger)
+```
+
+The data columns are:
+
+- **oring_tot**: Total number of orings on the flight
+
+- **oring_dt** : number of orings that failed during a flight
+
+- **temp**: Outside temperature on the date of the flight
+
+- **flight** order of flights
+
+It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles.
+One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights **where a failure had occurred**
+
+```{r, eval = T}
+
+challenger %>% 
+  filter(oring_dt > 0) %>% 
+ggplot(aes(y=oring_dt, x=temp))+geom_point()+
+  ggtitle("Temperature on flight launches where an O-ring incident occurred")
+
+```
+
+From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.
+
+However when we compare this to the full data that was available a very different picture emerges. 
+
+
+```{r, eval = T}
+challenger %>% 
+ggplot(aes(y=oring_dt, 
+           x=temp))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  ggtitle("All launch data")
+```
+
+When we include the flights without incident *and* those with incident, we can see that there is a very clear relationship between temperature and the risk of an o-ring failure. It has been argued that the clear presentation of this data should have allowed even the casual observer to determine the high risk of disaster.
+
+However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range). 
+
+We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of **having a flight with o-ring failure vs. no failure**. Then we should implement a GLM with a Binomial distribution.
+
+We can use dplyr to generate a binary column of no incident '0' and fail '1' for anything >0. 
+
+```{r, eval = T}
+challenger <- challenger |> 
+  mutate(oring_int = oring_tot - oring_dt) # create variable containing orings left intact
+```
+
+Fitting a binary GLM 
+
+```{r}
+binary_model <- glm(cbind(oring_dt, oring_int) ~ temp, family = binomial(link = "logit"), data = challenger)
+binary_model %>% 
+  broom::tidy(conf.int=T)
+```
+
+So we are now fitting the following model
+
+$$
+ Y \sim Bern(p)
+$$
+$$
+\log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
+$$
+
+Which in R will look like this:
+
+```{r}
+binary_model <- glm(cbind(oring_dt, oring_int) ~ temp, family=binomial, data=challenger)
+```
+
+- Intercept = $\beta_{0}$ = 23.77
+
+When the temperature is 0&deg;F the mean *log-odds* are 8.82 [95%CI: 1.95-	16.5] for a failure incident in the O-rings
+
+- Temp = $\beta_{1}$ = -0.179 [95%CI: -0.307 - -0.0726]
+
+For every rise in the temperature by 1&deg;F, the *log-odds* of a critical incident fall by 0.179.
+
+### Interpreting model coefficients
+
+We first consider why we are dealing with odds  $\frac{p}{1-p}$ instead of just $p$. They contain the same information, so the choice is somewhat arbitrary, however we’ve been using probabilities for so long that it feels unnatural to switch to odds. There are good reasons for this, however. Odds  $\frac{p}{1-p}$ can take on any value from 0 to ∞ and so part of our translation of $p$ to an unrestricted domain is already done ($P$ is restricted to 0-1). Take a look at some examples below: 
+
++----------------+-------------------------------------------+------------------------+
+|  Probability   |               Odds                        |      Verbiage          |
++================+===========================================+========================+
+|   $p=.95$      |  $\frac{95}{5} = \frac{19}{1} = 19$       |   19 to 1 odds for     |
++----------------+-------------------------------------------+------------------------+
+|   $p=.75$      |  $\frac{75}{25} = \frac{3}{1} = 3$        |   3 to 1 odds for      |
++----------------+-------------------------------------------+------------------------+
+|   $p=.50$      |  $\frac{50}{50} = \frac{1}{1} = 1$        |   1 to 1 odds          |
++----------------+-------------------------------------------+------------------------+
+|   $p=.25$      |  $\frac{25}{75} = \frac{1}{3} = 0.33$     |  3 to 1 odds against   |
++----------------+-------------------------------------------+------------------------+
+|   $p=.05$      |  $\frac{95}{5}  = \frac{1}{19} = 0.0526$  |  19 to 1 odds against  |
++----------------+-------------------------------------------+------------------------+
+
+When we use a binomial model, we produce the 'log-odds', this produces a fully unconstrained linear regression as anything less than 1, can now occupy an infinite negative value -∞ to ∞. 
+
+$$
+\log\left(\frac{p}{1-p}\right)	=	\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}
+$$
+
+$$
+\frac{p}{1-p}	=	e^{\beta_{0}}e^{\beta_{1}x_{1}}e^{\beta_{2}x_{2}}
+$$
+
+
+We can interpret $\beta_{1}$ and $\beta_{2}$ as the increase in the log odds for every unit increase in $x_{1}$ and $x_{2}$. We could alternatively interpret $\beta_{1}$ and $\beta_{2}$ using the notion that a one unit change in $x_{1}$ as a percent change of $e^{\beta_{1}}$ in the odds. That is to say, $e^{\beta_{1}}$ is the odds ratio of that change. 
+
+If you want to find out more about [Odds and log-odds head here](https://www.youtube.com/watch?v=8nm0G-1uJzA)
+
+
+
+
+## Probability
+
+A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data? 
+
+### Activity 1: Make predictions
+
+Can you use our prediction functions `predict()` or `broom::augment()` to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?
+
+```{solution, multCode = T}
+
+``{r}
+
+predict(binary_model, type = "response")
+``
+
+####
+
+``{r}
+
+broom::augment(binary_model, 
+               type.predict = "response")
+
+``
+
+```
+
+### Emmeans
+
+If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals! 
+
+But how do log-odds and probability actually relate?
+
+```{r}
+emmeans::emmeans(binary_model, specs=~temp, type="response")
+```
+
+This is the equation to work out probability using the **exponent** of the linear regression equation:
+
+$$
+P(\operatorname{risk of failure at }  X=69.6)\left[ \frac{e^{8.81+(-0.18 \times 69.6)}}{1+e^{8.81+(-0.18 \times 69.6)}} \right]
+$$
+
+Which produces the following result and we can confirm the risk of an o-ring failure on an *average* day is 0.025
+
+```{r}
+odds_at_69.6 <- exp(coef(binary_model)[1]+coef(binary_model)[2]*69.6)
+# To convert from odds to a probability, divide the odds by one plus the odds
+
+probability <-  odds_at_69.6/(1+odds_at_69.6)
+probability
+```
+
+
+### Changes in probability
+
+A useful *rule-of-thumb* can be the **divide-by-four** rule.
+
+This can be described as the **maximum** difference in probability for a unit change in $X$ is $\beta/4$.
+
+In our example the **maximum difference** in probability from a one degree change in Temp is $-0.18/4 = -0.045$
+
+So the **maximum difference** in probability of failure corresponding to a one degree change is 4.5%
+
+
+Remember if you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
+
+```{r}
+broom::augment(binary_model, 
+               type.predict="response", 
+               se_fit = T) %>% 
+  head()
+```
+
+Annoyingly a limitation of the augment function is that it won't produce 95% CI for predictions on glms. 
+
+```{r, echo = FALSE, eval = FALSE}
+augment_glm <- function(mod, predict = NULL){
+  fam <- family(mod)
+  ilink <- fam$linkinv
+  
+  broom::augment(mod, newdata = predict, se_fit=T)%>%
+    mutate(.lower = ilink(.fitted - 1.96*.se.fit),
+           .upper = ilink(.fitted + 1.96*.se.fit), 
+           .fitted=ilink(.fitted))
+}
+
+augment_glm(binary_model)
+
+```
+
+Alternatively we can also do this calculation via emmeans
+
+```{r, eval = FALSE}
+emmeans::emmeans(binary_model, 
+                 specs = ~ temp, 
+                 at=list(temp=c(66:27)), 
+                 type='response') 
+
+```
+
+```{task}
+Use the emmeans output to make a ggplot of the changing probability of O-ring failure with temperature
+```
+
+
+```{solution}
+
+``{r, eval = F}
+
+emmeans::emmeans(binary_model, 
+                 specs = ~ temp, 
+                 at=list(temp=c(27:80)), 
+                 type='response') %>% 
+  as_tibble() %>% 
+  ggplot(aes(x=temp, y=prob))+geom_line(aes(x=temp, y=prob))+
+  geom_ribbon(aes(ymin=asymp.LCL, ymax=asymp.UCL), alpha=0.2)
+
+``
+
+```
+
+```{r, echo = F}
+emmeans::emmeans(binary_model, 
+                 specs = ~ temp, 
+                 at=list(temp=c(27:80)), 
+                 type='response') %>% 
+  as_tibble() %>% 
+  ggplot(aes(x=temp, y=prob))+geom_line(aes(x=temp, y=prob))+
+  geom_ribbon(aes(ymin=asymp.LCL, ymax=asymp.UCL), alpha=0.2)
+
+```
+
+
+## Predictions
+
+On the day the Challenger launched the outside air temperature was 36&deg;F
+
+We can use augment to add our model to new data - and make predictions about the risk of o-ring failure
+
+
+### Activity 2: More predictions
+
+```{task}
+Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure?
+```
+
+
+```{solution}
+
+First - we make a new dataset with the temperature on the day of the Challenger Launch **36&deg;F**
+  
+``{r, eval = TRUE}
+
+
+ emmeans::emmeans(binary_model, 
+                 specs = ~ temp, 
+                 at = list(temp = 36),                  
+                 type='response')
+
+``
+We can see from our fitted model, an O-ring failure on the day of the Challenger launch could have been predicted with a probability of >0.91 [91.3%CI: 0.34-99.5]
+
+```
+
+
+## Assumptions
+
+The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
+
+Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
+
+```{multCode = T}
+
+``{r}
+library(arm)
+
+x <- predict(binary_model)
+y <- resid(binary_model)
+arm::binnedplot(x,y)
+
+``
+
+####
+
+``{r}
+
+performance::check_model(binary_model)
+
+``
+
+```
+
+### Activity 3: Write-up
+
+How would you write up for findings from this analysis?
+
+`r hide("Write-up")`
+Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the effect of temperature on the likelihood of O-ring failure.
+
+All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019).
+
+Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.37 [95%CI: -0.88 - -0.12], *z* = -2.1, d.f = 21, *P* = 0.036). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.15[0.03-0.45], but this rose to a near certainty of failure 0.99[0.43-1] at 36&deg;F.
+
+> Note you could use anova( test = "Chisq") here, but as there is only one, continuous variable, we can also report directly from the summary table. 
+
+`r unhide()`
+
 # Poisson regression (for count data or rate data)
 
 Count or rate data are ubiquitous in the life sciences (e.g number of parasites per microlitre of blood, number of species counted in a particular area). These type of data are **discrete** and **non-negative**.
@@ -346,17 +782,33 @@ $$
 \end{aligned}
 $$
 
-Fit the model with the interaction term in R:
+
+## Activity 1: Fit the model
+
+```{task}
+Fit the model with the interaction term in R - mean center the Mass variable before starting
+```
+
+```{solution}
+
+``{r, eval = T}
+cuckoo <- cuckoo %>% 
+  mutate(center_mass = Mass - mean(Mass))
+``
+
+```
+
+
 
 ```{r}
-cuckoo_glm1 <- glm(Beg ~ Mass + Species + Mass:Species, data=cuckoo, family=poisson(link="log"))
+cuckoo_glm1 <- glm(Beg ~ center_mass + Species + center_mass:Species, data=cuckoo, family=poisson(link="log"))
 
 summary(cuckoo_glm1)
 ```
 
 > Note there appears to be a negative interaction effect for Species:Mass, indicating that Begging calls do not increase with mass as much as you would expect for Warblers as compared to Cuckoos.
 
-##Activity 1: Plot the mean regression line for each species:
+## Activity 2: Plot the mean regression line for each species:
 
 Hint: Use `broom::augment`. If we fit the model on the log scale, then we get the fitted generalized linear response (Y is on a log scale). The lines will be straight. We get an exponential curve in the scale of the original data, if we specify `type.predict = response` which is the **same** as a straight line in the log-scaled version of the data. Try both: 
 
@@ -368,7 +820,7 @@ Hint: Use `broom::augment`. If we fit the model on the log scale, then we get th
 # using augment allows you to generate fitted outcomes from the regression, make sure to set the predictions onto the response scale in order to 'back transform` the data onto the original scale
 
 broom::augment(cuckoo_glm1, type.predict = "response") %>% 
-ggplot(aes(x=Mass, y=.fitted, colour=Species)) + 
+ggplot(aes(x=center_mass, y=.fitted, colour=Species)) + 
   geom_point() +
   geom_line()+
   scale_colour_manual(values=c("green3","turquoise3"))+
@@ -383,7 +835,7 @@ ggplot(aes(x=Mass, y=.fitted, colour=Species)) +
 
 ``{r, eval = TRUE}
 broom::augment(cuckoo_glm1) %>% 
-ggplot(aes(x=Mass, y=.fitted, colour=Species)) + 
+ggplot(aes(x=center_mass, y=.fitted, colour=Species)) + 
   geom_point() +
   geom_line()+
   scale_colour_manual(values=c("green3","turquoise3"))+
@@ -398,7 +850,8 @@ Compare the new Poisson model fits to the ordinary least squares model. We can s
 ```{r, eval = T}
 performance::check_model(cuckoo_glm1, 
                          check = c("homogeneity",
-                                   "qq"))
+                                   "qq", "vif"),
+                         detrend = F)
 
 ```
 
@@ -425,7 +878,7 @@ Because this is a Poisson distribution where variance is fixed with the mean we 
 Remember that not only is this **Poisson** model fitting variance using a Poisson and not Normal distribution. It is also relating the predictors to the response variable with a "*log-link*" this means we need to exponentiate our estimates to get them on the same scale as the response (y) variable. Until you do this all the model estimates are logn(y).
 
 ```{r}
-exp(coef(cuckoo_glm1)[1]) ### Intercept - Incidence rate at Mass=0, and Species = Cuckoo
+exp(coef(cuckoo_glm1)[1]) ### Intercept - Incidence rate at mean mass, and Species = Cuckoo
 
 exp(coef(cuckoo_glm1)[2]) ### Change in the average incidence rate with Mass 
 
@@ -465,7 +918,7 @@ drop1(cuckoo_glm1, test = "Chisq")
 
 # emmeans can be another handy function - if you specify response then here it provideds the average call rate for each species, at the average value for any continuous measures - so here the average call rate for both species at an average body mass of 20.3
 
-emmeans::emmeans(cuckoo_glm1, specs = ~ Species:Mass, type = "response")
+emmeans::emmeans(cuckoo_glm1, specs = ~ Species:center_mass, type = "response")
 
 
 ```
@@ -487,7 +940,7 @@ Overdispersion is a result of larger than expected variance for that mean under 
 Luckily a simple fix is to fit a *quasi-likelihood* model which accounts for this, think of "quasi" as "sort of but not completely" Poisson. 
 
 ```{r}
-cuckoo_glm2 <- glm(Beg ~ Mass+Species+Mass:Species, data=cuckoo, family=quasipoisson(link="log"))
+cuckoo_glm2 <- glm(Beg ~ center_mass+Species+center_mass:Species, data=cuckoo, family=quasipoisson(link="log"))
 
 summary(cuckoo_glm2)
 
@@ -500,7 +953,7 @@ As you can see, while none of the estimates have changed, the standard errors (a
 Because we are now estimating the variance again, the test statistics have reverted to *t* distributions and anova and drop1 functions should specify the F-test again.
 ```
 
-## Activity 2: Write-up
+## Activity 3: Write-up
 
 ```{task}
 How would you write up an Analysis Methods section?
@@ -515,440 +968,6 @@ The initial model also included an interaction term between species and mass, bu
 All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019), performance (Lüdecke et al 2021) for checking model assumptions, and MASS (Venables & Ripley 2002) for model comparisons.
 ```
 
-# Logistic regression (for binary data)
-
-When our response variable is binary, we can use a glm with a **binomial** error distribution
-
-So far we have only considered continuous and discrete data as response variables. What if our response is a categorical variable (e.g passing or failing an exam, voting yes or no in a referendum, whether an egg has successfully fledged or been predated, infected/uninfected, alive/dead)? 
-
-We can model the **probability** $p$ of being in a particular class as a function of other
-explanatory variables.
-
-These type of **binary** data are assumed to follow a **Bernoulli** distribution (which is a special case of *Binomial*) which has the following characteristics:
-
-$$
-Y \sim \mathcal{Bern}(p)
-$$
-
-* **Binary** variable, taking the values 0 or 1 (yes/no, pass/fail).
-* A **probability** parameter $p$, where $0 < p < 1$.
-* **Mean** = $p$  
-* **Variance** = $p(1 - p)$
-
-```{r bernplot, echo=F, eval = T, fig.width=9, fig.height=3}
-par(mfrow = c(1, 3))
-x <- 0:1
-p <- c(0.1, 0.5, 0.8)
-barplot(dbinom(x, size = 1, prob = p[1]), col = cols[1], ylab = "Probability", xlab = "X", main = paste0("p = ", p[1]), ylim = c(0, 1), names.arg = x)
-for(i in 2:length(p)) barplot(dbinom(x, size = 1, prob = p[i]), col = cols[i], ylab = "Probability", xlab = "X", main = paste0("p = ", p[i]), ylim = c(0, 1), names.arg = x)
-par(mfrow = c(1, 1))
-```
-
-Let us now place the Gaussian (simple linear regression), Poisson and logistic models next to each other:
-
-
-$$
-\begin{aligned}
-Y & \sim \mathcal{N}(\mu, \sigma^2) &&& Y  \sim \mathcal{Pois}(\lambda) &&& Y  \sim \mathcal{Bern}(p)\\
-\mu & = \beta_0 + \beta_1X &&& \log{\lambda} = \beta_0 + \beta_1X &&& ?? = \beta_0 + \beta_1X
-\end{aligned}
-$$
-
-Now we need to fill in the `??` with the appropriate term. Similar to the Poisson regression case, 
-we cannot simply model the probabiliy as $p = \beta_0 + \beta_1X$, because $p$ **cannot** be negative.
-$\log{p} = \beta_0 + \beta_1X$ won't work either, because $p$ cannot be greater than 1. Instead we 
-model the **log odds** $\log\left(\frac{p}{1 - p}\right)$ as a linear function. So our logistic regression model looks
-like this:
-
-$$
-\begin{aligned}
-Y  & \sim \mathcal{Bern}(p)\\
-\log\left(\frac{p}{1 - p}\right) &  = \beta_0 + \beta_1 X
-\end{aligned}
-$$
-
-Again, note that we are still "only" fitting straight lines through our data, but this time in the log odds space.
-As a shorthand notation we write $\log\left(\frac{p}{1 - p}\right) = \text{logit}(p) = \beta_0 + \beta_1 X$.
-
-```{r, echo=F, fig.width=5, fig.height = 5}
-x <- seq(-10, 10, length = 100)
-plot(x, x, lwd=2, col='black', xlab="X", ylab="logit(p)", type = "l")
-```
-
-We can also re-arrange the above equation so that we get an expression for $p$
-
-$$
-p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
-$$
-
-```{r, echo=F, fig.width=5, fig.height=5}
-plot(x, exp(x) / (1 + exp(x)), lwd = 2, col = 'black', xlab = "X", ylab = "p", type = "l")
-```
-
-Note how $p$ can only vary between 0 and 1. 
-
-To implement the logistic regression model in R, we choose `family=binomial(link=logit)` (the Bernoulli distribution is a special case of the Binomial distribution).
-
-```
-glm(response ~ explanatory, family=binomial(link=logit))
-```
-
-```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "Space shuttle at launch"}
-knitr::include_graphics("images/space-shuttle.jpg")
-```
-
-[The Challenger Disaster](https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster#O-ring_concerns)
-
-In 1985, NASA made the decision to send the first civilian into space. 
-
-This decision brought a huge amount of public attention to the STS-51-L mission, which would be Challenger’s 25th trip to space and school teacher Christa McAuliffe’s 1st. On the afternoon of January 28th, 1986 students around America tuned in to watch McAuliffe and six other astronauts launch from Cape Canaveral, Florida. 73 seconds into the flight, the shuttle experienced a critical failure and broke apart in mid air, resulting in the deaths of all seven crewmembers: Christa McAuliffe, Dick Scobee, Judy Resnik, Ellison Onizuka, Ronald McNair, Gregory Jarvis, and Michael Smith.
-
-After an investigation into the incident, it was discovered that the failure was caused by an O-ring in the solid rocket booster. Additionally, it was revealed that such an incident was foreseeable.
-
-In this half of the worksheet we will discuss how the right statistical model could have predicted the critical failure of an O-ring on that day. 
-
-
-```{r, echo = FALSE}
-challenger <- read_csv(here::here("book", "files" , "Challenger.csv"))
-```
-
-```{r, eval = TRUE, echo = FALSE}
-downloadthis::download_link(
-  link = "https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/Challenger.csv",
-  button_label = "Download Challenger data as csv",
-  button_type = "success",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
-)
-```
-
-```{r}
-head(challenger)
-```
-
-The data columns are:
-
-- **oring_tot**: Total number of orings on the flight
-
-- **oring_dt** : number of orings that failed during a flight
-
-- **temp**: Outside temperature on the date of the flight
-
-- **flight** order of flights
-
-It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles.
-One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights **where a failure had occurred**
-
-```{r, eval = T}
-
-challenger %>% 
-  filter(oring_dt > 0) %>% 
-ggplot(aes(y=oring_dt, x=temp))+geom_point()+
-  ggtitle("Temperature on flight launches where an O-ring incident occurred")
-
-```
-
-From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.
-
-However when we compare this to the full data that was available a very different picture emerges. 
-
-
-```{r, eval = T}
-challenger %>% 
-ggplot(aes(y=oring_dt, 
-           x=temp))+
-  geom_point()+
-  geom_smooth(method="lm")+
-  ggtitle("All launch data")
-```
-
-When we include the flights without incident *and* those with incident, we can see that there is a very clear relationship between temperature and the risk of an o-ring failure. It has been argued that the clear presentation of this data should have allowed even the casual observer to determine the high risk of disaster.
-
-However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range). 
-
-We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of **having a flight with o-ring failure vs. no failure**. Then we should implement a GLM with a Binomial distribution.
-
-We can use dplyr to generate a binary column of no incident '0' and fail '1' for anything >0. 
-
-```{r, eval = T}
-challenger <- challenger %>% 
-  mutate(oring_binary = ifelse(oring_dt =='0', 0, 1))
-```
-
-Fitting a binary GLM 
-
-```{r}
-binary_model <- glm(oring_binary~temp, family=binomial, data=challenger)
-binary_model %>% 
-  broom::tidy(conf.int=T)
-```
-
-So we are now fitting the following model
-
-$$
- Y \sim Bern(p)
-$$
-$$
-\log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
-$$
-
-Which in R will look like this:
-
-```{r}
-binary_model <- glm(oring_binary~temp, family=binomial, data=challenger)
-```
-
-- Intercept = $\beta_{0}$ = 23.77
-
-When the temperature is 0&deg;F the mean *log-odds* are 23.77 [95%CI: 7.24-	58.19] for a failure incident in the O-rings
-
-- Temp = $\beta_{1}$ = -0.37 [95%CI: -0.87 - -0.12]
-
-For every rise in the temperature by 1&deg;F, the *log-odds* of a critical incident fall by 0.37.
-
-### Interpreting model coefficients
-
-We first consider why we are dealing with odds  $\frac{p}{1-p}$ instead of just $p$. They contain the same information, so the choice is somewhat arbitrary, however we’ve been using probabilities for so long that it feels unnatural to switch to odds. There are good reasons for this, however. Odds  $\frac{p}{1-p}$ can take on any value from 0 to ∞ and so part of our translation of $p$ to an unrestricted domain is already done ($P$ is restricted to 0-1). Take a look at some examples below: 
-
-+----------------+-------------------------------------------+------------------------+
-|  Probability   |               Odds                        |      Verbiage          |
-+================+===========================================+========================+
-|   $p=.95$      |  $\frac{95}{5} = \frac{19}{1} = 19$       |   19 to 1 odds for     |
-+----------------+-------------------------------------------+------------------------+
-|   $p=.75$      |  $\frac{75}{25} = \frac{3}{1} = 3$        |   3 to 1 odds for      |
-+----------------+-------------------------------------------+------------------------+
-|   $p=.50$      |  $\frac{50}{50} = \frac{1}{1} = 1$        |   1 to 1 odds          |
-+----------------+-------------------------------------------+------------------------+
-|   $p=.25$      |  $\frac{25}{75} = \frac{1}{3} = 0.33$     |  3 to 1 odds against   |
-+----------------+-------------------------------------------+------------------------+
-|   $p=.05$      |  $\frac{95}{5}  = \frac{1}{19} = 0.0526$  |  19 to 1 odds against  |
-+----------------+-------------------------------------------+------------------------+
-
-When we use a binomial model, we produce the 'log-odds', this produces a fully unconstrained linear regression as anything less than 1, can now occupy an infinite negative value -∞ to ∞. 
-
-$$
-\log\left(\frac{p}{1-p}\right)	=	\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}
-$$
-
-$$
-\frac{p}{1-p}	=	e^{\beta_{0}}e^{\beta_{1}x_{1}}e^{\beta_{2}x_{2}}
-$$
-
-
-We can interpret $\beta_{1}$ and $\beta_{2}$ as the increase in the log odds for every unit increase in $x_{1}$ and $x_{2}$. We could alternatively interpret $\beta_{1}$ and $\beta_{2}$ using the notion that a one unit change in $x_{1}$ as a percent change of $e^{\beta_{1}}$ in the odds. That is to say, $e^{\beta_{1}}$ is the odds ratio of that change. 
-
-If you want to find out more about [Odds and log-odds head here](https://www.youtube.com/watch?v=8nm0G-1uJzA)
-
-
-
-
-## Probability
-
-A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data? 
-
-### Activity 3: Make predictions
-
-Can you use our prediction functions `predict()` or `broom::augment()` to look at the models predictions for O-ring failure in our data? Bonus points if you can convert log-odds to probability?
-
-```{solution, multCode = T}
-
-``{r}
-
-predict(binary_model, type = "response")
-``
-
-####
-
-``{r}
-
-broom::augment(binary_model, 
-               type.predict = "response")
-
-``
-
-```
-
-### Emmeans
-
-If we use the `emmeans()` function it will convert *log-odds* to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals! 
-
-But how do log-odds and probability actually relate?
-
-```{r}
-emmeans::emmeans(binary_model, specs=~temp, type="response")
-```
-
-This is the equation to work out probability using the **exponent** of the linear regression equation:
-
-$$
-P(\operatorname{risk of failure at }  X=69)\left[ \frac{e^{23.77+(-0.37 \times 69.6)}}{1+e^{23.77+(-0.37 \times 69.6)}} \right]
-$$
-
-Which produces the following result and we can confirm the risk of an o-ring failure on an *average* day is 0.15
-
-```{r}
-odds_at_69.6 <- exp(coef(binary_model)[1]+coef(binary_model)[2]*69.6)
-# To convert from odds to a probability, divide the odds by one plus the odds
-
-probability <-  odds_at_69.6/(1+odds_at_69.6)
-probability
-```
-
-
-### Changes in probability
-
-A useful *rule-of-thumb* can be the **divide-by-four** rule.
-
-This can be described as the **maximum** difference in probability for a unit change in $X$ is $\beta/4$.
-
-In our example the **maximum difference** in probability from a one degree change in Temp is $-0.37/4 = -0.09$
-
-So the **maximum difference** in probability of failure corresponding to a one degree change is 9%
-
-
-Remember if you want to augment your data with the model, you can use the `augment()` function, remembering to specify `type.predict = "response` to get probabilities of o-ring failure (not log odds). 
-
-```{r}
-broom::augment(binary_model, 
-               type.predict="response", 
-               se_fit = T) %>% 
-  head()
-```
-
-Annoyingly a limitation of the augment function is that it won't produce 95% CI for predictions on glms. 
-
-```{r, echo = FALSE, eval = FALSE}
-augment_glm <- function(mod, predict = NULL){
-  fam <- family(mod)
-  ilink <- fam$linkinv
-  
-  broom::augment(mod, newdata = predict, se_fit=T)%>%
-    mutate(.lower = ilink(.fitted - 1.96*.se.fit),
-           .upper = ilink(.fitted + 1.96*.se.fit), 
-           .fitted=ilink(.fitted))
-}
-
-augment_glm(binary_model)
-
-```
-
-Alternatively we can also do this calculation via emmeans
-
-```{r, eval = FALSE}
-emmeans::emmeans(binary_model, 
-                 specs = ~ temp, 
-                 at=list(temp=c(66:27)), 
-                 type='response') 
-
-```
-
-```{task}
-Use the emmeans output to make a ggplot of the changing probability of O-ring failure with temperature
-```
-
-
-```{solution}
-
-``{r, eval = F}
-
-emmeans::emmeans(binary_model, 
-                 specs = ~ temp, 
-                 at=list(temp=c(27:80)), 
-                 type='response') %>% 
-  as_tibble() %>% 
-  ggplot(aes(x=temp, y=prob))+geom_line(aes(x=temp, y=prob))+
-  geom_ribbon(aes(ymin=asymp.LCL, ymax=asymp.UCL), alpha=0.2)
-
-``
-
-```
-
-```{r, echo = F}
-emmeans::emmeans(binary_model, 
-                 specs = ~ temp, 
-                 at=list(temp=c(27:80)), 
-                 type='response') %>% 
-  as_tibble() %>% 
-  ggplot(aes(x=temp, y=prob))+geom_line(aes(x=temp, y=prob))+
-  geom_ribbon(aes(ymin=asymp.LCL, ymax=asymp.UCL), alpha=0.2)
-
-```
-
-
-## Predictions
-
-On the day the Challenger launched the outside air temperature was 36&deg;F
-
-We can use augment to add our model to new data - and make predictions about the risk of o-ring failure
-
-
-### Activity 4: More predictions
-
-```{task}
-Make a new dataset with the temperature on the day of the Challenger launch - what was the probability of o-ring failure?
-```
-
-
-```{solution}
-
-First - we make a new dataset with the temperature on the day of the Challenger Launch **36&deg;F**
-  
-``{r, eval = TRUE}
-
-
- emmeans::emmeans(binary_model, 
-                 specs = ~ temp, 
-                 at = list(temp = 36),                  
-                 type='response')
-
-``
-We can see from our fitted model, an O-ring failure on the day of the Challenger launch could have been predicted with a probability of >0.999 [95%CI: 0.43-1]
-
-```
-
-
-## Assumptions
-
-The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
-
-Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
-
-```{multCode = T}
-
-``{r}
-library(arm)
-
-x <- predict(binary_model)
-y <- resid(binary_model)
-arm::binnedplot(x,y)
-
-``
-
-####
-
-``{r}
-
-performance::check_model(binary_model)
-
-``
-
-```
-
-### Activity 5: Write-up
-
-How would you write up for findings from this analysis?
-
-`r hide("Write-up")`
-Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the effect of temperature on the likelihood of O-ring failure.
-
-All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019).
-
-Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.37 [95%CI: -0.88 - -0.12], *z* = -2.1, d.f = 21, *P* = 0.036). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.15[0.03-0.45], but this rose to a near certainty of failure 0.99[0.43-1] at 36&deg;F.
-
-> Note you could use anova( test = "Chisq") here, but as there is only one, continuous variable, we can also report directly from the summary table. 
-
-`r unhide()`
 
 ## Summary
 

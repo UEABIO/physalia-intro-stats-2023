@@ -880,15 +880,18 @@ The package `ggridges` (@R-ggridges) provides some excellent extra geoms to supp
 
 ```r
 library(ggridges)
-ggplot(penguins, aes(x = body_mass_g, y = species)) + 
-  ggridges::geom_density_ridges(fill = colour_fill,
-                colour = colour_line,
+
+penguins %>% 
+ggplot(aes(x = body_mass_g, y = species)) + 
+  ggridges::stat_binline(fill = colour_fill,
                 alpha = 0.8)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-69-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" />
 
 </div></div></div>
+
+## QQplots by group
 
 **Q. Does each species have a data distribution that appears to be normally distributed?**
 
@@ -1242,7 +1245,7 @@ These efforts allow us to capture details about the spread and distribution of b
 
 * The correlation between the two variables
 
-## Associations between categorical variables
+## Associations between Categorical variables
 
 Exploring associations between different categorical variables is not quite as simple as the previous numeric-numeric examples. Generally speaking we are interested in whether different combinations of categories are uniformally distributed or show evidence of clustering leading to *over- or under-represented* combinations. 
 The simplest way to investigate this is to use `group_by` and `summarise` as we have used previously.
@@ -1334,6 +1337,12 @@ penguins %>%
 </div>
 
 ## Associations between Categorical-numerical variables
+
+Exploring associations between categorical and numerical variables is essential for uncovering how different categories influence numerical outcomes. 
+
+Descriptive statistics and visualizations play a vital role in this process. Summary statistics such as mean, median, and range, grouped by categorical variables, can reveal significant differences and trends across categories. 
+
+Visualizations like box plots and histograms with color-coded categories provide intuitive insights into data distribution, variability, and potential outliers. By leveraging these tools, you can identify patterns, assess the strength and direction of associations, and detect any anomalies.
 
 
 ```r
