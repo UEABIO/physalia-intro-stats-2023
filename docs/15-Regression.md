@@ -90,7 +90,7 @@ janka %>%
   geom_point()
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-35-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 
@@ -553,14 +553,14 @@ Here you can see it is mostly pretty good, with just one or two data points outs
 plot(janka_ls1, which=c(2,2))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 performance::check_model(janka_ls1, check=c("normality","qq"))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-26') </script></div></div></div>
 
 
@@ -579,14 +579,14 @@ Both plots suggests that the residuals **do not** have constant variance, broadl
 plot(janka_ls1, which=c(1,3))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-49-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-54-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
 
 ```r
 performance::check_model(janka_ls1, check="homogeneity")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-27') </script></div></div></div>
 
 #### Linearity
@@ -599,14 +599,14 @@ performance::check_model(janka_ls1, check="homogeneity")
 plot(janka_ls1, which=c(1,3))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-51-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-56-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-56-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
 
 ```r
 performance::check_model(janka_ls1, check="linearity")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-57-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-28') </script></div></div></div>
 
 
@@ -625,14 +625,14 @@ It would appear that we have some curvature in our residuals - indicating that o
 plot(janka_ls1, which=c(4,5))
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-53-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-53-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-58-1.png" width="100%" style="display: block; margin: auto;" /><img src="15-Regression_files/figure-html/unnamed-chunk-58-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 performance::check_model(janka_ls1, check="outliers")
 ```
 
-<img src="15-Regression_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="15-Regression_files/figure-html/unnamed-chunk-59-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-29') </script></div></div></div>
 
 Here we can see there is just one potential outlier. 

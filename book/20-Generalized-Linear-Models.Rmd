@@ -172,6 +172,7 @@ $$
 * **Variance** = $p(1 - p)$
 
 ```{r bernplot, echo=F, eval = T, fig.width=9, fig.height=3}
+cols <- c("#377eb8", "#4daf4a", "#984ea3") # colorbrewer
 par(mfrow = c(1, 3))
 x <- 0:1
 p <- c(0.1, 0.5, 0.8)
@@ -548,7 +549,7 @@ We can see from our fitted model, an O-ring failure on the day of the Challenger
 
 The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
 
-Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
+Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood fit). In this case there is likely not enough data for robust checks - we could consider a quasi-likelihood model in order to have more conservative confidence intervals. 
 
 ```{multCode = T}
 
@@ -580,7 +581,7 @@ Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the e
 
 All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019).
 
-Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.37 [95%CI: -0.88 - -0.12], *z* = -2.1, d.f = 21, *P* = 0.036). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.15[0.03-0.45], but this rose to a near certainty of failure 0.99[0.43-1] at 36&deg;F.
+Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.17 [95%CI: -0.31 - -0.07], *z* = -3.1, df = 21, *P* = 0.002). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.025[0.007-0.08], but this rose to 0.91[0.34-1] at 36&deg;F.
 
 > Note you could use anova( test = "Chisq") here, but as there is only one, continuous variable, we can also report directly from the summary table. 
 

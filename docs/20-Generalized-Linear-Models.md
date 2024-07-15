@@ -460,13 +460,13 @@ predict(binary_model, type = "response")
 
 ```
 ##           1           2           3           4           5           6 
-## 0.394769696 0.130776531 0.178373050 0.238538593 0.311308842 0.067388639 
+## 0.046108217 0.023032936 0.027437182 0.032655437 0.038826526 0.016198395 
 ##           7           8           9          10          11          12 
-## 0.047687994 0.130776531 0.946495574 0.662129014 0.130776531 0.007941202 
+## 0.013573034 0.023032936 0.195583537 0.076485696 0.023032936 0.005577258 
 ##          13          14          15          16          17          18 
-## 0.311308842 0.987128767 0.311308842 0.023485304 0.130776531 0.002657203 
+## 0.038826526 0.332663964 0.038826526 0.009518173 0.023032936 0.003262669 
 ##          19          20          21          22          23 
-## 0.016393905 0.005516836 0.023485304 0.016393905 0.924582363
+## 0.007966744 0.004665159 0.009518173 0.007966744 0.168874959
 ```
 </div><div id="option2unnamed-chunk-19" class="tabcontentunnamed-chunk-19">
 
@@ -477,31 +477,31 @@ broom::augment(binary_model,
 
 <div class="kable-table">
 
-| oring_binary| temp|   .fitted|     .resid|      .hat|    .sigma|   .cooksd| .std.resid|
-|------------:|----:|---------:|----------:|---------:|---------:|---------:|----------:|
-|            0|   66| 0.3947697| -1.0021439| 0.1212153| 0.8149531| 0.0511900| -1.0690274|
-|            1|   70| 0.1307765|  2.0170599| 0.0752029| 0.7080401| 0.2922222|  2.0974690|
-|            0|   69| 0.1783731| -0.6268474| 0.0778149| 0.8366510| 0.0099323| -0.6527589|
-|            0|   68| 0.2385386| -0.7382625| 0.0838649| 0.8315908| 0.0156510| -0.7713137|
-|            0|   67| 0.3113088| -0.8636693| 0.0973013| 0.8246049| 0.0269880| -0.9090255|
-|            0|   72| 0.0673886| -0.3735417| 0.0695651| 0.8448617| 0.0029032| -0.3872542|
-|            0|   73| 0.0476880| -0.3126102| 0.0645605| 0.8462069| 0.0018473| -0.3232178|
-|            0|   70| 0.1307765| -0.5294432| 0.0752029| 0.8403180| 0.0066147| -0.5505492|
-|            1|   57| 0.9464956|  0.3316293| 0.1899238| 0.8452819| 0.0081803|  0.3684596|
-|            1|   63| 0.6621290|  0.9080692| 0.2317717| 0.8170810| 0.1001978|  1.0360335|
-|            1|   70| 0.1307765|  2.0170599| 0.0752029| 0.7080401| 0.2922222|  2.0974690|
-|            0|   78| 0.0079412| -0.1262767| 0.0308485| 0.8488032| 0.0001315| -0.1282707|
-|            0|   67| 0.3113088| -0.8636693| 0.0973013| 0.8246049| 0.0269880| -0.9090255|
-|            1|   53| 0.9871288|  0.1609645| 0.0862364| 0.8484526| 0.0006733|  0.1683888|
-|            0|   67| 0.3113088| -0.8636693| 0.0973013| 0.8246049| 0.0269880| -0.9090255|
-|            0|   75| 0.0234853| -0.2180160| 0.0512601| 0.8478117| 0.0006848| -0.2238281|
-|            0|   70| 0.1307765| -0.5294432| 0.0752029| 0.8403180| 0.0066147| -0.5505492|
-|            0|   81| 0.0026572| -0.0729485| 0.0162947| 0.8491284| 0.0000224| -0.0735502|
-|            0|   76| 0.0163939| -0.1818228| 0.0440855| 0.8482690| 0.0004021| -0.1859683|
-|            0|   79| 0.0055168| -0.1051866| 0.0252300| 0.8489535| 0.0000737| -0.1065392|
-|            0|   75| 0.0234853| -0.2180160| 0.0512601| 0.8478117| 0.0006848| -0.2238281|
-|            0|   76| 0.0163939| -0.1818228| 0.0440855| 0.8482690| 0.0004021| -0.1859683|
-|            1|   58| 0.9245824|  0.3960130| 0.2192676| 0.8433540| 0.0146713|  0.4481860|
+| cbind(oring_dt, oring_int)| temp| .fitted|    .resid|       .hat|    .sigma|   .cooksd| .std.resid|
+|--------------------------:|----:|-------:|---------:|----------:|---------:|---------:|----------:|
+|                          0|    6|      66| 0.0461082| -0.7526358| 0.0629905| 0.6679262|  0.0104037|
+|                          1|    5|      70| 0.0230329|  1.5388142| 0.0558531| 0.5924111|  0.1723350|
+|                          0|    6|      69| 0.0274372| -0.5777952| 0.0576011| 0.6772295|  0.0054891|
+|                          0|    6|      68| 0.0326554| -0.6311943| 0.0592545| 0.6746684|  0.0067807|
+|                          0|    6|      67| 0.0388265| -0.6893508| 0.0609662| 0.6716023|  0.0083787|
+|                          0|    6|      72| 0.0161984| -0.4426876| 0.0518093| 0.6826554|  0.0028464|
+|                          0|    6|      73| 0.0135730| -0.4049591| 0.0494929| 0.6839049|  0.0022613|
+|                          0|    6|      70| 0.0230329| -0.5287987| 0.0558531| 0.6793703|  0.0044316|
+|                          1|    5|      57| 0.1955835| -0.1821604| 0.2280028| 0.6886242|  0.0060999|
+|                          1|    5|      63| 0.0764857|  0.7281885| 0.0757073| 0.6690799|  0.0306088|
+|                          1|    5|      70| 0.0230329|  1.5388142| 0.0558531| 0.5924111|  0.1723350|
+|                          0|    6|      78| 0.0055773| -0.2590645| 0.0362396| 0.6876558|  0.0006565|
+|                          0|    6|      67| 0.0388265| -0.6893508| 0.0609662| 0.6716023|  0.0083787|
+|                          2|    4|      53| 0.3326640|  0.0034793| 0.5581571| 0.6901819|  0.0000173|
+|                          0|    6|      67| 0.0388265| -0.6893508| 0.0609662| 0.6716023|  0.0083787|
+|                          0|    6|      75| 0.0095182| -0.3387700| 0.0444003| 0.6858189|  0.0014017|
+|                          0|    6|      70| 0.0230329| -0.5287987| 0.0558531| 0.6793703|  0.0044316|
+|                          0|    6|      81| 0.0032627| -0.1980304| 0.0283733| 0.6887194|  0.0002951|
+|                          0|    6|      76| 0.0079667| -0.3098125| 0.0417067| 0.6865453|  0.0010942|
+|                          0|    6|      79| 0.0046652| -0.2368816| 0.0335427| 0.6880766|  0.0005050|
+|                          0|    6|      75| 0.0095182| -0.3387700| 0.0444003| 0.6858189|  0.0014017|
+|                          0|    6|      76| 0.0079667| -0.3098125| 0.0417067| 0.6865453|  0.0010942|
+|                          1|    5|      58| 0.1688750| -0.0144635| 0.1803038| 0.6901737|  0.0000280|
 
 </div>
 </div><script> javascript:hide('option2unnamed-chunk-19') </script></div></div></div>
@@ -646,8 +646,8 @@ First - we make a new dataset with the temperature on the day of the Challenger 
 ```
 
 ```
-##  temp    prob        SE  df asymp.LCL asymp.UCL
-##    36 0.99997 0.0001416 Inf   0.43125         1
+##  temp  prob    SE  df asymp.LCL asymp.UCL
+##    36 0.913 0.122 Inf     0.338     0.995
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the logit scale
@@ -660,7 +660,7 @@ We can see from our fitted model, an O-ring failure on the day of the Challenger
 
 The standard model checks from `plot()` cannot be used on binomial glms, they are usually a mess! 
 
-Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood check). In this case there is likely not enough data for robust checks
+Luckily the `performance` package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood fit). In this case there is likely not enough data for robust checks - we could consider a quasi-likelihood model in order to have more conservative confidence intervals. 
 
 <div class="tab"><button class="tablinks= T active" onclick="javascript:openCode(event, 'option1= T', '= T');">Base R</button><button class="tablinks= T" onclick="javascript:openCode(event, 'option2= T', '= T');"><tt>tidyverse</tt></button></div><div id="option1= T" class="tabcontent= T">
 
@@ -672,14 +672,14 @@ y <- resid(binary_model)
 arm::binnedplot(x,y)
 ```
 
-<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-62-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2= T" class="tabcontent= T">
 
 ```r
 performance::check_model(binary_model)
 ```
 
-<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-67-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2= T') </script>
 
 ### Activity 3: Write-up
@@ -693,7 +693,7 @@ Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the e
 
 All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019).
 
-Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.37 [95%CI: -0.88 - -0.12], *z* = -2.1, d.f = 21, *P* = 0.036). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.15[0.03-0.45], but this rose to a near certainty of failure 0.99[0.43-1] at 36&deg;F.
+Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.17 [95%CI: -0.31 - -0.07], *z* = -3.1, df = 21, *P* = 0.002). At an average temperature of 69.6&deg;F the probability of o-ring failure was estimated at 0.025[0.007-0.08], but this rose to 0.91[0.34-1] at 36&deg;F.
 
 > Note you could use anova( test = "Chisq") here, but as there is only one, continuous variable, we can also report directly from the summary table. 
 
@@ -954,7 +954,7 @@ ggplot(aes(x=center_mass, y=.fitted, colour=Species)) +
   theme_minimal()
 ```
 
-<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-63-1.png" width="100%" style="display: block; margin: auto;" /></div></div></div>
+<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-65-1.png" width="100%" style="display: block; margin: auto;" /></div></div></div>
 
 ### Log scale
 
@@ -971,7 +971,7 @@ ggplot(aes(x=center_mass, y=.fitted, colour=Species)) +
   theme_minimal()
 ```
 
-<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-64-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="20-Generalized-Linear-Models_files/figure-html/unnamed-chunk-66-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 Compare the new Poisson model fits to the ordinary least squares model. We can see that although the homogeneity of variance is far from perfect, the curvature in the model has been drastically reduced (this makes sense as now we have a model fitted to exponential data), and the qqplot is within acceptable confidence intervals. 

@@ -95,8 +95,8 @@ fruitfly %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-41-1.png" alt="A density distribution of longevity across the three sexual activity treatments" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-41)A density distribution of longevity across the three sexual activity treatments</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-43-1.png" alt="A density distribution of longevity across the three sexual activity treatments" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-43)A density distribution of longevity across the three sexual activity treatments</p>
 </div>
 </div></div></div>
 
@@ -120,8 +120,8 @@ fruitfly %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-42-1.png" alt="A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-42)A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-44-1.png" alt="A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-44)A scatterplot of longevity against body size (thorax (mm)). No trend line added - often it is a good idea to look at data points without being lead to a conclusion by a line</p>
 </div>
 </div></div></div>
 
@@ -149,8 +149,8 @@ fruitfly %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-43-1.png" alt="A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-43)A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-45-1.png" alt="A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-45)A scatterplot of thorax against longevity - colours indicate treatment types. This time I have included a line, as it will help determine if I think the slopes are different by group</p>
 </div>
 </div></div></div>
 
@@ -188,8 +188,8 @@ fruitfly %>%
 ```
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-44-1.png" alt="A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-44)A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments.</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-46-1.png" alt="A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-46)A scatter plot of proportion of time spent sleeping against longevity with a linear model trendline. Points represent individual flies, colours represent treatments.</p>
 </div>
 </div></div></div>
 
@@ -501,7 +501,7 @@ flyls_sqrt <- lm(sqrt(longevity) ~ type + thorax + sleep + type:sleep, data = fr
 performance::check_model(flyls_sqrt)
 ```
 
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-54-1.png" width="100%" style="display: block; margin: auto;" />
 
 Not really, despite the suggestion that a sqrt transformation would improve the model, residual fits are not really any better - if we examine R squared carefully, we can see that there is a very small increase in variance explained - but in my opinion, not worth the hassle of having a transformed dependent variable - so we might as well stick with the original scale.
 
@@ -909,7 +909,7 @@ kbl(col.names = c("Predictors",
 ```
 
 <table class="table" style="font-size: 16px; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-43)Linear model coefficients</caption>
+<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-55)Linear model coefficients</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> Predictors </th>
@@ -971,8 +971,8 @@ Post hoc analysis showed that these differences were statistically significant f
 Comparing the treatment effects against other predictors of longevity such as body size and sleep, I found that sleep had a very small effect on longevity (mean change -0.05 days [-0.18 - 0.07]) which was not significantly different from no effect (Linear model: F~1,120~ = 0.68, P = 0.41). Body size (taken from thorax length) was a significant predictor of longevity (F~1,120~ = 121, P < 0.001), with each 0.1 mm increase in body size adding 14.4 days to the individual lifespan [11.8 - 17]. It appears as though body size has a stronger effect on longevity than treatment, indicating that while there is a measurable cost of sexual activity to males, it may be less severe than in females (not compared here), and less severe than other measurable predictors. 
 
 <div class="figure" style="text-align: center">
-<img src="18-Complex-models_files/figure-html/unnamed-chunk-44-1.png" alt=" A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments." width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-44) A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments.</p>
+<img src="18-Complex-models_files/figure-html/unnamed-chunk-56-1.png" alt=" A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments." width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-56) A scatter plot of longevity against body size across three treatments of differening male sexual activity. Fitted model slopes are from the reduced linear model (main effects only of thorax size, sleep and treatment group), with 95% confidence intervals, circles are individual data points. Marginal plots are density plot distributions for thorax length and longevity split by treatments.</p>
 </div>
 </div></div></div>
 
@@ -1072,23 +1072,23 @@ tbl_regression(flyls2)
 ```
 
 ```{=html}
-<div id="nmkeywpxkj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nmkeywpxkj table {
+<div id="xrgethxgsf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xrgethxgsf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nmkeywpxkj thead, #nmkeywpxkj tbody, #nmkeywpxkj tfoot, #nmkeywpxkj tr, #nmkeywpxkj td, #nmkeywpxkj th {
+#xrgethxgsf thead, #xrgethxgsf tbody, #xrgethxgsf tfoot, #xrgethxgsf tr, #xrgethxgsf td, #xrgethxgsf th {
   border-style: none;
 }
 
-#nmkeywpxkj p {
+#xrgethxgsf p {
   margin: 0;
   padding: 0;
 }
 
-#nmkeywpxkj .gt_table {
+#xrgethxgsf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1114,12 +1114,12 @@ tbl_regression(flyls2)
   border-left-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_caption {
+#xrgethxgsf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nmkeywpxkj .gt_title {
+#xrgethxgsf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1131,7 +1131,7 @@ tbl_regression(flyls2)
   border-bottom-width: 0;
 }
 
-#nmkeywpxkj .gt_subtitle {
+#xrgethxgsf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1143,7 +1143,7 @@ tbl_regression(flyls2)
   border-top-width: 0;
 }
 
-#nmkeywpxkj .gt_heading {
+#xrgethxgsf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1155,13 +1155,13 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_bottom_border {
+#xrgethxgsf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_col_headings {
+#xrgethxgsf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1176,7 +1176,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_col_heading {
+#xrgethxgsf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1196,7 +1196,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#nmkeywpxkj .gt_column_spanner_outer {
+#xrgethxgsf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1208,15 +1208,15 @@ tbl_regression(flyls2)
   padding-right: 4px;
 }
 
-#nmkeywpxkj .gt_column_spanner_outer:first-child {
+#xrgethxgsf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nmkeywpxkj .gt_column_spanner_outer:last-child {
+#xrgethxgsf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nmkeywpxkj .gt_column_spanner {
+#xrgethxgsf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1228,11 +1228,11 @@ tbl_regression(flyls2)
   width: 100%;
 }
 
-#nmkeywpxkj .gt_spanner_row {
+#xrgethxgsf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nmkeywpxkj .gt_group_heading {
+#xrgethxgsf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1258,7 +1258,7 @@ tbl_regression(flyls2)
   text-align: left;
 }
 
-#nmkeywpxkj .gt_empty_group_heading {
+#xrgethxgsf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1273,15 +1273,15 @@ tbl_regression(flyls2)
   vertical-align: middle;
 }
 
-#nmkeywpxkj .gt_from_md > :first-child {
+#xrgethxgsf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nmkeywpxkj .gt_from_md > :last-child {
+#xrgethxgsf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nmkeywpxkj .gt_row {
+#xrgethxgsf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1300,7 +1300,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#nmkeywpxkj .gt_stub {
+#xrgethxgsf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1313,7 +1313,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#nmkeywpxkj .gt_stub_row_group {
+#xrgethxgsf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1327,15 +1327,15 @@ tbl_regression(flyls2)
   vertical-align: top;
 }
 
-#nmkeywpxkj .gt_row_group_first td {
+#xrgethxgsf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nmkeywpxkj .gt_row_group_first th {
+#xrgethxgsf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nmkeywpxkj .gt_summary_row {
+#xrgethxgsf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1345,16 +1345,16 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#nmkeywpxkj .gt_first_summary_row {
+#xrgethxgsf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_first_summary_row.thick {
+#xrgethxgsf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nmkeywpxkj .gt_last_summary_row {
+#xrgethxgsf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1364,7 +1364,7 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_grand_summary_row {
+#xrgethxgsf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1374,7 +1374,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#nmkeywpxkj .gt_first_grand_summary_row {
+#xrgethxgsf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1384,7 +1384,7 @@ tbl_regression(flyls2)
   border-top-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_last_grand_summary_row_top {
+#xrgethxgsf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,11 +1394,11 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_striped {
+#xrgethxgsf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nmkeywpxkj .gt_table_body {
+#xrgethxgsf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1407,7 +1407,7 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_footnotes {
+#xrgethxgsf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1421,7 +1421,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_footnote {
+#xrgethxgsf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1430,7 +1430,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#nmkeywpxkj .gt_sourcenotes {
+#xrgethxgsf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1444,7 +1444,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#nmkeywpxkj .gt_sourcenote {
+#xrgethxgsf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1452,63 +1452,63 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#nmkeywpxkj .gt_left {
+#xrgethxgsf .gt_left {
   text-align: left;
 }
 
-#nmkeywpxkj .gt_center {
+#xrgethxgsf .gt_center {
   text-align: center;
 }
 
-#nmkeywpxkj .gt_right {
+#xrgethxgsf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nmkeywpxkj .gt_font_normal {
+#xrgethxgsf .gt_font_normal {
   font-weight: normal;
 }
 
-#nmkeywpxkj .gt_font_bold {
+#xrgethxgsf .gt_font_bold {
   font-weight: bold;
 }
 
-#nmkeywpxkj .gt_font_italic {
+#xrgethxgsf .gt_font_italic {
   font-style: italic;
 }
 
-#nmkeywpxkj .gt_super {
+#xrgethxgsf .gt_super {
   font-size: 65%;
 }
 
-#nmkeywpxkj .gt_footnote_marks {
+#xrgethxgsf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nmkeywpxkj .gt_asterisk {
+#xrgethxgsf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nmkeywpxkj .gt_indent_1 {
+#xrgethxgsf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nmkeywpxkj .gt_indent_2 {
+#xrgethxgsf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nmkeywpxkj .gt_indent_3 {
+#xrgethxgsf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nmkeywpxkj .gt_indent_4 {
+#xrgethxgsf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nmkeywpxkj .gt_indent_5 {
+#xrgethxgsf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

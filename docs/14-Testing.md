@@ -59,7 +59,7 @@ legend("topright", inset=.05, title="Distributions",
        labels, lwd=2, lty=c(1, 1, 1, 1, 2), col=colors)
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-3" class="tabcontentunnamed-chunk-3">
 
 ```r
@@ -83,7 +83,7 @@ combined %>%
   theme_classic()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-3') </script></div></div></div>
 
 A potential source of confusion when discussing *t* is that there are two values that must be considered. There is *critical t* the value which must be **exceeded** for the test to be significant (e.g. generates a *P* value that is less than our predefined $\alpha$). The critical value for *t* is defined by the *df*. Then there is the *observed * value of *t*, this is the value returned by your statistical test, calculated by $\frac{difference}{SE}$. When $observed~t > critical~t$ the result can be declared significantly different at that threshold for $\alpha$. 
@@ -501,7 +501,7 @@ y %>%
   theme_minimal()
 ```
 
-<img src="14-Testing_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="14-Testing_files/figure-html/unnamed-chunk-30-1.png" width="100%" style="display: block; margin: auto;" />
 </div></div></div>
 
 By illustrating this visually, it is clearer to see that the results are not really inconsistent, the negative effects of inbreeding depression are clear to see in all of the experiments - we are simply observing the effect of sampling error. 

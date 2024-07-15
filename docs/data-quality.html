@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 Data Quality | Introduction to Statistics</title>
+<title>Chapter 7 Data Quality | Introduction to Statistics</title>
 <meta name="author" content="Philip T. Leftwich">
 <meta name="description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
 <meta name="generator" content="bookdown 0.34 with bs4_book()">
-<meta property="og:title" content="Chapter 5 Data Quality | Introduction to Statistics">
+<meta property="og:title" content="Chapter 7 Data Quality | Introduction to Statistics">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://ueabio.github.io/physalia-intro-stats-2023/data-quality.html">
 <meta property="og:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
 <meta property="og:description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 Data Quality | Introduction to Statistics">
+<meta name="twitter:title" content="Chapter 7 Data Quality | Introduction to Statistics">
 <meta name="twitter:description" content="Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality...">
 <meta name="twitter:image" content="https://ueabio.github.io/physalia-intro-stats-2023/images/logos/twitter_card.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -112,38 +112,41 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
+<li class="book-part">Get Started in R</li>
+<li><a class="" href="introduction-to-r-and-rstudio.html"><span class="header-section-number">1</span> Introduction to R and RStudio</a></li>
+<li><a class="" href="r-basics.html"><span class="header-section-number">2</span> R Basics</a></li>
 <li class="book-part">Exploring Data</li>
-<li><a class="" href="loading-data.html"><span class="header-section-number">1</span> Loading data</a></li>
-<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">2</span> Data wrangling part one</a></li>
-<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">3</span> Data wrangling part two</a></li>
-<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data visualisation with ggplot2</a></li>
+<li><a class="" href="loading-data.html"><span class="header-section-number">3</span> Loading data</a></li>
+<li><a class="" href="data-wrangling-part-one.html"><span class="header-section-number">4</span> Data wrangling part one</a></li>
+<li><a class="" href="data-wrangling-part-two.html"><span class="header-section-number">5</span> Data wrangling part two</a></li>
+<li><a class="" href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></li>
 <li class="book-part">Descriptive Statistics</li>
-<li><a class="active" href="data-quality.html"><span class="header-section-number">5</span> Data Quality</a></li>
-<li><a class="" href="data-insights.html"><span class="header-section-number">6</span> Data insights</a></li>
+<li><a class="active" href="data-quality.html"><span class="header-section-number">7</span> Data Quality</a></li>
+<li><a class="" href="data-insights.html"><span class="header-section-number">8</span> Data insights</a></li>
 <li class="book-part">Linear models</li>
-<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">7</span> Introduction to statistics</a></li>
-<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">8</span> Introduction to Linear Models</a></li>
-<li><a class="" href="assumption-checking.html"><span class="header-section-number">9</span> Assumption checking</a></li>
-<li><a class="" href="testing.html"><span class="header-section-number">10</span> Testing</a></li>
-<li><a class="" href="paired-designs.html"><span class="header-section-number">11</span> Paired designs</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
-<li><a class="" href="anova.html"><span class="header-section-number">13</span> ANOVA</a></li>
+<li><a class="" href="introduction-to-statistics.html"><span class="header-section-number">9</span> Introduction to statistics</a></li>
+<li><a class="" href="introduction-to-linear-models.html"><span class="header-section-number">10</span> Introduction to Linear Models</a></li>
+<li><a class="" href="assumption-checking.html"><span class="header-section-number">11</span> Assumption checking</a></li>
+<li><a class="" href="testing.html"><span class="header-section-number">12</span> Testing</a></li>
+<li><a class="" href="paired-designs.html"><span class="header-section-number">13</span> Paired designs</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">14</span> Regression</a></li>
+<li><a class="" href="anova.html"><span class="header-section-number">15</span> ANOVA</a></li>
 <li class="book-part">Multiple regression</li>
-<li><a class="" href="multi-factor-anova.html"><span class="header-section-number">14</span> Multi factor ANOVA</a></li>
-<li><a class="" href="complex-models.html"><span class="header-section-number">15</span> Complex models</a></li>
+<li><a class="" href="multi-factor-anova.html"><span class="header-section-number">16</span> Multi factor ANOVA</a></li>
+<li><a class="" href="complex-models.html"><span class="header-section-number">17</span> Complex models</a></li>
 <li class="book-part">Generalized Linear Models</li>
-<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">16</span> Generalized Linear Models</a></li>
-<li><a class="" href="logistic-regression-for-binary-data.html"><span class="header-section-number">17</span> Logistic regression (for binary data)</a></li>
-<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">18</span> Poisson regression (for count data or rate data)</a></li>
+<li><a class="" href="generalized-linear-models.html"><span class="header-section-number">18</span> Generalized Linear Models</a></li>
+<li><a class="" href="logistic-regression-for-binary-data.html"><span class="header-section-number">19</span> Logistic regression (for binary data)</a></li>
+<li><a class="" href="poisson-regression-for-count-data-or-rate-data.html"><span class="header-section-number">20</span> Poisson regression (for count data or rate data)</a></li>
 <li class="book-part">Mixed Models</li>
-<li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">19</span> Foundations of Mixed Modelling</a></li>
-<li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">20</span> Worked Example 1 - Dolphins</a></li>
-<li><a class="" href="multiple-random-effects.html"><span class="header-section-number">21</span> Multiple random effects</a></li>
-<li><a class="" href="worked-example-2---nested-design.html"><span class="header-section-number">22</span> Worked Example 2 - Nested design</a></li>
-<li><a class="" href="types-of-random-effects.html"><span class="header-section-number">23</span> Types of Random Effects</a></li>
-<li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">24</span> Worked Example 3 - Sleep study</a></li>
-<li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">25</span> Reporting Mixed Model Results</a></li>
-<li><a class="" href="summary-11.html"><span class="header-section-number">26</span> Summary</a></li>
+<li><a class="" href="foundations-of-mixed-modelling.html"><span class="header-section-number">21</span> Foundations of Mixed Modelling</a></li>
+<li><a class="" href="worked-example-1---dolphins.html"><span class="header-section-number">22</span> Worked Example 1 - Dolphins</a></li>
+<li><a class="" href="multiple-random-effects.html"><span class="header-section-number">23</span> Multiple random effects</a></li>
+<li><a class="" href="worked-example-2---nested-design.html"><span class="header-section-number">24</span> Worked Example 2 - Nested design</a></li>
+<li><a class="" href="types-of-random-effects.html"><span class="header-section-number">25</span> Types of Random Effects</a></li>
+<li><a class="" href="worked-example-3---sleep-study.html"><span class="header-section-number">26</span> Worked Example 3 - Sleep study</a></li>
+<li><a class="" href="reporting-mixed-model-results.html"><span class="header-section-number">27</span> Reporting Mixed Model Results</a></li>
+<li><a class="" href="summary-11.html"><span class="header-section-number">28</span> Summary</a></li>
 </ul>
 
         <div class="book-extra">
@@ -151,9 +154,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-quality" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-quality" class="section level1" number="7">
 <h1>
-<span class="header-section-number">5</span> Data Quality<a class="anchor" aria-label="anchor" href="#data-quality"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Data Quality<a class="anchor" aria-label="anchor" href="#data-quality"><i class="fas fa-link"></i></a>
 </h1>
 <p>Before diving into data analysis, it is crucial to understand and address various aspects of data quality. Ensuring data quality is the foundation of robust and reliable insights. High-quality data leads to accurate analyses and valid conclusions, while poor-quality data can result in misleading findings and faulty decisions. This introductory guide outlines key dimensions of data quality, including completeness, consistency, accuracy, validity, uniformity, distribution, redundancy, integrity, temporal consistency, and bias checks. Understanding and evaluating these dimensions is an essential first step in generating insights from our data.</p>
 <div class="inline-table"><table class="table table-sm">
@@ -205,9 +208,9 @@
 </tr>
 </tbody>
 </table></div>
-<div id="data-wrangling" class="section level4" number="5.0.0.1">
+<div id="data-wrangling" class="section level4" number="7.0.0.1">
 <h4>
-<span class="header-section-number">5.0.0.1</span> Data wrangling<a class="anchor" aria-label="anchor" href="#data-wrangling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.0.0.1</span> Data wrangling<a class="anchor" aria-label="anchor" href="#data-wrangling"><i class="fas fa-link"></i></a>
 </h4>
 <p>Importantly you should have already generated an understanding of data checking and validation of your dataset during the <a href="data-wrangling-part-one.html#data-wrangling-part-one">data wrangling</a> steps. Including gaining insights on:</p>
 <ul>
@@ -236,14 +239,14 @@ console.
 </p>
 </div>
 </div>
-<div id="variable-types" class="section level2" number="5.1">
+<div id="variable-types" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">5.1</span> Variable types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Variable types<a class="anchor" aria-label="anchor" href="#variable-types"><i class="fas fa-link"></i></a>
 </h2>
 <p>A quick refresher:</p>
-<div id="numerical" class="section level3" number="5.1.1">
+<div id="numerical" class="section level3" number="7.1.1">
 <h3>
-<span class="header-section-number">5.1.1</span> Numerical<a class="anchor" aria-label="anchor" href="#numerical"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.1</span> Numerical<a class="anchor" aria-label="anchor" href="#numerical"><i class="fas fa-link"></i></a>
 </h3>
 <p>You <strong>should</strong> already be familiar with the concepts of numerical and categorical data. <strong>Numeric</strong> variables have values that describe a measure or quantity. This is also known as quantitative data. We can subdivide numerical data further:</p>
 <ul>
@@ -258,9 +261,9 @@ While in theory these values can have any numbers, within a dataset they are lik
 </ul>
 <p>In a tibble these will be represented by the header <code>&lt;int&gt;</code>.</p>
 </div>
-<div id="categorical" class="section level3" number="5.1.2">
+<div id="categorical" class="section level3" number="7.1.2">
 <h3>
-<span class="header-section-number">5.1.2</span> Categorical<a class="anchor" aria-label="anchor" href="#categorical"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.2</span> Categorical<a class="anchor" aria-label="anchor" href="#categorical"><i class="fas fa-link"></i></a>
 </h3>
 <p>Values that describe a characteristic of data such as 'what type' or 'which category'. Categorical variables are mutually exclusive - one observation should not be able to fall into two categories at once - and should be exhaustive - there should not be data which does not <em>fit</em> a category (not the same as NA - not recorded). Categorical variables are qualitative, and often represented by non-numeric values such as words. It's a bad idea to represent categorical variables as numbers (R won't treat it correctly). Categorical variables can be defined further as:</p>
 <ul>
@@ -270,12 +273,12 @@ In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p
 </ul>
 <p>These will have to be coded manually see <a href="data-wrangling-part-two.html#factors">Factors</a>, and will then be represented in a tibble by the header <code>&lt;fct&gt;</code></p>
 <p>It is important to order Ordinal variables in the their logical order value when plotting data visuals or tables. Nominal variables are more flexible and could be ordered in whatever pattern works best for your data ( by default they will plot alphabetically, but perhaps you could order them according to the values of another numeric variable).</p>
-<div id="quick-view-of-variables" class="section level4" number="5.1.2.1">
+<div id="quick-view-of-variables" class="section level4" number="7.1.2.1">
 <h4>
-<span class="header-section-number">5.1.2.1</span> Quick view of variables<a class="anchor" aria-label="anchor" href="#quick-view-of-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.2.1</span> Quick view of variables<a class="anchor" aria-label="anchor" href="#quick-view-of-variables"><i class="fas fa-link"></i></a>
 </h4>
 <p>Let's take a look at some of our variables, these functions will give a quick snapshot overview.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
 <p>Here we get insights into whether each variable is in a valid data type, information on range and the extent of any missingness.</p>
@@ -285,9 +288,9 @@ In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p
 </div>
 </div>
 </div>
-<div id="missing-data" class="section level2" number="5.2">
+<div id="missing-data" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">5.2</span> Missing data<a class="anchor" aria-label="anchor" href="#missing-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Missing data<a class="anchor" aria-label="anchor" href="#missing-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>The first issue we will cover is missing data. There is a whole host of reasons that your data could have missing values.</p>
 <p>This can be broken down into three broad categories:</p>
@@ -321,11 +324,11 @@ In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p
 </tbody>
 </table></div>
 <p>Understanding which type of process is causing your missing data is important, for any type of missingness at random we can process our data accordingly. But if the missing data is Not at Random we may have to consider collecting more data.</p>
-<div id="deletion" class="section level3" number="5.2.1">
+<div id="deletion" class="section level3" number="7.2.1">
 <h3>
-<span class="header-section-number">5.2.1</span> Deletion<a class="anchor" aria-label="anchor" href="#deletion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.1</span> Deletion<a class="anchor" aria-label="anchor" href="#deletion"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins_listwise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">)</span></span></code></pre></div>
 <p>As you can see, penguins_listwise now only contains data for penguins with a complete set of data—i.e., observations in each column.</p>
 <p>While this might seem beneficial and sometimes is the most appropriate option, there are a couple of important points to consider.</p>
@@ -333,7 +336,7 @@ In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p
 <p>Additionally, using a listwise deletion approach can result in significant data loss. Compare the original penguins dataset to penguins_listwise. The original dataset had 344 observations. After using drop_na(), we only have 34 observations, meaning we've lost a huge portion of our data with this approach! Only a handful of observations have accompanying notes in the comments column</p>
 <p>Note: If you use a listwise deletion approach, it's also important to check that the missing values are not concentrated in a particular group (i.e., ensure the missing data is random and not biased).</p>
 <p>To address these issues, you can modify the use of drop_na() to exclude specific columns, such as comments and isotopes, from the deletion criteria. This ensures you don't exclude observations based on irrelevant columns. For example, run the code below:</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins_listwise2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="op">-</span><span class="va">delta_15n</span>, <span class="op">-</span><span class="va">delta_13c</span>, <span class="op">-</span><span class="va">comments</span><span class="op">)</span></span></code></pre></div>
 <p>Q. How many observations does <code>penguins_listwise2</code> have?</p>
 <p><select class="webex-select"><option value="blank"></option>
@@ -345,13 +348,13 @@ In a tibble these will be represented by the header <code>&lt;chr&gt;</code>.</p
 Alternatively, you could choose to remove participants with NAs based only on specific columns relevant to your analysis, such as bill length and flipper length:</p>
 <p>This demonstrates the flexibility of <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> — you have a lot of control as long as you plan your approach in advance.</p>
 </div>
-<div id="pairwise-deletion" class="section level3" number="5.2.2">
+<div id="pairwise-deletion" class="section level3" number="7.2.2">
 <h3>
-<span class="header-section-number">5.2.2</span> Pairwise deletion<a class="anchor" aria-label="anchor" href="#pairwise-deletion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.2</span> Pairwise deletion<a class="anchor" aria-label="anchor" href="#pairwise-deletion"><i class="fas fa-link"></i></a>
 </h3>
 <p>An alternative to listwise deletion is pairwise deletion. This method removes cases depending on the analysis. For example, if we calculate correlations between bill length, flipper length, and body mass without first removing observations with missing data, we'll use different numbers of observations in each correlation based on the available data for each pair of variables.</p>
 <p>Consider the following correlations:</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Correlation between bill_length_mm and flipper_length_mm</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">penguins</span><span class="op">$</span><span class="va">body_mass_g</span>, <span class="va">penguins</span><span class="op">$</span><span class="va">delta_15n</span><span class="op">)</span></span>
 <span><span class="co"># Output example:</span></span>
@@ -366,12 +369,12 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 <p>You can see that the correlation between body mass and delta_15n has df = 328, whereas the correlation between body mass and delta_13c has df = 329. This indicates that the correlation is calculated only on the observations with available data for both columns—pairwise deletion.</p>
 <p>The challenge here is to remember to report the degrees of freedom (dfs) accordingly, as they change and may differ from the total number of observations mentioned in your methods section. Therefore, it is crucial to thoroughly examine your data!</p>
 </div>
-<div id="summarising-data-with-missing-values" class="section level3" number="5.2.3">
+<div id="summarising-data-with-missing-values" class="section level3" number="7.2.3">
 <h3>
-<span class="header-section-number">5.2.3</span> Summarising data with missing values<a class="anchor" aria-label="anchor" href="#summarising-data-with-missing-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.3</span> Summarising data with missing values<a class="anchor" aria-label="anchor" href="#summarising-data-with-missing-values"><i class="fas fa-link"></i></a>
 </h3>
 <p>When running inferential tests like correlations, and later, linear models, the analysis will usually know to ignore missing values. However, when calculating descriptive statistics or if you want to calculate the average score of a number of different items, you need to explicitly state to ignore the missing values. We can do this through <code>na.rm = TRUE</code></p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -398,7 +401,7 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </table></div>
 </div>
 <p>As you can see, the mean score for body mass in Adelie and Gentoo penguins shows as <code>NA</code>. This is because we are trying to calculate an average of a variable that has missing data and that just isn't doable. As such we need to calculate the mean but ignoring the missing values by adding <code>na.rm = TRUE</code></p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -425,7 +428,7 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </table></div>
 </div>
 <p>When working with data, it’s crucial to consider whether you want to calculate your descriptive statistics from observations with missing data. For instance, if you are calculating the average body mass from hundreds of measurements, a few missing data points won’t significantly impact the validity of the mean. However, if the missing data is biased in some way, or you only have values for 30% of the total dataset, it may not be appropriate to calculate a mean score from the remaining data.</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -453,17 +456,17 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </div>
 </div>
 </div>
-<div id="implausible-values" class="section level2" number="5.3">
+<div id="implausible-values" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">5.3</span> Implausible values<a class="anchor" aria-label="anchor" href="#implausible-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Implausible values<a class="anchor" aria-label="anchor" href="#implausible-values"><i class="fas fa-link"></i></a>
 </h2>
-<div id="categorical-data" class="section level3" number="5.3.1">
+<div id="categorical-data" class="section level3" number="7.3.1">
 <h3>
-<span class="header-section-number">5.3.1</span> Categorical data<a class="anchor" aria-label="anchor" href="#categorical-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.1</span> Categorical data<a class="anchor" aria-label="anchor" href="#categorical-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Along with looking for missing values, an additional crucial step of data screening is checking for implausible values - values that should not exist in your data. What is implausible depends on the data you've collected!</p>
 <p>The first place to look for implausible values is in character and factorial data - typos will be incorrectly processed as unique levels to a variable</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span></code></pre></div>
@@ -504,7 +507,7 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </table></div>
 </div>
 <p>Or you could combine these into a single run</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">sex</span>, <span class="va">species</span>, <span class="va">region</span>, <span class="va">island</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -599,12 +602,12 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </table></div>
 </div>
 </div>
-<div id="continuous-data" class="section level3" number="5.3.2">
+<div id="continuous-data" class="section level3" number="7.3.2">
 <h3>
-<span class="header-section-number">5.3.2</span> Continuous data<a class="anchor" aria-label="anchor" href="#continuous-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.2</span> Continuous data<a class="anchor" aria-label="anchor" href="#continuous-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Additional functions we can put inside a <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> function are <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code>.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_at</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span><span class="op">)</span>,</span>
 <span>               <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>max <span class="op">=</span> <span class="va">max</span>, min <span class="op">=</span> <span class="va">min</span><span class="op">)</span>,</span>
@@ -633,12 +636,12 @@ Alternatively, you could choose to remove participants with NAs based only on sp
 </div>
 <p>Or we could use <code>summary</code> or <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skimr::skim</a></code></p>
 </div>
-<div id="visualise-continuous-data" class="section level3" number="5.3.3">
+<div id="visualise-continuous-data" class="section level3" number="7.3.3">
 <h3>
-<span class="header-section-number">5.3.3</span> Visualise continuous data<a class="anchor" aria-label="anchor" href="#visualise-continuous-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.3</span> Visualise continuous data<a class="anchor" aria-label="anchor" href="#visualise-continuous-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are a number of different ways to visualise the data as you know and this depends on the data, and your preferences. You could produce histograms, or violin-boxplots with the data points on top to check the distributions as follows:</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span><span class="op">)</span>,</span>
@@ -651,7 +654,7 @@ figure changes. It is usually a very good idea to try more than one set
 of bins in order to have better insights into the data
 </p>
 </div>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
@@ -698,13 +701,13 @@ There appear to be more data points to the right of the peak of the histogram th
 </div>
 <p>If you found atypical values at this point, you could decide to exclude them from the dataset (using <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, or impute the data (see below)). BUT you should only do this at this stage if you have a very strong reason for believing this is a mistake in the data entry, rather than a true outlier.</p>
 </div>
-<div id="impute-data" class="section level3" number="5.3.4">
+<div id="impute-data" class="section level3" number="7.3.4">
 <h3>
-<span class="header-section-number">5.3.4</span> Impute data<a class="anchor" aria-label="anchor" href="#impute-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.4</span> Impute data<a class="anchor" aria-label="anchor" href="#impute-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>One method for dealing with NA or implausible data is to remove it. An alternative method for dealing with implausible data is to impute the data, i.e., to replace missing data with substituted values. There are many methods of doing this, for example, you can replace missing values with the mean value of the distribution. Although there are more sophisticated methods available <a href="https://www.r-bloggers.com/2015/10/imputing-missing-data-with-r-mice-package/">see here</a>.</p>
 <p>The code for imputing missing data uses <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> and <code><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na()</a></code>:</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins_imputed</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>body_mass_g <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">body_mass_g</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -712,15 +715,15 @@ There appear to be more data points to the right of the peak of the histogram th
 <p>If you check the dataset, you can see that they have been given the value of the mean of the distribution in this new variable and then can be used in different analyses!</p>
 </div>
 </div>
-<div id="categorical-variables" class="section level2" number="5.4">
+<div id="categorical-variables" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">5.4</span> Categorical variables<a class="anchor" aria-label="anchor" href="#categorical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Categorical variables<a class="anchor" aria-label="anchor" href="#categorical-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div id="frequency" class="section level4" number="5.4.0.1">
+<div id="frequency" class="section level4" number="7.4.0.1">
 <h4>
-<span class="header-section-number">5.4.0.1</span> Frequency<a class="anchor" aria-label="anchor" href="#frequency"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.0.1</span> Frequency<a class="anchor" aria-label="anchor" href="#frequency"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -747,7 +750,7 @@ There appear to be more data points to the right of the peak of the histogram th
 </table></div>
 </div>
 <p>It might be useful for us to make some quick data summaries here, like relative frequency</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prob_obs_species</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -782,14 +785,14 @@ There appear to be more data points to the right of the peak of the histogram th
 </div>
 <p>So about 44% of our sample is made up of observations from Adelie penguins. We also know that our Chinstrap penguins make up less than 20% of the dataset. When it comes to making summaries about categorical data, that's about the best we can do, we can make observations about the most common categorical observations, and the relative proportions.</p>
 <p>Here it is important to consider whether we have any evidence for sampling bias. Or just to understand that the power of any analyses might be limited by the least abundant group. Either way it will be important to record and report these numbers when producing any analyses.</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This chart is ok - but can we make anything better?</p>
 <p>We could go for a stacked bar approach</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">""</span>,</span>
 <span>             fill<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> </span>
@@ -804,7 +807,7 @@ There appear to be more data points to the right of the peak of the histogram th
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This graph is OK <em>but not great</em>, the height of each section of the bar represents the relative proportions of each species in the dataset, but this type of chart becomes increasingly difficult to read as more categories are included. Colours become increasingly samey,and it is difficult to read where on the y-axis a category starts and stops, you then have to do some subtraction to work out the values.</p>
 <p>The best graph is then probably the first one we made - with a few minor tweak we can rapidly improve this.</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>species<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">species</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Adelie"</span>,</span>
 <span>                                          <span class="st">"Gentoo"</span>,</span>
@@ -825,9 +828,9 @@ There appear to be more data points to the right of the peak of the histogram th
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This is an example of a figure we might use in a report or paper. Having cleaned up the theme, added some simple colour, made sure our labels are clear and descriptive, ordered our categories in ascending frequency order, and included some simple text of percentages to aid readability.</p>
 </div>
-<div id="two-categorical-variables" class="section level4" number="5.4.0.2">
+<div id="two-categorical-variables" class="section level4" number="7.4.0.2">
 <h4>
-<span class="header-section-number">5.4.0.2</span> Two categorical variables<a class="anchor" aria-label="anchor" href="#two-categorical-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.0.2</span> Two categorical variables<a class="anchor" aria-label="anchor" href="#two-categorical-variables"><i class="fas fa-link"></i></a>
 </h4>
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -838,7 +841,7 @@ Think about what might be a suitable confounding variable to investigate and gra
 </div>
 </div>
 <p>Understanding how frequency is broken down by species and sex might be useful information to have.</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -905,18 +908,18 @@ Think about what might be a suitable confounding variable to investigate and gra
 </div>
 </div>
 </div>
-<div id="continuous-variables" class="section level2" number="5.5">
+<div id="continuous-variables" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">5.5</span> Continuous variables<a class="anchor" aria-label="anchor" href="#continuous-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Continuous variables<a class="anchor" aria-label="anchor" href="#continuous-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div id="central-tendency" class="section level4" number="5.5.0.1">
+<div id="central-tendency" class="section level4" number="7.5.0.1">
 <h4>
-<span class="header-section-number">5.5.0.1</span> Central tendency<a class="anchor" aria-label="anchor" href="#central-tendency"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.1</span> Central tendency<a class="anchor" aria-label="anchor" href="#central-tendency"><i class="fas fa-link"></i></a>
 </h4>
 <p>Central tendency is a descriptive summary of a dataset through a single value that reflects the center of the data distribution. The three most widely used measures of central tendency are <strong>mean</strong>, <strong>median</strong> and <strong>mode</strong>.</p>
 <p>The <strong>mean</strong> is defined as the sum of all values of the variable divided by the total number of values. The <strong>median</strong> is the middle value. If N is odd and if N is even, it is the average of the two middle values. The <strong>mode</strong> is the most frequently occurring observation in a data set, but is arguable least useful for understanding biological datasets.</p>
 <p>We can find both the mean and median easily with the summarise function. The <strong>mean</strong> is usually the best measure of central tendency when the distribution is symmetrical, and the <strong>mode</strong> is the best measure when the distribution is asymmetrical/skewed.</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguin_body_mass_summary</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_body_mass<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span>, </span>
 <span>              sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,</span>
@@ -940,7 +943,7 @@ Think about what might be a suitable confounding variable to investigate and gra
 </tr></tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">body_mass_g</span><span class="op">)</span>,</span>
@@ -962,13 +965,13 @@ Think about what might be a suitable confounding variable to investigate and gra
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-27"></span>
 <img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-27-1.png" alt="Red dashed line represents the mean, Black dashed line is the median value" width="100%"><p class="caption">
-Figure 5.1: Red dashed line represents the mean, Black dashed line is the median value
+Figure 7.1: Red dashed line represents the mean, Black dashed line is the median value
 </p>
 </div>
 </div>
-<div id="normal-distribution" class="section level4" number="5.5.0.2">
+<div id="normal-distribution" class="section level4" number="7.5.0.2">
 <h4>
-<span class="header-section-number">5.5.0.2</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.2</span> Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution"><i class="fas fa-link"></i></a>
 </h4>
 <p>From our histogram we can likely already tell whether we have normally distributed data.</p>
 <div class="info">
@@ -982,7 +985,7 @@ curve”.
 </div>
 <p>If our data follows a normal distribution, then we can predict the spread of our data, and the likelihood of observing a datapoint of any given value with only the mean and standard deviation.</p>
 <p>Here we can simulate what a normally distributed dataset would look like with our sample size, mean and standard deviation.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">norm_mass</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">344</span>,</span>
 <span>      mean <span class="op">=</span> <span class="fl">4201.754</span>,</span>
 <span>      sd <span class="op">=</span> <span class="fl">801.9545</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -995,27 +998,27 @@ curve”.
 <span>                 bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-29-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="qq-plot" class="section level4" number="5.5.0.3">
+<div id="qq-plot" class="section level4" number="7.5.0.3">
 <h4>
-<span class="header-section-number">5.5.0.3</span> QQ-plot<a class="anchor" aria-label="anchor" href="#qq-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.3</span> QQ-plot<a class="anchor" aria-label="anchor" href="#qq-plot"><i class="fas fa-link"></i></a>
 </h4>
 <p>A QQ plot is a classic way of checking whether a sample distribution is the same as another (or theoretical distribution). They look a bit odd at first, but they are actually fairly easy to understand, and very useful! The qqplot distributes your data on the y-axis, and a theoretical normal distribution on the x-axis. If the residuals follow a normal distribution, they should meet to produce a perfect diagonal line across the plot.</p>
 <p>Watch this video to see <a href="https://www.youtube.com/watch?v=okjYjClSjOg">QQ plots explained</a></p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-30"></span>
 <img src="images/qq_example.png" alt="Examples of qqplots with different deviations from a normal distribution" width="80%"><p class="caption">
-Figure 5.2: Examples of qqplots with different deviations from a normal distribution
+Figure 7.2: Examples of qqplots with different deviations from a normal distribution
 </p>
 </div>
 <p>In our example we can see that <em>most</em> of our residuals can be explained by a normal distribution, except at the low end of our data.</p>
 <p>So the fit is not perfect, but it is also not terrible!</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-31-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p><strong>How do we know how much deviation from an idealised distribution is ok?</strong></p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1042,9 +1045,9 @@ There are is a 'truncated' left tail of our normal distribution. We would predic
 </div>
 </div>
 </div>
-<div id="variation" class="section level4" number="5.5.0.4">
+<div id="variation" class="section level4" number="7.5.0.4">
 <h4>
-<span class="header-section-number">5.5.0.4</span> Variation<a class="anchor" aria-label="anchor" href="#variation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.4</span> Variation<a class="anchor" aria-label="anchor" href="#variation"><i class="fas fa-link"></i></a>
 </h4>
 <p>Dispersion (how spread out the data is) is an important component towards understanding any numeric variable. While measures of central tendency are used to estimate the central value of a dataset, measures of dispersion are important for describing the spread of data.</p>
 <p>Two data sets can have an equal mean (that is, measure of central tendency) but vastly different variability.</p>
@@ -1055,13 +1058,13 @@ There are is a 'truncated' left tail of our normal distribution. We would predic
 <li><p><strong>Variance</strong> is defined as the sum of squares of deviations from the mean, divided by the total number of observations. The standard deviation is the positive square root of the variance. The <strong>standard deviation</strong> is preferred instead of variance as it has the same units as the original values.</p></li>
 </ul>
 </div>
-<div id="interquartile-range" class="section level4" number="5.5.0.5">
+<div id="interquartile-range" class="section level4" number="7.5.0.5">
 <h4>
-<span class="header-section-number">5.5.0.5</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.5</span> Interquartile range<a class="anchor" aria-label="anchor" href="#interquartile-range"><i class="fas fa-link"></i></a>
 </h4>
 <p>We used the IQR function in <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to find the interquartile range of the body mass variable.</p>
 <p>The IQR is also useful when applied to the summary plots 'box and whisker plots'. We can also calculate the values of the IQR margins, and add labels with <code>scales</code> <span class="citation">Wickham &amp; Seidel (<a href="summary-11.html#ref-R-scales">2022</a>)</span>.</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>q_body_mass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">body_mass_g</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>            quantile <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># scales package allows easy converting from data values to perceptual properties</span></span></code></pre></div>
@@ -1089,9 +1092,9 @@ There are is a 'truncated' left tail of our normal distribution. We would predic
 </div>
 <p>We can see for ourselves the IQR is obtained by subtracting the body mass at tht 75% quantile from the 25% quantile (4750-3550 = 1200).</p>
 </div>
-<div id="standard-deviation" class="section level4" number="5.5.0.6">
+<div id="standard-deviation" class="section level4" number="7.5.0.6">
 <h4>
-<span class="header-section-number">5.5.0.6</span> Standard deviation<a class="anchor" aria-label="anchor" href="#standard-deviation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.6</span> Standard deviation<a class="anchor" aria-label="anchor" href="#standard-deviation"><i class="fas fa-link"></i></a>
 </h4>
 <p>standard deviation (or <span class="math inline">\(s\)</span>) is a measure of how dispersed the data is in relation to the mean. Low standard deviation means data are clustered around the mean, and high standard deviation indicates data are more spread out. As such it makes sense only to use this when the mean is a good measure of our central tendency.</p>
 <div class="info">
@@ -1129,17 +1132,17 @@ Solution
 </div>
 </div>
 </div>
-<div id="visualising-dispersion" class="section level4" number="5.5.0.7">
+<div id="visualising-dispersion" class="section level4" number="7.5.0.7">
 <h4>
-<span class="header-section-number">5.5.0.7</span> Visualising dispersion<a class="anchor" aria-label="anchor" href="#visualising-dispersion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.0.7</span> Visualising dispersion<a class="anchor" aria-label="anchor" href="#visualising-dispersion"><i class="fas fa-link"></i></a>
 </h4>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-38"></span>
 <img src="images/distribution_gif.gif" alt="Visualising dispersion with different figures" width="80%"><p class="caption">
-Figure 5.3: Visualising dispersion with different figures
+Figure 7.3: Visualising dispersion with different figures
 </p>
 </div>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">colour_fill</span> <span class="op">&lt;-</span> <span class="st">"darkorange"</span></span>
 <span><span class="va">colour_line</span> <span class="op">&lt;-</span> <span class="st">"steelblue"</span></span>
 <span><span class="va">lims</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">7000</span><span class="op">)</span></span>
@@ -1188,18 +1191,18 @@ Figure 5.3: Visualising dispersion with different figures
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We now have several compact representations of the body_mass_g including a histogram, boxplot and summary calculations. You can <em>and should</em> generate the same summaries for your other numeric variables. These tables and graphs provide the detail you need to understand the central tendency and dispersion of numeric variables.</p>
 </div>
-<div id="what-is-an-outlier" class="section level3" number="5.5.1">
+<div id="what-is-an-outlier" class="section level3" number="7.5.1">
 <h3>
-<span class="header-section-number">5.5.1</span> What is an outlier?<a class="anchor" aria-label="anchor" href="#what-is-an-outlier"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.1</span> What is an outlier?<a class="anchor" aria-label="anchor" href="#what-is-an-outlier"><i class="fas fa-link"></i></a>
 </h3>
 <p>Outliers are data points that deviate significantly from other observations in a dataset. They can be identified using various methods, such as the Interquartile Range (IQR), which defines outliers as values lying outside 1.5 times the IQR above the third quartile or below the first quartile.</p>
 <p>Other definitions may include standard deviations from the mean or z-scores.</p>
 <p>However, it's crucial to approach outliers with caution. Removing them without context can lead to the loss of valuable information, as these points might reveal important insights or reflect underlying trends. Additionally, outliers can change when data transformations are applied or when models are fitted. Therefore, a thoughtful analysis of outliers is essential, considering their potential impact on conclusions and the overall integrity of the data.</p>
 </div>
 </div>
-<div id="categorical-and-continuous-variables" class="section level2" number="5.6">
+<div id="categorical-and-continuous-variables" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">5.6</span> Categorical and continuous variables<a class="anchor" aria-label="anchor" href="#categorical-and-continuous-variables"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Categorical and continuous variables<a class="anchor" aria-label="anchor" href="#categorical-and-continuous-variables"><i class="fas fa-link"></i></a>
 </h2>
 <p>It’s common to want to explore the distribution of a continuous variable broken down by a categorical variable.</p>
 <div class="webex-solution">
@@ -1209,7 +1212,7 @@ Think about which other variables might affect body mass?
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-40"></span>
 <img src="images/body-mass-interaction.png" alt="Species and sex are both likely to affect body mass" width="80%"><p class="caption">
-Figure 5.4: Species and sex are both likely to affect body mass
+Figure 7.4: Species and sex are both likely to affect body mass
 </p>
 </div>
 <p>So it is reasonable to think that perhaps either species or sex might affect the morphology of beaks directly - or that these might affect body mass (so that if there is a direct relationship between mass and beak length, there will also be an indirect relationship with sex or species).</p>
@@ -1217,9 +1220,9 @@ Figure 5.4: Species and sex are both likely to affect body mass
 <p>The best and simplest place to start exploring these possible relationships is by producing simple figures.</p>
 <p>Let's start by looking at the distribution of body mass by species.</p>
 </div>
-<div id="activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species" class="section level2" number="5.7">
+<div id="activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species" class="section level2" number="7.7">
 <h2>
-<span class="header-section-number">5.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species<a class="anchor" aria-label="anchor" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species<a class="anchor" aria-label="anchor" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><i class="fas fa-link"></i></a>
 </h2>
 <button id="displayTextunnamed-chunk-41" onclick="javascript:toggle('unnamed-chunk-41');">
 Show Solution
@@ -1230,7 +1233,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jitter_plot</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>,</span>
 <span>               y <span class="op">=</span> <span class="va">body_mass_g</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -1257,15 +1260,15 @@ Solution
 <span>                colour <span class="op">=</span> <span class="va">colour_line</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">jitter_plot</span><span class="op">/</span><span class="va">box_plot</span><span class="op">/</span><span class="va">histogram_plot</span></span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent <code>ggridges</code> package to help out</p>
 </div>
 </div>
 </div>
 </div>
-<div id="ggridges" class="section level2" number="5.8">
+<div id="ggridges" class="section level2" number="7.8">
 <h2>
-<span class="header-section-number">5.8</span> GGridges<a class="anchor" aria-label="anchor" href="#ggridges"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.8</span> GGridges<a class="anchor" aria-label="anchor" href="#ggridges"><i class="fas fa-link"></i></a>
 </h2>
 <p>The package <code>ggridges</code> (<span class="citation">Wilke (<a href="summary-11.html#ref-R-ggridges">2022</a>)</span>) provides some excellent extra geoms to supplement <code>ggplot</code>. One if its most useful features is to to allow different groups to be mapped to the y axis, so that histograms are more easily viewed.</p>
 <button id="displayTextunnamed-chunk-42" onclick="javascript:toggle('unnamed-chunk-42');">
@@ -1277,21 +1280,21 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">ggridges</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/ggridges/reference/stat_binline.html">stat_binline</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">colour_fill</span>,</span>
 <span>                alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-71-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 </div>
 </div>
-<div id="qqplots-by-group" class="section level2" number="5.9">
+<div id="qqplots-by-group" class="section level2" number="7.9">
 <h2>
-<span class="header-section-number">5.9</span> QQplots by group<a class="anchor" aria-label="anchor" href="#qqplots-by-group"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> QQplots by group<a class="anchor" aria-label="anchor" href="#qqplots-by-group"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Q. Does each species have a data distribution that appears to be normally distributed?</strong></p>
 <ul>
@@ -1314,12 +1317,12 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html">group_split</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">body_mass_g</span><span class="op">)</span> </span>
 <span>      <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/qqPlot.html">qqPlot</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-2.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-3.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-1.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-2.png" width="100%" style="display: block; margin: auto;"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-3.png" width="100%" style="display: block; margin: auto;"></p>
 <pre><code>## [[1]]
 ## [1] 110 102
 ## 
@@ -1333,7 +1336,7 @@ Solution
 </div>
 </div>
 <p>If we wanted to we could also apply more formal tests of normality here:</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
@@ -1368,21 +1371,21 @@ Solution
 </table></div>
 </div>
 <p>What's interesting to note here is that the qqplots were very similar to each other, and Shapiro's W is basically the same for all three species. Therefore the difference comes down to sample size. There are over twice as many Adelie penguins as Chinstrap's - so the power to detect small deviations from normality is higher.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">drop_na</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">body_mass_g</span>, y <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_density_ridges.html">geom_density_ridges</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span>,</span>
 <span>                        colour <span class="op">=</span> <span class="va">colour_line</span>,</span>
 <span>                        alpha <span class="op">=</span> <span class="fl">0.8</span>,</span>
 <span>                        bandwidth <span class="op">=</span> <span class="fl">175</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># try playing with the bandwidth argument - this behaves similar to binning which you should be familiar with from using geom_histogram</span></span></code></pre></div>
 <p>If we take important subpopulations into account such as species and sex (these penguins have sexual dimorphism) - we see no evidence for any deviation from normality (despite the unexplained peaks we can still observe).</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span>,<span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">body_mass_g</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
@@ -1439,9 +1442,9 @@ Solution
 </table></div>
 </div>
 </div>
-<div id="activity-2-test-yourself" class="section level2" number="5.10">
+<div id="activity-2-test-yourself" class="section level2" number="7.10">
 <h2>
-<span class="header-section-number">5.10</span> Activity 2: Test yourself<a class="anchor" aria-label="anchor" href="#activity-2-test-yourself"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.10</span> Activity 2: Test yourself<a class="anchor" aria-label="anchor" href="#activity-2-test-yourself"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Question 1.</strong> Write down some insights you have made about the data and relationships you have observed. Compare these to the ones below. Do you agree with these? Did you miss any? What observations did you make that are <strong>not</strong> in the list below.</p>
 <div class="webex-solution">
@@ -1476,7 +1479,7 @@ Show Solution
 Solution
 </div>
 <div class="panel-body">
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean</span> <span class="op">&lt;-</span> <span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">body_mass_g</span>, na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1686,42 +1689,42 @@ $( document ).ready(function() {
   );
 });
 </script><div class="chapter-nav">
-<div class="prev"><a href="data-visualisation-with-ggplot2.html"><span class="header-section-number">4</span> Data visualisation with ggplot2</a></div>
-<div class="next"><a href="data-insights.html"><span class="header-section-number">6</span> Data insights</a></div>
+<div class="prev"><a href="data-visualisation-with-ggplot2.html"><span class="header-section-number">6</span> Data visualisation with ggplot2</a></div>
+<div class="next"><a href="data-insights.html"><span class="header-section-number">8</span> Data insights</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-quality"><span class="header-section-number">5</span> Data Quality</a></li>
+<li><a class="nav-link" href="#data-quality"><span class="header-section-number">7</span> Data Quality</a></li>
 <li>
-<a class="nav-link" href="#variable-types"><span class="header-section-number">5.1</span> Variable types</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#numerical"><span class="header-section-number">5.1.1</span> Numerical</a></li>
-<li><a class="nav-link" href="#categorical"><span class="header-section-number">5.1.2</span> Categorical</a></li>
+<a class="nav-link" href="#variable-types"><span class="header-section-number">7.1</span> Variable types</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#numerical"><span class="header-section-number">7.1.1</span> Numerical</a></li>
+<li><a class="nav-link" href="#categorical"><span class="header-section-number">7.1.2</span> Categorical</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#missing-data"><span class="header-section-number">5.2</span> Missing data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#deletion"><span class="header-section-number">5.2.1</span> Deletion</a></li>
-<li><a class="nav-link" href="#pairwise-deletion"><span class="header-section-number">5.2.2</span> Pairwise deletion</a></li>
-<li><a class="nav-link" href="#summarising-data-with-missing-values"><span class="header-section-number">5.2.3</span> Summarising data with missing values</a></li>
+<a class="nav-link" href="#missing-data"><span class="header-section-number">7.2</span> Missing data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#deletion"><span class="header-section-number">7.2.1</span> Deletion</a></li>
+<li><a class="nav-link" href="#pairwise-deletion"><span class="header-section-number">7.2.2</span> Pairwise deletion</a></li>
+<li><a class="nav-link" href="#summarising-data-with-missing-values"><span class="header-section-number">7.2.3</span> Summarising data with missing values</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#implausible-values"><span class="header-section-number">5.3</span> Implausible values</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#categorical-data"><span class="header-section-number">5.3.1</span> Categorical data</a></li>
-<li><a class="nav-link" href="#continuous-data"><span class="header-section-number">5.3.2</span> Continuous data</a></li>
-<li><a class="nav-link" href="#visualise-continuous-data"><span class="header-section-number">5.3.3</span> Visualise continuous data</a></li>
-<li><a class="nav-link" href="#impute-data"><span class="header-section-number">5.3.4</span> Impute data</a></li>
+<a class="nav-link" href="#implausible-values"><span class="header-section-number">7.3</span> Implausible values</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#categorical-data"><span class="header-section-number">7.3.1</span> Categorical data</a></li>
+<li><a class="nav-link" href="#continuous-data"><span class="header-section-number">7.3.2</span> Continuous data</a></li>
+<li><a class="nav-link" href="#visualise-continuous-data"><span class="header-section-number">7.3.3</span> Visualise continuous data</a></li>
+<li><a class="nav-link" href="#impute-data"><span class="header-section-number">7.3.4</span> Impute data</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#categorical-variables"><span class="header-section-number">5.4</span> Categorical variables</a></li>
+<li><a class="nav-link" href="#categorical-variables"><span class="header-section-number">7.4</span> Categorical variables</a></li>
 <li>
-<a class="nav-link" href="#continuous-variables"><span class="header-section-number">5.5</span> Continuous variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#what-is-an-outlier"><span class="header-section-number">5.5.1</span> What is an outlier?</a></li></ul>
+<a class="nav-link" href="#continuous-variables"><span class="header-section-number">7.5</span> Continuous variables</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#what-is-an-outlier"><span class="header-section-number">7.5.1</span> What is an outlier?</a></li></ul>
 </li>
-<li><a class="nav-link" href="#categorical-and-continuous-variables"><span class="header-section-number">5.6</span> Categorical and continuous variables</a></li>
-<li><a class="nav-link" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><span class="header-section-number">5.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species</a></li>
-<li><a class="nav-link" href="#ggridges"><span class="header-section-number">5.8</span> GGridges</a></li>
-<li><a class="nav-link" href="#qqplots-by-group"><span class="header-section-number">5.9</span> QQplots by group</a></li>
-<li><a class="nav-link" href="#activity-2-test-yourself"><span class="header-section-number">5.10</span> Activity 2: Test yourself</a></li>
+<li><a class="nav-link" href="#categorical-and-continuous-variables"><span class="header-section-number">7.6</span> Categorical and continuous variables</a></li>
+<li><a class="nav-link" href="#activity-1-produce-a-plot-which-allows-you-to-look-at-the-distribution-of-penguin-body-mass-observations-by-species"><span class="header-section-number">7.7</span> Activity 1: Produce a plot which allows you to look at the distribution of penguin body mass observations by species</a></li>
+<li><a class="nav-link" href="#ggridges"><span class="header-section-number">7.8</span> GGridges</a></li>
+<li><a class="nav-link" href="#qqplots-by-group"><span class="header-section-number">7.9</span> QQplots by group</a></li>
+<li><a class="nav-link" href="#activity-2-test-yourself"><span class="header-section-number">7.10</span> Activity 2: Test yourself</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1739,7 +1742,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-14.</p>
+    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -863,7 +863,7 @@ histogram_plot <- penguins %>%
 jitter_plot/box_plot/histogram_plot
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-68-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" />
 
 So it is reasonable to think that perhaps either species or sex might affect body mass, and we can visualise this in a number of different ways. The last method, a density histogram, looks a little crowded now, so I will use the excellent `ggridges` package to help out
 </div></div></div>
@@ -887,7 +887,7 @@ ggplot(aes(x = body_mass_g, y = species)) +
                 alpha = 0.8)
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-71-1.png" width="100%" style="display: block; margin: auto;" />
 
 </div></div></div>
 
@@ -912,7 +912,7 @@ penguins %>%
       %>% car::qqPlot())
 ```
 
-<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-70-3.png" width="100%" style="display: block; margin: auto;" />
+<img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-1.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-2.png" width="100%" style="display: block; margin: auto;" /><img src="10-Data-insights-part-1_files/figure-html/unnamed-chunk-72-3.png" width="100%" style="display: block; margin: auto;" />
 
 ```
 ## [[1]]
@@ -972,7 +972,7 @@ If we take important subpopulations into account such as species and sex (these 
 penguins %>% 
     group_by(species,sex) %>% 
   drop_na()%>% 
-  shapiro_test(body_mass_g)
+  rstatix::shapiro_test(body_mass_g)
 ```
 
 <div class="kable-table">

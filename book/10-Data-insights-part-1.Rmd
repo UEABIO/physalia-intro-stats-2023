@@ -788,7 +788,7 @@ If we take important subpopulations into account such as species and sex (these 
 penguins %>% 
     group_by(species,sex) %>% 
   drop_na()%>% 
-  shapiro_test(body_mass_g)
+  rstatix::shapiro_test(body_mass_g)
 
 ```
 

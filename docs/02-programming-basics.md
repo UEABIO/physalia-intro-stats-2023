@@ -156,8 +156,8 @@ mean(data)
 
 ```
 ## [1] 45
-## Time difference of -534 days
-## [1] 15.27983
+## Time difference of -926 days
+## [1] 15.62639
 ```
 
 Finally, you can store the result of these operations in a new object:
@@ -304,36 +304,11 @@ country_data
 
 <div class="kable-table">
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:left;"> country </th>
-   <th style="text-align:right;"> yr1960 </th>
-   <th style="text-align:right;"> yr1970 </th>
-   <th style="text-align:right;"> yr2010 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> x </td>
-   <td style="text-align:right;"> 10 </td>
-   <td style="text-align:right;"> 13 </td>
-   <td style="text-align:right;"> 15 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> y </td>
-   <td style="text-align:right;"> 20 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 25 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> z </td>
-   <td style="text-align:right;"> 30 </td>
-   <td style="text-align:right;"> 33 </td>
-   <td style="text-align:right;"> 35 </td>
-  </tr>
-</tbody>
-</table>
+|country | yr1960| yr1970| yr2010|
+|:-------|------:|------:|------:|
+|x       |     10|     13|     15|
+|y       |     20|     23|     25|
+|z       |     30|     33|     35|
 
 </div>
 
@@ -452,7 +427,7 @@ citation()
 ```
 ## To cite R in publications use:
 ## 
-##   R Core Team (2023). _R: A Language and Environment for Statistical
+##   R Core Team (2024). _R: A Language and Environment for Statistical
 ##   Computing_. R Foundation for Statistical Computing, Vienna, Austria.
 ##   <https://www.R-project.org/>.
 ## 
@@ -463,7 +438,7 @@ citation()
 ##     author = {{R Core Team}},
 ##     organization = {R Foundation for Statistical Computing},
 ##     address = {Vienna, Austria},
-##     year = {2023},
+##     year = {2024},
 ##     url = {https://www.R-project.org/},
 ##   }
 ## 
@@ -605,14 +580,14 @@ You should use the form `package::function`, for example `dplyr::select`. Rememb
 </div>
   
 
-**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value=''>read_csv()</option><option value=''><-</option><option value='answer'>35</option></select>
+**Question 4.** Which of the following is most likely to be an argument? <select class='webex-select'><option value='blank'></option><option value='answer'>35</option><option value=''>read_csv()</option><option value=''><-</option></select>
 
 **Question 5.** An easy way to spot functions is to look for <select class='webex-select'><option value='blank'></option><option value=''>numbers</option><option value='answer'>brackets</option><option value=''>computers</option></select>.
 
-**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value=''>assignment</option><option value=''>argument</option><option value='answer'>object</option></select>.
+**Question 6.** The job of `<-` is to send the output from the function to a/an <select class='webex-select'><option value='blank'></option><option value='answer'>object</option><option value=''>argument</option><option value=''>assignment</option></select>.
 
-**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class='webex-select'><option value='blank'></option><option value=''>FALSE</option><option value='answer'>TRUE</option></select>.
+**Question 7.** A vector must always contain elements of the same data type (e.g logical, character, numeric) <select class='webex-select'><option value='blank'></option><option value='answer'>TRUE</option><option value=''>FALSE</option></select>.
 
-**Question 8.** A dataframe/tibble must always contain elements of the same data type <select class='webex-select'><option value='blank'></option><option value='answer'>FALSE</option><option value=''>TRUE</option></select>
+**Question 8.** A dataframe/tibble must always contain elements of the same data type <select class='webex-select'><option value='blank'></option><option value=''>TRUE</option><option value='answer'>FALSE</option></select>
 
 

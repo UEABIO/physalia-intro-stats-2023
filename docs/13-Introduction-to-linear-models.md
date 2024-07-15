@@ -502,7 +502,7 @@ Quantile-Quantile (QQ) Plot: This plot compares the distribution of residuals to
 plot(lsmodel1, which=c(2,2))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
 
 ```r
@@ -510,7 +510,7 @@ performance::check_model(lsmodel1, check=c("normality","qq"),
                          detrend = F)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-24') </script>
 ### Formal test of Normality
 
@@ -556,14 +556,14 @@ To assess this assumption, we can plot the residuals against the fitted values:
 plot(lsmodel1, which=c(1,3))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-40-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-40-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 performance::check_model(lsmodel1, check=c("homogeneity"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-26') </script>
 
 
@@ -613,14 +613,14 @@ To assess this assumption, we can plot the residuals against the fitted values:
 plot(lsmodel1, which=c(1,3))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-36-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-49-2.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
 
 ```r
 performance::check_model(lsmodel1, check=c("linearity"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-28') </script>
 
 Checking for linearity can be difficult when we only have two groups in our model:
@@ -643,14 +643,14 @@ To identify outliers, we can employ Cook's Distance, which measures the influenc
 plot(lsmodel1, which=c(4,4))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
 </div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 performance::check_model(lsmodel1, check=c("outliers"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-39-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
 </div><script> javascript:hide('option2unnamed-chunk-29') </script>
 
 ### Formal Tests for Outliers
