@@ -107,6 +107,14 @@ penguins <- read_csv ("data/penguins_raw.csv")
 
 penguins <- janitor::clean_names(penguins) # clean variable names
 #__________________________----
+
+# SHORTEN SPECIES NAMES----
+
+# use mutate and case_when for a statement that conditionally changes the names of the values in a variable
+penguins <- penguins %>% 
+  mutate(species = case_when(species == "Adelie Penguin (Pygoscelis adeliae)" ~ "Adelie",
+                             species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
+                             species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
 ```
 
 

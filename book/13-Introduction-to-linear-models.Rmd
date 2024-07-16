@@ -178,20 +178,6 @@ summary(lsmodel1)
 knitr::include_graphics("images/model summary.png")
 ```
 
-We could use the information from this model to superimpose the calculated means onto a plot. 
-
-```{r, warning=FALSE, message=FALSE, eval=TRUE}
-# Create a plot using ggplot
-darwin %>% 
-  ggplot(aes(x = type, y = height, colour = type)) +
-  # Add jittered points with transparency and width customization
-  geom_jitter(alpha = 0.5, width = 0.1) +
-  # Add a summary statistic point representing the mean
-  stat_summary(fun = mean, size = 1.2) +
-  # Apply a black and white theme to the plot
-  theme_bw()
-
-```
 
 #### Standard error of the difference
 
@@ -209,7 +195,9 @@ Our linear model analysis doesn't actually calculate the individual variances fo
 
 ## Confidence intervals
 
-```{solution, multCode = T}
+With a wrapper function around our model we can generate accurate 95% confidence intervals from the SE and calculated t-distribution:
+
+```{multCode}
 
 ``{r}
 confint(lsmodel1)
@@ -330,21 +318,43 @@ The difference in means is always accompanied by a standard error of the differe
 
 Linear models make a variety of assumptions, including that the noise (residual differences) are approximately normally distributed, with roughly equal (homogenous) variance. 
 
-```{r, eval=T}
-darwin %>% 
-  ggplot(aes(x = type, y = height)) +
-  # Add jittered points with customization of width, point shape, and fill color
-  geom_jitter(width = 0.1, pch = 21, aes(fill = type)) +
-  # Apply a classic theme to the plot
-  theme_classic() +
-  # Add a dashed segment indicating a specific measurement
-  geom_segment(aes(x = 1, xend = 2, y = 20.192, yend = 20.192 - 2.617), linetype = "dashed") +
-  # Add a summary statistic using a crossbar geom
-  stat_summary(fun.y = mean, geom = "crossbar", width = 0.2)
+## Write-up
 
+```{task}
+Can you write an Analysis section?
+```
+
+
+```{solution}
+The maize plants that have been cross pollinated had an average height of 20.19 inches [18.63 - 21.74] and were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.42, 4.82] inches (mean [95% CI]) (t(28) = -2.44, p = 0.02).
 
 ```
 
+> This will be different to your previous manual calculations on two counts. One, we are using a t-distribution for our confidence intervals. Two this example is a two-sample t-test, our previous example was closer to a paired t-test we will see how to implement a linear model with a paired design in subsequent chapters.
+
+```{r, eval=T}
+
+
+# Convert the 'means' object to a tibble
+means %>%
+  as_tibble() %>%
+  # Create a plot using ggplot
+  ggplot(aes(x = type, y = emmean, fill = type)) +
+    # Add raw data
+  geom_jitter(data = darwin,
+              aes(x = type,
+                  y = height),
+              width = 0.1,
+              pch = 21,
+              alpha = 0.4) +
+  # Add point estimates with error bars
+  geom_pointrange(aes(ymin = lower.CL, 
+                      ymax = upper.CL),
+                  pch = 21) +
+  theme_classic()
+
+
+```
 
 
 # Assumption checking

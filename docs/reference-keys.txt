@@ -265,6 +265,7 @@ answering-the-question
 getting-the-other-treatment-mean-and-standard-error
 emmeans
 summary-2
+write-up
 assumption-checking
 assumption-1-normality-of-residuals
 understanding-residuals
@@ -329,7 +330,7 @@ one-way-anova
 testing-for-interactions
 model-estimates-and-confidence-intervals
 anova-tables
-write-up
+write-up-1
 post-hoc
 ancova
 activity-2-build-your-own-analysis
@@ -354,7 +355,8 @@ posthoc
 activity-3-write-up-1
 summary-9
 checklist-2
-supplementary-code
+summary-tables
+sjplot
 generalized-linear-models
 motivation
 generalised-linear-models-glms
@@ -400,7 +402,7 @@ predictions-1
 shrinkage-in-mixed-models
 ggeffects
 ggpredict
-sjplot
+sjplot-1
 checking-model-assumptions
 performance
 dharma

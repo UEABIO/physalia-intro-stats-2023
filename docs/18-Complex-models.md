@@ -615,262 +615,6 @@ If we provide the data ranges, then we can get predictions built from the model 
   as_tibble()
 ```
 
-<div class="kable-table">
-
-|type        | thorax| sleep|   emmean|       SE|  df|  lower.CL| upper.CL|
-|:-----------|------:|-----:|--------:|--------:|---:|---------:|--------:|
-|Control     |   0.64|     1| 36.33743| 3.588858| 120| 29.231737| 43.44311|
-|Inseminated |   0.64|     1| 39.96539| 3.096986| 120| 33.833573| 46.09721|
-|Virgin      |   0.64|     1| 23.09140| 3.090747| 120| 16.971930| 29.21086|
-|Control     |   0.64|     2| 36.28462| 3.569372| 120| 29.217510| 43.35173|
-|Inseminated |   0.64|     2| 39.91258| 3.069921| 120| 33.834352| 45.99081|
-|Virgin      |   0.64|     2| 23.03859| 3.065499| 120| 16.969113| 29.10806|
-|Control     |   0.64|     3| 36.23181| 3.550927| 120| 29.201223| 43.26240|
-|Inseminated |   0.64|     3| 39.85977| 3.043954| 120| 33.832957| 45.88659|
-|Virgin      |   0.64|     3| 22.98578| 3.041381| 120| 16.964058| 29.00750|
-|Control     |   0.64|     4| 36.17900| 3.533538| 120| 29.182843| 43.17516|
-|Inseminated |   0.64|     4| 39.80697| 3.019113| 120| 33.829333| 45.78460|
-|Virgin      |   0.64|     4| 22.93297| 3.018419| 120| 16.956712| 28.90923|
-|Control     |   0.64|     5| 36.12620| 3.517222| 120| 29.162341| 43.09005|
-|Inseminated |   0.64|     5| 39.75416| 2.995427| 120| 33.823424| 45.68490|
-|Virgin      |   0.64|     5| 22.88017| 2.996642| 120| 16.947023| 28.81331|
-|Control     |   0.64|     6| 36.07339| 3.501994| 120| 29.139685| 43.00709|
-|Inseminated |   0.64|     6| 39.70135| 2.972922| 120| 33.815174| 45.58753|
-|Virgin      |   0.64|     6| 22.82736| 2.976074| 120| 16.934939| 28.71978|
-|Control     |   0.64|     7| 36.02058| 3.487866| 120| 29.114848| 42.92631|
-|Inseminated |   0.64|     7| 39.64855| 2.951626| 120| 33.804532| 45.49256|
-|Virgin      |   0.64|     7| 22.77455| 2.956741| 120| 16.920409| 28.62869|
-|Control     |   0.64|     8| 35.96777| 3.474854| 120| 29.087803| 42.84774|
-|Inseminated |   0.64|     8| 39.59574| 2.931565| 120| 33.791444| 45.40003|
-|Virgin      |   0.64|     8| 22.72174| 2.938668| 120| 16.903386| 28.54010|
-|Control     |   0.64|     9| 35.91497| 3.462970| 120| 29.058526| 42.77141|
-|Inseminated |   0.64|     9| 39.54293| 2.912764| 120| 33.775860| 45.31000|
-|Virgin      |   0.64|     9| 22.66894| 2.921877| 120| 16.883823| 28.45405|
-|Control     |   0.64|    10| 35.86216| 3.452225| 120| 29.026993| 42.69732|
-|Inseminated |   0.64|    10| 39.49012| 2.895249| 120| 33.757731| 45.22251|
-|Virgin      |   0.64|    10| 22.61613| 2.906391| 120| 16.861677| 28.37058|
-|Control     |   0.64|    11| 35.80935| 3.442630| 120| 28.993184| 42.62552|
-|Inseminated |   0.64|    11| 39.43732| 2.879043| 120| 33.737011| 45.13762|
-|Virgin      |   0.64|    11| 22.56332| 2.892231| 120| 16.836906| 28.28974|
-|Control     |   0.64|    12| 35.75654| 3.434194| 120| 28.957078| 42.55601|
-|Inseminated |   0.64|    12| 39.38451| 2.864167| 120| 33.713656| 45.05536|
-|Virgin      |   0.64|    12| 22.51051| 2.879416| 120| 16.809471| 28.21156|
-|Control     |   0.64|    13| 35.70374| 3.426927| 120| 28.918660| 42.48881|
-|Inseminated |   0.64|    13| 39.33170| 2.850643| 120| 33.687625| 44.97578|
-|Virgin      |   0.64|    13| 22.45771| 2.867965| 120| 16.779336| 28.13608|
-|Control     |   0.64|    14| 35.65093| 3.420835| 120| 28.877913| 42.42394|
-|Inseminated |   0.64|    14| 39.27889| 2.838491| 120| 33.658879| 44.89891|
-|Virgin      |   0.64|    14| 22.40490| 2.857893| 120| 16.746469| 28.06333|
-|Control     |   0.64|    15| 35.59812| 3.415925| 120| 28.834827| 42.36142|
-|Inseminated |   0.64|    15| 39.22609| 2.827727| 120| 33.627384| 44.82479|
-|Virgin      |   0.64|    15| 22.35209| 2.849216| 120| 16.710842| 27.99334|
-|Control     |   0.64|    16| 35.54531| 3.412202| 120| 28.789391| 42.30124|
-|Inseminated |   0.64|    16| 39.17328| 2.818367| 120| 33.593108| 44.75345|
-|Virgin      |   0.64|    16| 22.29928| 2.841947| 120| 16.672428| 27.92614|
-|Control     |   0.64|    17| 35.49251| 3.409670| 120| 28.741597| 42.24342|
-|Inseminated |   0.64|    17| 39.12047| 2.810426| 120| 33.556022| 44.68492|
-|Virgin      |   0.64|    17| 22.24648| 2.836095| 120| 16.631206| 27.86175|
-|Control     |   0.64|    18| 35.43970| 3.408332| 120| 28.691440| 42.18796|
-|Inseminated |   0.64|    18| 39.06766| 2.803916| 120| 33.516104| 44.61922|
-|Virgin      |   0.64|    18| 22.19367| 2.831670| 120| 16.587159| 27.80018|
-|Control     |   0.64|    19| 35.38689| 3.408188| 120| 28.638916| 42.13487|
-|Inseminated |   0.64|    19| 39.01486| 2.798847| 120| 33.473334| 44.55638|
-|Virgin      |   0.64|    19| 22.14086| 2.828679| 120| 16.540274| 27.74145|
-|Control     |   0.64|    20| 35.33408| 3.409240| 120| 28.584027| 42.08414|
-|Inseminated |   0.64|    20| 38.96205| 2.795226| 120| 33.427695| 44.49640|
-|Virgin      |   0.64|    20| 22.08805| 2.827126| 120| 16.490541| 27.68557|
-|Control     |   0.64|    21| 35.28128| 3.411485| 120| 28.526774| 42.03578|
-|Inseminated |   0.64|    21| 38.90924| 2.793060| 120| 33.379178| 44.43931|
-|Virgin      |   0.64|    21| 22.03525| 2.827014| 120| 16.437957| 27.63254|
-|Control     |   0.64|    22| 35.22847| 3.414923| 120| 28.467161| 41.98978|
-|Inseminated |   0.64|    22| 38.85643| 2.792351| 120| 33.327774| 44.38509|
-|Virgin      |   0.64|    22| 21.98244| 2.828342| 120| 16.382520| 27.58236|
-|Control     |   0.64|    23| 35.17566| 3.419548| 120| 28.405196| 41.94613|
-|Inseminated |   0.64|    23| 38.80363| 2.793100| 120| 33.273483| 44.33377|
-|Virgin      |   0.64|    23| 21.92963| 2.831109| 120| 16.324234| 27.53503|
-|Control     |   0.64|    24| 35.12286| 3.425356| 120| 28.340888| 41.90482|
-|Inseminated |   0.64|    24| 38.75082| 2.795307| 120| 33.216305| 44.28533|
-|Virgin      |   0.64|    24| 21.87683| 2.835310| 120| 16.263109| 27.49054|
-|Control     |   0.64|    25| 35.07005| 3.432342| 120| 28.274250| 41.86585|
-|Inseminated |   0.64|    25| 38.69801| 2.798968| 120| 33.156249| 44.23977|
-|Virgin      |   0.64|    25| 21.82402| 2.840939| 120| 16.199156| 27.44888|
-|Control     |   0.64|    26| 35.01724| 3.440497| 120| 28.205295| 41.82919|
-|Inseminated |   0.64|    26| 38.64520| 2.804078| 120| 33.093325| 44.19708|
-|Virgin      |   0.64|    26| 21.77121| 2.847988| 120| 16.132393| 27.41003|
-|Control     |   0.64|    27| 34.96443| 3.449815| 120| 28.134040| 41.79483|
-|Inseminated |   0.64|    27| 38.59240| 2.810628| 120| 33.027549| 44.15725|
-|Virgin      |   0.64|    27| 21.71840| 2.856446| 120| 16.062839| 27.37397|
-|Control     |   0.64|    28| 34.91163| 3.460285| 120| 28.060503| 41.76275|
-|Inseminated |   0.64|    28| 38.53959| 2.818608| 120| 32.958942| 44.12024|
-|Virgin      |   0.64|    28| 21.66560| 2.866300| 120| 15.990521| 27.34067|
-|Control     |   0.64|    29| 34.85882| 3.471896| 120| 27.984705| 41.73293|
-|Inseminated |   0.64|    29| 38.48678| 2.828007| 120| 32.887525| 44.08604|
-|Virgin      |   0.64|    29| 21.61279| 2.877537| 120| 15.915465| 27.31011|
-|Control     |   0.64|    30| 34.80601| 3.484638| 120| 27.906669| 41.70535|
-|Inseminated |   0.64|    30| 38.43398| 2.838810| 120| 32.813329| 44.05462|
-|Virgin      |   0.64|    30| 21.55998| 2.890140| 120| 15.837705| 27.28226|
-|Control     |   0.64|    31| 34.75320| 3.498499| 120| 27.826419| 41.67999|
-|Inseminated |   0.64|    31| 38.38117| 2.851001| 120| 32.736384| 44.02595|
-|Virgin      |   0.64|    31| 21.50717| 2.904091| 120| 15.757275| 27.25707|
-|Control     |   0.64|    32| 34.70040| 3.513464| 120| 27.743981| 41.65681|
-|Inseminated |   0.64|    32| 38.32836| 2.864563| 120| 32.656725| 44.00000|
-|Virgin      |   0.64|    32| 21.45437| 2.919371| 120| 15.674214| 27.23452|
-|Control     |   0.64|    33| 34.64759| 3.529520| 120| 27.659384| 41.63579|
-|Inseminated |   0.64|    33| 38.27555| 2.879476| 120| 32.574392| 43.97671|
-|Virgin      |   0.64|    33| 21.40156| 2.935960| 120| 15.588562| 27.21455|
-|Control     |   0.64|    34| 34.59478| 3.546653| 120| 27.572656| 41.61691|
-|Inseminated |   0.64|    34| 38.22275| 2.895719| 120| 32.489424| 43.95607|
-|Virgin      |   0.64|    34| 21.34875| 2.953835| 120| 15.500364| 27.19714|
-|Control     |   0.64|    35| 34.54197| 3.564846| 120| 27.483828| 41.60012|
-|Inseminated |   0.64|    35| 38.16994| 2.913270| 120| 32.401866| 43.93801|
-|Virgin      |   0.64|    35| 21.29594| 2.972972| 120| 15.409665| 27.18222|
-|Control     |   0.64|    36| 34.48917| 3.584083| 120| 27.392932| 41.58540|
-|Inseminated |   0.64|    36| 38.11713| 2.932106| 120| 32.311766| 43.92250|
-|Virgin      |   0.64|    36| 21.24314| 2.993349| 120| 15.316514| 27.16976|
-|Control     |   0.64|    37| 34.43636| 3.604348| 120| 27.300002| 41.57272|
-|Inseminated |   0.64|    37| 38.06432| 2.952201| 120| 32.219170| 43.90948|
-|Virgin      |   0.64|    37| 21.19033| 3.014939| 120| 15.220959| 27.15970|
-|Control     |   0.64|    38| 34.38355| 3.625623| 120| 27.205071| 41.56203|
-|Inseminated |   0.64|    38| 38.01152| 2.973531| 120| 32.124131| 43.89890|
-|Virgin      |   0.64|    38| 21.13752| 3.037717| 120| 15.123053| 27.15199|
-|Control     |   0.64|    39| 34.33074| 3.647891| 120| 27.108174| 41.55331|
-|Inseminated |   0.64|    39| 37.95871| 2.996069| 120| 32.026699| 43.89072|
-|Virgin      |   0.64|    39| 21.08471| 3.061657| 120| 15.022847| 27.14658|
-|Control     |   0.64|    40| 34.27794| 3.671134| 120| 27.009347| 41.54653|
-|Inseminated |   0.64|    40| 37.90590| 3.019789| 120| 31.926930| 43.88487|
-|Virgin      |   0.64|    40| 21.03191| 3.086730| 120| 14.920396| 27.14342|
-|Control     |   0.64|    41| 34.22513| 3.695333| 120| 26.908627| 41.54163|
-|Inseminated |   0.64|    41| 37.85309| 3.044661| 120| 31.824877| 43.88131|
-|Virgin      |   0.64|    41| 20.97910| 3.112911| 120| 14.815753| 27.14245|
-|Control     |   0.64|    42| 34.17232| 3.720470| 120| 26.806051| 41.53859|
-|Inseminated |   0.64|    42| 37.80029| 3.070659| 120| 31.720595| 43.87998|
-|Virgin      |   0.64|    42| 20.92629| 3.140170| 120| 14.708973| 27.14361|
-|Control     |   0.64|    43| 34.11951| 3.746525| 120| 26.701655| 41.53737|
-|Inseminated |   0.64|    43| 37.74748| 3.097754| 120| 31.614142| 43.88082|
-|Virgin      |   0.64|    43| 20.87348| 3.168481| 120| 14.600112| 27.14686|
-|Control     |   0.64|    44| 34.06671| 3.773481| 120| 26.595478| 41.53794|
-|Inseminated |   0.64|    44| 37.69467| 3.125917| 120| 31.505572| 43.88377|
-|Virgin      |   0.64|    44| 20.82068| 3.197816| 120| 14.489224| 27.15213|
-|Control     |   0.64|    45| 34.01390| 3.801316| 120| 26.487558| 41.54024|
-|Inseminated |   0.64|    45| 37.64186| 3.155121| 120| 31.394945| 43.88878|
-|Virgin      |   0.64|    45| 20.76787| 3.228146| 120| 14.376366| 27.15937|
-|Control     |   0.64|    46| 33.96109| 3.830014| 120| 26.377932| 41.54425|
-|Inseminated |   0.64|    46| 37.58906| 3.185335| 120| 31.282314| 43.89580|
-|Virgin      |   0.64|    46| 20.71506| 3.259443| 120| 14.261591| 27.16853|
-|Control     |   0.64|    47| 33.90829| 3.859553| 120| 26.266638| 41.54993|
-|Inseminated |   0.64|    47| 37.53625| 3.216533| 120| 31.167738| 43.90476|
-|Virgin      |   0.64|    47| 20.66226| 3.291681| 120| 14.144956| 27.17955|
-|Control     |   0.64|    48| 33.85548| 3.889916| 120| 26.153715| 41.55724|
-|Inseminated |   0.64|    48| 37.48344| 3.248685| 120| 31.051272| 43.91561|
-|Virgin      |   0.64|    48| 20.60945| 3.324832| 120| 14.026512| 27.19238|
-|Control     |   0.64|    49| 33.80267| 3.921082| 120| 26.039201| 41.56614|
-|Inseminated |   0.64|    49| 37.43063| 3.281763| 120| 30.932972| 43.92830|
-|Virgin      |   0.64|    49| 20.55664| 3.358868| 120| 13.906316| 27.20697|
-|Control     |   0.64|    50| 33.74986| 3.953033| 120| 25.923132| 41.57659|
-|Inseminated |   0.64|    50| 37.37783| 3.315740| 120| 30.812892| 43.94276|
-|Virgin      |   0.64|    50| 20.50383| 3.393763| 120| 13.784418| 27.22325|
-|Control     |   0.64|    51| 33.69706| 3.985751| 120| 25.805547| 41.58856|
-|Inseminated |   0.64|    51| 37.32502| 3.350589| 120| 30.691087| 43.95895|
-|Virgin      |   0.64|    51| 20.45103| 3.429492| 120| 13.660871| 27.24118|
-|Control     |   0.64|    52| 33.64425| 4.019215| 120| 25.686482| 41.60201|
-|Inseminated |   0.64|    52| 37.27221| 3.386282| 120| 30.567610| 43.97681|
-|Virgin      |   0.64|    52| 20.39822| 3.466027| 120| 13.535726| 27.26071|
-|Control     |   0.64|    53| 33.59144| 4.053408| 120| 25.565974| 41.61691|
-|Inseminated |   0.64|    53| 37.21941| 3.422793| 120| 30.442514| 43.99630|
-|Virgin      |   0.64|    53| 20.34541| 3.503344| 120| 13.409033| 27.28179|
-|Control     |   0.64|    54| 33.53863| 4.088312| 120| 25.444060| 41.63321|
-|Inseminated |   0.64|    54| 37.16660| 3.460096| 120| 30.315849| 44.01735|
-|Virgin      |   0.64|    54| 20.29260| 3.541418| 120| 13.280842| 27.30437|
-|Control     |   0.64|    55| 33.48583| 4.123908| 120| 25.320774| 41.65088|
-|Inseminated |   0.64|    55| 37.11379| 3.498166| 120| 30.187666| 44.03992|
-|Virgin      |   0.64|    55| 20.23980| 3.580226| 120| 13.151198| 27.32839|
-|Control     |   0.64|    56| 33.43302| 4.160179| 120| 25.196153| 41.66988|
-|Inseminated |   0.64|    56| 37.06098| 3.536978| 120| 30.058013| 44.06395|
-|Virgin      |   0.64|    56| 20.18699| 3.619742| 120| 13.020151| 27.35383|
-|Control     |   0.64|    57| 33.38021| 4.197108| 120| 25.070231| 41.69019|
-|Inseminated |   0.64|    57| 37.00818| 3.576508| 120| 29.926939| 44.08941|
-|Virgin      |   0.64|    57| 20.13418| 3.659946| 120| 12.887744| 27.38062|
-|Control     |   0.64|    58| 33.32740| 4.234676| 120| 24.943041| 41.71177|
-|Inseminated |   0.64|    58| 36.95537| 3.616732| 120| 29.794491| 44.11625|
-|Virgin      |   0.64|    58| 20.08137| 3.700813| 120| 12.754022| 27.40873|
-|Control     |   0.64|    59| 33.27460| 4.272867| 120| 24.814618| 41.73458|
-|Inseminated |   0.64|    59| 36.90256| 3.657627| 120| 29.660713| 44.14441|
-|Virgin      |   0.64|    59| 20.02857| 3.742322| 120| 12.619029| 27.43810|
-|Control     |   0.64|    60| 33.22179| 4.311665| 120| 24.684994| 41.75858|
-|Inseminated |   0.64|    60| 36.84975| 3.699172| 120| 29.525650| 44.17386|
-|Virgin      |   0.64|    60| 19.97576| 3.784453| 120| 12.482806| 27.46871|
-|Control     |   0.64|    61| 33.16898| 4.351053| 120| 24.554200| 41.78376|
-|Inseminated |   0.64|    61| 36.79695| 3.741345| 120| 29.389344| 44.20455|
-|Virgin      |   0.64|    61| 19.92295| 3.827184| 120| 12.345393| 27.50051|
-|Control     |   0.64|    62| 33.11617| 4.391015| 120| 24.422270| 41.81008|
-|Inseminated |   0.64|    62| 36.74414| 3.784124| 120| 29.251837| 44.23644|
-|Virgin      |   0.64|    62| 19.87014| 3.870496| 120| 12.206831| 27.53346|
-|Control     |   0.64|    63| 33.06337| 4.431537| 120| 24.289233| 41.83750|
-|Inseminated |   0.64|    63| 36.69133| 3.827489| 120| 29.113170| 44.26949|
-|Virgin      |   0.64|    63| 19.81734| 3.914370| 120| 12.067157| 27.56752|
-|Control     |   0.64|    64| 33.01056| 4.472602| 120| 24.155119| 41.86600|
-|Inseminated |   0.64|    64| 36.63852| 3.871421| 120| 28.973381| 44.30367|
-|Virgin      |   0.64|    64| 19.76453| 3.958786| 120| 11.926408| 27.60265|
-|Control     |   0.64|    65| 32.95775| 4.514196| 120| 24.019959| 41.89555|
-|Inseminated |   0.64|    65| 36.58572| 3.915900| 120| 28.832508| 44.33893|
-|Virgin      |   0.64|    65| 19.71172| 4.003728| 120| 11.784620| 27.63882|
-|Control     |   0.64|    66| 32.90494| 4.556304| 120| 23.883779| 41.92611|
-|Inseminated |   0.64|    66| 36.53291| 3.960908| 120| 28.690587| 44.37523|
-|Virgin      |   0.64|    66| 19.65891| 4.049176| 120| 11.641828| 27.67600|
-|Control     |   0.64|    67| 32.85214| 4.598913| 120| 23.746610| 41.95766|
-|Inseminated |   0.64|    67| 36.48010| 4.006427| 120| 28.547655| 44.41255|
-|Virgin      |   0.64|    67| 19.60611| 4.095115| 120| 11.498065| 27.71415|
-|Control     |   0.64|    68| 32.79933| 4.642008| 120| 23.608477| 41.99018|
-|Inseminated |   0.64|    68| 36.42729| 4.052441| 120| 28.403744| 44.45084|
-|Virgin      |   0.64|    68| 19.55330| 4.141528| 120| 11.353363| 27.75324|
-|Control     |   0.64|    69| 32.74652| 4.685576| 120| 23.469408| 42.02364|
-|Inseminated |   0.64|    69| 36.37449| 4.098931| 120| 28.258888| 44.49009|
-|Virgin      |   0.64|    69| 19.50049| 4.188399| 120| 11.207754| 27.79323|
-|Control     |   0.64|    70| 32.69372| 4.729604| 120| 23.329427| 42.05800|
-|Inseminated |   0.64|    70| 36.32168| 4.145883| 120| 28.113119| 44.53024|
-|Virgin      |   0.64|    70| 19.44769| 4.235714| 120| 11.061267| 27.83410|
-|Control     |   0.64|    71| 32.64091| 4.774080| 120| 23.188562| 42.09325|
-|Inseminated |   0.64|    71| 36.26887| 4.193281| 120| 27.966468| 44.57128|
-|Virgin      |   0.64|    71| 19.39488| 4.283456| 120| 10.913932| 27.87582|
-|Control     |   0.64|    72| 32.58810| 4.818990| 120| 23.046835| 42.12937|
-|Inseminated |   0.64|    72| 36.21606| 4.241109| 120| 27.818963| 44.61317|
-|Virgin      |   0.64|    72| 19.34207| 4.331613| 120| 10.765778| 27.91836|
-|Control     |   0.64|    73| 32.53529| 4.864324| 120| 22.904271| 42.16632|
-|Inseminated |   0.64|    73| 36.16326| 4.289354| 120| 27.670634| 44.65588|
-|Virgin      |   0.64|    73| 19.28926| 4.380171| 120| 10.616830| 27.96170|
-|Control     |   0.64|    74| 32.48249| 4.910068| 120| 22.760893| 42.20408|
-|Inseminated |   0.64|    74| 36.11045| 4.338002| 120| 27.521508| 44.69939|
-|Virgin      |   0.64|    74| 19.23646| 4.429116| 120| 10.467114| 28.00580|
-|Control     |   0.64|    75| 32.42968| 4.956212| 120| 22.616724| 42.24263|
-|Inseminated |   0.64|    75| 36.05764| 4.387038| 120| 27.371612| 44.74367|
-|Virgin      |   0.64|    75| 19.18365| 4.478435| 120| 10.316657| 28.05064|
-|Control     |   0.64|    76| 32.37687| 5.002745| 120| 22.471785| 42.28196|
-|Inseminated |   0.64|    76| 36.00484| 4.436451| 120| 27.220970| 44.78870|
-|Virgin      |   0.64|    76| 19.13084| 4.528118| 120| 10.165483| 28.09620|
-|Control     |   0.64|    77| 32.32406| 5.049655| 120| 22.326097| 42.32203|
-|Inseminated |   0.64|    77| 35.95203| 4.486228| 120| 27.069609| 44.83445|
-|Virgin      |   0.64|    77| 19.07803| 4.578150| 120| 10.013614| 28.14245|
-|Control     |   0.64|    78| 32.27126| 5.096933| 120| 22.179683| 42.36283|
-|Inseminated |   0.64|    78| 35.89922| 4.536356| 120| 26.917551| 44.88089|
-|Virgin      |   0.64|    78| 19.02523| 4.628523| 120|  9.861073| 28.18938|
-|Control     |   0.64|    79| 32.21845| 5.144569| 120| 22.032560| 42.40434|
-|Inseminated |   0.64|    79| 35.84641| 4.586825| 120| 26.764819| 44.92801|
-|Virgin      |   0.64|    79| 18.97242| 4.679223| 120|  9.707883| 28.23695|
-|Control     |   0.64|    80| 32.16564| 5.192552| 120| 21.884750| 42.44653|
-|Inseminated |   0.64|    80| 35.79361| 4.637623| 120| 26.611435| 44.97578|
-|Virgin      |   0.64|    80| 18.91961| 4.730241| 120|  9.554063| 28.28516|
-|Control     |   0.64|    81| 32.11283| 5.240873| 120| 21.736270| 42.48940|
-|Inseminated |   0.64|    81| 35.74080| 4.688739| 120| 26.457420| 45.02418|
-|Virgin      |   0.64|    81| 18.86680| 4.781567| 120|  9.399634| 28.33397|
-|Control     |   0.64|    82| 32.06003| 5.289523| 120| 21.587139| 42.53291|
-|Inseminated |   0.64|    82| 35.68799| 4.740164| 120| 26.302796| 45.07319|
-|Virgin      |   0.64|    82| 18.81400| 4.833191| 120|  9.244615| 28.38338|
-|Control     |   0.64|    83| 32.00722| 5.338492| 120| 21.437376| 42.57706|
-|Inseminated |   0.64|    83| 35.63518| 4.791887| 120| 26.147581| 45.12279|
-|Virgin      |   0.64|    83| 18.76119| 4.885103| 120|  9.089025| 28.43335|
-
-</div>
-
 ## Activity 3: Write-up
 
 <div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
@@ -1000,10 +744,17 @@ In this chapter we have worked with our scientific knowledge to develop testable
 
 * Well described tables and figures can enhance your results sections - take the time to make sure these are informative and attractive. 
 
+# (PART\*) Summary tables {.unnumbered}
 
-## Supplementary code
+# Summary tables
 
-`sjPlot` A really nice package that helps produce model summaries for you automatically
+While we need to report the parameters and statistics of our models in text with any reports, it can also be extremely useful to provide a model summary table, especially when reporting complex analyses. Below I present examples from two of my favourite packages for model reporting.
+
+Both packages come with lots of options for customisation to produce presentation ready tables
+
+## sjPlot
+
+`sjPlot` A really nice package that helps produce model summaries for you automatically, currently it will only output in HTML format
 
 
 ```r
@@ -1063,7 +814,75 @@ tab_model(flyls2)
 
 </table>
 
-`gtsummary` Provides a similar function
+
+
+```r
+tab_model(
+  flyls2, 
+  pred.labels = c("Intercept", "Inseminated females", "Virgin females", "Thorax size (μm
+)", "Sleep (%)"),
+  dv.labels = "Male longevity",
+  string.pred = "Coefficient",
+  string.ci = "Conf. Int (95%)",
+  string.p = "P-Value"
+)
+```
+
+<table style="border-collapse:collapse; border:none;">
+<tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Male longevity</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Coefficient</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Conf. Int (95%)</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">P-Value</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">Intercept</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;56.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;78.18&nbsp;&ndash;&nbsp;-33.91</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">Inseminated females</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">3.63</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;1.86&nbsp;&ndash;&nbsp;9.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.193</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">Virgin females</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;13.25</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;18.71&nbsp;&ndash;&nbsp;-7.78</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">Thorax size (μm
+)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">144.43</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">118.46&nbsp;&ndash;&nbsp;170.40</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">Sleep (%)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;0.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">&#45;0.18&nbsp;&ndash;&nbsp;0.07</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.410</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">125</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.605 / 0.591</td>
+</tr>
+
+</table>
+
+`gtsummary` Is an extension of the `gt` package and provides even greater levels of flexibility and customisation. It is also compatible with HTML, word or pdf. Perhaps the only downside is the level of options and customisability can be slightly overwhelming. In addition the `gt` package has been undergoing a lot of active development, so sometimes older code examples are now defunct.
+
 
 
 ```r
@@ -1072,23 +891,23 @@ tbl_regression(flyls2)
 ```
 
 ```{=html}
-<div id="xrgethxgsf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xrgethxgsf table {
+<div id="ixrgethxgs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ixrgethxgs table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xrgethxgsf thead, #xrgethxgsf tbody, #xrgethxgsf tfoot, #xrgethxgsf tr, #xrgethxgsf td, #xrgethxgsf th {
+#ixrgethxgs thead, #ixrgethxgs tbody, #ixrgethxgs tfoot, #ixrgethxgs tr, #ixrgethxgs td, #ixrgethxgs th {
   border-style: none;
 }
 
-#xrgethxgsf p {
+#ixrgethxgs p {
   margin: 0;
   padding: 0;
 }
 
-#xrgethxgsf .gt_table {
+#ixrgethxgs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1114,12 +933,12 @@ tbl_regression(flyls2)
   border-left-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_caption {
+#ixrgethxgs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xrgethxgsf .gt_title {
+#ixrgethxgs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1131,7 +950,7 @@ tbl_regression(flyls2)
   border-bottom-width: 0;
 }
 
-#xrgethxgsf .gt_subtitle {
+#ixrgethxgs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1143,7 +962,7 @@ tbl_regression(flyls2)
   border-top-width: 0;
 }
 
-#xrgethxgsf .gt_heading {
+#ixrgethxgs .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1155,13 +974,13 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_bottom_border {
+#ixrgethxgs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_col_headings {
+#ixrgethxgs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1176,7 +995,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_col_heading {
+#ixrgethxgs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1196,7 +1015,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#xrgethxgsf .gt_column_spanner_outer {
+#ixrgethxgs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1208,15 +1027,15 @@ tbl_regression(flyls2)
   padding-right: 4px;
 }
 
-#xrgethxgsf .gt_column_spanner_outer:first-child {
+#ixrgethxgs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xrgethxgsf .gt_column_spanner_outer:last-child {
+#ixrgethxgs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xrgethxgsf .gt_column_spanner {
+#ixrgethxgs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1228,11 +1047,11 @@ tbl_regression(flyls2)
   width: 100%;
 }
 
-#xrgethxgsf .gt_spanner_row {
+#ixrgethxgs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xrgethxgsf .gt_group_heading {
+#ixrgethxgs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1258,7 +1077,7 @@ tbl_regression(flyls2)
   text-align: left;
 }
 
-#xrgethxgsf .gt_empty_group_heading {
+#ixrgethxgs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1273,15 +1092,15 @@ tbl_regression(flyls2)
   vertical-align: middle;
 }
 
-#xrgethxgsf .gt_from_md > :first-child {
+#ixrgethxgs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xrgethxgsf .gt_from_md > :last-child {
+#ixrgethxgs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xrgethxgsf .gt_row {
+#ixrgethxgs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1300,7 +1119,7 @@ tbl_regression(flyls2)
   overflow-x: hidden;
 }
 
-#xrgethxgsf .gt_stub {
+#ixrgethxgs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1313,7 +1132,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#xrgethxgsf .gt_stub_row_group {
+#ixrgethxgs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1327,15 +1146,15 @@ tbl_regression(flyls2)
   vertical-align: top;
 }
 
-#xrgethxgsf .gt_row_group_first td {
+#ixrgethxgs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xrgethxgsf .gt_row_group_first th {
+#ixrgethxgs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xrgethxgsf .gt_summary_row {
+#ixrgethxgs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1345,16 +1164,16 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#xrgethxgsf .gt_first_summary_row {
+#ixrgethxgs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_first_summary_row.thick {
+#ixrgethxgs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xrgethxgsf .gt_last_summary_row {
+#ixrgethxgs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1364,7 +1183,7 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_grand_summary_row {
+#ixrgethxgs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1374,7 +1193,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#xrgethxgsf .gt_first_grand_summary_row {
+#ixrgethxgs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1384,7 +1203,7 @@ tbl_regression(flyls2)
   border-top-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_last_grand_summary_row_top {
+#ixrgethxgs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1394,11 +1213,11 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_striped {
+#ixrgethxgs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xrgethxgsf .gt_table_body {
+#ixrgethxgs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1407,7 +1226,7 @@ tbl_regression(flyls2)
   border-bottom-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_footnotes {
+#ixrgethxgs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1421,7 +1240,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_footnote {
+#ixrgethxgs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1430,7 +1249,7 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#xrgethxgsf .gt_sourcenotes {
+#ixrgethxgs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1444,7 +1263,7 @@ tbl_regression(flyls2)
   border-right-color: #D3D3D3;
 }
 
-#xrgethxgsf .gt_sourcenote {
+#ixrgethxgs .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1452,63 +1271,63 @@ tbl_regression(flyls2)
   padding-right: 5px;
 }
 
-#xrgethxgsf .gt_left {
+#ixrgethxgs .gt_left {
   text-align: left;
 }
 
-#xrgethxgsf .gt_center {
+#ixrgethxgs .gt_center {
   text-align: center;
 }
 
-#xrgethxgsf .gt_right {
+#ixrgethxgs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xrgethxgsf .gt_font_normal {
+#ixrgethxgs .gt_font_normal {
   font-weight: normal;
 }
 
-#xrgethxgsf .gt_font_bold {
+#ixrgethxgs .gt_font_bold {
   font-weight: bold;
 }
 
-#xrgethxgsf .gt_font_italic {
+#ixrgethxgs .gt_font_italic {
   font-style: italic;
 }
 
-#xrgethxgsf .gt_super {
+#ixrgethxgs .gt_super {
   font-size: 65%;
 }
 
-#xrgethxgsf .gt_footnote_marks {
+#ixrgethxgs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xrgethxgsf .gt_asterisk {
+#ixrgethxgs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xrgethxgsf .gt_indent_1 {
+#ixrgethxgs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xrgethxgsf .gt_indent_2 {
+#ixrgethxgs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xrgethxgsf .gt_indent_3 {
+#ixrgethxgs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xrgethxgsf .gt_indent_4 {
+#ixrgethxgs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xrgethxgsf .gt_indent_5 {
+#ixrgethxgs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1549,6 +1368,515 @@ tbl_regression(flyls2)
 <td headers="p.value" class="gt_row gt_center">0.4</td></tr>
   </tbody>
   
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+```
+
+
+```r
+tbl_regression(flyls2,
+               intercept = TRUE,
+               label = list(type ~ "Female mating type", thorax ~ "Thorax", sleep ~ "Sleep"),
+               pvalue_fun = ~ style_pvalue(.x, digits = 2)) %>% 
+  modify_header(label = "Coefficient",
+                estimate = "Estimate") %>% 
+  bold_labels() %>% 
+  bold_p(t = 0.05) %>% 
+  as_gt () %>% 
+   gt::tab_source_note(gt::md("*This is an ordinary least squares model*"))
+```
+
+```{=html}
+<div id="fixsyogfwj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fixsyogfwj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#fixsyogfwj thead, #fixsyogfwj tbody, #fixsyogfwj tfoot, #fixsyogfwj tr, #fixsyogfwj td, #fixsyogfwj th {
+  border-style: none;
+}
+
+#fixsyogfwj p {
+  margin: 0;
+  padding: 0;
+}
+
+#fixsyogfwj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#fixsyogfwj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#fixsyogfwj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#fixsyogfwj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#fixsyogfwj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#fixsyogfwj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#fixsyogfwj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#fixsyogfwj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#fixsyogfwj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#fixsyogfwj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#fixsyogfwj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#fixsyogfwj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#fixsyogfwj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#fixsyogfwj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#fixsyogfwj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fixsyogfwj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#fixsyogfwj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#fixsyogfwj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#fixsyogfwj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fixsyogfwj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#fixsyogfwj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fixsyogfwj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#fixsyogfwj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fixsyogfwj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#fixsyogfwj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#fixsyogfwj .gt_left {
+  text-align: left;
+}
+
+#fixsyogfwj .gt_center {
+  text-align: center;
+}
+
+#fixsyogfwj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#fixsyogfwj .gt_font_normal {
+  font-weight: normal;
+}
+
+#fixsyogfwj .gt_font_bold {
+  font-weight: bold;
+}
+
+#fixsyogfwj .gt_font_italic {
+  font-style: italic;
+}
+
+#fixsyogfwj .gt_super {
+  font-size: 65%;
+}
+
+#fixsyogfwj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#fixsyogfwj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#fixsyogfwj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#fixsyogfwj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#fixsyogfwj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#fixsyogfwj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#fixsyogfwj .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Coefficient">Coefficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Estimate">Estimate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;95% CI&lt;/strong&gt;&lt;span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/span&gt;"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="&lt;strong&gt;p-value&lt;/strong&gt;"><strong>p-value</strong></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">(Intercept)</td>
+<td headers="estimate" class="gt_row gt_center">-56</td>
+<td headers="ci" class="gt_row gt_center">-78, -34</td>
+<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Female mating type</td>
+<td headers="estimate" class="gt_row gt_center"></td>
+<td headers="ci" class="gt_row gt_center"></td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Control</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="ci" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Inseminated</td>
+<td headers="estimate" class="gt_row gt_center">3.6</td>
+<td headers="ci" class="gt_row gt_center">-1.9, 9.1</td>
+<td headers="p.value" class="gt_row gt_center">0.19</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Virgin</td>
+<td headers="estimate" class="gt_row gt_center">-13</td>
+<td headers="ci" class="gt_row gt_center">-19, -7.8</td>
+<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Thorax</td>
+<td headers="estimate" class="gt_row gt_center">144</td>
+<td headers="ci" class="gt_row gt_center">118, 170</td>
+<td headers="p.value" class="gt_row gt_center" style="font-weight: bold;"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="font-weight: bold;">Sleep</td>
+<td headers="estimate" class="gt_row gt_center">-0.05</td>
+<td headers="ci" class="gt_row gt_center">-0.18, 0.07</td>
+<td headers="p.value" class="gt_row gt_center">0.41</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><em>This is an ordinary least squares model</em></td>
+    </tr>
+  </tfoot>
   <tfoot class="gt_footnotes">
     <tr>
       <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> CI = Confidence Interval</td>

@@ -411,23 +411,7 @@ Large standard deviations produce wide bell curves, with short peaks. Small stan
 
 The bell curve occurs frequently in nature, most circumstances where we can think of a continuous measure coming from a population e.g. human mass, penguin flipper lengths or plant heights. 
 
-As a *probability* distribution, the area within the curve sums to the whole population (e.g. the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g. 67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations of the mean. This *idealized* normal distribution is presented below:
-
-
-```r
-# Create a sequence of 100 equally spaced numbers between -4 and 4
-x <- seq(-4, 4, length = 100)
-
-# Create a vector of values that represents the height of the probability distribution
-# for each value in x using the standard normal distribution
-y <- dnorm(x)
-
-# Plot x and y as a scatterplot with connected lines (type = "l") and customize the plot
-plot(x, y, type = "l", lwd = 2, axes = FALSE, xlab = "", ylab = "")
-
-# Add an x-axis with custom labels
-axis(1, at = -3:3, labels = c("-3s", "-2s", "-1s", "mean", "1s", "2s", "3s"))
-```
+As a *probability* distribution, the area within the curve sums to the whole population (e.g. the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g. 67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations of the mean. This *idealized* normal (z) distribution is presented below:
 
 <img src="12-Introduction-to-statistics_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 

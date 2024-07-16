@@ -254,22 +254,6 @@ summary(lsmodel1)
 <p class="caption">(\#fig:unnamed-chunk-12)Annotation of the summary function output</p>
 </div>
 
-We could use the information from this model to superimpose the calculated means onto a plot. 
-
-
-```r
-# Create a plot using ggplot
-darwin %>% 
-  ggplot(aes(x = type, y = height, colour = type)) +
-  # Add jittered points with transparency and width customization
-  geom_jitter(alpha = 0.5, width = 0.1) +
-  # Add a summary statistic point representing the mean
-  stat_summary(fun = mean, size = 1.2) +
-  # Apply a black and white theme to the plot
-  theme_bw()
-```
-
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" />
 
 #### Standard error of the difference
 
@@ -295,9 +279,9 @@ later).</p>
 
 ## Confidence intervals
 
-<button id="displayTextunnamed-chunk-15" onclick="javascript:toggle('unnamed-chunk-15');">Show Solution</button>
+With a wrapper function around our model we can generate accurate 95% confidence intervals from the SE and calculated t-distribution:
 
-<div id="toggleTextunnamed-chunk-15" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body"><div class="tab"><button class="tablinksunnamed-chunk-15 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-15', 'unnamed-chunk-15');">Base R</button><button class="tablinksunnamed-chunk-15" onclick="javascript:openCode(event, 'option2unnamed-chunk-15', 'unnamed-chunk-15');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-15" class="tabcontentunnamed-chunk-15">
+<div class="tab"><button class="tablinksunnamed-chunk-14 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-14', 'unnamed-chunk-14');">Base R</button><button class="tablinksunnamed-chunk-14" onclick="javascript:openCode(event, 'option2unnamed-chunk-14', 'unnamed-chunk-14');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-14" class="tabcontentunnamed-chunk-14">
 
 ```r
 confint(lsmodel1)
@@ -308,7 +292,7 @@ confint(lsmodel1)
 ## (Intercept) 18.63651 21.7468231
 ## typeSelf    -4.81599 -0.4173433
 ```
-</div><div id="option2unnamed-chunk-15" class="tabcontentunnamed-chunk-15">
+</div><div id="option2unnamed-chunk-14" class="tabcontentunnamed-chunk-14">
 
 ```r
 broom::tidy(lsmodel1, conf.int=T)
@@ -322,7 +306,7 @@ broom::tidy(lsmodel1, conf.int=T)
 |typeSelf    | -2.616667| 1.0736749| -2.437113| 0.0214145| -4.81599| -0.4173433|
 
 </div>
-</div><script> javascript:hide('option2unnamed-chunk-15') </script></div></div></div>
+</div><script> javascript:hide('option2unnamed-chunk-14') </script>
 
 Because this follows the same layout as the table of coefficients, the output intercept row gives a 95% CI for the height of the crossed plants and the second row gives a 95% interval for the *difference in height between crossed and selfed plants*. The lower and upper bounds are the 2.5% and 97.5% of a *t*-distribution (more on this later). 
 
@@ -349,7 +333,7 @@ GGally::ggcoef_model(lsmodel1,
                      conf.level = 0.95)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-16-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="try">
 <p>Set the confidence levels to 99%, do you think the difference between
@@ -439,7 +423,7 @@ means %>%
   geom_pointrange(aes(ymin = lower.CL, ymax = upper.CL))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-21-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" />
 
 Notice that no matter how we calculate the estimated SE (and therefore the 95% CI) of both treatments is the same. This is because as mentioned earlier the variance is a pooled estimate, e.g. variance is not being calculate separately for each group. The only difference you should see in SE across treatments will be if there is a difference in *sample size* between groups. 
 
@@ -462,22 +446,42 @@ The difference in means is always accompanied by a standard error of the differe
 
 Linear models make a variety of assumptions, including that the noise (residual differences) are approximately normally distributed, with roughly equal (homogenous) variance. 
 
+## Write-up
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Can you write an Analysis section? </div></div>
+
+
+<button id="displayTextunnamed-chunk-23" onclick="javascript:toggle('unnamed-chunk-23');">Show Solution</button>
+
+<div id="toggleTextunnamed-chunk-23" style="display: none"><div class="panel panel-default"><div class="panel-heading panel-heading1"> Solution </div><div class="panel-body">
+The maize plants that have been cross pollinated had an average height of 20.19 inches [18.63 - 21.74] and were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.42, 4.82] inches (mean [95% CI]) (t(28) = -2.44, p = 0.02).
+</div></div></div>
+
+> This will be different to your previous manual calculations on two counts. One, we are using a t-distribution for our confidence intervals. Two this example is a two-sample t-test, our previous example was closer to a paired t-test we will see how to implement a linear model with a paired design in subsequent chapters.
+
 
 ```r
-darwin %>% 
-  ggplot(aes(x = type, y = height)) +
-  # Add jittered points with customization of width, point shape, and fill color
-  geom_jitter(width = 0.1, pch = 21, aes(fill = type)) +
-  # Apply a classic theme to the plot
-  theme_classic() +
-  # Add a dashed segment indicating a specific measurement
-  geom_segment(aes(x = 1, xend = 2, y = 20.192, yend = 20.192 - 2.617), linetype = "dashed") +
-  # Add a summary statistic using a crossbar geom
-  stat_summary(fun.y = mean, geom = "crossbar", width = 0.2)
+# Convert the 'means' object to a tibble
+means %>%
+  as_tibble() %>%
+  # Create a plot using ggplot
+  ggplot(aes(x = type, y = emmean, fill = type)) +
+    # Add raw data
+  geom_jitter(data = darwin,
+              aes(x = type,
+                  y = height),
+              width = 0.1,
+              pch = 21,
+              alpha = 0.4) +
+  # Add point estimates with error bars
+  geom_pointrange(aes(ymin = lower.CL, 
+                      ymax = upper.CL),
+                  pch = 21) +
+  theme_classic()
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" />
-
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 # Assumption checking
@@ -496,25 +500,25 @@ To visually assess the normality of residuals, we can utilize various plotting f
 
 Quantile-Quantile (QQ) Plot: This plot compares the distribution of residuals to a theoretical normal distribution. If the residuals follow a normal distribution, they should approximately align along a diagonal line.
 
-<div class="tab"><button class="tablinksunnamed-chunk-24 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-24', 'unnamed-chunk-24');">Base R</button><button class="tablinksunnamed-chunk-24" onclick="javascript:openCode(event, 'option2unnamed-chunk-24', 'unnamed-chunk-24');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+<div class="tab"><button class="tablinksunnamed-chunk-25 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-25', 'unnamed-chunk-25');">Base R</button><button class="tablinksunnamed-chunk-25" onclick="javascript:openCode(event, 'option2unnamed-chunk-25', 'unnamed-chunk-25');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
 
 ```r
 plot(lsmodel1, which=c(2,2))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-24" class="tabcontentunnamed-chunk-24">
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-37-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
 
 ```r
 performance::check_model(lsmodel1, check=c("normality","qq"),
                          detrend = F)
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-24') </script>
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-38-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-25') </script>
 ### Formal test of Normality
 
-<div class="tab"><button class="tablinksunnamed-chunk-25 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-25', 'unnamed-chunk-25');">Base R</button><button class="tablinksunnamed-chunk-25" onclick="javascript:openCode(event, 'option2unnamed-chunk-25', 'unnamed-chunk-25');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+<div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 shapiro.test(residuals(lsmodel1))
@@ -527,7 +531,7 @@ shapiro.test(residuals(lsmodel1))
 ## data:  residuals(lsmodel1)
 ## W = 0.83089, p-value = 0.0002531
 ```
-</div><div id="option2unnamed-chunk-25" class="tabcontentunnamed-chunk-25">
+</div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
 
 ```r
 performance::check_normality(lsmodel1)
@@ -536,7 +540,7 @@ performance::check_normality(lsmodel1)
 ```
 ## Warning: Non-normality of residuals detected (p < .001).
 ```
-</div><script> javascript:hide('option2unnamed-chunk-25') </script>
+</div><script> javascript:hide('option2unnamed-chunk-26') </script>
 
 
 
@@ -550,21 +554,21 @@ The assumption of homogeneity of variance (or homoscedasticity) states that the 
 
 To assess this assumption, we can plot the residuals against the fitted values:
 
-<div class="tab"><button class="tablinksunnamed-chunk-26 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-26', 'unnamed-chunk-26');">Base R</button><button class="tablinksunnamed-chunk-26" onclick="javascript:openCode(event, 'option2unnamed-chunk-26', 'unnamed-chunk-26');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+<div class="tab"><button class="tablinksunnamed-chunk-27 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-27', 'unnamed-chunk-27');">Base R</button><button class="tablinksunnamed-chunk-27" onclick="javascript:openCode(event, 'option2unnamed-chunk-27', 'unnamed-chunk-27');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
 
 ```r
 plot(lsmodel1, which=c(1,3))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-2.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-26" class="tabcontentunnamed-chunk-26">
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-41-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
 
 ```r
 performance::check_model(lsmodel1, check=c("homogeneity"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-26') </script>
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-42-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-27') </script>
 
 
 ### Formal Tests for Homogeneity of Variance
@@ -573,7 +577,7 @@ To formally test for homogeneity of variance, we can use:
 
 Breusch-Pagan Test: This test evaluates whether the variance of residuals is constant.
 
-<div class="tab"><button class="tablinksunnamed-chunk-27 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-27', 'unnamed-chunk-27');">Base R</button><button class="tablinksunnamed-chunk-27" onclick="javascript:openCode(event, 'option2unnamed-chunk-27', 'unnamed-chunk-27');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
+<div class="tab"><button class="tablinksunnamed-chunk-28 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-28', 'unnamed-chunk-28');">Base R</button><button class="tablinksunnamed-chunk-28" onclick="javascript:openCode(event, 'option2unnamed-chunk-28', 'unnamed-chunk-28');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
 
 ```r
 library(lmtest)
@@ -588,7 +592,7 @@ bptest(lsmodel1, varformula = ~fitted.values(lsmodel1), studentize = F )
 ## data:  lsmodel1
 ## BP = 3.9496, df = 1, p-value = 0.04688
 ```
-</div><div id="option2unnamed-chunk-27" class="tabcontentunnamed-chunk-27">
+</div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
 
 ```r
 performance::check_heteroscedasticity(lsmodel1)
@@ -597,7 +601,7 @@ performance::check_heteroscedasticity(lsmodel1)
 ```
 ## Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.047).
 ```
-</div><script> javascript:hide('option2unnamed-chunk-27') </script>
+</div><script> javascript:hide('option2unnamed-chunk-28') </script>
 
 ## Assumption 3: Linearity
 
@@ -607,21 +611,21 @@ Linear regression assumes a linear relationship between the predictor(s) and the
 
 To assess this assumption, we can plot the residuals against the fitted values:
 
-<div class="tab"><button class="tablinksunnamed-chunk-28 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-28', 'unnamed-chunk-28');">Base R</button><button class="tablinksunnamed-chunk-28" onclick="javascript:openCode(event, 'option2unnamed-chunk-28', 'unnamed-chunk-28');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+<div class="tab"><button class="tablinksunnamed-chunk-29 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-29', 'unnamed-chunk-29');">Base R</button><button class="tablinksunnamed-chunk-29" onclick="javascript:openCode(event, 'option2unnamed-chunk-29', 'unnamed-chunk-29');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 plot(lsmodel1, which=c(1,3))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-49-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-49-2.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-28" class="tabcontentunnamed-chunk-28">
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-1.png" width="100%" style="display: block; margin: auto;" /><img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-45-2.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
 
 ```r
 performance::check_model(lsmodel1, check=c("linearity"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-50-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-28') </script>
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-46-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-29') </script>
 
 Checking for linearity can be difficult when we only have two groups in our model:
 
@@ -637,21 +641,21 @@ Outliers can significantly affect the estimates of a model, influencing both res
 
 To identify outliers, we can employ Cook's Distance, which measures the influence of each data point on the model fit. Large values of Cook's Distance suggest that a point may be having an outsized effect.
 
-<div class="tab"><button class="tablinksunnamed-chunk-29 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-29', 'unnamed-chunk-29');">Base R</button><button class="tablinksunnamed-chunk-29" onclick="javascript:openCode(event, 'option2unnamed-chunk-29', 'unnamed-chunk-29');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
+<div class="tab"><button class="tablinksunnamed-chunk-30 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-30', 'unnamed-chunk-30');">Base R</button><button class="tablinksunnamed-chunk-30" onclick="javascript:openCode(event, 'option2unnamed-chunk-30', 'unnamed-chunk-30');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
 
 ```r
 plot(lsmodel1, which=c(4,4))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
-</div><div id="option2unnamed-chunk-29" class="tabcontentunnamed-chunk-29">
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-47-1.png" width="100%" style="display: block; margin: auto;" />
+</div><div id="option2unnamed-chunk-30" class="tabcontentunnamed-chunk-30">
 
 ```r
 performance::check_model(lsmodel1, check=c("outliers"))
 ```
 
-<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-52-1.png" width="100%" style="display: block; margin: auto;" />
-</div><script> javascript:hide('option2unnamed-chunk-29') </script>
+<img src="13-Introduction-to-linear-models_files/figure-html/unnamed-chunk-48-1.png" width="100%" style="display: block; margin: auto;" />
+</div><script> javascript:hide('option2unnamed-chunk-30') </script>
 
 ### Formal Tests for Outliers
 
@@ -671,18 +675,18 @@ performance::check_outliers(lsmodel1)
 
 Check: Assess whether predictors are highly correlated with each other, which can affect the stability of coefficient estimates. In this model we only have a single predictor, so this test is not required - we will revisit this with more complex models later. 
 
-<div class="tab"><button class="tablinksunnamed-chunk-31 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-31', 'unnamed-chunk-31');">Base R</button><button class="tablinksunnamed-chunk-31" onclick="javascript:openCode(event, 'option2unnamed-chunk-31', 'unnamed-chunk-31');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-31" class="tabcontentunnamed-chunk-31">
+<div class="tab"><button class="tablinksunnamed-chunk-32 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-32', 'unnamed-chunk-32');">Base R</button><button class="tablinksunnamed-chunk-32" onclick="javascript:openCode(event, 'option2unnamed-chunk-32', 'unnamed-chunk-32');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
 
 ```r
 library(car)
 vif(lsmodel1)
 ```
-</div><div id="option2unnamed-chunk-31" class="tabcontentunnamed-chunk-31">
+</div><div id="option2unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
 
 ```r
 performance::check_model(lsmodel1, check=c("vif"))
 ```
-</div><script> javascript:hide('option2unnamed-chunk-31') </script>
+</div><script> javascript:hide('option2unnamed-chunk-32') </script>
 
 
 ## Summary
@@ -705,17 +709,17 @@ In this chapter, we covered essential steps for checking linear model assumption
 
 We can check all our model assumptions at once, as well as looking at individual plots as shown above. 
 
-<div class="tab"><button class="tablinksunnamed-chunk-32 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-32', 'unnamed-chunk-32');">Base R</button><button class="tablinksunnamed-chunk-32" onclick="javascript:openCode(event, 'option2unnamed-chunk-32', 'unnamed-chunk-32');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
+<div class="tab"><button class="tablinksunnamed-chunk-33 active" onclick="javascript:openCode(event, 'option1unnamed-chunk-33', 'unnamed-chunk-33');">Base R</button><button class="tablinksunnamed-chunk-33" onclick="javascript:openCode(event, 'option2unnamed-chunk-33', 'unnamed-chunk-33');"><tt>tidyverse</tt></button></div><div id="option1unnamed-chunk-33" class="tabcontentunnamed-chunk-33">
 
 ```r
 plot(lsmodel1)
 ```
-</div><div id="option2unnamed-chunk-32" class="tabcontentunnamed-chunk-32">
+</div><div id="option2unnamed-chunk-33" class="tabcontentunnamed-chunk-33">
 
 ```r
 performance::check_model(lsmodel1, detrend = F)
 ```
-</div><script> javascript:hide('option2unnamed-chunk-32') </script>
+</div><script> javascript:hide('option2unnamed-chunk-33') </script>
 
 While graphical checks provide a valuable first step, complementing them with formal tests strengthens our analysis. 
 
