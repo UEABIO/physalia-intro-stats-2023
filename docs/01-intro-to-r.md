@@ -11,19 +11,17 @@
 
 R is a programming language that you will write code in, and RStudio is an Integrated Development Environment (IDE) which makes working with R easier. Think of it as knowing English and using a plain text editor like NotePad to write a book versus using a word processor like Microsoft Word. You could do it, but it wouldn't look as good and it would be much harder without things like spell-checking and formatting. In a similar way, you can use R without R Studio but we wouldn't recommend it. The key thing to remember is that although you will do all of your work using RStudio for this course, you are actually using **two** pieces of software which means that from time-to-time, both of them may have separate updates.
 
-R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/)(see Appendices), but for convenience we will use a classroom space on **RStudio Cloud**.
+R and RStudio can be downloaded for free onto your [personal computers](https://www.rstudio.com/products/rstudio/)(see Appendices), but for convenience we can also use a classroom space on **RStudio Cloud**.
 
 [RStudio Cloud](https://rstudio.cloud/) is a cloud-based service where we can log into remotely hosted servers that host our data analysis projects.
 
 The advantage of using RStudio Cloud is that all the extra packages and functions you need for this course will already be installed. You can log-in to your workspace from any computer as long as you have an internet connection and remember you username and password. I can also "visit" your projects and help out when you get stuck, if they are hosted on RStudio Cloud.
 
-Eventually we will may also add extra tools like GitHub and RMarkdown for data reproducibility, literate and collaborative programming.
-
 By the end of this course I hope you will have the tools to confidently analyze real data, make informative and beautiful data visuals, and be able to analyze lots of different types of data.
 
-## Using RStudio Cloud
+## Using RStudio Cloud (Optional)
 
-All of our sessions will run on cloud-based software. All you have to do is make a free account, and join our Workspace.
+Go to RStudio Cloud and sign up or log in.
 
 Once you are signed up - you will see that there are two spaces:
 
@@ -31,15 +29,26 @@ Once you are signed up - you will see that there are two spaces:
 
 -   Our shared classroom - educational licence (no limit)
 
-Make sure you are working in the classroom workspace - so that I can distribute project work and 'visit' your projects if needed.
-
 RStudio Cloud works in exactly the same way as RStudio, but means you don't have to download any software. You can access the hosted cloud server and your projects through any browser connection (Chrome works best), from any computer.
 
 Here is a good reference guide to [RStudio Cloud](https://rstudio.cloud/learn/guide#projects)
 
 ## Getting to know RStudio
 
-R Studio has a console that you can try out code in (appearing as the bottom left window), there is a script editor (top left), a window showing functions and objects you have created in the "Environment" tab (top right window in the figure), and a window that shows plots, files packages, and help documentation (bottom right).
+Once you open a project in RStudio (or RStudio Cloud), you should see these key panes:
+
+- Script Editor (top-left): For writing and editing R scripts (.R files).
+
+- Console (bottom-left): Where R actually runs your commands.
+
+- Environment / History (top-right): Displays objects you’ve created and a history of commands.
+
+- Files / Plots / Packages / Help (bottom-right):
+
+    - Files: Browse your working directory.
+    - Plots: Displays plots you generate.
+    - Packages: Lists installed and loaded packages.
+    - Help: Documentation for R functions and packages.
 
 <div class="figure" style="text-align: center">
 <img src="images/rstudio.png" alt="RStudio interface" width="100%" />
@@ -108,11 +117,7 @@ on your early mistakes, or laugh about the mistakes you still
 occasionally make!</p>
 </div>
 
-## Get Started
-
-Go to RStudio Cloud and enter the Project labelled `Day One` - this will clone the project and provide you with your own project workspace.
-
-Follow the instructions below to get used to the R command line, and how R works as a language.
+## First steps in R
 
 ## Your first R command
 
@@ -160,6 +165,15 @@ There are two types of operators to consider
 |/|	division|
 |^|	exponentiation|
 
+
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Try it out </div></div>
+
+
+```r
+5^4
+```
+
 #### Logical Operators
 
 |Operator|Description
@@ -171,7 +185,17 @@ There are two types of operators to consider
 |==|exactly equal to|
 |!=|not equal to|
 
-### Typos
+<div class="panel panel-default"><div class="panel-heading"> Task </div><div class="panel-body"> 
+Try it out </div></div>
+
+
+```r
+2 + 2 == 4
+```
+
+### Typos and Errors
+
+
 
 <div class="warning">
 <p>Before we go on to talk about other types of calculations that we can
@@ -181,38 +205,24 @@ pretty stupid, and because it’s stupid it can’t handle typos. It takes
 it on faith that you meant to type exactly what you did type.</p>
 </div>
 
-Suppose you forget to hit the shift key when trying to type `+`, and as a result your command ended up being `10 = 20` rather than `10 + 20`. Try it for yourself and replicate this error message:
+R is picky. Even small typos can lead to big errors:
 
 
 ```r
-10 = 20
+2 + 2   # valid
+2 +     # incomplete
+10 + 20 # valid
+10 = 20 # error: invalid assignment
 ```
 
 
-<div class='webex-solution'><button>What answer did you get?</button>
+If you make a mistake, R will display an error message. Don’t panic:
 
-Error in 10 = 20 : invalid (do_set) left-hand side to assignment
+- Read the error carefully.
 
+- Check spelling, missing commas, or missing parentheses.
 
-</div>
-
-
-What's happened here is that R has attempted to interpret `10 = 20` as a command, and spits out an error message because the command doesn't make any sense to it.
-
-When a *human* looks at this, and then looks down at his or her keyboard and sees that `+` and `=` are on the same key, it's pretty obvious that the command was a typo. But R doesn't know this, so it gets upset.
-
-Even more subtle is the fact that some typos won't produce errors at all, because they happen to correspond to "well-formed" R commands. For instance, suppose that not only did I forget to hit the shift key when trying to type `10 + 20`, I also managed to press the key next to one I meant do. The resulting typo would produce the command `10 - 20`. Clearly, R has no way of knowing that you meant to *add* 20 to 10, not *subtract* 20 from 10, so what happens this time is this:
-
-
-```r
-10 - 20
-```
-
-```
-## [1] -10
-```
-
-In this case, R produces the right answer, but to the the wrong question.
+- Use the Escape key if the console prompts a + (continuation line) and you want to exit or start over.
 
 ### More simple arithmetic
 
@@ -303,80 +313,9 @@ all your previous commands.</p>
 scripts, as an essential way to re-use, store and edit commands.</p>
 </div>
 
-## "TRUE or FALSE" data
-
-Time to make a sidebar onto another kind of data. Many concepts in programming rely on the idea of a ***logical value***. A logical value is an assertion about whether something is true or false. This is implemented in R in a pretty straightforward way. There are two logical values, namely `TRUE` and `FALSE`. Despite the simplicity, logical values are very useful things. Let's see how they work.
-
-### Assessing mathematical truths
-
-In George Orwell's classic book *1984*, one of the slogans used by the totalitarian Party was "two plus two equals five", the idea being that the political domination of human freedom becomes complete when it is possible to subvert even the most basic of truths.
-
-But they didn't have R!
-
-R will not be subverted. It has rather firm opinions on the topic of what is and isn't true, at least as regards basic mathematics. If I ask it to calculate `2 + 2`, it always gives the same answer, and it's **not** 5:
 
 
-```r
-2 + 2
-```
-
-```
-## [1] 4
-```
-
-Of course, so far R is just doing the calculations. I haven't asked it to explicitly assert that $2+2 = 4$ is a true statement. If I want R to make an explicit judgement, I can use a command like this:
-
-
-```r
-2 + 2 == 4
-```
-
-
-<div class='webex-solution'><button>Solution</button>
-
-TRUE
-
-
-</div>
-
-
-What I've done here is use the ***equality operator***, `==`, to force R to make a "true or false" judgement.
-
-<div class="info">
-<p>This is a very different operator to the assignment operator
-<code>=</code> you saw previously.</p>
-<p>A common typo that people make when trying to write logical commands
-in R (or other languages, since the “<code>=</code> versus
-<code>==</code>” distinction is important in most programming languages)
-is to accidentally type <code>=</code> when you really mean
-<code>==</code>.</p>
-</div>
-
-Okay, let's see what R thinks of the Party slogan:
-
-
-```r
-2+2 == 5
-```
-
-```
-## [1] FALSE
-```
-
-Take that Big Brother! Anyway, it's worth having a look at what happens if I try to *force* R to believe that two plus two is five by making an assignment statement like `2 + 2 = 5` or `2 + 2 <- 5`. When I do this, here's what happens:
-
-
-```r
-2 + 2 = 5
-```
-
-    Error in 2 + 2 = 5 : target of assignment expands to non-language object
-
-R doesn't like this very much. It recognises that `2 + 2` is *not* a variable (that's what the "non-language object" part is saying), and it won't let you try to "reassign" it. While R is pretty flexible, and actually does let you do some quite remarkable things to redefine parts of R itself, there are just some basic, primitive truths that it refuses to give up. It won't change the laws of addition, and it won't change the definition of the number `2`.
-
-That's probably for the best.
-
-## Storing outputs
+## Working with objects in R
 
 With simple questions like the ones above we are happy to just see the answer, but our questions are often more complex than this. If we need to take multiple steps, we benefit from being able to store our answers and recall them for use in later steps. This is very simple to do we can *assign* outputs to a name:
 
@@ -519,7 +458,7 @@ analyses we have been working on.</p>
 
 <div class="figure" style="text-align: center">
 <img src="images/snake_case.png" alt="snake_case" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-37)courtesy of Allison Horst</p>
+<p class="caption">(\#fig:unnamed-chunk-33)courtesy of Allison Horst</p>
 </div>
 
 ## Error
@@ -547,7 +486,7 @@ specific topic</p>
 
 <div class="figure" style="text-align: center">
 <img src="images/Error.jpg" alt="R Error" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-39)courtesy of Allison Horst</p>
+<p class="caption">(\#fig:unnamed-chunk-35)courtesy of Allison Horst</p>
 </div>
 
 ## Functions
@@ -695,7 +634,7 @@ However, the power of R is that it is extendable and open source - anyone can cr
 
 An R package is a container for various things including functions and data. These make it easy to do very complicated protocols by using custom-built functions. Later we will see how we can write our own simple functions. Packages are a lot like new apps extending the functionality of what your phone can do.
 
-On RStudio Cloud I have already installed several add-on packages, all we need to do is use a simple function `library()` to load these packages into our workspace. Once this is complete we will have access to all the custom functions they contain.
+> Note you will have to have these packages installed first before they can be used
 
 <div class="try">
 <p>Copy and paste the following code into the console.</p>
@@ -736,7 +675,7 @@ Today let's use some simple functions to produce a figure. We specify the data s
 ggplot(data = penguins,aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(aes(colour=species)) 
 ```
 
-<img src="01-intro-to-r_files/figure-html/unnamed-chunk-55-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-intro-to-r_files/figure-html/unnamed-chunk-51-1.png" width="100%" style="display: block; margin: auto;" />
 
 <div class="information">
 <p>You may have noticed R gave you a warning. Not the same as a big
@@ -986,9 +925,7 @@ ggsave(filename = "2022_10_01_5023Y_workshop_1_penguin_scatterplot.png",
 
 -   If you spotted any mistakes or errors let me know
 
--   Close your RStudio Cloud Browser
-
--   Complete this week's short quiz!
+-   Complete this short quiz!
 
 ## Activity 1
 

@@ -69,6 +69,7 @@
     div.csl-bib-body { }
     div.csl-entry {
       clear: both;
+          margin-bottom: 0em;
         }
     .hanging div.csl-entry {
       margin-left:2em;
@@ -166,7 +167,7 @@
 <h3>
 <span class="header-section-number">10.0.1</span> Packages<a class="anchor" aria-label="anchor" href="#packages-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggobi.github.io/ggally/">GGally</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span></span>
@@ -178,7 +179,7 @@
 </h2>
 <p>R has a general function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> for fitting linear models, this is part of base R (does not require the tidyverse packages). We will run through a few different iterations of the linear model increasing in complexity. We will often want to fit several models to our data, so a common way to work is to fit a model and assign it to a named R object, so that we can extract data from when we need it.</p>
 <p>In the example below I have called the model <code>lsmodel0</code>, short for "least-squares model 0", this is because the linear-model uses a technique called <strong>least-squares</strong> we will explore what this means later.</p>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lsmodel0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">height</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">darwin</span><span class="op">)</span></span></code></pre></div>
 <div class="try">
 <p>
@@ -231,7 +232,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel0</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -250,7 +251,7 @@ Base R
 ## Residual standard error: 3.181 on 29 degrees of freedom</code></pre>
 </div>
 <div id="option2unnamed-chunk-6" class="tabcontentunnamed-chunk-6">
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel0</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -276,7 +277,7 @@ Base R
 </div>
 </div>
 <p>The output above is called the <em>table of coefficients</em>. The 18.9 is the <em>estimate of the model coefficient</em> (in this case it is the overall mean), together with its standard error. The first row in any R model output is always labelled the 'Intercept' and the challenge is usually to workout what that represents. In this case we can prove that this is the same as the overall mean as follows:</p>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">darwin</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 18.88333</code></pre>
 <p>This simple model allows us to understand what the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function does.</p>
@@ -304,7 +305,7 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data<span class="op">=</span><span class="va">darwin</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># note that the following is identical</span></span>
@@ -332,7 +333,7 @@ Base R
 ## F-statistic:  5.94 on 1 and 28 DF,  p-value: 0.02141</code></pre>
 </div>
 <div id="option2unnamed-chunk-8" class="tabcontentunnamed-chunk-8">
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data<span class="op">=</span><span class="va">darwin</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
@@ -368,7 +369,7 @@ Base R
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lsmodel1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">height</span> <span class="op">~</span> <span class="va">type</span>, data<span class="op">=</span><span class="va">darwin</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># note that the following is identical</span></span>
@@ -394,7 +395,7 @@ Solution
 <p>So what about the second row? A common mistake is to think that this must refer to the height of the Self plants. However, this cannot be true as the value is <em>negative</em>. Instead what it actually refers to is the <strong>difference in the mean height of the two groups</strong>. This focuses then on the question which we are asking: is their a difference in the height of plants that result from cross pollination when compared to plants that have been self pollinated?</p>
 <p>This linear model indicates the average height of Crossed plants is 20.2 inches, and Selfed plants are an average of 2.6 inches <em>shorter</em>.</p>
 <p>You can confirm this for yourself:</p>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">darwin</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -420,7 +421,7 @@ Solution
 </div>
 </div>
 <p>Let's take a look at a fuller summary of our model, to see what else we can determine</p>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -487,14 +488,14 @@ Base R
 </button>
 </div>
 <div id="option1unnamed-chunk-14" class="tabcontentunnamed-chunk-14">
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">lsmodel1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                2.5 %     97.5 %
 ## (Intercept) 18.63651 21.7468231
 ## typeSelf    -4.81599 -0.4173433</code></pre>
 </div>
 <div id="option2unnamed-chunk-14" class="tabcontentunnamed-chunk-14">
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -552,7 +553,7 @@ We must ask ourselves if our experiment is consistent with this null hypothesis 
 <p>If our confidence intervals contain zero (or no difference), then we cannot establish a difference between our sample difference in height (-2.62 inches) from the null prediction of zero difference, given the level of variability (noise) in our data.</p>
 <p>In this case we can see that the upper and lower bounds of the confidence intervals do not cross zero. The difference in height is consistent with Darwin's alternate hypothesis of inbreeding depression.</p>
 <p>The <code>GGally</code> package has a handy <code><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model()</a></code> function, that produces a graph of the estimated mean difference with an approx 95% CI. As we can see we are able to reject the null hypothesis at a 95% confidence level.</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate a coefficient plot for the linear regression model using ggcoef_model</span></span>
 <span><span class="fu">GGally</span><span class="fu">::</span><span class="fu"><a href="https://ggobi.github.io/ggally/reference/ggcoef_model.html">ggcoef_model</a></span><span class="op">(</span><span class="va">lsmodel1</span>,</span>
 <span>                     show_p_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -566,7 +567,7 @@ treatments is still statistically significant at an of 0.01?
 </div>
 <p>If we increase the level of confidence (from 95% to 99%, roughly 2 SE to 3 SE), then we may find that we cannot reject the null hypothesis at a higher threshold of confidence. Try altering the conf.level argument above for yourself to see this in action.</p>
 <p>We can also include this argument in the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function if we wish to:</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">lsmodel1</span>, conf.int<span class="op">=</span><span class="cn">T</span>, conf.level<span class="op">=</span><span class="fl">0.99</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <div class="inline-table"><table class="table table-sm">
@@ -615,7 +616,7 @@ treatments is still statistically significant at an of 0.01?
 <span class="header-section-number">10.4.0.1</span> Getting the other treatment mean and standard error<a class="anchor" aria-label="anchor" href="#getting-the-other-treatment-mean-and-standard-error"><i class="fas fa-link"></i></a>
 </h4>
 <p>One limitation of the table of coefficients output is that it doesn't provide the mean and standard error of the <em>other</em> treatment level (only the difference between them). If we wish to calculate the "other" mean and SE then we can get R to do this.</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform linear regression on darwin data with Self as the intercept</span></span>
 <span><span class="va">darwin</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Convert 'type' column to a factor</span></span>
@@ -660,7 +661,7 @@ treatments is still statistically significant at an of 0.01?
 <span class="header-section-number">10.4.1</span> Emmeans<a class="anchor" aria-label="anchor" href="#emmeans"><i class="fas fa-link"></i></a>
 </h3>
 <p>We could also use the package <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/"><code>emmeans</code></a> and its function <code><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans()</a></code> to do a similar thing</p>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate estimated marginal means (EMMs) using emmeans package</span></span>
 <span><span class="va">means</span> <span class="op">&lt;-</span> <span class="fu">emmeans</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">lsmodel1</span>, specs <span class="op">=</span> <span class="op">~</span> <span class="va">type</span><span class="op">)</span></span>
 <span></span>
@@ -672,7 +673,7 @@ treatments is still statistically significant at an of 0.01?
 ## Confidence level used: 0.95</code></pre>
 <p>The advantage of emmeans is that it provides the mean, standard error and 95% confidence interval estimates of all levels from the model at once (e.g. it relevels the model multiple times behind the scenes).</p>
 <p><code>emmeans</code> also gives us a handy summary to include in data visuals that combine raw data and statistical inferences. These are standard <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code> outputs so can be <a href="data-visualisation-with-ggplot2.html#intro-to-grammar">customised as much as you want</a>.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert the 'means' object to a tibble</span></span>
 <span><span class="va">means</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -730,7 +731,7 @@ Solution
 <blockquote>
 <p>This will be different to your previous manual calculations on two counts. One, we are using a t-distribution for our confidence intervals. Two this example is a two-sample t-test, our previous example was closer to a paired t-test we will see how to implement a linear model with a paired design in subsequent chapters.</p>
 </blockquote>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Convert the 'means' object to a tibble</span></span>
 <span><span class="va">means</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -964,7 +965,7 @@ $( document ).ready(function() {
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2024-07-16.</p>
+    <p>"<strong>Introduction to Statistics</strong>: A guide for Biologists and Ecologists" was written by Philip T. Leftwich. It was last built on 2025-01-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

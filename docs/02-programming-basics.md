@@ -18,14 +18,17 @@ Run the below code to load the tidyverse package. You can do this regardless of 
 library(tidyverse)
 ```
 
-You will get what looks like an error message - it's not. It's just R telling you what it's done. You should **read this** it gives you a full list of the packages it has made available to you. One of these should look familiar to you from last week?
+You will get what looks like an error message - it's not. It's just R telling you what it's done. You should **read this** it gives you a full list of the packages it has made available to you. One of these should look familiar to you from last time?
 
 <select class='webex-select'><option value='blank'></option><option value='answer'>ggplot2</option><option value=''>tibble</option><option value=''>tidyr</option><option value=''>dplyr</option></select>
 
 Now that we've loaded the `tidyverse` package we can use **any** of the functions it contains but remember, you need to run the `library()` function every time you start R.
 
 
-<div class='webex-solution'><button>Install the tidyverse. You DO NOT need to do this on RStudio Cloud.</button>
+The tidyverse is a collection of packages that share a philosophy of data analysis
+
+
+<div class='webex-solution'><button>Install the tidyverse. You ONLY need to do this ONCE on your computer.</button>
 
 
 In order to use a package, you must first install it. The following code installs the package tidyverse, a package we will use very frequently.
@@ -53,6 +56,16 @@ is required to build R packages” you may need to download and install an
 extra bit of software called <a
 href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>.</p>
 </div>
+
+### Installing vs Loading
+
+R has thousands of packages that extend its functionality. To use a package, you must:
+
+- Install it (one-time) using install.packages("somepackage").
+
+- Load it (every session) using library(somepackage).
+
+
 
 ## Package updates
 
