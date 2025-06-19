@@ -1,0 +1,40 @@
+# Overview {.unnumbered}
+
+This course will introduce scientists and practitioners interested in applying statistical approaches in their daily routine using R as a working environment. Participants will be introduced into R and R Studio while learning how to perform common statistical analyses. After a short introduction on R and its principles, the focus will be on questions that could be addressed using common statistical analyses, both for descriptive statistics and for statistical inference.
+
+## Learning outcomes
+
+- Understand how to read, interpret and write scripts in R.
+
+- Learn how to check and clean data 
+
+- Learn statistical tools to address common questions in research activities.
+
+- An introduction to efficient, readable and reproducible analyses
+
+- Being comfortable with using R when performing both descriptive and inferential statistics.
+
+
+
+
+```{r cite-packages, include = FALSE}
+# automatically create a bib database for R packages
+# add any packages you want to cite here
+knitr::write_bib(c(
+  .packages(), 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'skimr', 'ggplot2', 'sandwich', 'parameters'
+), 'include/packages.bib')
+
+
+# Set ggplot theme for book
+library(ggplot2)
+
+
+my_theme <- theme_minimal(base_size = 16) + 
+  theme(
+    panel.grid = element_blank(),  # Removes gridlines
+    axis.line = element_line(color = "black")  # Adds x and y axis lines
+  )
+
+theme_set(my_theme)
+
+```
