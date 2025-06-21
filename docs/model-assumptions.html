@@ -424,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
   </div>
 </li>
       </ul>
@@ -461,12 +461,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Mixed Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -916,7 +933,8 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>                         <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -973,7 +991,15 @@ Warning
 <span id="cb24-6"><a href="#cb24-6"></a>                        <span class="at">method =</span> <span class="st">"case"</span>, </span>
 <span id="cb24-7"><a href="#cb24-7"></a>                        <span class="at">R =</span> <span class="dv">2000</span>)</span>
 <span id="cb24-8"><a href="#cb24-8"></a></span>
-<span id="cb24-9"><a href="#cb24-9"></a><span class="fu">summary</span>(boot_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="fu">summary</span>(boot_model)</span>
+<span id="cb24-10"><a href="#cb24-10"></a></span>
+<span id="cb24-11"><a href="#cb24-11"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(boot_model<span class="sc">$</span>t[,<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1006,13 +1032,65 @@ Warning
 </table>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1278  360</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(parameters)</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">library</span>(qqplotr)</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="fu">bootstrap_parameters</span>(lsmodel1, <span class="at">iterations =</span> <span class="dv">2000</span>)</span>
+<span id="cb26-7"><a href="#cb26-7"></a></span>
+<span id="cb26-8"><a href="#cb26-8"></a>parameters_model <span class="ot">&lt;-</span> <span class="fu">bootstrap_model</span>(lsmodel1, <span class="at">iterations =</span> <span class="dv">2000</span>)</span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="fu">ggplot</span>(parameters_model, <span class="fu">aes</span>(<span class="at">sample =</span> typeSelf))<span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>    <span class="fu">stat_qq_band</span>() <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>    <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>    <span class="fu">stat_qq_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">Coefficient</th>
+<th style="text-align: right;">CI_low</th>
+<th style="text-align: right;">CI_high</th>
+<th style="text-align: right;">p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">20.252976</td>
+<td style="text-align: right;">18.174792</td>
+<td style="text-align: right;">21.7941866</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">typeSelf</td>
+<td style="text-align: right;">-2.652149</td>
+<td style="text-align: right;">-4.639655</td>
+<td style="text-align: right;">-0.4578413</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <section id="get-confidence-intervals" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="get-confidence-intervals">
 <span class="header-section-number">10.2.1</span> Get Confidence intervals</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">confint</span>(boot_model)</span>
-<span id="cb25-2"><a href="#cb25-2"></a></span>
-<span id="cb25-3"><a href="#cb25-3"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(boot_model, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">confint</span>(boot_model)</span>
+<span id="cb27-2"><a href="#cb27-2"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(boot_model, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bootstrap bca confidence intervals
 
@@ -1053,44 +1131,96 @@ typeSelf    -4.442568 -0.08401808</code></pre>
 </div>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>b <span class="ot">&lt;-</span> <span class="fu">bootstrap_parameters</span>(lsmodel1, <span class="at">iterations =</span> <span class="dv">2000</span>)</span>
+<span id="cb29-4"><a href="#cb29-4"></a>b</span>
+<span id="cb29-5"><a href="#cb29-5"></a></span>
+<span id="cb29-6"><a href="#cb29-6"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(b, <span class="at">specs =</span> <span class="sc">~</span> type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: right;">Coefficient</th>
+<th style="text-align: right;">CI_low</th>
+<th style="text-align: right;">CI_high</th>
+<th style="text-align: right;">p</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">20.252976</td>
+<td style="text-align: right;">18.174792</td>
+<td style="text-align: right;">21.7941866</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">typeSelf</td>
+<td style="text-align: right;">-2.652149</td>
+<td style="text-align: right;">-4.639655</td>
+<td style="text-align: right;">-0.4578413</td>
+<td style="text-align: right;">0.024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> type  emmean lower.HPD upper.HPD
+ Cross   20.3      18.4      21.9
+ Self    17.6      16.5      18.5
+
+Point estimate displayed: median 
+HPD interval probability: 0.95 </code></pre>
+</div>
+</div>
 </section><section id="visualise-bootstrap-distributions" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="visualise-bootstrap-distributions">
 <span class="header-section-number">10.2.2</span> Visualise bootstrap distributions</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Get model-based 95% CIs</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a></span>
-<span id="cb27-3"><a href="#cb27-3"></a>orig_ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Get model-based 95% CIs</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a>orig_ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Get bootstrapped coefficients from car::Boot()</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>boot_coefs <span class="ot">&lt;-</span> boot_model<span class="sc">$</span>t</span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="co"># Long format for plotting</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>boot_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(boot_coefs)</span>
-<span id="cb28-6"><a href="#cb28-6"></a></span>
-<span id="cb28-7"><a href="#cb28-7"></a>boot_long <span class="ot">&lt;-</span> boot_df <span class="sc">%&gt;%</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"term"</span>, <span class="at">values_to =</span> <span class="st">"estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Get bootstrapped coefficients from car::Boot()</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>boot_coefs <span class="ot">&lt;-</span> boot_model<span class="sc">$</span>t</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># Long format for plotting</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>boot_df <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(boot_coefs)</span>
+<span id="cb32-6"><a href="#cb32-6"></a></span>
+<span id="cb32-7"><a href="#cb32-7"></a>boot_long <span class="ot">&lt;-</span> boot_df <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"term"</span>, <span class="at">values_to =</span> <span class="st">"estimate"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="co"># 95% confidence intervals </span></span>
+<span id="cb32-11"><a href="#cb32-11"></a></span>
+<span id="cb32-12"><a href="#cb32-12"></a>quantile <span class="ot">&lt;-</span> boot_long <span class="sc">|&gt;</span> </span>
+<span id="cb32-13"><a href="#cb32-13"></a>  <span class="fu">group_by</span>(term) <span class="sc">|&gt;</span> </span>
+<span id="cb32-14"><a href="#cb32-14"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">quantile</span>(estimate, <span class="fu">c</span>(<span class="fl">0.025</span>)),</span>
+<span id="cb32-15"><a href="#cb32-15"></a>            <span class="at">max =</span> <span class="fu">quantile</span>(estimate, <span class="fu">c</span>(<span class="fl">0.975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(boot_long, <span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="co"># Add shaded CI region from original model</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> orig_ci,</span>
-<span id="cb29-4"><a href="#cb29-4"></a>            <span class="fu">aes</span>(<span class="at">xmin =</span> conf.low, <span class="at">xmax =</span> conf.high, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
-<span id="cb29-5"><a href="#cb29-5"></a>            <span class="at">fill =</span> <span class="st">"orange"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6"></a>  <span class="co"># Add histogram of bootstrap estimates</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a>  <span class="co"># Facet by term</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>term, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb29-10"><a href="#cb29-10"></a>  <span class="co"># Add dashed line for original coefficient</span></span>
-<span id="cb29-11"><a href="#cb29-11"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> orig_ci,</span>
-<span id="cb29-12"><a href="#cb29-12"></a>             <span class="fu">aes</span>(<span class="at">xintercept =</span> estimate), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
-<span id="cb29-13"><a href="#cb29-13"></a>  <span class="fu">labs</span>(</span>
-<span id="cb29-14"><a href="#cb29-14"></a>    <span class="at">title =</span> <span class="st">"Bootstrapped Coefficient Distributions with Model 95% CI"</span>,</span>
-<span id="cb29-15"><a href="#cb29-15"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate"</span>,</span>
-<span id="cb29-16"><a href="#cb29-16"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb29-17"><a href="#cb29-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(boot_long, <span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="co"># Add shaded CI region from original model</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> quantile,</span>
+<span id="cb33-4"><a href="#cb33-4"></a>            <span class="fu">aes</span>(<span class="at">xmin =</span> min, <span class="at">xmax =</span> max, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
+<span id="cb33-5"><a href="#cb33-5"></a>            <span class="at">fill =</span> <span class="st">"orange"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="co"># Add histogram of bootstrap estimates</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="co"># Facet by term</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>term, <span class="at">scales =</span> <span class="st">"free"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a>  <span class="co"># Add dashed line for original coefficient</span></span>
+<span id="cb33-11"><a href="#cb33-11"></a>  <span class="fu">geom_vline</span>(<span class="at">data =</span> orig_ci,</span>
+<span id="cb33-12"><a href="#cb33-12"></a>             <span class="fu">aes</span>(<span class="at">xintercept =</span> estimate), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a>  <span class="fu">labs</span>(</span>
+<span id="cb33-14"><a href="#cb33-14"></a>    <span class="at">title =</span> <span class="st">"Bootstrapped Coefficient Distributions with Model 95% CI"</span>,</span>
+<span id="cb33-15"><a href="#cb33-15"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate"</span>,</span>
+<span id="cb33-16"><a href="#cb33-16"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
+<span id="cb33-17"><a href="#cb33-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1109,23 +1239,23 @@ typeSelf    -4.442568 -0.08401808</code></pre>
 </ul></section><section id="manual-permutation" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="manual-permutation">
 <span class="header-section-number">10.3.2</span> Manual Permutation</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Observed test statistic</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>obs_stat <span class="ot">&lt;-</span> <span class="fu">coef</span>(lsmodel1)[<span class="st">"typeSelf"</span>]</span>
-<span id="cb30-3"><a href="#cb30-3"></a></span>
-<span id="cb30-4"><a href="#cb30-4"></a></span>
-<span id="cb30-5"><a href="#cb30-5"></a></span>
-<span id="cb30-6"><a href="#cb30-6"></a><span class="co"># Run permutation test</span></span>
-<span id="cb30-7"><a href="#cb30-7"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb30-8"><a href="#cb30-8"></a>perm_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, {</span>
-<span id="cb30-9"><a href="#cb30-9"></a>  shuffled <span class="ot">&lt;-</span> <span class="fu">sample</span>(darwin<span class="sc">$</span>type)</span>
-<span id="cb30-10"><a href="#cb30-10"></a>  perm_data <span class="ot">&lt;-</span> darwin</span>
-<span id="cb30-11"><a href="#cb30-11"></a>  perm_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> shuffled, <span class="at">data =</span> perm_data)</span>
-<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">coef</span>(perm_model)[[<span class="dv">2</span>]]</span>
-<span id="cb30-13"><a href="#cb30-13"></a>})</span>
-<span id="cb30-14"><a href="#cb30-14"></a></span>
-<span id="cb30-15"><a href="#cb30-15"></a><span class="co"># Permutation-based p-value</span></span>
-<span id="cb30-16"><a href="#cb30-16"></a>perm_pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(perm_stats) <span class="sc">&gt;=</span> <span class="fu">abs</span>(obs_stat))</span>
-<span id="cb30-17"><a href="#cb30-17"></a>perm_pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Observed test statistic</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>obs_stat <span class="ot">&lt;-</span> <span class="fu">coef</span>(lsmodel1)[<span class="st">"typeSelf"</span>]</span>
+<span id="cb34-3"><a href="#cb34-3"></a></span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="co"># Run permutation test</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb34-8"><a href="#cb34-8"></a>perm_stats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, {</span>
+<span id="cb34-9"><a href="#cb34-9"></a>  shuffled <span class="ot">&lt;-</span> <span class="fu">sample</span>(darwin<span class="sc">$</span>type)</span>
+<span id="cb34-10"><a href="#cb34-10"></a>  perm_data <span class="ot">&lt;-</span> darwin</span>
+<span id="cb34-11"><a href="#cb34-11"></a>  perm_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> shuffled, <span class="at">data =</span> perm_data)</span>
+<span id="cb34-12"><a href="#cb34-12"></a>  <span class="fu">coef</span>(perm_model)[[<span class="dv">2</span>]]</span>
+<span id="cb34-13"><a href="#cb34-13"></a>})</span>
+<span id="cb34-14"><a href="#cb34-14"></a></span>
+<span id="cb34-15"><a href="#cb34-15"></a><span class="co"># Permutation-based p-value</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a>perm_pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(perm_stats) <span class="sc">&gt;=</span> <span class="fu">abs</span>(obs_stat))</span>
+<span id="cb34-17"><a href="#cb34-17"></a>perm_pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.021</code></pre>
 </div>
@@ -1133,11 +1263,11 @@ typeSelf    -4.442568 -0.08401808</code></pre>
 </section><section id="using-the-coin-package" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="using-the-coin-package">
 <span class="header-section-number">10.3.3</span> Using the coin package</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">library</span>(coin)</span>
-<span id="cb32-2"><a href="#cb32-2"></a></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="fu">independence_test</span>(height <span class="sc">~</span> <span class="fu">as.factor</span>(type),</span>
-<span id="cb32-4"><a href="#cb32-4"></a>                  <span class="at">data =</span> darwin, </span>
-<span id="cb32-5"><a href="#cb32-5"></a>                  <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">5000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">library</span>(coin)</span>
+<span id="cb36-2"><a href="#cb36-2"></a></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="fu">independence_test</span>(height <span class="sc">~</span> <span class="fu">as.factor</span>(type),</span>
+<span id="cb36-4"><a href="#cb36-4"></a>                  <span class="at">data =</span> darwin, </span>
+<span id="cb36-5"><a href="#cb36-5"></a>                  <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">5000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Approximative General Independence Test

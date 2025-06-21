@@ -167,7 +167,6 @@ cuckoo_ls1 <- lm(Beg ~ Mass+Species+Mass:Species, data=cuckoo)
 
 ```{r, eval = T}
 performance::check_model(cuckoo_ls1, 
-                         residual_type = "normal",
                          detrend = FALSE)
 ```
 

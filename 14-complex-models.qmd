@@ -1,4 +1,4 @@
-# Linear Models
+# Complex models
 
 ```{r, include = FALSE}
 source("R/booktem_setup.R")
@@ -49,15 +49,6 @@ The flies used were an outbred stock, sexual activity was manipulated by supplyi
 
 * **sleep**: percentage of the day spent sleeping
 
-:::{.callout-important}
-
-In order to work through this assignment you should be in the Github Classroom assignment for Task 3. 
-
-You will first have to complete the data cleaning assignment. If you cannot complete this task please talk to me.
-
-Throughout you may have *slightly* different values - this is due to the process you will have used for imputing missing values.
-
-:::
 
 ## Hypothesis
 
@@ -126,11 +117,19 @@ lm(longevity ~ type + thorax + sleep, data = dros_clean)
 
 Other interactions *could* be included but you should have a strong reason for them. 
 
+More complex models can be compared to simpler ones and reported with F-tests as to whether they explain a significant amount of variance:
+
+```{r}
+
+full_model <- lm(longevity ~ type + thorax + sleep + type:sleep, data = dros_clean)
+
+reduced_model <- lm(longevity ~ type + thorax + sleep, data = dros_clean)
+
+anova(reduced_model, full_model)
+
 ```
 
-lm(longevity ~ type + thorax + sleep + type:sleep, data = dros_clean)
-
-```
+Our initial model included an interaction term for type and sleep, but this was removed from the final model as it did not explain a statistically significant amount of variance F~2,118~ = 0.51, p = 0.6. 
 
 
 `r unhide()`
@@ -445,8 +444,9 @@ tbl_regression(flyls1)
 
 ```
 
+## Figures
 
-```{r, include = FALSE}
+```{r}
 marginal1 <- dros_clean |> 
   ggplot()+
   geom_density(aes(x = thorax, fill = type),
@@ -496,5 +496,5 @@ BBBC"
 
 dros_plot <- marginal1+model_plot+marginal2 +plot_layout(design = layout)
 
-saveRDS(dros_plot, "dros_plot")
+dros_plot
 ```

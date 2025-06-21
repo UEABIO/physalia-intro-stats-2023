@@ -257,7 +257,7 @@ One way in which the intercept can be made more valuable is to use a technique k
 
 :::
 
-### Activity 3:  Mean-centering
+## Activity 3:  Mean-centering
 
 ::: {.callout-note}
 
@@ -470,3 +470,154 @@ Linear model analyses can extend beyond testing differences of means in categori
 As with all linear models, regression assumes that the unexplained variability around the regression line, is normally distributed and has constant variance. 
 
 Once the regression has been fitted it is possible to predict values of *y* from values of *x*, the uncertainty around these predictions can be captured with confidence intervals. 
+
+## Activity 5: Assumption checking
+
+After conducting a linear model analysis, we often find ourselves with results and inferences. However, before we can fully trust our analysis, it’s essential to check whether the underlying assumptions of the model are adequately met.
+
+```{r}
+
+check_model(janka_ls1,
+            detrend = FALSE)
+
+```
+
+Based on these residual checks - what do you think the main issues with the model are?
+
+`r hide("Assumption checks")`
+
+There is an issue with non-normality, heteroscedasticity and linearity - there is also one outlier.
+
+```{r}
+
+check_normality(janka_ls1)
+check_heteroscedasticity(janka_ls1)
+check_outliers(janka_ls1)
+
+```
+
+In this instance - while we could approach by bootstrapping, the most severe issue appears to be heteroscedasticity and curvature in the fit of the model. If we can deal with these issues directly we may be able to model the data more effectively. 
+
+`r unhide()`
+
+`r hide("Walkthrough")`
+
+
+There are multiple ways to approach a non-linear relationship - one method is to use a series of transformations. The `boxCox()` function models likelihood under different transformations of the dependent variable. Here it indicates a square root transformation may be appropriate. 
+
+```{r}
+
+janka_ls1 <- lm(hardness ~ dens, data = janka) 
+
+car::boxCox(janka_ls1)
+
+```
+
+```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
+library(kableExtra)
+
+`lambda value` <- c(0, 0.5, 1, 2 )
+
+`transformation` <- c("log(Y)", "sqrt(Y)", "Y", "Y^1")
+
+box <- tibble(`lambda value`, `transformation`)
+
+box %>% 
+   kbl(caption = "Common Box-Cox Transformations", 
+    booktabs = T) %>% 
+   kable_styling(full_width = FALSE, font_size=16)
+
+```
+
+
+```{r}
+
+janka_ls2 <- lm(sqrt(hardness) ~ dens, data = janka)
+
+```
+
+When we recheck the model, we see it is much improved, though heteroscedasticity remains an issue. This could lead to standard errors that are too narrow and incorrect p-values. 
+
+```{r}
+
+check_model(janka_ls2,
+            detrend = FALSE)
+
+```
+
+```{r}
+
+check_normality(janka_ls2)
+
+check_heteroscedasticity(janka_ls2)
+
+```
+### Robust errors
+
+One way to adjust standard errors is to use the sandwich package, which actually handles the standard error correction behind the scenes for most of the other approaches we’ll look at. `sandwich` comes with a bunch of standard error correction functions, like `vcovHC()` for heteroscedasticity-consistent (HC) errors, `vcovHAC()` for heteroscedastiticy- and autocorrelation-consistent (HAC) errors, and `vcovCL()` for clustered errors (see their [website for all the different ones](http://sandwich.r-forge.r-project.org/articles/sandwich.html)).
+
+#### When to Use:
+
+- You suspect heteroscedasticity, but don’t know its structure
+
+- You trust your model's form (e.g. linearity, correct predictors)
+
+- You want robust inference without changing your model
+
+#️### What it Does:
+
+- Leaves your model unchanged
+
+- Adjusts only the standard errors, using a robust (heteroscedasticity-consistent) covariance matrix
+
+```{r}
+library(sandwich)
+library(lmtest)
+robust_model <- coeftest(janka_ls2, type = "HC1")
+
+```
+
+If you want to use the emmeans package - it does not accept robust models as standard, but the same variance-covariance matrix can be applied directly:
+
+```{r}
+emmeans::emmeans(janka_ls2, 
+                 specs = ~ dens, 
+                 vcov. = vcovHC(janka_ls2,
+                                type = "HC1"))
+
+```
+
+### Weighted least squares
+
+We could also consider weighted least squares (WLS) as an alternative. Unlike robust errors, WLS directly models the unequal variance by assigning weights to observations, allowing the regression to place more trust in data points with lower variability, which can improve the efficiency and accuracy of both estimates and standard errors.
+
+`gls()` assumes that the heteroscedasticity follows a predictable pattern tied to one or more predictors.
+If there’s no clear structure to the variance (i.e., residual spread is random), `gls()` may not help — and may even overfit or mislead. 
+
+In this instance we suspect that heteroscedasticity increases as density changes.
+
+#### When to Use:
+
+- You know or can estimate how residual variance changes
+
+- You want to improve efficiency (more precise coefficient estimates)
+
+- You want to model the heteroscedasticity directly
+
+#️### What it Does:
+
+- Assigns weights to observations (lower for high-variance points)
+
+- Adjusts both estimates and standard errors
+
+- Requires that weights be calculated
+
+```{r}
+
+model <- nlme::gls(sqrt(hardness) ~ dens, data = janka, 
+                   weights = nlme::varFixed(~ dens))
+
+check_heteroscedasticity(model)
+
+```
+`r unhide()`

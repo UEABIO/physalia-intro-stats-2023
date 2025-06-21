@@ -449,7 +449,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
   </div>
 </li>
       </ul>
@@ -486,12 +486,29 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Mixed Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
@@ -547,9 +564,8 @@ window.Quarto = {
 <li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">9.0.1</span> Packages</a></li>
   <li><a href="#activity-1-compare-paired-model-designs" id="toc-activity-1-compare-paired-model-designs" class="nav-link" data-scroll-target="#activity-1-compare-paired-model-designs"><span class="header-section-number">9.1</span> Activity 1: Compare paired model designs</a></li>
   <li><a href="#effect-sizes" id="toc-effect-sizes" class="nav-link" data-scroll-target="#effect-sizes"><span class="header-section-number">9.2</span> Effect sizes</a></li>
-  <li><a href="#type-1-and-type-2-errors" id="toc-type-1-and-type-2-errors" class="nav-link" data-scroll-target="#type-1-and-type-2-errors"><span class="header-section-number">9.3</span> Type 1 and Type 2 errors</a></li>
-  <li><a href="#activity-2-write-up" id="toc-activity-2-write-up" class="nav-link" data-scroll-target="#activity-2-write-up"><span class="header-section-number">9.4</span> Activity 2: Write-up</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.5</span> Summary</a></li>
+  <li><a href="#activity-2-write-up" id="toc-activity-2-write-up" class="nav-link" data-scroll-target="#activity-2-write-up"><span class="header-section-number">9.3</span> Activity 2: Write-up</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.4</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -959,18 +975,8 @@ In this case we had a good <em>a priori</em> reason to include pair in our model
 </section><section id="effect-sizes" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="effect-sizes">
 <span class="header-section-number">9.2</span> Effect sizes</h2>
 <p>We have discussed the importance of using confidence intervals to talk about effect sizes. When our 95% confidence intervals do not overlap the intercept, this indicates we have difference in our means which is significant at <span class="math inline">\(\alpha\)</span> = 0.05. More interestingly than this it allows us to talk about the ‘amount of difference’ between our treatments, the lower margin of our confidence intervals is the smallest/minimum effect size. On the response scale of our variables this is very useful, we can report for example that there is <em>at least</em> a 0.4 inch height difference between self and crossed fertilised plants at <span class="math inline">\(\alpha\)</span> = 0.05.</p>
-</section><section id="type-1-and-type-2-errors" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="type-1-and-type-2-errors">
-<span class="header-section-number">9.3</span> Type 1 and Type 2 errors</h2>
-<p>The repeatability of results is a key part of the scientific method. Unfortunately there is often an emphasis in the literature on ‘novel findings’, which means that unusual/interesting results that happen to reach statistical significance may be more likely to be published. The reality is that we know if we set an <span class="math inline">\(\alpha\)</span> = 0.05, that we run the risk of rejecting the null hypothesis incorrectly in 1 in 20 of our experiments (A Type 1 error).</p>
-<p>Type 2 errors. Statistical tests provide you with the probability of making a Type 1 error (rejecting the null hypothesis incorrectly) in the form of <em>P</em>. But what about Type 2 errors? Keeping the null hypothesis, when we should be rejecting it? Or not finding an effect.</p>
-<p>The probability of making a Type 2 error is known as <span class="math inline">\(1-\beta\)</span>, where <span class="math inline">\(\beta\)</span> refers to your statistical ‘power’.</p>
-<p>Power is the strength of your experiment to detect a statistical effect <em>when there is one</em>. A common threshold for power is 80%. That is you have an 80% chance of finding an effect <strong>if it’s there</strong>. Which means our Type 2 error risk would be 20%.</p>
-<p>We cannot know the power of our experiments unless we conduct a <em>power analysis</em> - therefore for now we have to accept that finding a non-significant result does not mean we have evidence <em>against</em> a hypothesis, just that we don’t have evidence <em>for</em> it.</p>
-<div class="callout-info">
-<p>All experiments/statistical analyses will become <em>statistically significant</em> if you make the sample size large enough. In this respect it shows how misleading a significant result can be. It is not that interesting if a result is statistically significant, but the effect size is tiny.</p>
-</div>
-</section><section id="activity-2-write-up" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="activity-2-write-up">
-<span class="header-section-number">9.4</span> Activity 2: Write-up</h2>
+</section><section id="activity-2-write-up" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="activity-2-write-up">
+<span class="header-section-number">9.3</span> Activity 2: Write-up</h2>
 <p>Q. Can you write a summary of the <strong>Results</strong>?</p>
 <div class="webex-solution">
 <button>
@@ -978,10 +984,9 @@ Solution
 </button>
 <p>We analysed the difference in heights between selfed and cross-pollinated maize plants using a paired analysis of 15 pairs of plants. On average we found plants that have been cross pollinated (20.2 inches [18.3, 22], (mean [95% CI])) were taller than the self-pollinated plants (t(14) = -2.148, p = 0.0497), with a mean difference in height of 2.62 [0.004, 5.23] inches .</p>
 </div>
-</section><section id="summary" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">9.5</span> Summary</h2>
+</section><section id="summary" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">9.4</span> Summary</h2>
 <p>This chapter finally allowed us to calculate <em>P</em>-values and test statistical significance for our experiments using linear models. We also compared the linear model structures for producing a paired vs.&nbsp;unpaired <em>t</em>-test.</p>
-<p>However we also learned to appreciate the potential issues around making Type 1 and Type 2 errors, and how an appreciation of confidence intervals and standardised effect sizes can be used to assess these.</p>
 <p>A single experiment is never definitive, and a reliance on reporting <em>P</em>-values is uninformative and can be misleading. Instead reporting estimates and confidence intervals allows us to report our levels of uncertainty, and provides results which are more informative for comparative studies.</p>
 
 

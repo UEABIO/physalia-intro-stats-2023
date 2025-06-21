@@ -63,6 +63,9 @@ book:
     - 15-generalised-linear.qmd
     - 16-poisson.qmd
     - 17-binomial.qmd
+  - part: "Linear Mixed Models"
+    chapters:
+    - mixed-model.qmd
     
   appendices:
   - r-basics.qmd

@@ -264,7 +264,8 @@ plot(lsmodel1)
 ## Performance
 
 ```{r}
-performance::check_model(lsmodel1, detrend = F)
+performance::check_model(lsmodel1, 
+                         detrend = F)
 ```
 
 :::
@@ -320,6 +321,27 @@ boot_model <- car::Boot(lsmodel1,
 
 summary(boot_model)
 
+car::qqPlot(boot_model$t[,2])
+
+```
+
+
+
+```{r}
+library(parameters)
+library(qqplotr)
+
+set.seed(123)
+
+bootstrap_parameters(lsmodel1, iterations = 2000)
+
+parameters_model <- bootstrap_model(lsmodel1, iterations = 2000)
+
+ggplot(parameters_model, aes(sample = typeSelf))+
+    stat_qq_band() +
+    stat_qq_line() +
+    stat_qq_point()
+
 ```
 
 
@@ -327,8 +349,18 @@ summary(boot_model)
 
 ```{r}
 confint(boot_model)
-
 broom::tidy(boot_model, conf.int = T)
+```
+
+
+```{r}
+set.seed(123)
+
+b <- bootstrap_parameters(lsmodel1, iterations = 2000)
+b
+
+emmeans::emmeans(b, specs = ~ type)
+
 ```
 
 
@@ -352,6 +384,13 @@ boot_df <- as_tibble(boot_coefs)
 boot_long <- boot_df %>%
   pivot_longer(cols = everything(), names_to = "term", values_to = "estimate")
 
+# 95% confidence intervals 
+
+quantile <- boot_long |> 
+  group_by(term) |> 
+  summarise(min = quantile(estimate, c(0.025)),
+            max = quantile(estimate, c(0.975)))
+
 ```
 
 
@@ -359,8 +398,8 @@ boot_long <- boot_df %>%
 
 ggplot(boot_long, aes(x = estimate)) +
   # Add shaded CI region from original model
-  geom_rect(data = orig_ci,
-            aes(xmin = conf.low, xmax = conf.high, ymin = -Inf, ymax = Inf),
+  geom_rect(data = quantile,
+            aes(xmin = min, xmax = max, ymin = -Inf, ymax = Inf),
             fill = "orange", alpha = 0.2, inherit.aes = FALSE) +
   # Add histogram of bootstrap estimates
   geom_histogram(bins = 40, fill = "skyblue", color = "white") +
