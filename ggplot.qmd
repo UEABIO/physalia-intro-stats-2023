@@ -617,12 +617,24 @@ Clear communication helps ensure that readers interpret the transformed data acc
 :::
 
 
-In this example we take some bacterial plates with colony forming units (CFU) grown on them. This is an example from the BIO-5009A genetics labs - looking at number of colonies as a measure of the frequency of antibiotic resistance.
+In this example we take some bacterial plates with colony forming units (CFU) grown on them. Looking at number of colonies as a measure of the frequency of antibiotic resistance.
 
 ```{r, include = FALSE}
 LData <- read_csv("files/LD-assay data.csv", na = "-")
 
 ```
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/UEABIO/physalia-intro-stats/refs/heads/2025/files/LD-assay%20data.csv",
+  button_label = "Download LD bacteria data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
 
 ```{r, eval = FALSE}
 
@@ -1062,7 +1074,11 @@ ggplot(aes(x = species)) +
 
 # Activity: Replicate this figure
 
+How close can you get to replicating the figure below?
+
 ```{r, echo = FALSE}
+
+
 
 pal <- c("#FF8C00", "#A034F0", "#159090")
 
@@ -1072,7 +1088,7 @@ penguins |>
              fill = species,
              colour = species))+
   geom_violin(alpha = 0.2)+
-  geom_boxplot(width = 0.2,
+  geom_boxplot(width = 0.4,
                alpha = 0.6)+
   scale_fill_manual(values = pal)+
   scale_colour_manual(values = pal)+
@@ -1083,7 +1099,38 @@ penguins |>
     y = "Body mass (g)",
     title = "Body mass of brush-tailed penguins",
     subtitle = "Box and violin plot of body mass by species")
+
 ```
+
+`r hide("Solution")`
+
+```{r, eval = FALSE}
+
+
+pal <- c("#FF8C00", "#A034F0", "#159090")
+
+penguins |> 
+  ggplot(aes(x = species,
+             y = body_mass_g,
+             fill = species,
+             colour = species))+
+  geom_violin(alpha = 0.2)+
+  geom_boxplot(width = 0.4,
+               alpha = 0.6)+
+  scale_fill_manual(values = pal)+
+  scale_colour_manual(values = pal)+
+  theme_classic()+
+  theme(legend.position = "none")+
+    labs(
+    x = "",
+    y = "Body mass (g)",
+    title = "Body mass of brush-tailed penguins",
+    subtitle = "Box and violin plot of body mass by species")
+
+
+```
+
+`r unhide()`
 
 
 # Refining Plots for Publication Standard
@@ -1158,9 +1205,7 @@ This section covers the core principles of refining plots for publication standa
     This consistency makes figures easier to compare and keeps readers focused on the data.
 
 
-## Task: Take the unvoltine butterfly figure and make it publication ready by following the tips above
 
-- When you have made your best effort figure save it and submit it as this week's assignment.
 
 ## Saving
 

@@ -123,7 +123,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="site_libs/font-awesome-5.13.0/js/script.js"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -642,9 +642,8 @@ div.csl-indent {
 <li><a href="#best-practices-for-publication-ready-plots" id="toc-best-practices-for-publication-ready-plots" class="nav-link" data-scroll-target="#best-practices-for-publication-ready-plots"><span class="header-section-number">10.1.1</span> Best Practices for Publication-Ready Plots</a></li>
   </ul>
 </li>
-  <li><a href="#task-take-the-unvoltine-butterfly-figure-and-make-it-publication-ready-by-following-the-tips-above" id="toc-task-take-the-unvoltine-butterfly-figure-and-make-it-publication-ready-by-following-the-tips-above" class="nav-link" data-scroll-target="#task-take-the-unvoltine-butterfly-figure-and-make-it-publication-ready-by-following-the-tips-above"><span class="header-section-number">10.2</span> Task: Take the unvoltine butterfly figure and make it publication ready by following the tips above</a></li>
-  <li><a href="#saving" id="toc-saving" class="nav-link" data-scroll-target="#saving"><span class="header-section-number">10.3</span> Saving</a></li>
-  <li><a href="#further-reading-guides-and-tips-on-data-visualisation" id="toc-further-reading-guides-and-tips-on-data-visualisation" class="nav-link" data-scroll-target="#further-reading-guides-and-tips-on-data-visualisation"><span class="header-section-number">10.4</span> Further Reading, Guides and tips on data visualisation</a></li>
+  <li><a href="#saving" id="toc-saving" class="nav-link" data-scroll-target="#saving"><span class="header-section-number">10.2</span> Saving</a></li>
+  <li><a href="#further-reading-guides-and-tips-on-data-visualisation" id="toc-further-reading-guides-and-tips-on-data-visualisation" class="nav-link" data-scroll-target="#further-reading-guides-and-tips-on-data-visualisation"><span class="header-section-number">10.3</span> Further Reading, Guides and tips on data visualisation</a></li>
   </ul>
 </li>
   </ul></nav>
@@ -995,8 +994,8 @@ Note that when specifying colour variables using <code>aes()</code> some geometr
 </div>
 </div>
 <p>Q. Why have I now included the argument outlier.shape = NA?</p>
-<div id="radio_NEJHLLARMZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NEJHLLARMZ" value=""><span>To change the color of the outliers in geom_boxplot</span></label><label><input type="radio" autocomplete="off" name="radio_NEJHLLARMZ" value=""><span>To increase the size of the points displayed by geom_point</span></label><label><input type="radio" autocomplete="off" name="radio_NEJHLLARMZ" value="answer"><span>To prevent the box plot from displaying outliers, since geom_point already shows all individual data points.</span></label>
+<div id="radio_AFOKVOYZHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AFOKVOYZHQ" value=""><span>To change the color of the outliers in geom_boxplot</span></label><label><input type="radio" autocomplete="off" name="radio_AFOKVOYZHQ" value=""><span>To increase the size of the points displayed by geom_point</span></label><label><input type="radio" autocomplete="off" name="radio_AFOKVOYZHQ" value="answer"><span>To prevent the box plot from displaying outliers, since geom_point already shows all individual data points.</span></label>
 </div>
 <section id="grouped-boxplot" class="level4" data-number="5.4.4.1"><h4 data-number="5.4.4.1" class="anchored" data-anchor-id="grouped-boxplot">
 <span class="header-section-number">5.4.4.1</span> Grouped boxplot</h4>
@@ -1295,7 +1294,14 @@ Warning
 <p>Clear communication helps ensure that readers interpret the transformed data accurately and understand why it enhances the visualization.</p>
 </div>
 </div>
-<p>In this example we take some bacterial plates with colony forming units (CFU) grown on them. This is an example from the BIO-5009A genetics labs - looking at number of colonies as a measure of the frequency of antibiotic resistance.</p>
+<p>In this example we take some bacterial plates with colony forming units (CFU) grown on them. Looking at number of colonies as a measure of the frequency of antibiotic resistance.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<a href="https://raw.githubusercontent.com/UEABIO/physalia-intro-stats/refs/heads/2025/files/LD-assay%20data.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download LD bacteria data as csv</button>
+</a>
+</div>
+</div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>LData <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/LD-assay data.csv"</span>, <span class="at">na =</span> <span class="st">"-"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1327,7 +1333,7 @@ Warning
 <span id="cb27-17"><a href="#cb27-17"></a>bacteria_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1345,7 +1351,7 @@ Warning
 <span id="cb28-5"><a href="#cb28-5"></a>       <span class="at">y =</span> <span class="st">"Log10 Colony Forming Units+1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1363,7 +1369,7 @@ Warning
 <span id="cb29-7"><a href="#cb29-7"></a>       <span class="at">y =</span> <span class="st">"Log10 Colony Forming Units+1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1381,7 +1387,7 @@ Warning
 <span id="cb30-9"><a href="#cb30-9"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> <span class="fu">label_number</span>(<span class="at">scale_cut =</span> <span class="fu">cut_si</span>(<span class="st">"g"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1396,7 +1402,7 @@ Warning
 <span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1409,7 +1415,7 @@ Warning
 <span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1422,7 +1428,7 @@ Warning
 <span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1446,7 +1452,7 @@ Warning
 <span id="cb34-10"><a href="#cb34-10"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1479,7 +1485,7 @@ Warning
 <span id="cb35-22"><a href="#cb35-22"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1527,7 +1533,7 @@ Warning
 <span id="cb36-37"><a href="#cb36-37"></a>marginal_1<span class="sc">+</span>scatterplot<span class="sc">+</span>marginal_2 <span class="sc">+</span><span class="fu">plot_layout</span>(<span class="at">design =</span> layout)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1546,7 +1552,7 @@ Warning
 <span id="cb37-7"><a href="#cb37-7"></a>                   <span class="at">colour=</span><span class="st">"black"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1584,7 +1590,7 @@ Warning
 <span id="cb38-13"><a href="#cb38-13"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1599,7 +1605,7 @@ Warning
 <span id="cb39-6"><a href="#cb39-6"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1630,7 +1636,7 @@ Warning
 <span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1646,7 +1652,7 @@ Warning
 <span id="cb41-8"><a href="#cb41-8"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1661,7 +1667,7 @@ Warning
 <span id="cb42-4"><a href="#cb42-4"></a>colorBlindness<span class="sc">::</span><span class="fu">cvdPlot</span>() <span class="co"># will automatically run on the last plot you made</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-52-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1706,7 +1712,7 @@ Warning
 <span id="cb43-13"><a href="#cb43-13"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1736,7 +1742,7 @@ Warning
 <span id="cb44-20"><a href="#cb44-20"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">160</span>,<span class="dv">250</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1750,7 +1756,7 @@ Warning
 <span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-56-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1773,19 +1779,46 @@ Warning
 <span id="cb46-14"><a href="#cb46-14"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-57-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section></section><section id="activity-replicate-this-figure" class="level1" data-number="9"><h1 data-number="9">
 <span class="header-section-number">9</span> Activity: Replicate this figure</h1>
+<p>How close can you get to replicating the figure below?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-58-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#FF8C00"</span>, <span class="st">"#A034F0"</span>, <span class="st">"#159090"</span>)</span>
+<span id="cb47-2"><a href="#cb47-2"></a></span>
+<span id="cb47-3"><a href="#cb47-3"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species,</span>
+<span id="cb47-5"><a href="#cb47-5"></a>             <span class="at">y =</span> body_mass_g,</span>
+<span id="cb47-6"><a href="#cb47-6"></a>             <span class="at">fill =</span> species,</span>
+<span id="cb47-7"><a href="#cb47-7"></a>             <span class="at">colour =</span> species))<span class="sc">+</span></span>
+<span id="cb47-8"><a href="#cb47-8"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.4</span>,</span>
+<span id="cb47-10"><a href="#cb47-10"></a>               <span class="at">alpha =</span> <span class="fl">0.6</span>)<span class="sc">+</span></span>
+<span id="cb47-11"><a href="#cb47-11"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal)<span class="sc">+</span></span>
+<span id="cb47-12"><a href="#cb47-12"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal)<span class="sc">+</span></span>
+<span id="cb47-13"><a href="#cb47-13"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb47-14"><a href="#cb47-14"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb47-15"><a href="#cb47-15"></a>    <span class="fu">labs</span>(</span>
+<span id="cb47-16"><a href="#cb47-16"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb47-17"><a href="#cb47-17"></a>    <span class="at">y =</span> <span class="st">"Body mass (g)"</span>,</span>
+<span id="cb47-18"><a href="#cb47-18"></a>    <span class="at">title =</span> <span class="st">"Body mass of brush-tailed penguins"</span>,</span>
+<span id="cb47-19"><a href="#cb47-19"></a>    <span class="at">subtitle =</span> <span class="st">"Box and violin plot of body mass by species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section><section id="refining-plots-for-publication-standard" class="level1" data-number="10"><h1 data-number="10">
@@ -1845,24 +1878,20 @@ Warning
 <p>Maintain a consistent style across figures in terms of font, size, color, and design to create a cohesive look throughout a publication.</p>
 <p>This consistency makes figures easier to compare and keeps readers focused on the data.</p>
 </li>
-</ul></section></section><section id="task-take-the-unvoltine-butterfly-figure-and-make-it-publication-ready-by-following-the-tips-above" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="task-take-the-unvoltine-butterfly-figure-and-make-it-publication-ready-by-following-the-tips-above">
-<span class="header-section-number">10.2</span> Task: Take the unvoltine butterfly figure and make it publication ready by following the tips above</h2>
-<ul>
-<li>When you have made your best effort figure save it and submit it as this week’s assignment.</li>
-</ul></section><section id="saving" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="saving">
-<span class="header-section-number">10.3</span> Saving</h2>
+</ul></section></section><section id="saving" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="saving">
+<span class="header-section-number">10.2</span> Saving</h2>
 <p>One of the easiest ways to save a figure you have made is with the <code>ggsave()</code> function. By default it will save the last plot you made on the screen.</p>
 <p>If have assigned the plot to an R object, then you can also provide this as the first argument for <code>ggsave()</code> in order to save a particular plot</p>
 <p>You should specify the output path to your <strong>figures</strong> folder, then provide a file name. Here I have decided to call my plot <em>plot</em> (imaginative!) and I want to save it as a .PNG image file. I can also specify the resolution (dpi 300 is good enough for most computer screens).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="co"># OUTPUT FIGURE TO FILE</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a></span>
-<span id="cb47-3"><a href="#cb47-3"></a><span class="fu">ggsave</span>(<span class="st">"outputs/YYYYMMDD_ggplot_workshop_final_plot.png"</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span>
-<span id="cb47-4"><a href="#cb47-4"></a></span>
-<span id="cb47-5"><a href="#cb47-5"></a><span class="co"># ggsave(plot,"outputs/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># OUTPUT FIGURE TO FILE</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a></span>
+<span id="cb48-3"><a href="#cb48-3"></a><span class="fu">ggsave</span>(<span class="st">"outputs/YYYYMMDD_ggplot_workshop_final_plot.png"</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span>
+<span id="cb48-4"><a href="#cb48-4"></a></span>
+<span id="cb48-5"><a href="#cb48-5"></a><span class="co"># ggsave(plot,"outputs/YYYYMMDD_ggplot_workshop_final_plot.png", dpi=300)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="further-reading-guides-and-tips-on-data-visualisation" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="further-reading-guides-and-tips-on-data-visualisation">
-<span class="header-section-number">10.4</span> Further Reading, Guides and tips on data visualisation</h2>
+</section><section id="further-reading-guides-and-tips-on-data-visualisation" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="further-reading-guides-and-tips-on-data-visualisation">
+<span class="header-section-number">10.3</span> Further Reading, Guides and tips on data visualisation</h2>
 <p>Check out <a href="advanced_ggplot.html" class="quarto-xref"><span>Appendix F</span></a> for extra data visualisation resources</p>
 <ul>
 <li><p><a href="https://www.rstudio.com/resources/cheatsheets/">R Cheat Sheets</a></p></li>
