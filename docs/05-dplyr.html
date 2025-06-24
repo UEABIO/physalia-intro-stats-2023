@@ -557,8 +557,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
 <li><a href="#activity-1-explore-data-structure" id="toc-activity-1-explore-data-structure" class="nav-link" data-scroll-target="#activity-1-explore-data-structure"><span class="header-section-number">2.3.1</span> Activity 1: Explore data structure</a></li>
   <li><a href="#activity-2-clean-column-names" id="toc-activity-2-clean-column-names" class="nav-link" data-scroll-target="#activity-2-clean-column-names"><span class="header-section-number">2.3.2</span> Activity 2: Clean column names</a></li>
-  <li><a href="#activity-2-checking-for-duplications" id="toc-activity-2-checking-for-duplications" class="nav-link" data-scroll-target="#activity-2-checking-for-duplications"><span class="header-section-number">2.3.3</span> Activity 2: Checking for duplications</a></li>
-  <li><a href="#activity-3-checking-for-typos" id="toc-activity-3-checking-for-typos" class="nav-link" data-scroll-target="#activity-3-checking-for-typos"><span class="header-section-number">2.3.4</span> Activity 3: Checking for typos</a></li>
+  <li><a href="#using-stringr" id="toc-using-stringr" class="nav-link" data-scroll-target="#using-stringr"><span class="header-section-number">2.3.3</span> Using stringr</a></li>
+  <li><a href="#activity-2-checking-for-duplications" id="toc-activity-2-checking-for-duplications" class="nav-link" data-scroll-target="#activity-2-checking-for-duplications"><span class="header-section-number">2.3.4</span> Activity 2: Checking for duplications</a></li>
+  <li><a href="#activity-3-checking-for-typos" id="toc-activity-3-checking-for-typos" class="nav-link" data-scroll-target="#activity-3-checking-for-typos"><span class="header-section-number">2.3.5</span> Activity 3: Checking for typos</a></li>
   </ul>
 </li>
   <li>
@@ -931,7 +932,7 @@ $ Comments              &lt;chr&gt; "Not enough blood for isotopes.", NA, NA, "A
                    </code></pre>
 </div>
 </div>
-<p>Finally the add-on package <code>skimr</code> provides the function <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skimr::skim()</a></code> provides an easy to view set of summaries including column types, completion rate, number of unique variables in each column and similar statistical summaries along with a small histogram for each numeric variable.</p>
+<p>Finally the add-on package <a href="https://docs.ropensci.org/skimr/reference/skim.html"><code>skimr</code></a> provides the function <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skimr::skim()</a></code> provides an easy to view set of summaries including column types, completion rate, number of unique variables in each column and similar statistical summaries along with a small histogram for each numeric variable.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(skimr)</span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="fu">skim</span>(penguins_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1287,7 +1288,8 @@ Explanation
 <li><p>Some of the names have capitalised letters</p></li>
 <li><p>Some of the names contain brackets</p></li>
 </ul>
-<p>R is case-sensitive and also doesn’t like spaces or brackets in variable names, because of this we have been forced to use backticks `Sample Number` to prevent errors when using these column names</p>
+<p>R is case-sensitive and also doesn’t like spaces or brackets in variable names, because of this we have been forced to use backticks `Sample Number` to prevent errors when using these column names.</p>
+<p>Luckily the <a href="https://sfirke.github.io/janitor/"><code>janitor</code></a> package comes to the rescue:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># CLEAN DATA ----</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a></span>
@@ -1382,11 +1384,12 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 </p>
 </div>
 </div>
-</section><section id="rename-text-values-with-stringr" class="level4" data-number="2.3.2.4"><h4 data-number="2.3.2.4" class="anchored" data-anchor-id="rename-text-values-with-stringr">
-<span class="header-section-number">2.3.2.4</span> Rename text values with stringr</h4>
+</section></section><section id="using-stringr" class="level3" data-number="2.3.3"><h3 data-number="2.3.3" class="anchored" data-anchor-id="using-stringr">
+<span class="header-section-number">2.3.3</span> Using stringr</h3>
 <p>Datasets often contain words, and we call these words “(character) strings”.</p>
-<p>Often these aren’t quite how we want them to be, but we can manipulate these as much as we like. Functions in the package <code>stringr</code>, are fantastic. And the number of different types of manipulations are endless!</p>
-<p>Below we repeat the outcomes above, but with string matching:</p>
+<p>Often these aren’t quite how we want them to be, but we can manipulate these as much as we like. Functions in the package <a href="https://stringr.tidyverse.org/"><code>stringr</code></a>, are fantastic. And the number of different types of manipulations are endless!</p>
+<p>Below we repeat the outcomes above, but with string matching - this has the benefit of reducing the chance of introducing NEW typos:</p>
+<p>In the example below we change all cases of sex to ‘title’ (capitalised first letter, the rest of the word is lower case)</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># use mutate and case_when </span></span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="co"># for a statement that conditionally changes </span></span>
@@ -1394,9 +1397,31 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 <span id="cb28-4"><a href="#cb28-4"></a>penguins <span class="ot">&lt;-</span> penguins_clean <span class="sc">|&gt;</span> </span>
 <span id="cb28-5"><a href="#cb28-5"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> stringr<span class="sc">::</span><span class="fu">word</span>(species, <span class="dv">1</span>)</span>
 <span id="cb28-6"><a href="#cb28-6"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> stringr<span class="sc">::</span><span class="fu">str_to_title</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> stringr<span class="sc">::</span><span class="fu">str_to_title</span>(sex))</span>
+<span id="cb28-8"><a href="#cb28-8"></a></span>
+<span id="cb28-9"><a href="#cb28-9"></a>penguins <span class="sc">|&gt;</span> <span class="fu">distinct</span>(sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: left;">sex</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NA</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>Alternatively we could decide we want simpler species names but that we would like to keep the latin name information, but in a separate column. To do this we are using <a href="https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html">regex</a>. Regular expressions are a concise and flexible tool for describing patterns in strings</p>
+</div>
+</div>
+<p>For the species names we could decide that we want simpler columns but without discarding the latin name information entirely. With <code>separate</code> we can keep this information but in a separate column. To do this we are using <a href="https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html">regex</a>. Regular expressions are a concise and flexible tool for describing patterns in strings</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>penguins_clean <span class="sc">|&gt;</span> </span>
 <span id="cb29-2"><a href="#cb29-2"></a>    <span class="fu">separate</span>(</span>
@@ -1575,8 +1600,8 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 </div>
 </div>
 </div>
-</section></section><section id="activity-2-checking-for-duplications" class="level3" data-number="2.3.3"><h3 data-number="2.3.3" class="anchored" data-anchor-id="activity-2-checking-for-duplications">
-<span class="header-section-number">2.3.3</span> Activity 2: Checking for duplications</h3>
+</section><section id="activity-2-checking-for-duplications" class="level3" data-number="2.3.4"><h3 data-number="2.3.4" class="anchored" data-anchor-id="activity-2-checking-for-duplications">
+<span class="header-section-number">2.3.4</span> Activity 2: Checking for duplications</h3>
 <p>It is very easy when inputting data to make mistakes, copy something in twice for example, or if someone did a lot of copy-pasting to assemble a spreadsheet (yikes!). We can check this pretty quickly</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># check for whole duplicate </span></span>
@@ -1762,8 +1787,8 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 </div>
 </div>
 </div>
-</section><section id="activity-3-checking-for-typos" class="level3" data-number="2.3.4"><h3 data-number="2.3.4" class="anchored" data-anchor-id="activity-3-checking-for-typos">
-<span class="header-section-number">2.3.4</span> Activity 3: Checking for typos</h3>
+</section><section id="activity-3-checking-for-typos" class="level3" data-number="2.3.5"><h3 data-number="2.3.5" class="anchored" data-anchor-id="activity-3-checking-for-typos">
+<span class="header-section-number">2.3.5</span> Activity 3: Checking for typos</h3>
 <p>We can also look for typos by asking R to produce all of the distinct values in a variable. This is more useful for categorical data, where we expect there to be only a few distinct categories</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Print only unique character strings in this variable</span></span>
@@ -1870,7 +1895,7 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 <li><p>13th Oct 2019</p></li>
 <li><p>2019-10-13</p></li>
 </ul>
-<p>This variability makes it difficult to tell our software how to read the information, luckily we can use the functions in the <code>lubridate</code> package.</p>
+<p>This variability makes it difficult to tell our software how to read the information, luckily we can use the functions in the <a href="https://lubridate.tidyverse.org/"><code>lubridate</code></a> package.</p>
 <div class="cell" data-layout-align="center" type="warning">
 <div class="warning">
 <p>
@@ -1886,8 +1911,8 @@ Pay attention to warning and error messages
 <li>
 <strong>Question</strong> What is the appropriate function from the above to use on the <code>date_egg</code> variable?</li>
 </ul>
-<div id="radio_QSCAALTVDF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QSCAALTVDF" value=""><span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_QSCAALTVDF" value=""><span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_QSCAALTVDF" value=""><span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_QSCAALTVDF" value="answer"><span>dmy()</span></label>
+<div id="radio_GMCHQYOJHW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GMCHQYOJHW" value=""><span>ymd()</span></label><label><input type="radio" autocomplete="off" name="radio_GMCHQYOJHW" value=""><span>ydm()</span></label><label><input type="radio" autocomplete="off" name="radio_GMCHQYOJHW" value=""><span>mdy()</span></label><label><input type="radio" autocomplete="off" name="radio_GMCHQYOJHW" value="answer"><span>dmy()</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -1916,7 +1941,7 @@ Solution
 <span class="header-section-number">2.5</span> Factors</h2>
 <p>In R, factors are a class of data that allow for <strong>ordered categories</strong> with a fixed set of acceptable values.</p>
 <p>Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later).</p>
-<p>Working with factors is easy with the <code>forcats</code> package:</p>
+<p>Working with factors is easy with the <a href="https://forcats.tidyverse.org/"><code>forcats</code></a> package:</p>
 <p>Using across - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the <code>.cols</code> argument and applying the function <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">forcats::as_factor()</a></code></p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -2258,6 +2283,7 @@ Explain this answer
 <li><p><a href="https://dplyr.tidyverse.org/index.html">Dplyr</a></p></li>
 <li><p><a href="https://lubridate.tidyverse.org/">Lubridate</a></p></li>
 <li><p><a href="https://stringr.tidyverse.org/">Stringr</a></p></li>
+<li><p><a href="https://forcats.tidyverse.org/">Forcats</a></p></li>
 </ul>
 
 

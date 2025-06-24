@@ -471,14 +471,15 @@ Have you checked that the above code block worked? Inspect your new tibble and c
 
 ```
 
-#### Rename text values with stringr
+### Using stringr
 
 Datasets often contain words, and we call these words "(character) strings".
 
 Often these aren't quite how we want them to be, but we can manipulate these as much as we like. Functions in the package [`stringr`](https://stringr.tidyverse.org/), are fantastic. And the number of different types of manipulations are endless!
 
-Below we repeat the outcomes above, but with string matching: 
+Below we repeat the outcomes above, but with string matching - this has the benefit of reducing the chance of introducing NEW typos: 
 
+In the example below we change all cases of sex to 'title' (capitalised first letter, the rest of the word is lower case)
 
 ```{r, eval = T, warning = F, message = F}
 # use mutate and case_when 
@@ -489,10 +490,12 @@ penguins <- penguins_clean |>
   ) |> 
   mutate(sex = stringr::str_to_title(sex))
 
+penguins |> distinct(sex)
+
 ```
 
 
-Alternatively we could decide we want simpler species names but that we would like to keep the latin name information, but in a separate column. To do this we are using [regex](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html). Regular expressions are a concise and flexible tool for describing patterns in strings
+For the species names we could decide that we want simpler columns but without discarding the latin name information entirely. With `separate` we can keep this information but in a separate column. To do this we are using [regex](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html). Regular expressions are a concise and flexible tool for describing patterns in strings
 
 ```{r, eval = F}
 penguins_clean |> 
