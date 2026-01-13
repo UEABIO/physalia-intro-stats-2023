@@ -31,7 +31,29 @@ darwin <- read_csv(here("files", "darwin.csv"))
 ```
 
 
-The structure of our linear model so far has produced the output for a standard two-sample Student's *t*-test. However, when we *first* [calculated our estimates by hand](#differences-between-groups) - we started by making an average of the paired differences in height. To generate the equivalent of a paired *t*-test, we simply have to add the factor for pairs to our linear model formula:
+The structure of our linear model so far has produced the output for a standard two-sample Student's *t*-test. However, when we *first* [calculated our estimates by hand](#differences-between-groups) - we started by making an average of the paired differences in height. This is the equivalent of a *paired t-test*. 
+
+## Understanding the data
+
+Before analysis, ensure you understand what each variable represents.
+
+- How are “Cross” and “Self” plants related within pairs?
+
+- Why might it make sense to treat “pair” as a factor rather than a numeric variable?
+
+Question: Does this design look like independent samples, or are observations linked in some way? e.g. which analysis is more appropriate a two-sample or paired test?
+
+`r hide("Explanations")`
+
+- From the original experiment design we know that for each "pair" the plants share one parent - and are either the result of having been self-crossed or cross-fertilised to an unrelated plant.
+
+- Pair is by default numeric in our dataframe - but this doesn't make sense for our analysis as each pair is independent and unrelated. It makes more sense to treat each pair as an unrelated group (which makes it categorical)
+
+- The experiment is designed to look at the effect of inbreeding between pairs of plants that share *at least some* genetic relatedness. For this reason the paired design makes sense as some of the variance in heights will be assigned to the pairs.
+
+
+
+`r unhide()`
 
 ::: {.panel-tabset}
 
@@ -64,30 +86,9 @@ The table of coefficients suddenly looks a lot more complicated! This is because
 
 Again the linear model computes every possible combination of *t*-statistic and *P*-value, however the only one we care about is the difference in Cross and Self-pollinated plant heights. If we ignore the pair comparisons the second row gives us a *paired t*-test. 'What is the difference in height between Cross and Self-pollinated plants when we hold pairs constant.'
 
-Q. By including pairs we are making sure we deal with `r mcq(c("Missing data bias", answer = "Omitted variable bias", "Survivorship bias"))`
-
 ## Activity 1: Compare paired model designs
 
-We previously compared the difference in plant heights by subtracting the difference between each pair of plants. Check our reasoning on the model design above by making another linear model based on the difference between pairs and check whether this is significantly different from 0, `lm(difference ~ 1)`
-
-`r hide("Solution")`
-
-```{r}
-
-darwin_wide <- darwin |>  
-  # pivot/reshape the data from long to wide format
-  pivot_wider(names_from = type, values_from = height) |>  
-  # Calculate the difference between 'Cross' and 'Self' heights for each pair
-  mutate(difference = Cross - Self)
-
-wide_model <- lm(difference ~ 1, data = darwin_wide)
-
-summary(wide_model)
-```
-
-`r unhide()`
-
-For completeness let's generate the confidence intervals for the *paired t*-test and compare them to our *unpaired t*-test. 
+We previously compared the difference in average plant heights between crossed and fertilsied plants, now let's generate the confidence intervals for the *paired t*-test and compare them to our *unpaired t*-test. 
 
 ::: {.panel-tabset}
 
@@ -133,10 +134,19 @@ rbind(m1,m2) |>
 
 ```
 
-```{block, type = "info"}
-Choosing the right model
 
-In this case we had a good *a priori* reason to include pair in our model, so I would argue that it should stay - alternative approaches are model simplification and stepwise removal. We will discuss these later. 
+
+```{block, type = "info"}
+
+What does our experiment actually test biologically, and what does it all mean? 
+
+Our new model has wider confidence intervals, and a very poor adjusted R-squared, so
+which model should we be using?
+
+In this case we had a good *a priori* reason to include pair in our model - we wanted to at least partially control for genetic background. 
+
+Our new model looks worse, but actually gives us important information - despite that fact that variance explained is poor (indicating that plant height is a noisy trait probably influence by lots of factors outside of genetic background), we *still* find that on avergage a statistically significant effect of inbreeding. Our wider confidence intervals represent genuine uncertainty about the true average effect of inbreeding depression.
+
 ```
 
 ## Effect sizes
@@ -148,7 +158,6 @@ We have discussed the importance of using confidence intervals to talk about eff
 
 
 Q. Can you write a summary of the **Results**?
-
 
 
 `r hide("Solution")`

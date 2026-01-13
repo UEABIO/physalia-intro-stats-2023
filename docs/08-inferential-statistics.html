@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>6&nbsp; Inferential statistics – Physalia</title>
+<title>18&nbsp; Inferential statistics – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,22 +62,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./09-linear-models.html" rel="next">
-<link href="./ggplot.html" rel="prev">
+<link href="./ggplot2.html" rel="prev">
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a85b8e33ea8f0b235709a7eb17d07876.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19fea3fb2752d4c0d13dbb0336d0799e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/font-awesome-6.5.2/js/script.js"></script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
@@ -115,7 +116,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -289,6 +290,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -303,7 +305,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./08-inferential-statistics.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./08-inferential-statistics.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -335,168 +337,168 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Working with data in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data cleaning</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-data-bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data bias</span></span></a>
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Generalised Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Mixed Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -504,7 +506,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -512,14 +514,125 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -542,12 +655,6 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">ggplot extras</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -562,40 +669,34 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#darwins-maize-data" id="toc-darwins-maize-data" class="nav-link active" data-scroll-target="#darwins-maize-data"><span class="header-section-number">6.1</span> Darwin’s maize data</a></li>
+<li><a href="#darwins-maize-data" id="toc-darwins-maize-data" class="nav-link active" data-scroll-target="#darwins-maize-data"><span class="header-section-number">18.1</span> Darwin’s maize data</a></li>
   <li>
-<a href="#activity-1-carry-out-some-basic-exploratory-data-analysis" id="toc-activity-1-carry-out-some-basic-exploratory-data-analysis" class="nav-link" data-scroll-target="#activity-1-carry-out-some-basic-exploratory-data-analysis"><span class="header-section-number">6.2</span> Activity 1: Carry out some basic exploratory data analysis</a>
+<a href="#activity-1-carry-out-some-basic-exploratory-data-analysis" id="toc-activity-1-carry-out-some-basic-exploratory-data-analysis" class="nav-link" data-scroll-target="#activity-1-carry-out-some-basic-exploratory-data-analysis"><span class="header-section-number">18.2</span> Activity 1: Carry out some basic exploratory data analysis</a>
   <ul class="collapse">
-<li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">6.2.1</span> Visualisation</a></li>
-  <li><a href="#comparing-groups" id="toc-comparing-groups" class="nav-link" data-scroll-target="#comparing-groups"><span class="header-section-number">6.2.2</span> Comparing groups</a></li>
+<li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">18.2.1</span> Visualisation</a></li>
+  <li><a href="#comparing-groups" id="toc-comparing-groups" class="nav-link" data-scroll-target="#comparing-groups"><span class="header-section-number">18.2.2</span> Comparing groups</a></li>
   </ul>
 </li>
   <li>
-<a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">6.3</span> Estimation</a>
+<a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">18.3</span> Estimation</a>
   <ul class="collapse">
-<li><a href="#differences-between-groups" id="toc-differences-between-groups" class="nav-link" data-scroll-target="#differences-between-groups"><span class="header-section-number">6.3.1</span> Differences between groups</a></li>
+<li><a href="#differences-between-groups" id="toc-differences-between-groups" class="nav-link" data-scroll-target="#differences-between-groups"><span class="header-section-number">18.3.1</span> Differences between groups</a></li>
+  <li><a href="#standard-error-of-the-difference" id="toc-standard-error-of-the-difference" class="nav-link" data-scroll-target="#standard-error-of-the-difference"><span class="header-section-number">18.3.2</span> Standard error of the difference</a></li>
   </ul>
 </li>
   <li>
-<a href="#activity-2-differences" id="toc-activity-2-differences" class="nav-link" data-scroll-target="#activity-2-differences"><span class="header-section-number">6.4</span> Activity 2: Differences</a>
+<a href="#uncertainty" id="toc-uncertainty" class="nav-link" data-scroll-target="#uncertainty"><span class="header-section-number">18.4</span> Uncertainty</a>
   <ul class="collapse">
-<li><a href="#standard-error-of-the-difference" id="toc-standard-error-of-the-difference" class="nav-link" data-scroll-target="#standard-error-of-the-difference"><span class="header-section-number">6.4.1</span> Standard error of the difference</a></li>
-  <li><a href="#activity-3-communicate" id="toc-activity-3-communicate" class="nav-link" data-scroll-target="#activity-3-communicate"><span class="header-section-number">6.4.2</span> Activity 3: Communicate</a></li>
+<li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">18.4.1</span> Normal distribution</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">18.4.2</span> Confidence Intervals</a></li>
   </ul>
 </li>
-  <li>
-<a href="#uncertainty" id="toc-uncertainty" class="nav-link" data-scroll-target="#uncertainty"><span class="header-section-number">6.5</span> Uncertainty</a>
-  <ul class="collapse">
-<li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">6.5.1</span> Normal distribution</a></li>
-  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">6.5.2</span> Confidence Intervals</a></li>
-  </ul>
-</li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.6</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">18.5</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./08-inferential-statistics.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-stats" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./08-inferential-statistics.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-stats" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></h1>
 </div>
 
 
@@ -612,8 +713,8 @@ window.Quarto = {
 </header><p>In this chapter will be focusing more on <em>statistics</em>. We actually did quite a lot of <em>descriptive statistics</em> work previously. Every time we summarised or described our data, by calculating a <strong>mean</strong>, <strong>median</strong>, <strong>standard deviation</strong>, <strong>frequency/count</strong>, or <strong>distribution</strong> we were carrying out <em>descriptive statistics</em> that helped us understand our data better.</p>
 <p>We are building on this to develop our skills in <em>inferential statistics</em>. Inferential statistics allow us to make generalisations - taking a descriptive statistics from our data such as the <strong>sample mean</strong>, and using it to say something about a population parameter (i.e.&nbsp;the <strong>population mean</strong>).</p>
 <p>For example we might measure the measure the heights of some plants that have been outcrossed and inbred and make some summaries and figures to construct an average difference in height (this is <strong>descriptive</strong>). Or we could use this to produce some estimates of the general effect of outcrossing vs inbreeding on plant heights (this is <strong>inferential</strong>).</p>
-<section id="darwins-maize-data" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="darwins-maize-data">
-<span class="header-section-number">6.1</span> Darwin’s maize data</h2>
+<section id="darwins-maize-data" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="darwins-maize-data">
+<span class="header-section-number">18.1</span> Darwin’s maize data</h2>
 <p>Loss of genetic diversity is an important issue in the conservation of species. Declines in population size due to over exploitation, habitat fragmentation lead to loss of genetic diversity. Even populations restored to viable numbers through conservation efforts may suffer from continued loss of population fitness because of inbreeding depression.</p>
 <p>Charles Darwin even wrote a book on the subject <em>“The Effects of Cross and Self-Fertilisation in the Vegetable Kingdom”</em>. In this he describes how he produced seeds of maize (<em>Zea mays</em>) that were fertilised with pollen from the same individual or from a different plant. The height of the seedlings that were produced from these were then measured as a proxy for their evolutionary fitness.</p>
 <p>Darwin wanted to know whether inbreeding reduced the fitness of the selfed plants - this was his <strong>hypothesis</strong>. The data we are going to use today is from Darwin’s original dataset.</p>
@@ -625,10 +726,10 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a>darwin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"darwin.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a>darwin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"darwin.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -646,15 +747,15 @@ Important
 <p>Use the File &gt; New Script menu item and select an R Script.</p>
 </div>
 </div>
-</section><section id="activity-1-carry-out-some-basic-exploratory-data-analysis" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="activity-1-carry-out-some-basic-exploratory-data-analysis">
-<span class="header-section-number">6.2</span> Activity 1: Carry out some basic exploratory data analysis</h2>
+</section><section id="activity-1-carry-out-some-basic-exploratory-data-analysis" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="activity-1-carry-out-some-basic-exploratory-data-analysis">
+<span class="header-section-number">18.2</span> Activity 1: Carry out some basic exploratory data analysis</h2>
 <p>The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic data check <strong>without</strong> prompts.</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># check the structure of the data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># check the structure of the data</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">glimpse</span>(darwin)</span>
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="co"># check data is in a tidy format</span></span>
@@ -693,40 +794,49 @@ Solution
 <span id="cb2-37"><a href="#cb2-37"></a></span>
 <span id="cb2-38"><a href="#cb2-38"></a><span class="co"># quick summary</span></span>
 <span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="fu">summary</span>(darwin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="fu">summary</span>(darwin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<section id="visualisation" class="level3" data-number="6.2.1"><h3 data-number="6.2.1" class="anchored" data-anchor-id="visualisation">
-<span class="header-section-number">6.2.1</span> Visualisation</h3>
+<section id="visualisation" class="level3" data-number="18.2.1"><h3 data-number="18.2.1" class="anchored" data-anchor-id="visualisation">
+<span class="header-section-number">18.2.1</span> Visualisation</h3>
 <p>Now seems like a good time for our first data visualisation.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>darwin <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>darwin <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,</span>
 <span id="cb3-3"><a href="#cb3-3"></a>         <span class="at">y=</span>height))<span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># you could also substitute (or combine) other geoms including</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># geom_boxplot()</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># geom_violin()</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># geom_histogram()</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Why not have a go and see what you can make?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>Can you substitute (or combine) other geoms to make changes to this figure?</p>
+<ul>
+<li><code>geom_boxplot</code></li>
+<li><code>geom_violin</code></li>
+<li><code>geom_histogram</code></li>
+<li><code>geom_jitter</code></li>
+</ul>
+</div>
 </div>
 <p>The graph clearly shows that the average height of the ‘crossed’ plants is greater than that of the ‘selfed’ plants. But we need to investigate further in order to determine whether the signal (any apparent differences in mean values) is greater than the level of noise (variance within the different groups).</p>
 <p>The variance appears to be roughly similar between the two groups - though by making a graph we can now clearly see that in the crossed group, there is a <em>potential</em> outlier with a value of 12.</p>
-</section><section id="comparing-groups" class="level3" data-number="6.2.2"><h3 data-number="6.2.2" class="anchored" data-anchor-id="comparing-groups">
-<span class="header-section-number">6.2.2</span> Comparing groups</h3>
+</section><section id="comparing-groups" class="level3" data-number="18.2.2"><h3 data-number="18.2.2" class="anchored" data-anchor-id="comparing-groups">
+<span class="header-section-number">18.2.2</span> Comparing groups</h3>
 <p>As we have seen previously we can use various tidy functions to determine the mean and standard deviations of our groups.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
-<span id="cb5-4"><a href="#cb5-4"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height)</span>
-<span id="cb5-5"><a href="#cb5-5"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>darwin <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
+<span id="cb4-4"><a href="#cb4-4"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -766,33 +876,31 @@ Tip
 </div>
 <p>Summary statistics like these could be presented as figures or tables. We normally reserve tables for <strong>very</strong> simple sets of numbers, and this instance we could present both.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># make a new object</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>darwin_summary <span class="ot">&lt;-</span>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
-<span id="cb6-5"><a href="#cb6-5"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height))</span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># make a summary plot</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>darwin_summary <span class="sc">|&gt;</span> </span>
-<span id="cb6-9"><a href="#cb6-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,</span>
-<span id="cb6-10"><a href="#cb6-10"></a>             <span class="at">y=</span>mean))<span class="sc">+</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd))<span class="sc">+</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># make a new object</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>darwin_summary <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
+<span id="cb5-5"><a href="#cb5-5"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height))</span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># make a summary plot</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>darwin_summary <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>             <span class="at">y=</span>mean))<span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd))<span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># put this at top of script</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># use kable extra functions to make a nice table (could be replaced with kable() if needed)</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>darwin_summary <span class="sc">|&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="fu">kbl</span>(<span class="at">caption=</span><span class="st">"Summary statistics of crossed and selfed maize plants"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="st">"striped"</span>, <span class="at">full_width =</span> T, <span class="at">position =</span> <span class="st">"left"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>darwin_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<table class="table table-striped caption-top table-sm small" data-quarto-postprocess="true">
+<table class="table table-striped caption-top table-sm small">
 <caption>Summary statistics of crossed and selfed maize plants</caption>
 <thead><tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
@@ -815,8 +923,8 @@ Tip
 </div>
 </div>
 <p>Descriptive statistics and careful data checking are often skipped steps in the rush to answer the <strong>big</strong> questions. However, description is an essential part of early phase analysis.</p>
-</section></section><section id="estimation" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="estimation">
-<span class="header-section-number">6.3</span> Estimation</h2>
+</section></section><section id="estimation" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="estimation">
+<span class="header-section-number">18.3</span> Estimation</h2>
 <p>In the section above we concentrated on description. But the hypothesis Darwin aimed to test was whether ‘inbreeding reduced the fitness of the selfed plants’. To do this we will use the height of the plants as a proxy for fitness and explicitly address whether there is a <strong>difference</strong> in the mean heights of the plants between these two groups.</p>
 <p>Our goal is to:</p>
 <ul>
@@ -824,34 +932,39 @@ Tip
 <li><p>Estimate the mean <em>difference</em> in heights between these two groups</p></li>
 <li><p>Quantify our <em>confidence</em> in these differences</p></li>
 </ul>
-<section id="differences-between-groups" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="differences-between-groups">
-<span class="header-section-number">6.3.1</span> Differences between groups</h3>
+<section id="differences-between-groups" class="level3" data-number="18.3.1"><h3 data-number="18.3.1" class="anchored" data-anchor-id="differences-between-groups">
+<span class="header-section-number">18.3.1</span> Differences between groups</h3>
 <p>Darwin’s data used match pairs - each pair shared one parent. So that in pair 1 the same parent plant was either ‘selfed’ or ‘crossed’ to produce offspring. This is a powerful approach to experimental design, as it means that we can look at the differences in heights across each of the 15 pairs of plants - rather than having to infer differences from two randomly derived groups.</p>
 <p>In order to calculate the differences in height between each pair we need to do some data wrangling with <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> {<a href="tidy-data.html" class="quarto-xref"><span>Appendix C</span></a>} and calculations with <code>mutate</code>.</p>
-</section></section><section id="activity-2-differences" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="activity-2-differences">
-<span class="header-section-number">6.4</span> Activity 2: Differences</h2>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
 <p>Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant.</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># pivot data to wide format then subtract Selfed plant heights from Crossed plant heights</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a>darwin_wide <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, </span>
-<span id="cb8-5"><a href="#cb8-5"></a>              <span class="at">values_from =</span> height) <span class="sc">|&gt;</span> </span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">mutate</span>(<span class="at">difference =</span> Cross <span class="sc">-</span> Self)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># pivot data to wide format then subtract Selfed plant heights from Crossed plant heights</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>darwin_wide <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>              <span class="at">values_from =</span> height) <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">mutate</span>(<span class="at">difference =</span> Cross <span class="sc">-</span> Self)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 </div>
 </div>
 <p>We now have the difference in height for each pair, we can use this to calculate the <strong>mean difference</strong> in heights between paired plants, and the amount of variance (as standard deviation)</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>difference_summary <span class="ot">&lt;-</span> darwin_wide <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(difference),</span>
-<span id="cb9-3"><a href="#cb9-3"></a>            <span class="at">sd=</span><span class="fu">sd</span>(difference),</span>
-<span id="cb9-4"><a href="#cb9-4"></a>            <span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a>difference_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_wide <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(difference),</span>
+<span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">sd=</span><span class="fu">sd</span>(difference),</span>
+<span id="cb8-4"><a href="#cb8-4"></a>            <span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -882,8 +995,8 @@ Important
 <p>What we have just calculated is the average difference in height between these groups of plants and the standard deviation of the difference Moving forward we will be working a lot with estimating our confidence in differences between groups</p>
 </div>
 </div>
-<section id="standard-error-of-the-difference" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="standard-error-of-the-difference">
-<span class="header-section-number">6.4.1</span> Standard error of the difference</h3>
+</section><section id="standard-error-of-the-difference" class="level3" data-number="18.3.2"><h3 data-number="18.3.2" class="anchored" data-anchor-id="standard-error-of-the-difference">
+<span class="header-section-number">18.3.2</span> Standard error of the difference</h3>
 <p>Remember standard deviation is a <em>descriptive</em> statistic - it measures the variance within our dataset - e.g.&nbsp;how closely do datapoints fit to the mean. However for <em>inferential</em> statistics we are more interested in our confidence in our estimation of the mean. This is where standard error comes in.</p>
 <p>We can think of error as a standard deviation of the mean. The mean we have calculated is an estimate based on one sample of data. We would expect that if we sampled another 30 plants these would have a different sample mean. Standard error describes the variability we would expect among sample means if we repeated this experiment many times. So we can think of it as a measure of the confidence we have in our estimate of a <strong>true population mean</strong>.</p>
 <p><span class="math display">\[
@@ -892,14 +1005,24 @@ SE = \frac{s}{\sqrt(n)}
 <p>As sample size increases the standard error should reduce - reflecting an increasing confidence in our estimate.</p>
 <p>Here is a great explainer video on <a href="https://www.youtube.com/watch?v=A82brFpdr9g">Standard Error</a></p>
 <p>And try this <a href="http://pleft86.shinyapps.io/Sampling">Shiny App on Sampling</a></p>
-<p>We can calculate the standard error for our sample by applying this equation to our <code>difference_summary</code> object, can you complete this?</p>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<ul>
+<li><p>Turn the equation for standard error into a simple <code>mutate</code> command.</p></li>
+<li><p>How would you write a short sentence describing the difference in average heights and standard error?</p></li>
+</ul>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>difference_summary <span class="sc">|&gt;</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">mutate</span>(<span class="at">se=</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_difference_summary <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">se=</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -920,18 +1043,18 @@ Solution
 </div>
 </div>
 </div>
-<p>Our estimate of the mean is not really very useful without an accompanying measuring of <em>uncertainty</em> like the standard error, in fact estimates of averages or differences should <strong>always</strong> be accompanied by their measure of uncertainty.</p>
-</section><section id="activity-3-communicate" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored" data-anchor-id="activity-3-communicate">
-<span class="header-section-number">6.4.2</span> Activity 3: Communicate</h3>
 <p>With the information above, how would you present a short sentence describing the average different in height?</p>
 <div class="webex-solution">
 <button>
-solution
+Write-up
 </button>
 <p><em>… the average difference in height was 2.62 ± 1.22 inches (mean ± SE).</em></p>
 </div>
-</section></section><section id="uncertainty" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="uncertainty">
-<span class="header-section-number">6.5</span> Uncertainty</h2>
+</div>
+</div>
+<p>Our estimate of the mean is not really very useful without an accompanying measuring of <em>uncertainty</em> like the standard error, in fact estimates of averages or differences should <strong>always</strong> be accompanied by their measure of uncertainty.</p>
+</section></section><section id="uncertainty" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="uncertainty">
+<span class="header-section-number">18.4</span> Uncertainty</h2>
 <p>With a mean and standard error of the difference in heights between inbred and crossed plants - how do we work out how much confidence we have in their being a difference between our <strong>population means</strong>?</p>
 <p>Standard error is a measure of uncertainty, the larger the standard error the more <em>noise</em> around our data and the more uncertainty we have. The smaller the standard error the more confidence we can have that our difference in means is <em>real</em>.</p>
 <ul>
@@ -952,30 +1075,30 @@ Tip
 <p>When we decide whether we have enough confidence that a difference is real (e.g.&nbsp;we could reject the null hypothesis), we cannot ever be 100% certain that this isn’t a false positive (also known as a Type I error). More on this later</p>
 </div>
 </div>
-<section id="normal-distribution" class="level3" data-number="6.5.1"><h3 data-number="6.5.1" class="anchored" data-anchor-id="normal-distribution">
-<span class="header-section-number">6.5.1</span> Normal distribution</h3>
+<section id="normal-distribution" class="level3" data-number="18.4.1"><h3 data-number="18.4.1" class="anchored" data-anchor-id="normal-distribution">
+<span class="header-section-number">18.4.1</span> Normal distribution</h3>
 <p>The normal distribution is a way to describe data that forms a bell-shaped curve when plotted on a graph. Most of the data points are clustered around the middle, with fewer data points as you move farther from the center in either direction. The middle point is the average (or mean), and it represents the most common value in the data set.</p>
 <p><a href="https://www.youtube.com/watch?v=rzFX5NWojp0&amp;t=2s">What is the normal distribution</a></p>
 <p>Now, standard deviation tells you how spread out the data points are from the mean. A small standard deviation means the data points are close to the mean, so the curve will be tall and narrow. A large standard deviation means the data points are more spread out, making the curve wider and flatter.</p>
 <p>In short, the standard deviation measures how much variation there is in the data from the average value.</p>
 <p>Large standard deviations produce wide bell curves, with short peaks. Small standard deviations produce narrow bell curves with tall peaks.</p>
 <p>The bell curve occurs frequently in nature, most circumstances where we can think of a continuous measure coming from a population e.g.&nbsp;human mass, penguin flipper lengths or plant heights.</p>
-<p>As a <em>probability</em> distribution, the area within the curve sums to the whole population (e.g.&nbsp;the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g.&nbsp;67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations of the mean. This <em>idealised</em> normal distribution is presented below:</p>
+<p>As a <em>probability</em> distribution, the area within the curve sums to the whole population (e.g.&nbsp;the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g.&nbsp;67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations (1.96 to be precise) of the mean. This <em>idealised</em> normal distribution is presented below:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>How do we convert this information into how likely we are to observe a difference of 2.62 inches in plant heights if the ‘true’ difference between crosses and selfed plants is <em>zero</em>?</p>
 <p>The <strong>central limit theorem</strong> states that if you have a population with mean and standard deviation, and take sufficiently large random samples from the population, then the distribution of the sample means will be approximately normally distributed. Standard error then is our measure of variability around our sample mean, and we will assume that we can apply a normal distribution to our ability to estimate the mean.</p>
-<p>So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.</p>
+<p>So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 1.96 standard errors, and 99.8% will be within ± 3 standard errors.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -988,20 +1111,55 @@ Tip
 <li><p>This is also usually taken as the minimum threshold needed to <em>reject</em> a null hypothesis. We can think of the probability of estimating this mean difference, if our true mean difference was zero, as p &lt; 0.05.</p></li>
 </ul>
 <p>You will probably be very used to a threshold for null hypothesis rejection of <span class="math inline">\(\alpha\)</span> = 0.05, but this only the very lowest level of confidence at which we can pass a statistical test. If we increase the severity of our test so that the minimum we require is <span class="math inline">\(\alpha\)</span> = 0.001 or 99% confidence, we can see that we no longer believe we have enough confidence to reject the null hypothesis (0 is within 3 s.d. of our estimated mean).</p>
-</section><section id="confidence-intervals" class="level3" data-number="6.5.2"><h3 data-number="6.5.2" class="anchored" data-anchor-id="confidence-intervals">
-<span class="header-section-number">6.5.2</span> Confidence Intervals</h3>
-<p>Because ± 2 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%.</p>
+</section><section id="confidence-intervals" class="level3" data-number="18.4.2"><h3 data-number="18.4.2" class="anchored" data-anchor-id="confidence-intervals">
+<span class="header-section-number">18.4.2</span> Confidence Intervals</h3>
+<p>Because ± 1.96 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%.</p>
 <p>We can work out the 95% confidence interval range of our estimated mean as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>lowerCI <span class="ot">&lt;-</span> <span class="fl">2.62</span><span class="sc">-</span>(<span class="dv">2</span><span class="sc">*</span><span class="fl">1.22</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a>upperCI <span class="ot">&lt;-</span> <span class="fl">2.62</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span><span class="fl">1.22</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a></span>
-<span id="cb11-5"><a href="#cb11-5"></a>lowerCI</span>
-<span id="cb11-6"><a href="#cb11-6"></a>upperCI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.18
-[1] 5.06</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>ci95 <span class="ot">&lt;-</span> <span class="fl">1.96</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>darwin_difference_summary <span class="sc">|&gt;</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">mutate</span>(<span class="at">lower_CI =</span> mean <span class="sc">-</span> (se<span class="sc">*</span>ci95),</span>
+<span id="cb10-5"><a href="#cb10-5"></a>         <span class="at">upper_CI =</span> mean <span class="sc">+</span> (se<span class="sc">*</span>ci95))</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">se</th>
+<th style="text-align: right;">lower_CI</th>
+<th style="text-align: right;">upper_CI</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">2.616667</td>
+<td style="text-align: right;">4.718047</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1.218195</td>
+<td style="text-align: right;">0.2290053</td>
+<td style="text-align: right;">5.004328</td>
+</tr></tbody>
+</table>
+</div>
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">se</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">2.616667</td>
+<td style="text-align: right;">4.718047</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">1.218195</td>
+</tr></tbody>
+</table>
+</div>
 </div>
 </div>
 <p>A common mistake it to state that we are 95% confident that the ‘true’ mean lies within our interval. But <em>technically</em> it refers to the fact that if we kept running this experiment again and again the intervals we calculate would capture the true mean in 95% of experiments. So really we are saying that we are confident we would capture the true mean in 95% of our experiments.</p>
@@ -1016,15 +1174,12 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The maize plants that have been cross pollinated were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.18, 5.06] inches (mean [95% CI]).</p>
+<p>The maize plants that have been cross pollinated were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.23, 5.0] inches (mean [95% CI]).</p>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Note that because it is possible to generate multiple types of average and confidence interval, we clearly state them in our write up. The same would be true if you were presenting the standard error (± S.E.) or the standard deviation (± S.D.) or a median and interquartile range (median [± IQR]).</p>
-</blockquote>
 <p>The above is a good example of a simple but clear write-up because it clearly describes the <em>direction</em> of the difference, the <em>amount</em> and the <em>error</em> in our estimate.</p>
-</section></section><section id="summary" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">6.6</span> Summary</h2>
+</section></section><section id="summary" class="level2" data-number="18.5"><h2 data-number="18.5" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">18.5</span> Summary</h2>
 <p>Statistics is all about trying to interpret whether the signal (of a difference or trend) is stronger than the amount of noise (variability). In a sample the standard deviation is a strong choice for estimating this <em>within</em> a dataset. The standard deviation of the sampling distribution of the mean is known as the standard error. The standard error (of the mean) is a measure of the precision we have in our estimate of the mean. Thanks to the central limit theorem and normal distribution we can use the variability in our estimate to calculate confidence intervals, and decide whether our signal of an effect is strong enough to reject a null hypothesis (of no effect or no difference).</p>
 <p>Next we will start working with linear models - this approach allows us to estimate means and intervals in a more sophisticated (and automated) way.</p>
 
@@ -1325,13 +1480,14 @@ window.onresize = move_sidebar;
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1673,13 +1829,13 @@ window.onresize = move_sidebar;
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./ggplot.html" class="pagination-link" aria-label="ggplot">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span>
+      <a href="./ggplot2.html" class="pagination-link" aria-label="ggplot2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./09-linear-models.html" class="pagination-link" aria-label="Linear models">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

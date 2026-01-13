@@ -10,15 +10,6 @@ source("R/my_setup.R")
 
 ```
 
-```{r, eval=TRUE, echo=FALSE}
-
-library(tidyverse)
-
-library(here)
-
-darwin <- read_csv(here("files", "darwin.csv"))
-
-```
 
 
 ```{r, eval=T, echo=F}
@@ -92,8 +83,7 @@ Timber hardness is quantified using the 'Janka scale', and the data we are going
 
 ```{r, eval=T, echo = FALSE}
 library(tidyverse)
-library(SemiPar)
-data(janka)
+janka <- read_csv(here("files", "janka.csv"))
 ```
 
 ```{r, eval = TRUE, echo = FALSE}
@@ -452,7 +442,7 @@ emmeans::emmeans(janka_ls1,
 `r unhide()`
 
 
-## Activity 4
+## Activity 4: Results
 
 - Can you write a summary of the **Results**?
 
@@ -478,7 +468,11 @@ After conducting a linear model analysis, we often find ourselves with results a
 ```{r}
 
 check_model(janka_ls1,
-            detrend = FALSE)
+            detrend = FALSE,
+            check = c("linearity",
+                       "homogeneity",
+                       "outliers",
+                       "qq"))
 
 ```
 
@@ -486,138 +480,17 @@ Based on these residual checks - what do you think the main issues with the mode
 
 `r hide("Assumption checks")`
 
-There is an issue with non-normality, heteroscedasticity and linearity - there is also one outlier.
+We begin by fitting a linear regression model to examine the relationship between wood density and timber hardness. The model explains a large proportion of the variance in the outcome (high R squared), indicating a strong predictive association. But there are some minor issues with the model to consider:
 
-```{r}
+1. Non-linearity: there is a pattern of curvature in the residuals indicating the relationship is not strictly linear
 
-check_normality(janka_ls1)
-check_heteroscedasticity(janka_ls1)
-check_outliers(janka_ls1)
+2. Heteroscedasticty: The residual plots indicate increasing spread of the residuals as fitted values increase - this will affect standard errors, 95%CI and p-values
 
-```
+3. One observation has high leverage and influences the fitted line
 
-In this instance - while we could approach by bootstrapping, the most severe issue appears to be heteroscedasticity and curvature in the fit of the model. If we can deal with these issues directly we may be able to model the data more effectively. 
+> Taken together the diagnostics indicate the model violates some key assumptions underlying linear regression. We might consider nonlinear terms or data transformations - which we can cover later. 
+
 
 `r unhide()`
 
-`r hide("Walkthrough")`
 
-
-There are multiple ways to approach a non-linear relationship - one method is to use a series of transformations. The `boxCox()` function models likelihood under different transformations of the dependent variable. Here it indicates a square root transformation may be appropriate. 
-
-```{r}
-
-janka_ls1 <- lm(hardness ~ dens, data = janka) 
-
-car::boxCox(janka_ls1)
-
-```
-
-```{r, eval = TRUE, echo = FALSE, warning = FALSE, message = FALSE}
-library(kableExtra)
-
-`lambda value` <- c(0, 0.5, 1, 2 )
-
-`transformation` <- c("log(Y)", "sqrt(Y)", "Y", "Y^1")
-
-box <- tibble(`lambda value`, `transformation`)
-
-box %>% 
-   kbl(caption = "Common Box-Cox Transformations", 
-    booktabs = T) %>% 
-   kable_styling(full_width = FALSE, font_size=16)
-
-```
-
-
-```{r}
-
-janka_ls2 <- lm(sqrt(hardness) ~ dens, data = janka)
-
-```
-
-When we recheck the model, we see it is much improved, though heteroscedasticity remains an issue. This could lead to standard errors that are too narrow and incorrect p-values. 
-
-```{r}
-
-check_model(janka_ls2,
-            detrend = FALSE)
-
-```
-
-```{r}
-
-check_normality(janka_ls2)
-
-check_heteroscedasticity(janka_ls2)
-
-```
-### Robust errors
-
-One way to adjust standard errors is to use the sandwich package, which actually handles the standard error correction behind the scenes for most of the other approaches we’ll look at. `sandwich` comes with a bunch of standard error correction functions, like `vcovHC()` for heteroscedasticity-consistent (HC) errors, `vcovHAC()` for heteroscedastiticy- and autocorrelation-consistent (HAC) errors, and `vcovCL()` for clustered errors (see their [website for all the different ones](http://sandwich.r-forge.r-project.org/articles/sandwich.html)).
-
-#### When to Use:
-
-- You suspect heteroscedasticity, but don’t know its structure
-
-- You trust your model's form (e.g. linearity, correct predictors)
-
-- You want robust inference without changing your model
-
-#️### What it Does:
-
-- Leaves your model unchanged
-
-- Adjusts only the standard errors, using a robust (heteroscedasticity-consistent) covariance matrix
-
-```{r}
-library(sandwich)
-library(lmtest)
-robust_model <- coeftest(janka_ls2, type = "HC1")
-
-```
-
-If you want to use the emmeans package - it does not accept robust models as standard, but the same variance-covariance matrix can be applied directly:
-
-```{r}
-emmeans::emmeans(janka_ls2, 
-                 specs = ~ dens, 
-                 vcov. = vcovHC(janka_ls2,
-                                type = "HC1"))
-
-```
-
-### Weighted least squares
-
-We could also consider weighted least squares (WLS) as an alternative. Unlike robust errors, WLS directly models the unequal variance by assigning weights to observations, allowing the regression to place more trust in data points with lower variability, which can improve the efficiency and accuracy of both estimates and standard errors.
-
-`gls()` assumes that the heteroscedasticity follows a predictable pattern tied to one or more predictors.
-If there’s no clear structure to the variance (i.e., residual spread is random), `gls()` may not help — and may even overfit or mislead. 
-
-In this instance we suspect that heteroscedasticity increases as density changes.
-
-#### When to Use:
-
-- You know or can estimate how residual variance changes
-
-- You want to improve efficiency (more precise coefficient estimates)
-
-- You want to model the heteroscedasticity directly
-
-#️### What it Does:
-
-- Assigns weights to observations (lower for high-variance points)
-
-- Adjusts both estimates and standard errors
-
-- Requires that weights be calculated
-
-```{r}
-
-model <- nlme::gls(sqrt(hardness) ~ dens, data = janka, 
-                   weights = nlme::varFixed(~ dens))
-
-check_heteroscedasticity(model)
-
-```
-`r unhide()`

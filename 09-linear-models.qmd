@@ -34,7 +34,7 @@ darwin <- read_csv(here("files", "darwin.csv"))
 
 ```
 
-## A linear |> model analysis for calculating means
+## A linear model analysis for calculating means
 
 R has a general function `lm()` for fitting linear models, this is part of base R (does not require the tidyverse packages). We will run through a few different iterations of the linear model increasing in complexity. We will often want to fit several models to our data, so a common way to work is to fit a model and assign it to a named R object, so that we can extract data from when we need it. 
 
@@ -67,15 +67,6 @@ Without explanatory variables this means the formula will just estimate the over
 
 When you have made a linear model, we can investigate a summary of the model using the base R function `summary()`. There is also a tidyverse option provided by the package `broom`(@R-broom).
 
-### Broom
-
-broom summarizes key information about models in tidy `tibble()s`. broom provides three verbs to make it convenient to interact with model objects:
-
-* `broom::tidy()` summarizes information about model components
-
-* `broom::glance()` reports information about the entire model
-
-* `broom::augment()` adds informations about individual observations to a dataset and it can be used to model predictions onto a new dataset.
 
 ### Model summary
 
@@ -216,7 +207,109 @@ combined |>
 `r unhide()`
 
 
+## Assumptions: minimal, practical checks
+
+When we fit a linear model for a two-group comparison, we need to check whether the numbers we have generated are reliable by checking the fit of our model against some assumptions: 
+
+- Normality: The t-test and lm are fairly robust for moderate sample sizes. A quick check is still useful.
+
+> The normality assumption mainly affects standard errors, confidence intervals, and p-values.
+
+> For moderate sample sizes, small deviations from normality are rarely problematic.
+
+- Equal variances: In two-group comparisons, unequal variances are common and not automatically a concern. What matters is whether the difference in variability is large enough to distort uncertainty estimates.
+
+> Unequal variances do not bias the estimated means or their difference.
+
+> They can, however, affect standard errors and therefore inference.
+
+Making these checks is simple and quick with `performance::check_model()`
+
+
+::: {.panel-tabset}
+## Performance
+
+```{r}
+# -------------------------------------------------------------------
+# Check the NORMALITY of residuals for the linear model 'lsmodel1'
+# -------------------------------------------------------------------
+
+# Purpose:
+#  - In linear regression, residuals should ideally be normally distributed.
+#    This affects the validity of confidence intervals and p-values.
+
+normality <- check_normality(lsmodel1)
+
+# Visualize the normality check with a Q–Q plot (quantile–quantile plot).
+# 
+# The plot() method for the object returned by 'check_normality()' creates:
+#   - A Q–Q plot comparing the quantiles of the residuals 
+#     against the theoretical quantiles from a normal distribution.
+#   - The line represents the "ideal" normal distribution.
+# Argument:
+#   detrend = FALSE → Shows the standard Q–Q plot (not detrended).
+#   If TRUE, it shows the residuals from the Q–Q line (useful for subtle deviations).
+#
+# Interpretation:
+#   - We look for large, systematic departures from the diagonal line
+
+plot(normality, detrend = FALSE)
+
+
+# -------------------------------------------------------------------
+# Check for HETEROSCEDASTICITY (unequal variances of residuals)
+# -------------------------------------------------------------------
+
+# The function 'check_heteroscedasticity()' tests whether the residuals 
+# from the model have constant variance (homoscedasticity).
+# 
+# Under the hood, it typically performs:
+#  - Breusch–Pagan test (default)
+# 
+# Purpose:
+#  - In linear regression, we assume the variance of residuals is constant
+#    across fitted values (homoscedasticity).
+#  - Heteroscedasticity can bias standard errors and affect inference.
+
+heteroscedasticity <- check_heteroscedasticity(lsmodel1)
+
+# Visualize the results with a residuals-vs-fitted plot.
+# The plot() method for 'check_heteroscedasticity()' creates:
+#   - A scatterplot of fitted values (x-axis) vs. residuals (y-axis)
+#   - A smoothing line (usually loess) that helps detect trends.
+# 
+# Interpretation:
+#   - Residuals versus fitted values plot.
+# A roughly constant spread suggests the assumption is reasonable;
+# strong patterns or funnel shapes suggest heteroscedasticity.
+plot(heteroscedasticity)
+```
+
+## Base R
+
+We don't *have* to use performance, base R can visualise these with the `plot()` function
+
+```{r}
+
+# ---------------------------------------------------------------
+# Plot 1: Normal Q–Q Plot
+# ---------------------------------------------------------------
+plot(lsmodel1, which = 2)
+
+# ---------------------------------------------------------------
+# Plot 2: Residuals vs Fitted values
+# ---------------------------------------------------------------
+plot(lsmodel1, which = 1)
+
+
+```
+
+:::
+
+
 ### A simple write up
+
+Once we have satisfied ourselves that there are no severe violations of model assumptions, we proceed to interpret the fitted model.
 
 From this summary model we can make conclusions about the effect of inbreeding and produce a simple write up:
 
@@ -296,6 +389,7 @@ In this case we can see that the upper and lower bounds of the confidence interv
 ### Plausible range of significant difference
 
 - A 95% CI provides a range of values where the true effect (like a difference between two group means) is likely to fall. Our analysis suggests that within the 95% confidence interval the true (population) difference could be between 0.42 and 4.8 inches in height difference between crossed and selfed plants. 
+
 - **Minimum effect size**: the value closest to zero gives a sense of the **minimum effect size** that is plausible at 95% confidence. This is important because it shows the smallest effect you might expect. Here the minimum effect size is 0.42 inches. Or that the cost of inbreeding could be as little as a 0.42 inch height difference. 
 
 The `GGally` package has a handy `ggcoef_model()` function, that produces a graph of the estimated mean difference with an approx 95% CI. As we can see we are able to reject the null hypothesis at a 95% confidence level. 
@@ -422,7 +516,7 @@ means |>
                       ymax = upper.CL),
                   pch = 21) +
   labs(x = "Breeding Type",
-       y = "Height (inches) ± 95% CI")
+       y = "Height (inches) ± 95% CI")+
   theme_classic()+
   theme(legend.position = "none")
 

@@ -1,4 +1,4 @@
-# Multi factor ANOVA {#sec-interaction}
+# Interactions {#sec-interaction}
 
 ```{r, echo = F, warning = F, message = F}
 library(tidyverse)

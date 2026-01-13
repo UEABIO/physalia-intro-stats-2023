@@ -1,0 +1,322 @@
+
+#  Data Management {#sec-data-management}
+
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+library(tidyverse)
+library(here)
+```
+
+
+
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+
+- Understand the limitations with messy/inconsistent data
+
+- Apply a set of rules to maintain a well organised spreadsheet
+
+- Write a simple data dictionary
+
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
+
+- What has been your biggest spreadsheet headache?
+
+- Have you ever struggled to understand a spreadsheet because it has:
+
+    - Inconsistent names
+    - Unclear codings
+    - Notes or annotations without clear meaning
+
+
+::::
+:::
+
+[Why we should all be data quality detectives](https://realworlddatascience.net/foundation-frontiers/posts/2025/10/30/data-detectives.html)
+
+## What makes a well organised spreadsheet?
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/Data.xlsx",
+  button_label = "Download messy data",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
+What are the issues with this dataset?
+::::
+:::
+
+### Example
+
+- Even though are data is extremely messy, and has a lot of inconsistencies - we can clean and reformat our data with clear code. 
+
+- By keeping our data cleaning and tidying to the commmand line we ensure that our work is completely reproducible, with a set of documented steps available at all times.
+
+```{r, include = FALSE}
+messy_data <- readxl::read_excel(here::here("files", "Data.xlsx"))
+```
+
+
+`r hide("Code")`
+
+```{r, eval = FALSE}
+library(readxl)
+
+data_ranges <- c("A3:F15", "I3:N15", "Q3:V9") # gather each table as a data range
+
+lines <- c("A","B","C") # set names for each experiment
+
+clean_data <-  map2_dfr(data_ranges, lines, ~ read_excel("data/raw/Data.xlsx", # combined all three tables in one tidy dataframe
+                                  range = .x,
+                                  na = c("ND", "-"), # choose characters that match NA
+                                  .name_repair = janitor::make_clean_names) |>  # standardise names
+                          mutate(line = .y) # add line information to data
+)
+  
+clean_data |> 
+  mutate(genotype = str_remove(genotype, "A-")) |> # fix genotype names
+  fill(genotype) # fill in blanks for genotype in line C
+
+```
+
+`r unhide()`
+
+```{r, echo = FALSE}
+library(readxl)
+
+data_ranges <- c("A3:F15", "I3:N15", "Q3:V9") # gather each table as a data range
+
+lines <- c("A","B","C") # set names for each experiment
+
+clean_data <-  map2_dfr(data_ranges, lines, ~ read_excel("files/Data.xlsx", # combined all three tables in one tidy dataframe
+                                  range = .x,
+                                  na = c("ND", "-"), # choose characters that match NA
+                                  .name_repair = janitor::make_clean_names) |>  # standardise names
+                          mutate(line = .y) # add line information to data
+)
+  
+clean_data |> 
+  mutate(genotype = str_remove(genotype, "A-")) |> # fix genotype names
+  fill(genotype) |> 
+  head()
+
+```
+
+## Data Organisation
+
+Based on [Broman & Woo (2018), Data Organization in Spreadsheets,](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989?scroll=top&needAccess=true#abstract)
+
+Reproducibility in R begins long before you load a file. Poorly structured data silently corrupts analysis, whereas disciplined organization lets you import, wrangle, and model without ad hoc cleaning
+
+### Consistency
+
+**Principle**: Every categorical code, variable name, and missing-value marker must be used consistently.
+Inconsistency leads to type coercion, ambiguous factors, and failed joins.
+
+- Inconsistent
+
+```{r}
+library(dplyr)
+
+data <- tibble(
+  id = 1:5,
+  sex = c("male", "Male", "M", "female", "F"),
+  glucose = c(NA, 5.2, 6.1, 5.7, "")
+)
+
+data
+```
+
+- Consistent
+
+```{r}
+data_clean <- data  |> 
+  mutate(
+    sex = recode(tolower(sex),
+                 "m" = "male",
+                 "f" = "female"),
+    glucose = na_if(glucose, "")
+  )
+
+data_clean
+
+```
+
+### Variable and file naming
+
+**Principle**: Names are part of your analytical grammar. They must be readable, regular, and machine-safe.
+
+- Do: 
+          
+    - Keep your filenames to a reasonable length
+
+    - Use underscores and hyphens for readability
+
+    - Start or end your filename with a letter or number
+
+    - Use a standard date format when applicable; example: YYYY-MM-DD
+
+    - Use filenames for related files that work well with default ordering; example: in chronological order, or logical order using numbers first
+
+```
+2025_04_10_lineA_fecundity_rep2.csv
+
+2025_04_10_lineA_fecundity_analysis.R
+
+```
+
+- Don't:
+
+    - Use unnecessary additional characters in filenames
+    
+    - Use spaces or “illegal” characters; examples: &, %, #, <, or >
+    
+    - Start or end your filename with a symbol
+    
+    - Use incomplete or inconsistent date formats; example: M-D-YY
+    
+    - Use filenames for related files that do not work well with default ordering; examples: a random system of numbers or date formats, or using letters first
+
+```
+4102020marchfecundity<workinprogress>.R
+
+ _20210320*newlineinfo.csv
+
+ firstfile_for_analysis.R
+```
+
+See @sec-column-name
+
+### Dates and Times
+
+**Principle**: Always store dates in a consistent format e.g. ddmmyyyy
+
+See @sec-dates
+
+### One variable per column
+
+**Principle**: Each cell holds one atomic value; never embed multiple attributes in one field.
+
+See @sec-tidy
+
+- Not this:
+
+```{r}
+library(tidyr)
+
+data_messy <- tibble(id = 1:3, combined = c("adult_male", "juvenile_female", "adult_female"))
+data_messy
+
+
+```
+
+- But This:
+
+
+```{r}
+
+
+
+data_clean <- separate(data_messy, combined, into = c("age_group", "sex"), sep = "_")
+data_clean
+```
+
+
+
+
+
+### Rectangular layout
+
+**Principle**: Keep your data rectangular: one header row, variables in columns, observations in rows.
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "tidy data overview"}
+knitr::include_graphics("images/tidy-1.png")
+```
+
+### Preserve Raw Data
+
+- Never alter the raw data collection files, every time this occurs errors can be introduced and they may not be trackable.
+
+- Make backups! 
+
+### No Excel formatting as Data
+
+Principle: Encoded information via colour blocks or fonts are invisible to R and ambiguous to other users.
+
+
+```{r, eval=TRUE, echo=FALSE, out.width="80%", fig.alt= "excel colour blocks", fig.cap = "please don't do this"}
+knitr::include_graphics("images/excel_colour.png")
+```
+
+### Metadata and Data Dictionaries
+
+Principle: Every dataset requires a companion dictionary documenting meaning, units, and type.
+
+[Examples of data dictionaries](https://cghlewis.com/blog/data_dictionary/)
+
+- Example data:
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/UEABIO/data-sci-v1/main/book/files/penguins_raw.csv",
+  button_label = "Download penguin data as csv",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+- A simple data dictionary:
+
+```{r, eval = TRUE, echo = FALSE}
+downloadthis::download_link(
+  link = "https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/data-dictionary/palmer_penguins_metadata.xlsx",
+  button_label = "Download metadata as excel",
+  button_type = "success",
+  has_icon = TRUE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
+
+
+### Validation Checks
+
+- Every import should be followed by automated sanity checks
+
+    - Are there fewer eggs hatching than eggs laid?
+
+    - Are there negative valuse for body weight?
+
+see @sec-validate
+
+### File formats and version control
+
+- Where possible use plain text (csv/tsv) and version control for transparency
+
+
+## Summary
+
+Disciplined data organization eliminates **ambiguity**, allows **seamless import into R**, and ensures that analysis code represents all transformations transparently. 
+
+Having a set of company values around data quality and standardisation where data quality is *everyones responsibility* helps prevent errors, and reduce the risk of information being lost when researchers transition across to new roles.
+
+**We should all be data detectives!**

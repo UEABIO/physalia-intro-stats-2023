@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>11&nbsp; ANOVA – Physalia</title>
+<title>23&nbsp; ANOVA – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a85b8e33ea8f0b235709a7eb17d07876.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19fea3fb2752d4c0d13dbb0336d0799e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/font-awesome-6.5.2/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -114,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -288,6 +289,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -302,7 +304,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./12-ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./12-ANOVA.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -334,168 +336,168 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Working with data in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data cleaning</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-data-bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data bias</span></span></a>
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Generalised Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Mixed Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -503,7 +505,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -511,14 +513,125 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -541,12 +654,6 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">ggplot extras</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -562,49 +669,32 @@ window.Quarto = {
    
   <ul>
 <li>
-<a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link active" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">11.1</span> Analysis of Variance (ANOVA)</a>
+<a href="#analysis-of-variance-anova" id="toc-analysis-of-variance-anova" class="nav-link active" data-scroll-target="#analysis-of-variance-anova"><span class="header-section-number">23.1</span> Analysis of Variance (ANOVA)</a>
   <ul class="collapse">
-<li><a href="#anova-and-the-t-test-share-a-common-foundation" id="toc-anova-and-the-t-test-share-a-common-foundation" class="nav-link" data-scroll-target="#anova-and-the-t-test-share-a-common-foundation"><span class="header-section-number">11.1.1</span> ANOVA and the t-test Share a Common Foundation</a></li>
-  <li><a href="#anova-is-useful-when-we-have-more-than-two-groups" id="toc-anova-is-useful-when-we-have-more-than-two-groups" class="nav-link" data-scroll-target="#anova-is-useful-when-we-have-more-than-two-groups"><span class="header-section-number">11.1.2</span> ANOVA is Useful When We Have More Than Two Groups</a></li>
+<li><a href="#anova-and-the-t-test-share-a-common-foundation" id="toc-anova-and-the-t-test-share-a-common-foundation" class="nav-link" data-scroll-target="#anova-and-the-t-test-share-a-common-foundation"><span class="header-section-number">23.1.1</span> ANOVA and the t-test Share a Common Foundation</a></li>
+  <li><a href="#anova-is-useful-when-we-have-more-than-two-groups" id="toc-anova-is-useful-when-we-have-more-than-two-groups" class="nav-link" data-scroll-target="#anova-is-useful-when-we-have-more-than-two-groups"><span class="header-section-number">23.1.2</span> ANOVA is Useful When We Have More Than Two Groups</a></li>
   </ul>
 </li>
   <li>
-<a href="#maize-data" id="toc-maize-data" class="nav-link" data-scroll-target="#maize-data"><span class="header-section-number">11.2</span> Maize data</a>
+<a href="#maize-data" id="toc-maize-data" class="nav-link" data-scroll-target="#maize-data"><span class="header-section-number">23.2</span> Maize data</a>
   <ul class="collapse">
-<li><a href="#the-anova-table" id="toc-the-anova-table" class="nav-link" data-scroll-target="#the-anova-table"><span class="header-section-number">11.2.1</span> The ANOVA table</a></li>
+<li><a href="#the-anova-table" id="toc-the-anova-table" class="nav-link" data-scroll-target="#the-anova-table"><span class="header-section-number">23.2.1</span> The ANOVA table</a></li>
   </ul>
 </li>
-  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova"><span class="header-section-number">11.3</span> Two-way ANOVA</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.4</span> Summary</a></li>
+  <li><a href="#two-way-anova" id="toc-two-way-anova" class="nav-link" data-scroll-target="#two-way-anova"><span class="header-section-number">23.3</span> Two-way ANOVA</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">23.4</span> Summary</a></li>
   <li>
-<a href="#anova-for-frogspawning" id="toc-anova-for-frogspawning" class="nav-link" data-scroll-target="#anova-for-frogspawning"><span class="header-section-number">11.5</span> ANOVA for frogspawning</a>
+<a href="#anova-for-frogspawning" id="toc-anova-for-frogspawning" class="nav-link" data-scroll-target="#anova-for-frogspawning"><span class="header-section-number">23.5</span> ANOVA for frogspawning</a>
   <ul class="collapse">
-<li><a href="#activity-1.-make-a-hypothesis" id="toc-activity-1.-make-a-hypothesis" class="nav-link" data-scroll-target="#activity-1.-make-a-hypothesis"><span class="header-section-number">11.5.1</span> Activity 1. Make a Hypothesis</a></li>
-  <li><a href="#activity-2.-import-and-clean-data" id="toc-activity-2.-import-and-clean-data" class="nav-link" data-scroll-target="#activity-2.-import-and-clean-data"><span class="header-section-number">11.5.2</span> Activity 2. Import and clean data</a></li>
-  <li><a href="#activity-3.-design-a-linear-model" id="toc-activity-3.-design-a-linear-model" class="nav-link" data-scroll-target="#activity-3.-design-a-linear-model"><span class="header-section-number">11.5.3</span> Activity 3. Design a linear model</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#sec-fit" id="toc-sec-fit" class="nav-link" data-scroll-target="#sec-fit"><span class="header-section-number">11.6</span> Checking the fit of a model</a>
-  <ul class="collapse">
-<li><a href="#assumption-1-normality-of-residuals" id="toc-assumption-1-normality-of-residuals" class="nav-link" data-scroll-target="#assumption-1-normality-of-residuals"><span class="header-section-number">11.6.1</span> Assumption 1: Normality of Residuals</a></li>
-  <li><a href="#assumption-2-homogeneity-of-variance" id="toc-assumption-2-homogeneity-of-variance" class="nav-link" data-scroll-target="#assumption-2-homogeneity-of-variance"><span class="header-section-number">11.6.2</span> Assumption 2: Homogeneity of Variance</a></li>
-  <li><a href="#assumption-3-linearity" id="toc-assumption-3-linearity" class="nav-link" data-scroll-target="#assumption-3-linearity"><span class="header-section-number">11.6.3</span> Assumption 3: Linearity</a></li>
-  <li><a href="#outliers-and-their-impact" id="toc-outliers-and-their-impact" class="nav-link" data-scroll-target="#outliers-and-their-impact"><span class="header-section-number">11.6.4</span> Outliers and Their Impact</a></li>
-  <li><a href="#quick-model-checks" id="toc-quick-model-checks" class="nav-link" data-scroll-target="#quick-model-checks"><span class="header-section-number">11.6.5</span> Quick model checks</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#making-figures" id="toc-making-figures" class="nav-link" data-scroll-target="#making-figures"><span class="header-section-number">11.7</span> Making Figures</a>
-  <ul class="collapse">
-<li><a href="#activity-4.-design-a-figure" id="toc-activity-4.-design-a-figure" class="nav-link" data-scroll-target="#activity-4.-design-a-figure"><span class="header-section-number">11.7.1</span> Activity 4. Design a figure</a></li>
+<li><a href="#activity-1.-make-a-hypothesis" id="toc-activity-1.-make-a-hypothesis" class="nav-link" data-scroll-target="#activity-1.-make-a-hypothesis"><span class="header-section-number">23.5.1</span> Activity 1. Make a Hypothesis</a></li>
+  <li><a href="#activity-2.-import-and-clean-data" id="toc-activity-2.-import-and-clean-data" class="nav-link" data-scroll-target="#activity-2.-import-and-clean-data"><span class="header-section-number">23.5.2</span> Activity 2. Import and clean data</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./12-ANOVA.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-anova" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./12-ANOVA.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-anova" class="quarto-section-identifier"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></h1>
 </div>
 
 
@@ -619,7 +709,7 @@ window.Quarto = {
 
 
 </header><div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(skimr)</span>
@@ -628,7 +718,7 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(performance)</span>
 <span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(ggridges)</span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(qqplotr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="fu">library</span>(qqplotr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -644,17 +734,17 @@ Warning
 <p>Make sure to include some data checking in your script.</p>
 </div>
 </div>
-<section id="analysis-of-variance-anova" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="analysis-of-variance-anova">
-<span class="header-section-number">11.1</span> Analysis of Variance (ANOVA)</h2>
+<section id="analysis-of-variance-anova" class="level2" data-number="23.1"><h2 data-number="23.1" class="anchored" data-anchor-id="analysis-of-variance-anova">
+<span class="header-section-number">23.1</span> Analysis of Variance (ANOVA)</h2>
 <p>So far we have used linear models for analyses between <em>two</em> ‘categorical’ explanatory variables e.g.&nbsp;<em>t</em>-tests, and for regression with <em>two</em> ‘continuous’ variables. However, as designs become more complicated, the number of comparisons can quickly become overwhelming, working with estimates and intervals alone can become harder.</p>
-<section id="anova-and-the-t-test-share-a-common-foundation" class="level3" data-number="11.1.1"><h3 data-number="11.1.1" class="anchored" data-anchor-id="anova-and-the-t-test-share-a-common-foundation">
-<span class="header-section-number">11.1.1</span> ANOVA and the t-test Share a Common Foundation</h3>
+<section id="anova-and-the-t-test-share-a-common-foundation" class="level3" data-number="23.1.1"><h3 data-number="23.1.1" class="anchored" data-anchor-id="anova-and-the-t-test-share-a-common-foundation">
+<span class="header-section-number">23.1.1</span> ANOVA and the t-test Share a Common Foundation</h3>
 <p>Both ANOVA and the t-test work by decomposing variance into different sources. In a t-test, we examine whether the difference between two group means is greater than what we would expect by chance, given the within-group variance. Similarly, ANOVA compares the variability between group means to the variability within the groups. For a t-test comparing two groups, the F-ratio calculated in a one-way ANOVA (variance between groups/variance within groups) will produce an equivalent result to the t-statistic (squared) because they both essentially use the same ratio of variance components. In this case, an ANOVA with two groups and one degree of freedom in the denominator yields the same conclusion as a t-test.</p>
-</section><section id="anova-is-useful-when-we-have-more-than-two-groups" class="level3" data-number="11.1.2"><h3 data-number="11.1.2" class="anchored" data-anchor-id="anova-is-useful-when-we-have-more-than-two-groups">
-<span class="header-section-number">11.1.2</span> ANOVA is Useful When We Have More Than Two Groups</h3>
+</section><section id="anova-is-useful-when-we-have-more-than-two-groups" class="level3" data-number="23.1.2"><h3 data-number="23.1.2" class="anchored" data-anchor-id="anova-is-useful-when-we-have-more-than-two-groups">
+<span class="header-section-number">23.1.2</span> ANOVA is Useful When We Have More Than Two Groups</h3>
 <p>When we have more than two groups (i.e., more than two levels of a categorical factor), a t-test would require multiple pairwise comparisons, each introducing an additional chance for Type I errors. If we conducted multiple t-tests (e.g., three comparisons for three groups), the probability of finding at least one significant result by chance (when there is no true effect) increases. ANOVA mitigates this problem by testing an overall hypothesis: it asks if there is a statistically significant difference among the group means without specifying which groups are different. By conducting a single F-test, ANOVA controls the Type I error rate across all group comparisons, maintaining a consistent significance threshold.</p>
-</section></section><section id="maize-data" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="maize-data">
-<span class="header-section-number">11.2</span> Maize data</h2>
+</section></section><section id="maize-data" class="level2" data-number="23.2"><h2 data-number="23.2" class="anchored" data-anchor-id="maize-data">
+<span class="header-section-number">23.2</span> Maize data</h2>
 <p>Our simple linear model for the maize data was:</p>
 <pre><code>lsmodel1 &lt;- lm(height ~ type, data = darwin)</code></pre>
 <p>A one-way ANOVA is a way of fitting a linear model with a single explanatory variable. Its main goal is to measure the total variability in the data and split it into two parts: the variability between groups (signal) and the variability within groups (noise). This “signal-to-noise” ratio helps us understand how much of the total variation is explained by our model (the signal) versus what remains unexplained (the noise).</p>
@@ -681,11 +771,11 @@ Warning
 <div class="callout-info">
 <p>Least squares quantifies A) total least squares, B) treatment least squares, C) error sum of squares (SST, SSR, SSE). The vertical lines measure the distances, which are then squared and summed. SST is calculated by measuring to the intercept, SSR is calculated by measuring the distance of the estimates to the intercept, SSE is calculated by measuring the distance to the estimates</p>
 </div>
-<section id="the-anova-table" class="level3" data-number="11.2.1"><h3 data-number="11.2.1" class="anchored" data-anchor-id="the-anova-table">
-<span class="header-section-number">11.2.1</span> The ANOVA table</h3>
+<section id="the-anova-table" class="level3" data-number="23.2.1"><h3 data-number="23.2.1" class="anchored" data-anchor-id="the-anova-table">
+<span class="header-section-number">23.2.1</span> The ANOVA table</h3>
 <p>If we want to get the ANOVA table for a linear model we can use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">anova</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">anova</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -732,7 +822,7 @@ Warning
 <p>In our example, with an F value of 5.9, the “signal” (or effect of the treatment) is almost six times greater than the “noise” (within-group variation). To determine if this is significant, we use the F value, along with sample size and treatment levels, to calculate the probability of seeing this ratio if there were actually no treatment effect (null hypothesis).</p>
 <p>This probability (the P-value) is found using an F-distribution (see below), which takes into account the degrees of freedom for both the signal (mean squared regression value) and noise (mean squared error value). You can verify this in R with the <code><a href="https://rdrr.io/r/stats/Fdist.html">pf()</a></code> function, using the F value, degrees of freedom for signal and noise, and setting the last argument to indicate a two-sided test. This should match the P-value in your ANOVA output exactly.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">pf</span>(<span class="fl">5.9395</span>, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">28</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">pf</span>(<span class="fl">5.9395</span>, <span class="at">df1 =</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="dv">28</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02141466</code></pre>
 </div>
@@ -776,15 +866,15 @@ F= \frac{within~group~variance}{between~group~variance}
 t^2= \frac{difference~in~means^2}{SE^2}
 \]</span></p>
 </div>
-</section></section><section id="two-way-anova" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="two-way-anova">
-<span class="header-section-number">11.3</span> Two-way ANOVA</h2>
+</section></section><section id="two-way-anova" class="level2" data-number="23.3"><h2 data-number="23.3" class="anchored" data-anchor-id="two-way-anova">
+<span class="header-section-number">23.3</span> Two-way ANOVA</h2>
 <p>Two way ANOVA (as you might guess) includes <strong>two</strong> explanatory variables. Usually these are treatments of interest, but for this example we will stick with including the pair variable.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>lsmodel2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type <span class="sc">+</span> <span class="fu">as.factor</span>(pair), <span class="at">data =</span> darwin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>lsmodel2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type <span class="sc">+</span> <span class="fu">as.factor</span>(pair), <span class="at">data =</span> darwin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>And we can look at this table using the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function again</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">anova</span>(lsmodel2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">anova</span>(lsmodel2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -832,11 +922,11 @@ t^2= \frac{difference~in~means^2}{SE^2}
 <p>When we see an F value less than 1, it suggests that pairing in the experiment isn’t adding useful information—essentially, it’s doing “nothing.” If pairing had no effect, we’d expect an F value around 1, but seeing an F much lower than 1 implies a “negative variance component.” In other words, pairing has actually increased the noise (SSE) relative to the signal (SSR).</p>
 <p>When the mean squares for the treatment (MSR) are smaller than for the residuals (MSE), it usually points to a design issue. This could mean there wasn’t enough sampling (more pairs may be needed) or that the pairs weren’t randomly selected.</p>
 </div>
-</section><section id="summary" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">11.4</span> Summary</h2>
+</section><section id="summary" class="level2" data-number="23.4"><h2 data-number="23.4" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">23.4</span> Summary</h2>
 <p>ANOVA tables can be built for any linear model. The tables partition the variance into signal(s) and noise, which can be compared using an <em>F</em>-test. For complex analyses where many pairwise comparisons could be performed, an initial <em>F</em>-test can provide the initial evidence for whether there are any differences at all, reducing the risk of overtesting and the false positives that can be generated.</p>
-</section><section id="anova-for-frogspawning" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="anova-for-frogspawning">
-<span class="header-section-number">11.5</span> ANOVA for frogspawning</h2>
+</section><section id="anova-for-frogspawning" class="level2" data-number="23.5"><h2 data-number="23.5" class="anchored" data-anchor-id="anova-for-frogspawning">
+<span class="header-section-number">23.5</span> ANOVA for frogspawning</h2>
 <p><strong>Q. How does frogspawn hatching time vary with temperature?</strong></p>
 <p>Imagine we ran a manipulative experiment.</p>
 <blockquote class="blockquote">
@@ -856,8 +946,8 @@ t^2= \frac{difference~in~means^2}{SE^2}
 <li><p>Our explanatory variable is Temperature, with 3 levels: 13°C, 18°C and 25°C.</p></li>
 </ul>
 <p>We want to compare the means of 3 independent groups (13°C, 18°C and 25°C temperature groups) and we have one continuous response variable (Hatching time in days) and one categorical explanatory variable (Temperature). One-way ANOVA is the appropriate analysis!</p>
-<section id="activity-1.-make-a-hypothesis" class="level3" data-number="11.5.1"><h3 data-number="11.5.1" class="anchored" data-anchor-id="activity-1.-make-a-hypothesis">
-<span class="header-section-number">11.5.1</span> Activity 1. Make a Hypothesis</h3>
+<section id="activity-1.-make-a-hypothesis" class="level3" data-number="23.5.1"><h3 data-number="23.5.1" class="anchored" data-anchor-id="activity-1.-make-a-hypothesis">
+<span class="header-section-number">23.5.1</span> Activity 1. Make a Hypothesis</h3>
 <p>Always make a hypothesis and prediction, before you delve into the data analysis.</p>
 <p>A hypothesis is a tentative answer to a well-framed question, referring to a mechanistic explanation of the expected pattern. It can be verified via predictions, which can be tested by making additional observations and performing experiments.</p>
 <p>This should be backed up by some level of knowledge about your study system.</p>
@@ -868,8 +958,8 @@ Solution
 <p>In our case, knowing that frogspawn takes around 2-3 weeks to hatch under optimal temperatures (15-20°C), we can hypothesize that the lower the temperature, the longer it will take for frogspawn to hatch. Our hypothesis can therefore be:</p>
 <p><strong>Mean frogspawn hatching time will vary with temperature level. Higher temperatures will lead to shorter hatching times. Specifically, at the highest temperature in our study (25°C), we predict that hatching time will be reduced compared to lower temperatures</strong></p>
 </div>
-</section><section id="activity-2.-import-and-clean-data" class="level3" data-number="11.5.2"><h3 data-number="11.5.2" class="anchored" data-anchor-id="activity-2.-import-and-clean-data">
-<span class="header-section-number">11.5.2</span> Activity 2. Import and clean data</h3>
+</section><section id="activity-2.-import-and-clean-data" class="level3" data-number="23.5.2"><h3 data-number="23.5.2" class="anchored">
+<span class="header-section-number">23.5.2</span> Activity 2. Import and clean data</h3>
 <p>After setting up your R project, import and tidy your dataset.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -884,15 +974,7 @@ Tip
 <p>Remember to organise your analysis script - use the document outline feature to help you.</p>
 </div>
 </div>
-<p>Check the data for:</p>
-<ul>
-<li>improper formatting</li>
-<li>impossible values</li>
-<li>missingness</li>
-<li>duplications</li>
-</ul>
-<p>Refer to {<a href="05-dplyr.html#sec-data-cleaning" class="quarto-xref"><span>Section 2.3</span></a>} for help</p>
-<p>Check your data is in a tidy format according to {<a href="tidy-data.html" class="quarto-xref"><span>Appendix C</span></a>}</p>
+<p>Is your data in a tidy format according to {<a href="tidy-data.html" class="quarto-xref"><span>Appendix C</span></a>}?</p>
 <div class="webex-solution">
 <button>
 Hints
@@ -904,7 +986,7 @@ Hints
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#___________________________----</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#___________________________----</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co"># SET UP ----</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="do">## An analysis of the development time of frogspawn in response to water temperature ----</span></span>
@@ -930,93 +1012,101 @@ Solution
 <span id="cb8-24"><a href="#cb8-24"></a></span>
 <span id="cb8-25"><a href="#cb8-25"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(frogs)</span>
 <span id="cb8-26"><a href="#cb8-26"></a></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="do">## Incorrect data format----</span></span>
-<span id="cb8-28"><a href="#cb8-28"></a><span class="co"># using distinct allows us to identify the values causing this column to be treated as a character string</span></span>
-<span id="cb8-29"><a href="#cb8-29"></a>frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-30"><a href="#cb8-30"></a>  <span class="fu">distinct</span>(Temperature18)</span>
-<span id="cb8-31"><a href="#cb8-31"></a></span>
-<span id="cb8-32"><a href="#cb8-32"></a><span class="co"># Fixing incorrect values</span></span>
-<span id="cb8-33"><a href="#cb8-33"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-34"><a href="#cb8-34"></a>  <span class="fu">mutate</span>(<span class="at">Temperature18 =</span> <span class="fu">ifelse</span>(Temperature18 <span class="sc">==</span> <span class="st">"twentytwo"</span>,</span>
-<span id="cb8-35"><a href="#cb8-35"></a>                                <span class="dv">22</span>, Temperature18)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-36"><a href="#cb8-36"></a>  <span class="fu">mutate</span>(<span class="at">Temperature18 =</span> <span class="fu">as.numeric</span>(Temperature18))</span>
-<span id="cb8-37"><a href="#cb8-37"></a></span>
-<span id="cb8-38"><a href="#cb8-38"></a><span class="do">## Data duplication----</span></span>
-<span id="cb8-39"><a href="#cb8-39"></a><span class="co"># Checking for duplicated rows</span></span>
-<span id="cb8-40"><a href="#cb8-40"></a>frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-41"><a href="#cb8-41"></a>  <span class="fu">duplicated</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb8-42"><a href="#cb8-42"></a>  <span class="fu">sum</span>()</span>
-<span id="cb8-43"><a href="#cb8-43"></a></span>
-<span id="cb8-44"><a href="#cb8-44"></a><span class="co"># Pull out rows of data included more than once</span></span>
-<span id="cb8-45"><a href="#cb8-45"></a>frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-46"><a href="#cb8-46"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(frogs))</span>
-<span id="cb8-47"><a href="#cb8-47"></a></span>
-<span id="cb8-48"><a href="#cb8-48"></a><span class="co"># Keep only unique rows </span></span>
-<span id="cb8-49"><a href="#cb8-49"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-50"><a href="#cb8-50"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">duplicated</span>(frogs))</span>
-<span id="cb8-51"><a href="#cb8-51"></a><span class="co">#___________________________----</span></span>
-<span id="cb8-52"><a href="#cb8-52"></a></span>
-<span id="cb8-53"><a href="#cb8-53"></a><span class="co"># TIDY DATA ----</span></span>
-<span id="cb8-54"><a href="#cb8-54"></a></span>
-<span id="cb8-55"><a href="#cb8-55"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-56"><a href="#cb8-56"></a>  <span class="co">#make snake_case names and remove redundant Temperature label</span></span>
-<span id="cb8-57"><a href="#cb8-57"></a>  <span class="fu">rename</span>(<span class="st">"13"</span> <span class="ot">=</span> Temperature13,</span>
-<span id="cb8-58"><a href="#cb8-58"></a>         <span class="st">"18"</span> <span class="ot">=</span> Temperature18,</span>
-<span id="cb8-59"><a href="#cb8-59"></a>         <span class="st">"25"</span> <span class="ot">=</span> Temperature25,</span>
-<span id="cb8-60"><a href="#cb8-60"></a>         <span class="at">frogspawn_id =</span> <span class="st">`</span><span class="at">Frogspawn sample id</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-61"><a href="#cb8-61"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">13</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">25</span><span class="st">`</span>, <span class="at">names_to=</span><span class="st">"temperature"</span>, <span class="at">values_to=</span><span class="st">"days"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb8-62"><a href="#cb8-62"></a>  <span class="co"># make sure analysis is on factors not a continuous variable</span></span>
-<span id="cb8-63"><a href="#cb8-63"></a>  <span class="fu">mutate</span>(<span class="at">temperature =</span> <span class="fu">factor</span>(temperature)) <span class="sc">|&gt;</span> </span>
-<span id="cb8-64"><a href="#cb8-64"></a>  <span class="co"># remove NAs generated by making data long</span></span>
-<span id="cb8-65"><a href="#cb8-65"></a>  <span class="fu">drop_na</span>(days)</span>
-<span id="cb8-66"><a href="#cb8-66"></a></span>
-<span id="cb8-67"><a href="#cb8-67"></a><span class="co">#___________________________----</span></span>
-<span id="cb8-68"><a href="#cb8-68"></a></span>
-<span id="cb8-69"><a href="#cb8-69"></a><span class="co"># CHECK FOR OUTLIERS ----</span></span>
-<span id="cb8-70"><a href="#cb8-70"></a><span class="co"># histograms, dotplots or density plots works here</span></span>
-<span id="cb8-71"><a href="#cb8-71"></a>frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-72"><a href="#cb8-72"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> days, </span>
-<span id="cb8-73"><a href="#cb8-73"></a>           <span class="at">y =</span> temperature)) <span class="sc">+</span> </span>
-<span id="cb8-74"><a href="#cb8-74"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>()</span>
-<span id="cb8-75"><a href="#cb8-75"></a></span>
-<span id="cb8-76"><a href="#cb8-76"></a><span class="co"># Remove impossible days values</span></span>
-<span id="cb8-77"><a href="#cb8-77"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-78"><a href="#cb8-78"></a>  <span class="fu">filter</span>(days <span class="sc">&lt;</span> <span class="dv">900</span>)</span>
-<span id="cb8-79"><a href="#cb8-79"></a><span class="co">#___________________________----</span></span>
-<span id="cb8-80"><a href="#cb8-80"></a><span class="co"># CHECK NORMALITY----</span></span>
-<span id="cb8-81"><a href="#cb8-81"></a></span>
-<span id="cb8-82"><a href="#cb8-82"></a><span class="co"># recheck distributions and assess normality  </span></span>
-<span id="cb8-83"><a href="#cb8-83"></a>frogs <span class="sc">|&gt;</span> </span>
-<span id="cb8-84"><a href="#cb8-84"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> days, </span>
-<span id="cb8-85"><a href="#cb8-85"></a>                     <span class="at">y =</span> temperature)) <span class="sc">+</span> </span>
-<span id="cb8-86"><a href="#cb8-86"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>()</span>
-<span id="cb8-87"><a href="#cb8-87"></a></span>
-<span id="cb8-88"><a href="#cb8-88"></a><span class="fu">library</span>(qqplotr)</span>
-<span id="cb8-89"><a href="#cb8-89"></a><span class="fu">ggplot</span>(frogs, <span class="fu">aes</span>(<span class="at">sample =</span> days))<span class="sc">+</span></span>
-<span id="cb8-90"><a href="#cb8-90"></a>  <span class="co"># stat_qq_band requires qqplotr and the latest version of ggplot2</span></span>
-<span id="cb8-91"><a href="#cb8-91"></a>    <span class="fu">stat_qq_band</span>() <span class="sc">+</span></span>
-<span id="cb8-92"><a href="#cb8-92"></a>    <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb8-93"><a href="#cb8-93"></a>    <span class="fu">stat_qq_point</span>() <span class="sc">+</span></span>
-<span id="cb8-94"><a href="#cb8-94"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>temperature)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-27"><a href="#cb8-27"></a><span class="co"># TIDY DATA ----</span></span>
+<span id="cb8-28"><a href="#cb8-28"></a></span>
+<span id="cb8-29"><a href="#cb8-29"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
+<span id="cb8-30"><a href="#cb8-30"></a>  <span class="co">#make snake_case names and remove redundant Temperature label</span></span>
+<span id="cb8-31"><a href="#cb8-31"></a>  <span class="fu">rename</span>(<span class="st">"13"</span> <span class="ot">=</span> Temperature13,</span>
+<span id="cb8-32"><a href="#cb8-32"></a>         <span class="st">"18"</span> <span class="ot">=</span> Temperature18,</span>
+<span id="cb8-33"><a href="#cb8-33"></a>         <span class="st">"25"</span> <span class="ot">=</span> Temperature25,</span>
+<span id="cb8-34"><a href="#cb8-34"></a>         <span class="at">frogspawn_id =</span> <span class="st">`</span><span class="at">Frogspawn sample id</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb8-35"><a href="#cb8-35"></a>  <span class="fu">pivot_longer</span>(<span class="st">`</span><span class="at">13</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">25</span><span class="st">`</span>, </span>
+<span id="cb8-36"><a href="#cb8-36"></a>               <span class="at">names_to=</span><span class="st">"temperature"</span>, </span>
+<span id="cb8-37"><a href="#cb8-37"></a>               <span class="at">values_to=</span><span class="st">"days"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38"></a>               <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-39"><a href="#cb8-39"></a></span>
+<span id="cb8-40"><a href="#cb8-40"></a><span class="st">`</span><span class="at">r unhide()</span><span class="st">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<ul class="task-list">
+<li><p><label><input type="checkbox">Check the distribution of the data</label></p></li>
+<li><p><label><input type="checkbox">Remove any impossible values</label></p></li>
+<li><p><label><input type="checkbox">Optional - check normality by subgroups</label></p></li>
+</ul>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">#___________________________----</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># CHECK FOR OUTLIERS ----</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># histograms, dotplots or density plots works here</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>frogs <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> days, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>           <span class="at">y =</span> temperature)) <span class="sc">+</span> </span>
+<span id="cb9-8"><a href="#cb9-8"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
 </div>
-</section><section id="activity-3.-design-a-linear-model" class="level3" data-number="11.5.3"><h3 data-number="11.5.3" class="anchored" data-anchor-id="activity-3.-design-a-linear-model">
-<span class="header-section-number">11.5.3</span> Activity 3. Design a linear model</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Remove impossible days values</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>frogs <span class="ot">&lt;-</span> frogs <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">filter</span>(days <span class="sc">&lt;</span> <span class="dv">900</span>)</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#___________________________----</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># CHECK NORMALITY----</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># recheck distributions and assess normality  </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>frogs <span class="sc">|&gt;</span> </span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> days, </span>
+<span id="cb10-10"><a href="#cb10-10"></a>                     <span class="at">y =</span> temperature)) <span class="sc">+</span> </span>
+<span id="cb10-11"><a href="#cb10-11"></a>  ggridges<span class="sc">::</span><span class="fu">geom_density_ridges</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(qqplotr)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">ggplot</span>(frogs, <span class="fu">aes</span>(<span class="at">sample =</span> days))<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="co"># stat_qq_band requires qqplotr and the latest version of ggplot2</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="fu">stat_qq_band</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="fu">stat_qq_point</span>() <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>temperature)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="activity-3.-design-a-linear-model" class="level3" data-number="23.5.3"><h3 data-number="23.5.3" class="anchored" data-anchor-id="activity-3.-design-a-linear-model">
+<span class="header-section-number">23.5.3</span> Activity 3. Design a linear model</h3>
 <p>With the data tidied can you produce a <strong>linear model</strong>, check its assumptions and interpret its findings?</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># ANALYSIS ----</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>lsmodel_frogs1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(days <span class="sc">~</span> temperature, <span class="at">data =</span> frogs)</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a> <span class="fu">summary</span>(lsmodel_frogs1)</span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># anova(lsmodel_frogs1)</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># broom::tidy(lsmodel_frogs1, conf.int = T)</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#___________________________----</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># ANALYSIS ----</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>lsmodel_frogs1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(days <span class="sc">~</span> temperature, <span class="at">data =</span> frogs)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a> <span class="fu">summary</span>(lsmodel_frogs1)</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># anova(lsmodel_frogs1)</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co"># broom::tidy(lsmodel_frogs1, conf.int = T)</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#___________________________----</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1048,39 +1138,27 @@ F-statistic: 505.4 on 2 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The ANOVA shows that temperature does explain a significant amount of the variance in time to hatching <em>F</em><sub>2,59</sub> = 505.4, <em>P</em> &lt; 0.001</p>
 <p>The R squared shows that 94% of the variance in time to hatching is explained by temperature</p>
 </div>
-</section></section><section id="sec-fit" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="sec-fit">
-<span class="header-section-number">11.6</span> Checking the fit of a model</h2>
+</section><section id="sec-fit" class="level2" data-number="23.6"><h2 data-number="23.6" class="anchored" data-anchor-id="sec-fit">
+<span class="header-section-number">23.6</span> Checking the fit of a model</h2>
 <p>After conducting a linear model analysis, we often find ourselves with results and inferences. However, before we can fully trust our analysis, it’s essential to check whether the model fits our data well. This is often described as whether our model meets certain “Assumptions” about the data. If our model deviates from these assumptions, the results are not to be trusted! More on this later</p>
 <p>We can use base R commands like <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> or the <code>performance</code> package to inspect our models.</p>
 <p>In linear models these are as follows:</p>
-<section id="assumption-1-normality-of-residuals" class="level3" data-number="11.6.1"><h3 data-number="11.6.1" class="anchored" data-anchor-id="assumption-1-normality-of-residuals">
-<span class="header-section-number">11.6.1</span> Assumption 1: Normality of Residuals</h3>
+<section id="assumption-1-normality-of-residuals" class="level3" data-number="23.6.1"><h3 data-number="23.6.1" class="anchored" data-anchor-id="assumption-1-normality-of-residuals">
+<span class="header-section-number">23.6.1</span> Assumption 1: Normality of Residuals</h3>
 <p>Residuals are the differences between observed values and the fitted values produced by the model. In our case, this involves analyzing plant heights against treatment means. The normality of residuals is crucial because the linear model relies on this assumption to compute standard errors, which in turn affects confidence intervals and p-values.</p>
-<section id="graphical-checks-for-normality" class="level4" data-number="11.6.1.1"><h4 data-number="11.6.1.1" class="anchored" data-anchor-id="graphical-checks-for-normality">
-<span class="header-section-number">11.6.1.1</span> Graphical Checks for Normality</h4>
+<section id="graphical-checks-for-normality" class="level4" data-number="23.6.1.1"><h4 data-number="23.6.1.1" class="anchored" data-anchor-id="graphical-checks-for-normality">
+<span class="header-section-number">23.6.1.1</span> Graphical Checks for Normality</h4>
 <p>To visually assess the normality of residuals, we can utilize various plotting functions in R. Two effective methods are:</p>
 <p>Quantile-Quantile (QQ) Plot: This plot compares the distribution of residuals to a theoretical normal distribution. If the residuals follow a normal distribution, they should approximately align along a diagonal line.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"normality"</span>,<span class="st">"qq"</span>),</span>
-<span id="cb12-2"><a href="#cb12-2"></a>                         <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1089,10 +1167,22 @@ F-statistic: 505.4 on 2 and 59 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"normality"</span>,<span class="st">"qq"</span>),</span>
+<span id="cb15-2"><a href="#cb15-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
 </div>
-</section><section id="formal-test-of-normality" class="level4" data-number="11.6.1.2"><h4 data-number="11.6.1.2" class="anchored" data-anchor-id="formal-test-of-normality">
-<span class="header-section-number">11.6.1.2</span> Formal test of Normality</h4>
+</div>
+</div>
+</div>
+</div>
+</section><section id="formal-test-of-normality" class="level4" data-number="23.6.1.2"><h4 data-number="23.6.1.2" class="anchored" data-anchor-id="formal-test-of-normality">
+<span class="header-section-number">23.6.1.2</span> Formal test of Normality</h4>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1110,13 +1200,13 @@ Warning
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(lsmodel_frogs1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(lsmodel_frogs1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -1128,7 +1218,7 @@ W = 0.97044, p-value = 0.1398</code></pre>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(lsmodel_frogs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(lsmodel_frogs1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: residuals appear as normally distributed (p = 0.140).</code></pre>
 </div>
@@ -1136,30 +1226,30 @@ W = 0.97044, p-value = 0.1398</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="assumption-2-homogeneity-of-variance" class="level3" data-number="11.6.2"><h3 data-number="11.6.2" class="anchored" data-anchor-id="assumption-2-homogeneity-of-variance">
-<span class="header-section-number">11.6.2</span> Assumption 2: Homogeneity of Variance</h3>
+</section></section><section id="assumption-2-homogeneity-of-variance" class="level3" data-number="23.6.2"><h3 data-number="23.6.2" class="anchored" data-anchor-id="assumption-2-homogeneity-of-variance">
+<span class="header-section-number">23.6.2</span> Assumption 2: Homogeneity of Variance</h3>
 <p>The assumption of homogeneity of variance (or homoscedasticity) states that the residual variance should be constant across all levels of the independent variable(s). This is important because linear models often pool variance across groups to make inferences.</p>
-<section id="graphical-checks-for-homogeneity" class="level4" data-number="11.6.2.1"><h4 data-number="11.6.2.1" class="anchored" data-anchor-id="graphical-checks-for-homogeneity">
-<span class="header-section-number">11.6.2.1</span> Graphical Checks for Homogeneity</h4>
+<section id="graphical-checks-for-homogeneity" class="level4" data-number="23.6.2.1"><h4 data-number="23.6.2.1" class="anchored" data-anchor-id="graphical-checks-for-homogeneity">
+<span class="header-section-number">23.6.2.1</span> Graphical Checks for Homogeneity</h4>
 <p>To assess this assumption, we can plot the residuals against the fitted values:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-19-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1167,10 +1257,10 @@ W = 0.97044, p-value = 0.1398</code></pre>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"homogeneity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"homogeneity"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1178,21 +1268,21 @@ W = 0.97044, p-value = 0.1398</code></pre>
 </div>
 </div>
 </div>
-</section><section id="formal-tests-for-homogeneity-of-variance" class="level4" data-number="11.6.2.2"><h4 data-number="11.6.2.2" class="anchored" data-anchor-id="formal-tests-for-homogeneity-of-variance">
-<span class="header-section-number">11.6.2.2</span> Formal Tests for Homogeneity of Variance</h4>
+</section><section id="formal-tests-for-homogeneity-of-variance" class="level4" data-number="23.6.2.2"><h4 data-number="23.6.2.2" class="anchored" data-anchor-id="formal-tests-for-homogeneity-of-variance">
+<span class="header-section-number">23.6.2.2</span> Formal Tests for Homogeneity of Variance</h4>
 <p>To formally test for homogeneity of variance, we can use:</p>
 <p>Breusch-Pagan Test: This test evaluates whether the variance of residuals is constant.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(lmtest)</span>
-<span id="cb19-2"><a href="#cb19-2"></a></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">bptest</span>(lsmodel1, <span class="at">varformula =</span> <span class="sc">~</span><span class="fu">fitted.values</span>(lsmodel_frogs1), <span class="at">studentize =</span> F )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">bptest</span>(lsmodel1, <span class="at">varformula =</span> <span class="sc">~</span><span class="fu">fitted.values</span>(lsmodel_frogs1), <span class="at">studentize =</span> F )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Breusch-Pagan test
@@ -1204,7 +1294,7 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(lsmodel_frogs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(lsmodel_frogs1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: Error variance appears to be homoscedastic (p = 0.161).</code></pre>
 </div>
@@ -1212,30 +1302,30 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="assumption-3-linearity" class="level3" data-number="11.6.3"><h3 data-number="11.6.3" class="anchored" data-anchor-id="assumption-3-linearity">
-<span class="header-section-number">11.6.3</span> Assumption 3: Linearity</h3>
+</section></section><section id="assumption-3-linearity" class="level3" data-number="23.6.3"><h3 data-number="23.6.3" class="anchored" data-anchor-id="assumption-3-linearity">
+<span class="header-section-number">23.6.3</span> Assumption 3: Linearity</h3>
 <p>Linear regression assumes a linear relationship between the predictor(s) and the response variable. If this assumption is violated, the model may produce biased or inaccurate predictions.</p>
-<section id="graphical-checks-for-linearity" class="level4" data-number="11.6.3.1"><h4 data-number="11.6.3.1" class="anchored" data-anchor-id="graphical-checks-for-linearity">
-<span class="header-section-number">11.6.3.1</span> Graphical checks for linearity</h4>
+<section id="graphical-checks-for-linearity" class="level4" data-number="23.6.3.1"><h4 data-number="23.6.3.1" class="anchored" data-anchor-id="graphical-checks-for-linearity">
+<span class="header-section-number">23.6.3.1</span> Graphical checks for linearity</h4>
 <p>To assess this assumption, we can plot the residuals against the fitted values:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1243,10 +1333,10 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"linearity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"linearity"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1258,32 +1348,21 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 <ul>
 <li>
 <strong>No Intermediate Values</strong>: Fixed level predictors means there are no intermediate values to examine. This means we should always be able to fit a straight line</li>
-</ul></section></section><section id="outliers-and-their-impact" class="level3" data-number="11.6.4"><h3 data-number="11.6.4" class="anchored" data-anchor-id="outliers-and-their-impact">
-<span class="header-section-number">11.6.4</span> Outliers and Their Impact</h3>
+</ul></section></section><section id="outliers-and-their-impact" class="level3" data-number="23.6.4"><h3 data-number="23.6.4" class="anchored" data-anchor-id="outliers-and-their-impact">
+<span class="header-section-number">23.6.4</span> Outliers and Their Impact</h3>
 <p>Outliers can significantly affect the estimates of a model, influencing both residuals and overall model fit. Therefore, it’s essential to assess the presence and impact of outliers on our analysis.</p>
-<section id="identifying-outliers" class="level4" data-number="11.6.4.1"><h4 data-number="11.6.4.1" class="anchored" data-anchor-id="identifying-outliers">
-<span class="header-section-number">11.6.4.1</span> Identifying Outliers</h4>
+<section id="identifying-outliers" class="level4" data-number="23.6.4.1"><h4 data-number="23.6.4.1" class="anchored" data-anchor-id="identifying-outliers">
+<span class="header-section-number">23.6.4.1</span> Identifying Outliers</h4>
 <p>To identify outliers, we can employ Cook’s Distance, which measures the influence of each data point on the model fit. Large values of Cook’s Distance suggest that a point may be having an outsized effect.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"outliers"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">plot</span>(lsmodel_frogs1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1292,51 +1371,62 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-</section><section id="formal-tests-for-outliers" class="level4" data-number="11.6.4.2"><h4 data-number="11.6.4.2" class="anchored" data-anchor-id="formal-tests-for-outliers">
-<span class="header-section-number">11.6.4.2</span> Formal Tests for Outliers</h4>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>performance<span class="sc">::</span><span class="fu">check_outliers</span>(lsmodel_frogs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"outliers"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="formal-tests-for-outliers" class="level4" data-number="23.6.4.2"><h4 data-number="23.6.4.2" class="anchored" data-anchor-id="formal-tests-for-outliers">
+<span class="header-section-number">23.6.4.2</span> Formal Tests for Outliers</h4>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>performance<span class="sc">::</span><span class="fu">check_outliers</span>(lsmodel_frogs1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: No outliers detected.
 - Based on the following method and threshold: cook (0.5).
 - For variable: (Whole model)</code></pre>
 </div>
 </div>
-</section></section><section id="quick-model-checks" class="level3" data-number="11.6.5"><h3 data-number="11.6.5" class="anchored" data-anchor-id="quick-model-checks">
-<span class="header-section-number">11.6.5</span> Quick model checks</h3>
+</section></section><section id="quick-model-checks" class="level3" data-number="23.6.5"><h3 data-number="23.6.5" class="anchored" data-anchor-id="quick-model-checks">
+<span class="header-section-number">23.6.5</span> Quick model checks</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <p>Hit Enter in the console to cycle through plots</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">plot</span>(lsmodel_frogs1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">plot</span>(lsmodel_frogs1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-27-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-27-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-28-4.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1344,11 +1434,11 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1,</span>
-<span id="cb30-2"><a href="#cb30-2"></a>                         <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel_frogs1,</span>
+<span id="cb33-2"><a href="#cb33-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1356,10 +1446,10 @@ BP = 0.3423, df = 1, p-value = 0.5585</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="making-figures" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="making-figures">
-<span class="header-section-number">11.7</span> Making Figures</h2>
-<section id="activity-4.-design-a-figure" class="level3" data-number="11.7.1"><h3 data-number="11.7.1" class="anchored" data-anchor-id="activity-4.-design-a-figure">
-<span class="header-section-number">11.7.1</span> Activity 4. Design a figure</h3>
+</section></section><section id="making-figures" class="level2" data-number="23.7"><h2 data-number="23.7" class="anchored" data-anchor-id="making-figures">
+<span class="header-section-number">23.7</span> Making Figures</h2>
+<section id="activity-4.-design-a-figure" class="level3" data-number="23.7.1"><h3 data-number="23.7.1" class="anchored" data-anchor-id="activity-4.-design-a-figure">
+<span class="header-section-number">23.7.1</span> Activity 4. Design a figure</h3>
 <p>Can you produce a suitable Figure for this dataset?</p>
 <div class="webex-solution">
 <button>
@@ -1369,7 +1459,7 @@ Solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Frogspawn hatching times at 13, 18 and 25 degrees Celsius. Boxplot displays median, hinges are first and third quartiles, whiskers extend from the hinge to 1.5X the interquartile range. Points represent individual frogspawns.</figcaption></figure>
 </div>
 </div>
@@ -1379,14 +1469,14 @@ Solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="12-ANOVA_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Time to hatching is inversely related to temperature in frogspawn. Circles represent estimated mean hatching times with 95% confidence intervals from a one-way ANOVA (F<sub>1,28</sub> = 385.9, P &lt; 0.001). Dashed lines indicate the slope of the mean difference between 13-18 degrees and 13-25 degrees Celsius. Faded points represent individual data points.</figcaption></figure>
 </div>
 </div>
 </div>
 </div>
-<section id="task" class="level4" data-number="11.7.1.1"><h4 data-number="11.7.1.1" class="anchored" data-anchor-id="task">
-<span class="header-section-number">11.7.1.1</span> Task</h4>
+<section id="task" class="level4" data-number="23.7.1.1"><h4 data-number="23.7.1.1" class="anchored" data-anchor-id="task">
+<span class="header-section-number">23.7.1.1</span> Task</h4>
 <p>Can you write a summary of the <strong>Results</strong>?</p>
 <div class="webex-solution">
 <button>
@@ -1396,7 +1486,9 @@ Solution
 </div>
 
 
-</section></section></section></main><!-- /main --><script>
+</section></section></section>
+</div>
+</section></section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
 update_total_correct = function() {
@@ -1692,13 +1784,14 @@ window.onresize = move_sidebar;
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -2041,12 +2134,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./11-regression.html" class="pagination-link" aria-label="Regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./13-interaction.html" class="pagination-link" aria-label="Multi factor ANOVA">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./13-interaction.html" class="pagination-link" aria-label="Interactions">
+        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,548 @@
+# Complex models
+
+```{r, include = FALSE}
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+library(tidyverse)
+library(here)
+dros_clean <- read_csv(here("files", "fruitfly.csv"))
+library(GGally)
+library(skimr)
+library(colorspace)
+library(ggridges)
+library(performance)
+library(patchwork)
+
+```
+
+
+```{r, eval = FALSE}
+# Required packages
+library(here)
+library(tidyverse)
+library(GGally)
+library(skimr)
+library(colorspace)
+library(ggridges)
+library(performance)
+library(patchwork)
+
+```
+
+
+In the previous chapter @sec-causal we worked through the process of including/excluding variables based on our **causal** hypotheses.
+However, we did not consider the potential role of *complex interactions* and in this chapter we will work through potential complexity in *non-factorial* experimental designs.
+
+## Experimental Design
+
+In order to make clear hypothesis statements, and then test these - we need to have a good understanding of the experimental design
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+Write some quick code to understand the distribution of treatment types and partner numbers across the experimental design. 
+
+Is the experiment a full `r glossary("factorial")` design?
+
+`r hide("Solution")`
+
+```{r}
+dros_clean |> 
+  group_by(partners, type) |> 
+  summarise(n = n())
+
+```
+
+`r unhide()`
+
+The experimental design is `r mcq(c("factorial", answer = "non-factorial"))`
+
+`r hide("Explanation")`
+
+Not all type x partner combinations exist:
+
+- Partners = 0 exists only for Control
+
+- Partners = 1,8 exist only for Virgin and Inseminated
+
+> This doesn't affect our initial consideration of model structure, but we will revisit this later
+
+`r unhide()`
+
+::::
+:::
+
+
+## Complex model interactions
+
+Sometimes, the relationship between a covariate and the outcome *differs between groups*.
+
+We have previously investigated models to examine the causal effect of mating types on male longevity - with five experimental groups
+
+- Control: Unmated flies (0 partners)
+
+- Virgin - 1 partner: Males paired with a single unmated female 
+
+- Virgin - 8 partners: Males paired with multiple unmated females
+
+- Inseminated - 1 partner: Males paired with a single previously mated female 
+
+- Inseminated - 8 partners: Males paired with multiple mated females
+
+> We now wish to consider some key questions in our experiment around interactions. 
+
+1. Does the number of females a male is paired with change the effect mating type has on male longevity?
+
+2. Does the size of a male change the effect of mating type on male longevity?
+
+```{r, echo = FALSE, message = FALSE}
+dros_clean |> 
+  group_by(partners, type) |> 
+  summarise(n = n())
+
+```
+
+**This is a non-factorial design** - not all type × partner combinations exist. Control flies only appear at 0 partners, while Virgin and Inseminated flies only appear at 1 or 8 partners.
+
+
+Let's start by fitting an interaction term with what seems like the obvious model:
+
+$$
+\text{longevity}_i = \beta_0 + \beta_1 \, \text{type}_i + \beta_2 \, \text{thorax}_i + \beta_3 \, \text{partners}_i + \beta_4 \, (\text{type}_i \times \text{thorax}_i) + \beta_5 \, (\text{type}_i \times \text{partners}_i) \varepsilon_i
+$$
+
+- This allows the **the effect of size on longevity to depend on mating partner**.
+
+- As a second interaction test it allows **the effect of mating partner on longevity to depend on the number of partners**
+
+Before fitting new models, we should make sure our data is in the appropriate format: 
+
+```{r}
+# Use mutate to set type and partners as factorial variables
+dros_clean2 <- dros_clean |> 
+  mutate(type = factor(type),
+         partners = factor(partners))
+
+```
+
+**Question 1.** Why is it important for partners to be treated as a factor (rather than numeric)?
+
+`r hide("Solution")`
+
+Partners is a numeric column - but this does not make sense with our experimental design, there are only three treatments with respect to number of partners, 0,1 or 8. 
+If we leave partners as a numeric in our model, R will attempt to fit a single slope to explain the variance explained by partners as though it is a continuous variable.
+We have no reason to think the effect of partners is strictly linear, and with only three different observations it makes much more sense to treat this as categorical. 
+
+`r unhide()`
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+Write a linear model that includes type, thorax and partners as main effects and include expressions to include an interaction effect between type:thorax and type:partners.
+
+`r hide()`
+
+```{r}
+
+flyls2 <- lm(longevity ~ type + 
+               thorax + 
+               partners +
+               type:thorax + # specifies the interaction effect
+               type:partners, # specifies the interaction effect
+             data = dros_clean2)
+```
+
+`r unhide()`
+
+
+::::
+:::
+
+
+## Issues with interpreting the fitted model
+
+Let's take a look at the fitted model now we have included our interaction terms:
+
+
+```{r}
+
+summary(flyls2)
+
+```
+
+The intercept is Control at partners=0 (the reference levels for both factors). But look at what the other parameters mean:
+
+- typeInseminated = -0.116: Difference between Inseminated and Control at partners=0
+
+> Problem: Inseminated flies don't exist at partners=0! This is meaningless.
+
+- partners1 = 13.14: Effect of having 1 partner for Control flies
+
+> Problem: Control flies don't exist at partners=1! This is also meaningless.
+
+Many NA values: R can't estimate these parameters because the combinations don't exist
+
+:::{callout-note}
+
+While the model is technically functional - interpretation and coefficients are suboptimal. The Control level only exists at partners = 0, this creates a fundamental mismatch when trying to estimate values
+
+:::
+
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+We need to revisit our key hypotheses and fix our model accordingly. 
+
+Can you write out specific testable questions we might have about interaction effects in our data?
+
+`r hide("Solution")`
+
+- Question 1: Within Virgin flies, does having 1 vs 8 partners affect longevity?
+
+- Question 2: Within Inseminated flies, does having 1 vs 8 partners affect longevity?
+
+- Question 3: At the same partner level, do Inseminated and Virgin flies differ in longevity?
+
+- Question 4: How do our mated treatments compare to unmated Controls?
+
+- Question 5: At the same body size, do Inseminated and Virgin flies differ in longevity?
+
+> With these questions in place we can "relevel" our factors to set the intercept to a different value - allowing for better comparisons
+
+```{r}
+
+# By setting Virgin and partners = 1 as the first level in the factors for type and partners this will become the new intercept
+
+dros_clean3 <- dros_clean2 |> 
+  mutate(type = fct_relevel(type, "Virgin"),
+         partners = fct_relevel(partners, "1"))
+
+# Refit the model
+
+flyls3 <- lm(longevity ~ type + 
+               thorax + 
+               partners +
+               type:thorax + # specifies the interaction effect
+               type:partners, # specifies the interaction effect
+             data = dros_clean3)
+
+summary(flyls3)
+
+
+```
+
+The intercept is Virgin at partners=1 (the reference levels for both factors). 
+
+- typeControl = 2.2 Difference between Virgin and Control (note control only has 0 partners)
+
+- typeInseminated = 0.940 Difference between Inseminated and Virgin at partners=1
+
+> Correct: Both treatments have examples of 1 partner.
+
+- partners8 = -13.14 Difference between Virgin flies with 8 partners compare to 1
+
+> Correct
+
+- Inseminated:partners8 = 14.515 Adjustment needed for estimating the effect of partners in Inseminated flies
+
+> Correct: Total difference in partners8 between Inseminated1 and Inseminated8 = -13.1 + 14.5 = 1.4
+> Total difference in partners8 between Virgin8 and Inseminated8 = 0.9 + 13.1 + 14.5 = 28.5
+
+NA values: R can't estimate these parameters because the combinations don't exist
+
+`r unhide()`
+
+::::
+:::
+
+
+## Determining a minimally sufficient model
+
+- A significant interaction means the relationship between body size and longevity, and parners and longevity is **not the same** across partner types.
+
+R compares the nested models via a likelihood ratio test (LRT):
+
+
+- H₀: β₃ = 0 (no interaction; same slope for all partner types)
+
+- H₁: β₃ ≠ 0 (interaction; slopes differ)
+
+If the p-value is small (typically < 0.05), the more complex model explains significantly more variation — implying the interaction is meaningful.
+
+```{r}
+drop1(flyls3, test = "F")
+```
+
+`r hide("Explanation")`
+
+The `drop1` function produces a series of LRT where a term is removed from the model and the difference in variance is compared to the maximal model with an F-test.
+A significant result indicates a statisticall significant reduction in variance explained.
+
+> What does this mean?: We can safely remove terms that are non-significant as not helping explain variance in our data.
+
+`r unhide()`
+
+### Refitting to produce the most optimal model
+
+Having determined that there *is* evidence for an interaction effect between `type:partners` but there *is not* evidence for an interaction between `type:thorax` we can refit our model: 
+
+```{r}
+
+flyls4 <- lm(longevity ~ type + 
+               thorax + 
+               partners +
+               type:partners, # specifies the interaction effect
+             data = dros_clean3)
+
+summary(flyls4)
+
+```
+
+This is our best fitting model - and the one we should report
+
+
+## Pairwise comparisons
+
+Using the [emmeans](https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/) package is a very easy way to produce the estimate mean values (rather than mean differences) for different categories `emmeans`. 
+
+```{r}
+
+means <- emmeans::emmeans(flyls4, specs = 
+                   ~ type + thorax + partners)
+
+means
+
+```
+
+If the term `pairs()` is included then it will also include post-hoc pairwise comparisons between all levels with a tukey test (adjustment for multiple comparisons), we can turn off p-value adjustments by including the argument `adjust = "none"`.
+
+:::{.panel-tabset}
+
+## Raw comparisons
+
+```{r}
+
+pairs(means,
+      adjust = "none")
+
+```
+
+## Adjusted comparisons
+
+In this example a Tukey HSD test adjustment has been applied - the p-values have been adjusted for *a family of 5 estimates* representing the five different experimental groups
+
+```{r}
+
+pairs(means)
+
+```
+
+:::
+
+:::{.callout-note}
+## Should we use raw or adjusted p-values?
+
+It depends - adjusted p-values are more conservative - and there is a good reason to use these (preventing Type 1 errors) - especially if we didn't have a clear set of initial hypotheses.
+However, in this example we have a clear experimental design, and we aren't actually interested in looking at every comparison possible. We are interested in the difference between the three treatment groups and whether partner number changes this. With these careful planned contrasts we should be ok using unadjusted p-values
+
+:::
+
+
+## Visualising models
+
+We can make visualisations of our models with `ggplot()`. 
+
+Because we have included thorax as a stabilising predictor in our models we have some options on how to present our results: 
+
+1) Thorax does not interact with other predictors - as such it is a constant and `emmeans` has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables.
+
+2) If we wish to model continuous predictions we need to specify these by asking for model predictions across the observed range of thorax values
+
+:::{.panel-tabset}
+
+## Type and partner differences across the average for thorax
+
+```{r, message = FALSE, warning = FALSE}
+means |> 
+    as_tibble() |> 
+    ggplot(aes(x=type, y = emmean, colour = partners, fill = partners))+
+    geom_pointrange(aes(ymin=lower.CL, ymax=upper.CL), position = position_dodge(width =.2))+
+    geom_point(data = dros_clean3, 
+               aes(x = type, 
+                   y = longevity),
+               show.legend = FALSE, 
+               alpha = .2, 
+               position = position_dodge(width =.2))+
+  scale_colour_discrete_qualitative() +
+  theme_classic()+ 
+  theme(strip.text = element_blank())+
+  facet_wrap(~factor(type, 
+                     levels = c("Control", 
+                                "Inseminated", 
+                                "Virgin")), 
+             scales = "free_x")
+
+```
+
+## Type and partner differences across the observed range for thorax
+
+```{r, message = FALSE, warning = FALSE}
+
+# use the final model to produce model predictions set to the new dataframe
+
+
+emmeans::emmeans(flyls4, 
+                 specs = ~ type + thorax + partners,
+                 at = list(thorax = seq(0.64,0.94, .1))) |> 
+  as_tibble() |> 
+  ggplot(
+       aes(x=thorax, 
+           y = emmean, 
+           colour = type, 
+           fill = type))+
+  geom_ribbon(aes(ymin=lower.CL, 
+                  ymax=upper.CL), 
+              alpha = 0.2)+
+    geom_line(linetype = "dashed", 
+              show.legend = FALSE)+
+  geom_point(data = dros_clean, 
+             aes(x = thorax, 
+                 y = longevity),
+             show.legend = FALSE)+
+scale_fill_discrete_qualitative() +
+scale_colour_discrete_qualitative() +
+  labs(y = "Lifespan in days",
+       x = "Thorax length (mm)",
+       fill = "Type of female exposure")+
+  guides(colour = "none")+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+    facet_wrap(~factor(partners, 
+                       levels = c(0, 1, 8)))
+
+```
+
+
+
+
+## Model checking
+
+Before we can interpret the terms in our model, we should check to see if this is even a good way of fitting and measuring our data. We should check the assumptions of our model are being met.
+
+R has ways to do this with the `plot()` function, but the `performance` packages @R-performance from `easystats` also gives nice residual checks:
+
+:::{.panel-tabset}
+
+## base R
+
+```{r, eval = TRUE, message = FALSE, warning = FALSE, fig.height=9}
+
+# Set plotting area to 2x2 (four panels)
+par(mfrow = c(2, 2))
+
+# Plot diagnostic plots
+plot(flyls4)
+```
+
+
+## performance
+
+```{r, eval = TRUE, message = FALSE, warning = FALSE, fig.height=9}
+
+performance::check_model(flyls4,
+                         detrend = F)
+
+```
+
+:::
+
+- Posterior Predictive Check – Assesses whether the model’s predicted values align well with the observed data, indicating good model fit.
+
+- Linearity Check – Ensures that the relationship between predictor variables and the outcome is approximately linear, a key assumption of linear regression.
+
+- Homogeneity of Variance Check – Tests whether residuals (errors) have constant variance across all levels of predictors, known as homoscedasticity.
+
+- Influential Observation Check – Identifies individual data points that have a disproportionately large impact on the model’s estimates.
+
+- Collinearity Check – Detects whether predictor variables are highly correlated with each other, which can distort model estimates and reduce interpretability.
+
+- Normality Check – Examines whether the residuals of the model follow a normal distribution, an assumption necessary for reliable inference in linear regression.
+
+### Homogeneity of variance
+
+**Question - IS the assumption of homogeneity of variance met?** `r mcq(c( answer = "Yes", "No"))`
+
+`r hide("Solution")`
+
+* Mostly - the reference line is fairly flat (there is a slight curve).
+
+* It looks as though there might be some increasing heterogeneity with larger values, though very minor.
+
+VERDICT, pretty much ok, should be fine for making inferences. 
+
+With a slight curvature this could indicate that you *might* get a better fit with a transformation, or perhaps that there is a missing variable that if included in the model would improve the residuals. In this instance I wouldn't be overly concerned. See here for a great explainer on intepreting residuals^[https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/].
+
+```{r}
+# Runs a Breusch-Pagan Test for heteroscedasticity
+# Sensitive to outliers, non-normality and sample size
+performance::check_heteroscedasticity(flyls4)
+
+```
+
+`r unhide()`
+
+### Normality of residuals
+
+`r mcq(c(answer = "Yes", "No"))`
+
+`r hide("Solution")`
+
+Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about. 
+
+[Interpreting QQ plots][What is a Quantile-Quantile (QQ) plot?]
+
+```{r}
+# Runs a Shapiro Wilk test of normality
+# Sensitive to outliers, sample size
+performance::check_normality(flyls4)
+```
+
+`r unhide()`
+
+
+### Collinearity
+
+**Question - IS their an issue with Collinearity?** `r mcq(c("Yes", answer ="No"))`
+
+:::{.callout-tip}
+
+What does it mean to have (multi)collinearity?
+
+This is when one or more predictors are correlated - leading to increased uncertainty about their contributions to the outcome variable. 
+
+The result is wider standard error and confidence intervals. 
+
+While there are many discussions about what can be done with multicollinearity - I subscribed to the views outlined [here](https://janhove.github.io/posts/2019-09-11-collinearity/). 
+
+It should be reported - but that's it - it represents genuine uncertainty around the contributions of your predictors. 
+
+```{r}
+check_collinearity(flyls4)
+
+```
+
+:::
+
+
+
+

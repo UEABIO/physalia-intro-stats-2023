@@ -1,0 +1,214 @@
+# Factors {#sec-factors}
+
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins_clean_names <- readRDS("data/penguin_clean_names.RDS")
+```
+
+:::{.callout-important collapse = "true"}
+
+## Penguin clean names dataset
+
+```{r, eval = FALSE}
+penguins_clean_names <- readRDS(url("https://github.com/Philip-Leftwich/Oct-Intro-Analytics/raw/refs/heads/dev/data/penguin_clean_names.RDS"))
+
+```
+
+:::
+
+
+In R, factors are a class of data that allow for **ordered categories** with a fixed set of acceptable values. 
+
+Typically, you would convert a column from character or numeric class to a factor if you want to set an intrinsic order to the values (“levels”) so they can be displayed non-alphabetically in plots and tables, or for use in linear model analyses (more on this later). 
+
+```{r}
+
+levels(penguins_clean_names$species)
+
+```
+
+
+Working with factors is easy with the `forcats` package:
+
+```{r, eval = F}
+penguin_factors <- penguins_clean_names |> 
+  mutate(species = as_factor(species))
+
+levels(penguin_factors$species)
+
+```
+
+
+### Applying changes across columns
+
+Using `across` - we can apply functions to columns based on selected criteria - here within mutate we are changing each column in the `.cols` argument and applying the function `forcats::as_factor()`
+
+```{r}
+
+penguins_clean_names |> 
+  mutate(
+    across(.cols = c("species", "region", "island", "stage", "sex"),
+           .fns = forcats::as_factor)
+  ) |> 
+  select(where(is.factor)) |> 
+  glimpse()
+
+```
+
+::: {.callout-important}
+
+Unless we assign the output of this code to an R object it will just print into the console, in the above I am demonstrating how to change variables to factors but we aren't "saving" this change.
+
+:::
+
+
+### Ordering factors manually
+
+With the `forcats::fct_relevel` function we can set factors and apply a specified level at the same time:
+
+```{r}
+penguins_clean_names |> 
+  mutate(species = fct_relevel(species, 
+                               "Adelie Penguin (Pygoscelis adeliae)", 
+                               "Chinstrap penguin (Pygoscelis antarctica)", 
+                               "Gentoo penguin (Pygoscelis papua)")) |> 
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+  
+
+```
+
+### Ordering factors by another variable
+
+With the function `forcats::fct_infreq` we can change the order according to how frequently each level occurs
+
+```{r}
+penguins_clean_names |> 
+   mutate(species = fct_infreq(species)) |>  
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+  
+
+```
+
+The `forcats::fct_rev()` function in R is used to reverse the order of levels in a factor variable. It is particularly useful for changing the order of factor levels when you want to display data in a reversed or descending order.
+
+```{r}
+penguins_clean_names |> 
+  mutate(species = fct_rev(as_factor(species))) |> 
+  ggplot(aes(x = species))+
+  geom_bar()+
+  coord_flip()
+
+```
+
+```{r, warning = FALSE}
+penguins_clean_names |> 
+  mutate(species = as_factor(species) |> 
+           fct_reorder(body_mass_g,
+                       .fun = mean,
+                       .na_rm = T)) |> 
+  # by default the levels are ordered by the median values of the continuous variable
+  # mean, min and max can all be included here
+  ggplot(aes(x = species,
+             y = body_mass_g,
+             colour = species))+
+  geom_boxplot(width = .2,
+               outlier.shape = NA)+
+  coord_flip()+
+  theme(legend.position ="none")
+```
+
+### Factor bins
+
+If we want to we can also *bin* continuous data into useful chunks: 
+
+```{r, eval = T, warning = F, message = F}
+penguins_clean_names <- penguins_clean_names |> 
+  mutate(mass_range = case_when(
+    body_mass_g <= 3500 ~ "smol penguin",
+    body_mass_g >3500 & body_mass_g < 4500 ~ "mid penguin",
+    body_mass_g >= 4500 ~ "chonk penguin",
+    .default = NA)
+  )
+```
+
+If we make a barplot, the order of the values on the x axis will typically be in alphabetical order for any character data
+
+```{r, eval = T, warning = F, message = F}
+penguins_clean_names |> 
+  drop_na(mass_range) |> 
+  ggplot(aes(x = mass_range))+
+  geom_bar()
+
+```
+
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Our new variable `mass_range` is not yet set as a factor, can you try this now?
+
+`r hide("Solution")`
+
+To convert a character or numeric column to class factor, you can use any function from the `forcats` package. They will convert to class factor and then also perform or allow certain ordering of the levels - for example using `forcats::fct_relevel()` lets you manually specify the level order. 
+
+The function `as_factor()` simply converts the class without any further capabilities.
+
+```{r, eval = T, warning=FALSE, message = F}
+penguins_clean_names <- penguins_clean_names |> 
+  mutate(mass_range = as_factor(mass_range))
+
+```
+
+
+```{r}
+levels(penguins_clean_names$mass_range)
+```
+
+` r unhide()`
+
+
+* [ ] Make sure the factors are set to a sensible order
+
+` r hide("Solution")`
+
+Below we use `mutate()` and `as_factor()` to convert the column flipper_range from class character to class factor. 
+
+```{r}
+# Correct the code in your script with this version
+penguins_clean_names <- penguins_clean_names |> 
+  mutate(mass_range = fct_relevel(mass_range, 
+                                  "smol penguin", 
+                                  "mid penguin", 
+                                  "chonk penguin")
+         )
+
+levels(penguins_clean_names$mass_range)
+```
+
+Now when we call a plot, we can see that the x axis categories match the intrinsic order we have specified with our factor levels. 
+
+```{r, eval = T, warning = F, message = F}
+penguins_clean_names |> 
+  drop_na(mass_range) |>  
+  ggplot(aes(x = mass_range))+
+  geom_bar()
+
+```
+
+`r unhide()`
+
+::::
+:::
+

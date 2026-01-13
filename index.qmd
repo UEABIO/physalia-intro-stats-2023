@@ -21,7 +21,7 @@ This course will introduce scientists and practitioners interested in applying s
 # automatically create a bib database for R packages
 # add any packages you want to cite here
 knitr::write_bib(c(
-  .packages(), 'rstatix', 'patchwork', 'here', 'kableExtra', 'plotly', 'gitcreds', 'usethis', 'ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'glmmTMB', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'skimr', 'ggplot2', 'sandwich', 'parameters'
+  .packages(), 'rstatix', 'patchwork', 'here', 'kableExtra','ggridges', 'scales', 'purrr', 'tinytex', 'gt', 'broom', 'tidyverse', 'rstatix', 'performance', 'see', 'lme4', 'lmerTest', 'DHARMa', 'nlme', 'ggeffects', 'sjPlot', 'DHARMa', 'report', 'MuMIn', 'palmerpenguins', 'colorBlindness', 'skimr', 'ggplot2', 'sandwich', 'parameters', 'emmeans', 'ggdag', 'janitor', 'glmmTMB', 'colorspace', 'broom.helpers', 'ggdag', 'report', 'DescTools', 'qqplotr', 'esquisse', 'fs', 'dplyr', 'naniar','ggh4x', 'lubridate'
 ), 'include/packages.bib')
 
 

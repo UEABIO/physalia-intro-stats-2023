@@ -5,6 +5,7 @@
 library(tidyverse)
 library(janitor)
 library(here)
+library(patchwork)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
 penguins <- readRDS(here("files", "chapter5.RDS"))
@@ -28,13 +29,13 @@ Before jumping into the analysis, it’s crucial to take a step back and first u
 
 ## What should we consider in our analysis?
 
-### 1. Distribution of Data Types
+### Distribution of Data Types
 
 Understanding the type of data we’re dealing with is the first step in any analysis. Both culmen length and depth are continuous numerical variables, meaning they can take a wide range of values. However, our dataset may also include categorical variables like species and island, which will help us group the data and see how these groups influence our measurements.
 
 Why this matters: Knowing whether a variable is numerical or categorical will influence how we visualize it and which statistical methods we use. For instance, numerical data might be plotted using histograms, while categorical data could be displayed using bar charts or boxplots.
 
-### 2. Central Tendency
+### Central Tendency
 Next, we’ll want to understand the central tendency of our data. Central tendency refers to the average or most common values in a dataset. The mean, median, and mode are common measures used to describe central tendency.
 
 - Mean: The average value (sum of all values divided by the number of values).
@@ -51,7 +52,7 @@ Understanding the average bill length and depth helps us get a sense of what is 
 
 :::
 
-### 3. Relationship Between Variables
+### Relationship Between Variables
 
 Now, we dive into the heart of our analysis: exploring the relationship between culmen length and culmen depth. To investigate this, we can use visual tools like `r glossary("scatterplots")` , which allow us to plot one variable against the other and visually check for patterns or trends.
 
@@ -65,7 +66,7 @@ Identifying the relationship between variables is critical to making meaningful 
 
 :::
 
-### 4. Confounding Variables
+### Confounding Variables
 
 While exploring the relationship between bill length and depth, we must also be aware of the potential impact of `r glossary("confounding variable")` . A confounding variable is one that influences both the dependent and independent variables, potentially leading to a false conclusion about their relationship.
 
@@ -89,21 +90,6 @@ Every step of the analysis leads to new questions. This is a natural part of the
 
 - If we spot outliers, we might ask, why are some penguins' measurements so different from the rest?
 
-### Data checking
-
-Before diving into analysis, it's crucial to have a clear understanding of the structure and quality of your dataset. This step is part of the data wrangling process and ensures that your data is accurate, clean, and ready for exploration. Key tasks include:
-
-- **The number of variables:** Know how many variables (columns) are present in the dataset. This helps in understanding the scope of the data and ensuring that all necessary information is available.
-
-- **The data format of each variable:** Check whether each variable is in the correct format (e.g., numeric, categorical, date). Mistakes in data types, such as a numeric variable being stored as text, can cause errors during analysis.
-
-- **Checked for missing data:** Identify any missing values and decide how to handle them. Ignoring missing data can skew results, so it’s important to either remove, impute, or investigate why data might be missing.
-
-- **Checked for typos, duplications, or other data errors:** Manually inspect the data or use automated tools to detect any typos, duplicate entries, or inconsistencies that could impact your analysis. For example, species names should be consistent across all rows.
-
-- **Cleaned column or factor names:** Ensure that all column names are properly labeled and easy to understand. This includes correcting any typos or formatting issues, such as spaces or special characters in names, which could cause problems when referencing them in code.
-
-These data checking steps provide a strong foundation for accurate and effective analysis, ensuring that your dataset is reliable and well-structured and luckily we carried this out in {@sec-dplyr}.
 
 ## Explore the distribution of categories
 
@@ -217,110 +203,6 @@ penguins |>
 
 `r unhide()`
 
-By thinking about how categories might interact, we can identify interesting patterns or potential issues that could impact our analysis or data interpretation. Careful consideration of these interactions helps us ensure the validity of our findings. For instance:
-
-- Sex Distribution: Looking at the patterns of male and female penguins, I’m reassured that the number of males and females observed is roughly equal across species and locations. This balance is important because unequal representation of sexes could bias our results, particularly in biological traits like bill length or body mass. Since there’s no imbalance, we can confidently proceed without worrying about gender skewing our insights.
-
-- Species Distribution by Island: There are different numbers of species on different islands, but this variation remains consistent across years. This suggests that the observed species distributions likely reflect true ecological patterns, rather than inconsistencies in data collection. If this trend were erratic across years, we might suspect sampling issues, but the consistency provides confidence in the accuracy of species representation.
-
-- Consistency Across Years: The number of penguins observed is consistent across years, meaning we don’t see major fluctuations in sample size. This consistency is important because significant changes could suggest variations in data collection methods or environmental factors affecting penguin populations. A steady count ensures that any trends or patterns we observe are less likely to be the result of sampling inconsistencies.
-
-- Missing Data for Sex: While there are some missing values for the sex variable, these gaps are small and don’t fit any obvious pattern. This suggests that the missing data is likely random and not linked to a particular species, location, or time period. Since the missing values are few and do not show a clear bias, we can choose to ignore these gaps in the analysis with reasonable confidence that they won’t heavily skew our results.
-
-By reflecting on these patterns, we can be more confident in the integrity of the data and proceed with analysis, knowing that key variables are well-represented and that any missing data or inconsistencies are minimal and manageable.
-
-
-## Missing data
-
-In the previous section, we identified some missing data, particularly for the sex variable, and noted that it was relatively small and likely random, meaning we could safely remove it from calculations without concern for `r glossary("bias")` . However, when it comes to our variables of interest, such as culmen length and culmen depth, it's worth taking a closer look at the missing values to understand if they occur in any particular patterns or groupings.
-
-We previously used functions like `skimr::skim()` and `summary()` to find that there are two missing values each for culmen length and depth. Although this small amount of missing data is unlikely to introduce significant bias, it’s still a good practice to investigate where these missing values are located in the dataset. Identifying patterns or specific groups (e.g., certain species or islands) associated with the missing values can help ensure that the missing data is not clustered in a way that could subtly affect our analysis.
-
-```{r}
-penguins |>
-  # Filter rows where culmen length is NA
-  filter(is.na(culmen_length_mm)) |> 
-  # Group by species, sex and island
-  group_by(species, sex, year, island) |>                 
-  summarise(n_missing = n())    
-
-penguins |>
-  filter(is.na(culmen_depth_mm)) |>         
-  group_by(species, sex, year, island) |>               
-  summarise(n_missing = n())    
-```
-
-There is data missing from one Adelie penguin in 2007 on Torgersen, and one value missing from a Gentoo penguin in 2009 on Biscoe. This is true for both culmen length and depth, it is probably the same penguin in both cases, but how could we change our code to be sure?
-
-`r hide("Solution")`
-
-```{r}
-penguins |>
-  filter(is.na(culmen_length_mm)) |> 
-# ADD individual id into group_by arguments
-  group_by(species, sex, year, island, individual_id) |>                 
-  summarise(n_missing = n())    
-
-penguins |>
-  filter(is.na(culmen_depth_mm)) |>         
-  group_by(species, sex, year, island, individual_id) |>               
-  summarise(n_missing = n())    
-
-
-```
-`r unhide()`
-
-Again here we could safely drop these from our data and regard these as missing at random. 
-
-### Removing rows with missing data
-
-If we are confident that missing data is not causing bias, then there are a few different ways we can deal with missing data so that it doesn't affect our calculations:
-
-#### `drop_na()` on everything before we start. 
-
-Using `drop_na()` to remove rows that contain any missing values across all variables can be useful, but it also runs the risk of losing a large portion of the data.
-
-```{r, eval = FALSE}
-
-drop_na(penguins)
-
-```
-- Pros: It's a simple, all-in-one solution for datasets where missing values are widespread and problematic.
-
-- Cons: This method may remove entire rows of data, even if the missing value is only in a single, unimportant column. This can lead to significant data loss if many rows have missing values in non-critical variables.
-
-#### `drop_na()` on a particular variable. 
-
-Another approach is to remove rows with missing data in a specific variable, such as `body_mass_g`. This is less drastic but still needs to be done thoughtfully, especially if you overwrite the original dataset with the modified version. It's often better to drop `NA`s temporarily for specific analyses or calculations.
-
-- Pros: You retain more data because you only remove rows with missing values in the column that matters for your current analysis.
-
-- Cons: You might still lose useful information from other columns. If you overwrite the dataset permanently (e.g., using `penguins <- penguins |> drop_na(body_mass_g))`, you can’t recover the dropped rows without reloading the data.
-
-
-```{r, eval = FALSE}
-
-penguins |>
-  drop_na(body_mass_g)
-  
-
-```
-
-#### Use arguments inside functions 
-
-A more cautious approach is to handle missing data within summary or calculation functions, using the `na.rm = TRUE` argument. Many summary functions (like `mean()`, `median()`, or `sum()`) include this argument, which, when set to `TRUE`, excludes `NA` values from the calculation. This allows you to keep missing values in the dataset but ignore them only when performing calculations.
-
-```{r, eval = F}
-penguins |> 
-  summarise(
-    mean_body_mass = mean(body_mass_g, na.rm = T)
-  )
-
-```
-
-- Pros: This is the least destructive option because it allows you to handle missing data without removing any rows from the dataset. You only exclude `NA` values during specific calculations.
-
-- Cons: This doesn’t remove missing data, so you need to ensure that they won’t cause issues later in other analyses (e.g., regressions or visualizations).
 
 ## Continuous distributions
 
@@ -630,59 +512,6 @@ This is because `summary()` is supposed to only supply one row per group - by as
 :::
 
 
-## Collinearity
-
-Collinearity occurs when two or more independent variables in a dataset are highly correlated with each other, meaning that they show a strong linear relationship. In simpler terms, it means that one variable can be almost perfectly predicted by another. Collinearity is particularly problematic in regression analysis, where you want each independent variable to provide unique information about the outcome (dependent variable).
-
-Imagine you’re studying penguin bill characteristics in the Palmer Penguins dataset. If you include both culmen length and flipper length are highly correlated, then collinearity may occur. This would make it difficult to determine whether changes in culmen depth are due to culmen length or flipper length, or a combination of both, as they provide overlapping information.
-
-### GGally
-
-The R package `GGally` helps us understand the relationships between variables, by producing a pairwise matric grid made of:
-
-- Scatterplots: The scatterplots in a pairwise matrix (created by ggpairs()) allow you to visually inspect the relationship between pairs of continuous variables. If two variables show a strong linear relationship (points forming a clear diagonal line), it suggests collinearity between those variables.
-
-- Correlation Coefficients: In the pairwise matrix, you can also display correlation coefficients. When these values are close to 1 (positive correlation) or -1 (negative correlation), it suggests that the variables are highly correlated and might indicate collinearity.
-
-```{r, fig.width = 12}
-
-library(GGally)
-
-penguins |> 
-  select(species, 
-         island, 
-         culmen_length_mm, 
-         culmen_depth_mm, 
-         flipper_length_mm, 
-         body_mass_g, 
-         sex) |> 
-  ggpairs()
-
-
-```
-
-From these pairwise plots we can see that there *is* a correlation between flipper length, body mass and the culmen length and depth variables. This is useful information to know when considering the relationship between variables for cause and effect, and will be important when build statistical models. 
-
-#### Applying Subgroups of Color in GGally (Using ggplot2)
-
-Since GGally builds on ggplot2, you can apply the same customisations that ggplot2 allows, including the use of color to represent different subgroups in your data. This is especially useful when exploring relationships between variables, as it helps highlight patterns or differences between categories (e.g., species, sex, or location).
-
-```{r, fig.width = 12}
-penguins |> 
-  ggpairs(columns = c(
-         "island", 
-         "culmen_length_mm", 
-         "culmen_depth_mm", 
-         "flipper_length_mm", 
-         "body_mass_g", 
-         "sex"), 
-         ggplot2::aes(colour = species))
-
-```
-
-
-Why is this useful? It means we can identify group-specific trends: Adding colour based on a categorical variable (like species) helps you quickly spot trends or patterns that may exist only within certain groups.
-
 ## Correlation
 
 A common measure of association between two numerical variables is the correlation coefficient. The correlation metric is a numerical measure of the strength of an association
@@ -771,51 +600,6 @@ scatterplot
 
 ```
 
-#### Marginal plots
-
-Marginal plots are useful when you want to explore the distribution of individual variables alongside a scatterplot of the relationship between two variables. They add histograms, density plots, or boxplots to the margins of a scatterplot, providing extra information about the distribution of each variable separately. So we would could add any of the plots we used previously to look at variance in each of our variables `culmen_length_mm` and `culmen_depth_mm`
-
-#### How to Create Marginal Plots: Using patchwork in R
-
-`patchwork` is an R package that makes it easy to combine multiple ggplots into a single plot layout, including creating layouts for marginal plots. While ggplot2 doesn't natively support marginal plots, patchwork allows you to combine the scatterplot with additional histograms or density plots at the top and side, creating a custom marginal plot.
-
-```{r}
-
-library(patchwork) # package calls should be placed at the TOP of your script
-
-bill_depth_marginal <- penguins |> 
-  ggplot()+
-  geom_density(aes(x=culmen_depth_mm), fill="darkgrey")+
-  theme_void()+
-  coord_flip() # this graph needs to be rotated
-
-bill_length_marginal <- penguins |> 
-  ggplot()+
-  geom_density(aes(x=culmen_length_mm), fill="darkgrey")+
-  theme_void()
-
-layout <- "
-AA#
-BBC
-BBC"
-
-# layout is easiest to organise using a text distribution, where ABC equal the three plots in order, and the grid is how much space they take up. We could easily make the main plot bigger and marginals smaller with
-
-scatterplot <- scatterplot +
-  geom_smooth(method = "lm",
-              se = FALSE)
-
-bill_length_marginal+
-  scatterplot+
-  bill_depth_marginal+ 
-  # order of plots is important
-  plot_layout(design=layout) 
-# uses the layout argument defined above to arrange the size and position of plots
-
-```
-
-From this plot we would conclude that there is weak `r mcq(c("positive", answer = "negative"))` relationship between culmen length and culmen depth. 
-
 ## Important variables
 
 When analyzing the correlation between two variables, it’s essential to consider important categories or grouping variables (like species, gender, location, or time) to avoid misleading results and oversimplified interpretations. Ignoring relevant categories can result in omitted variable bias, which occurs when a key variable is left out of the analysis and its influence distorts the observed relationship between the variables of interest.
@@ -825,7 +609,7 @@ Think about important categories or subgroups that should be included when consi
 `r hide("Solution")`
 
 ```{r}
-
+library(patchwork)
 colours <- c("cyan",
              "darkorange",
              "purple")

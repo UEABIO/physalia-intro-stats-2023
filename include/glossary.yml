@@ -38,5 +38,38 @@ mean: |
   The average of a dataset, calculated by summing all values and dividing by the number of observations.
 standard deviation: |
   A measure of the amount of variation or spread in a dataset, indicating how far data points are from the mean on average.
+causal effect: |
+  The difference in an outcome that would result from changing an exposure.
+exposure: |
+  A variable we are interested in intervening on.
+outcome: |
+  The variable affected by the exposure.
+
+confounder: |
+  A variable that affects both the exposure and the outcome, potentially creating a false association.
+
+mediator: |
+  A variable on the causal path from exposure to outcome; it transmits part of the effect.
+
+collider: |
+  A variable influenced by two or more other variables; adjusting for it can create spurious associations.
+
+backdoor path: |
+  A non-causal pathway from exposure to outcome that can bias estimates if not blocked.
+
+frontdoor path: |
+  A causal pathway through a mediator that can help identify effects even with unmeasured confounding.
+
+adjustment: |
+  Controlling for variables to remove confounding without introducing bias from colliders.
+
+interaction: |
+  When the association between variables depends on another variable in a specific model; not the same as causal effect modification.
+
+directed acyclic graph: |
+  A diagram showing assumed causal relationships; arrows indicate cause, and loops are not allowed.
+
+factorial: |
+  Every possible combination of levels for multiple factors is present, providing a complete understanding of individual factor effects and their interactions
 
 

@@ -29,7 +29,7 @@ book:
     foreground: dark
     border: true
     alignment: left
-    collapse-level: 3
+    collapse-level: 1
     pinned: true
     header: ''
     footer: ''
@@ -37,17 +37,35 @@ book:
   page-footer: CC-BY (2024) Philip Leftwich
   chapters:
   - index.qmd
-  - part: "Working with data in R"
+  - part: "R"
     chapters:
-    - 04-penguin-project.qmd
+    - r-basics.qmd
+    - 01-studio-basics.qmd
+  - part: "Project & Data Management"
+    chapters:
+    - spreadsheets.qmd
+    - projects.qmd
+    - import_penguins_data.qmd
+    - summarise.qmd
+  - part: "Dplyr"
+    chapters:
     - 05-dplyr.qmd
-    - 06-data-bias.qmd
+  - part: "Data Cleaning"
+    chapters:
+    - columns.qmd
+    - strings.qmd
+    - duplicates.qmd
+    - 08-missing-values.qmd
+    - dates.qmd
+    - factors.qmd
+    - scripts.qmd
   - part: "Descriptive Statistics"
     chapters:
     - 07-data-insights.qmd
   - part: "Data Visualisation"
     chapters:
     - ggplot.qmd
+    - ggplot2.qmd
   - part: "Linear Models"
     chapters:
     - 08-inferential-statistics.qmd
@@ -58,6 +76,7 @@ book:
     - 12-ANOVA.qmd
     - 13-interaction.qmd
     - 14-complex-models.qmd
+    - 14a-complex-models.qmd
   - part: "Generalised Linear Models"
     chapters:
     - 15-generalised-linear.qmd
@@ -73,7 +92,6 @@ book:
   - tidy-data.qmd
   - summary-table.qmd
   - quarto.qmd
-  - advanced_ggplot.qmd
   - references.qmd
 bibliography:
   - include/packages.bib

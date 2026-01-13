@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>16&nbsp; Logistic regression (for binary data) – Physalia</title>
+<title>29&nbsp; Logistic regression (for binary data) – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a85b8e33ea8f0b235709a7eb17d07876.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19fea3fb2752d4c0d13dbb0336d0799e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/font-awesome-5.13.0/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -114,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -288,6 +289,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -302,7 +304,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./17-binomial.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./17-binomial.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -334,191 +336,302 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Working with data in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data cleaning</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-data-bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data bias</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Generalised Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Mixed Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -541,12 +654,6 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">ggplot extras</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -561,36 +668,29 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#example-challenger-disaster" id="toc-example-challenger-disaster" class="nav-link active" data-scroll-target="#example-challenger-disaster"><span class="header-section-number">16.1</span> Example: Challenger Disaster</a>
+<li><a href="#example-dosage-response-to-pesticides" id="toc-example-dosage-response-to-pesticides" class="nav-link active" data-scroll-target="#example-dosage-response-to-pesticides"><span class="header-section-number">29.1</span> Example: Dosage response to pesticides</a></li>
+  <li><a href="#data-tidying" id="toc-data-tidying" class="nav-link" data-scroll-target="#data-tidying"><span class="header-section-number">29.2</span> Data tidying</a></li>
+  <li>
+<a href="#fitting-a-binomial-model" id="toc-fitting-a-binomial-model" class="nav-link" data-scroll-target="#fitting-a-binomial-model"><span class="header-section-number">29.3</span> Fitting a binomial model</a>
   <ul class="collapse">
-<li><a href="#interpreting-model-coefficients" id="toc-interpreting-model-coefficients" class="nav-link" data-scroll-target="#interpreting-model-coefficients"><span class="header-section-number">16.1.1</span> Interpreting model coefficients</a></li>
+<li><a href="#interpreting-model-coefficients" id="toc-interpreting-model-coefficients" class="nav-link" data-scroll-target="#interpreting-model-coefficients"><span class="header-section-number">29.3.1</span> Interpreting model coefficients</a></li>
   </ul>
 </li>
   <li>
-<a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability"><span class="header-section-number">16.2</span> Probability</a>
+<a href="#probability" id="toc-probability" class="nav-link" data-scroll-target="#probability"><span class="header-section-number">29.4</span> Probability</a>
   <ul class="collapse">
-<li><a href="#making-predictions" id="toc-making-predictions" class="nav-link" data-scroll-target="#making-predictions"><span class="header-section-number">16.2.1</span> Making predictions</a></li>
-  <li><a href="#odds-and-probability" id="toc-odds-and-probability" class="nav-link" data-scroll-target="#odds-and-probability"><span class="header-section-number">16.2.2</span> Odds and Probability</a></li>
-  <li><a href="#changes-in-probability" id="toc-changes-in-probability" class="nav-link" data-scroll-target="#changes-in-probability"><span class="header-section-number">16.2.3</span> Changes in probability</a></li>
-  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><span class="header-section-number">16.2.4</span> Emmeans</a></li>
+<li><a href="#making-predictions" id="toc-making-predictions" class="nav-link" data-scroll-target="#making-predictions"><span class="header-section-number">29.4.1</span> Making predictions</a></li>
   </ul>
 </li>
-  <li>
-<a href="#challenger-launch" id="toc-challenger-launch" class="nav-link" data-scroll-target="#challenger-launch"><span class="header-section-number">16.3</span> Challenger launch</a>
-  <ul class="collapse">
-<li><a href="#more-predictions" id="toc-more-predictions" class="nav-link" data-scroll-target="#more-predictions"><span class="header-section-number">16.3.1</span> More predictions</a></li>
-  </ul>
-</li>
-  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">16.4</span> Assumptions</a></li>
-  <li><a href="#write-ups" id="toc-write-ups" class="nav-link" data-scroll-target="#write-ups"><span class="header-section-number">16.5</span> Write-ups</a></li>
-  <li><a href="#final-checklist" id="toc-final-checklist" class="nav-link" data-scroll-target="#final-checklist"><span class="header-section-number">16.6</span> Final checklist</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><span class="header-section-number">29.5</span> Assumptions</a></li>
+  <li><a href="#write-ups" id="toc-write-ups" class="nav-link" data-scroll-target="#write-ups"><span class="header-section-number">29.6</span> Write-ups</a></li>
+  <li><a href="#binomial-vs-linear-model" id="toc-binomial-vs-linear-model" class="nav-link" data-scroll-target="#binomial-vs-linear-model"><span class="header-section-number">29.7</span> Binomial vs Linear Model</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./17-binomial.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./17-binomial.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span>
+<span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span>
 </h1>
 </div>
 
@@ -631,14 +731,16 @@ Y \sim \mathcal{Bern}(p)
 </div>
 </div>
 </div>
-<p>Let us now place the Gaussian (simple linear regression), Poisson and logistic models next to each other:</p>
+<p>Let us now place the Gaussian (simple linear regression), and logistic models next to each other:</p>
 <p><span class="math display">\[
 \begin{aligned}
-Y &amp; \sim \mathcal{N}(\mu, \sigma^2) &amp;&amp;&amp; Y  \sim \mathcal{Pois}(\lambda) &amp;&amp;&amp; Y  \sim \mathcal{Bern}(p)\\
-\mu &amp; = \beta_0 + \beta_1X &amp;&amp;&amp; \log{\lambda} = \beta_0 + \beta_1X &amp;&amp;&amp; ?? = \beta_0 + \beta_1X
+Y &amp; \sim \mathcal{N}(\mu, \sigma^2)  &amp;&amp;&amp; Y  \sim \mathcal{Bern}(p)\\
+\mu &amp; = \beta_0 + \beta_1X &amp;&amp;&amp;  ?? = \beta_0 + \beta_1X
 \end{aligned}
 \]</span></p>
-<p>Now we need to fill in the <code>??</code> with the appropriate term. Similar to the Poisson regression case, we cannot simply model the probabiliy as <span class="math inline">\(p = \beta_0 + \beta_1X\)</span>, because <span class="math inline">\(p\)</span> <strong>cannot</strong> be negative. <span class="math inline">\(\log{p} = \beta_0 + \beta_1X\)</span> won’t work either, because <span class="math inline">\(p\)</span> cannot be greater than 1. Instead we model the <strong>log odds</strong> <span class="math inline">\(\log\left(\frac{p}{1 - p}\right)\)</span> as a linear function. So our logistic regression model looks like this:</p>
+<p>Now we need to fill in the <code>??</code> with the appropriate term.</p>
+<p>We cannot simply model the probability as <span class="math inline">\(p = \beta_0 + \beta_1X\)</span>, because <span class="math inline">\(p\)</span> <strong>cannot</strong> be negative. <span class="math inline">\(\log{p} = \beta_0 + \beta_1X\)</span> won’t work either, because <span class="math inline">\(p\)</span> cannot be greater than 1.</p>
+<p>Instead we model the <strong>log odds</strong> <span class="math inline">\(\log\left(\frac{p}{1 - p}\right)\)</span> as a linear function. So our logistic regression model looks like this:</p>
 <p><span class="math display">\[
 \begin{aligned}
 Y  &amp; \sim \mathcal{Bern}(p)\\
@@ -649,7 +751,7 @@ Y  &amp; \sim \mathcal{Bern}(p)\\
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -661,7 +763,7 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -669,75 +771,75 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <p>Note how <span class="math inline">\(p\)</span> can only vary between 0 and 1.</p>
 <p>To implement the logistic regression model in R, we choose <code>family=binomial(link=logit)</code> (the Bernoulli distribution is a special case of the Binomial distribution).</p>
 <pre><code>glm(response ~ explanatory, family=binomial(link=logit))</code></pre>
-<section id="example-challenger-disaster" class="level2" data-number="16.1"><h2 data-number="16.1" class="anchored" data-anchor-id="example-challenger-disaster">
-<span class="header-section-number">16.1</span> Example: Challenger Disaster</h2>
+<section id="example-dosage-response-to-pesticides" class="level2" data-number="29.1"><h2 data-number="29.1" class="anchored" data-anchor-id="example-dosage-response-to-pesticides">
+<span class="header-section-number">29.1</span> Example: Dosage response to pesticides</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/space-shuttle.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" alt="Space shuttle at launch"></p>
+<figure class="figure"><p><img src="images/Tribolium castaneum.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Space_Shuttle_Challenger_disaster#O-ring_concerns">The Challenger Disaster</a></p>
-<p>In 1985, NASA made the decision to send the first civilian into space.</p>
-<p>This decision brought a huge amount of public attention to the STS-51-L mission, which would be Challenger’s 25th trip to space and school teacher Christa McAuliffe’s 1st. On the afternoon of January 28th, 1986 students around America tuned in to watch McAuliffe and six other astronauts launch from Cape Canaveral, Florida. 73 seconds into the flight, the shuttle experienced a critical failure and broke apart in mid air, resulting in the deaths of all seven crewmembers: Christa McAuliffe, Dick Scobee, Judy Resnik, Ellison Onizuka, Ronald McNair, Gregory Jarvis, and Michael Smith.</p>
-<p>After an investigation into the incident, it was discovered that the failure was caused by an O-ring in the solid rocket booster. Additionally, it was revealed that such an incident was foreseeable.</p>
-<p>In this half of the worksheet we will discuss how the right statistical model could have predicted the critical failure of an O-ring on that day.</p>
+<p>This small dataset is from an experiment looking at mortality in batches of flour exposed to different doses of pesticides.</p>
+<p>The question of interest is:</p>
+<blockquote class="blockquote">
+<p>How does pesticide dose affect mortality in the flour beetle <em>Tribolium castaneum</em></p>
+</blockquote>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<a href="https://github.com/UEABIO/5023B/blob/dev/files/Challenger.csv">
-<button class="btn btn-success"><i class="fa fa-save"></i> Download Challenger data as csv</button>
+<a href="https://raw.githubusercontent.com/Philip-Leftwich/Oct-Intro-Analytics/refs/heads/dev/files/beetles.csv">
+<button class="btn btn-success"><i class="fa fa-save"></i> Download Beetle data as csv</button>
 </a>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(challenger)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(beetles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
-<th style="text-align: right;">oring_tot</th>
-<th style="text-align: right;">oring_dt</th>
-<th style="text-align: right;">temp</th>
-<th style="text-align: right;">flight</th>
+<th style="text-align: right;">Dose</th>
+<th style="text-align: right;">Number_tested</th>
+<th style="text-align: right;">Number_killed</th>
+<th style="text-align: right;">Mortality_rate</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: right;">49.06</td>
+<td style="text-align: right;">49</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">66</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.1224490</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">70</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">52.99</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.2166667</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">69</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">56.91</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.2903226</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">68</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: right;">60.84</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.5000000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">67</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">64.76</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">0.8253968</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">72</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">68.69</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0.8983051</td>
 </tr>
 </tbody>
 </table>
@@ -746,33 +848,52 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 </div>
 <p>The data columns are:</p>
 <ul>
-<li><p><strong>oring_tot</strong>: Total number of orings on the flight</p></li>
-<li><p><strong>oring_dt</strong> : number of orings that failed during a flight</p></li>
-<li><p><strong>temp</strong>: Outside temperature on the date of the flight</p></li>
-<li><p><strong>flight</strong> order of flights</p></li>
+<li><p><strong>Dose</strong>: Pesticide dosage (mg)</p></li>
+<li><p><strong>Number_tested</strong> - Number of beetles in application</p></li>
+<li><p><strong>Number_killed</strong>: Number of beetles that died</p></li>
+<li><p><strong>Mortality_rate</strong> Calculated proportion of deaths</p></li>
+</ul></section><section id="data-tidying" class="level2" data-number="29.2"><h2 data-number="29.2" class="anchored" data-anchor-id="data-tidying">
+<span class="header-section-number">29.2</span> Data tidying</h2>
+<p>A binomial model calculates the numbers of <code>wins/losses</code> out of a series of trials, here that will refer to beetles “successfully killed” by the pesticide/ survivors. The GLM of the binomial counts will analyse the number of <em>each</em> batch of beetles killed, while taking into account the size of each group</p>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<ul class="task-list">
+<li><p><label><input type="checkbox">Clean the names in the dataset</label></p></li>
+<li><p><label><input type="checkbox">Use <code>mutate</code> to make a new column <code>number_survived</code> from the beetles not killed in each trial</label></p></li>
+<li><p><label><input type="checkbox">Include any sensible data checks</label></p></li>
 </ul>
-<p>It was frequently discussed issue that temperature might play a role in the critical safety of the o-rings on the shuttles. One of the biggest mistakes made in assessing the flight risk for the Challenger was to only look at the flights <strong>where a failure had occurred</strong></p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>challenger <span class="sc">%&gt;%</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">filter</span>(oring_dt <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>oring_dt, <span class="at">x=</span>temp))<span class="sc">+</span><span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"Temperature on flight launches where an O-ring incident occurred"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>beetles <span class="ot">&lt;-</span> beetles <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span> <span class="co"># clean names</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">mutate</span>(<span class="at">number_survived =</span> number_tested<span class="sc">-</span>number_killed) <span class="co"># mutate</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<p>From this it was concluded that temperature did not appear to affect o-ring risk of failure, as o-ring failures were detected at a range of different temperatures.</p>
-<p>However when we compare this to the full data that was available a very different picture emerges.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>A linear model
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Here we can fit a standard linear model to calculated proportions.</p>
+<p>This shows issues with normality and linearity</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>challenger <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>oring_dt, </span>
-<span id="cb4-3"><a href="#cb4-3"></a>           <span class="at">x=</span>temp))<span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="fu">ggtitle</span>(<span class="st">"All launch data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(model, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -780,31 +901,64 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 </div>
 </div>
 </div>
-<p>When we include the flights without incident <em>and</em> those with incident, we can see that there is a very clear relationship between temperature and the risk of an o-ring failure. It has been argued that the clear presentation of this data should have allowed even the casual observer to determine the high risk of disaster.</p>
-<p>However if we want to understand the actual relationship between temperature and risk then there are several issues with fitting a linear model here - once again the data is an integer, and bounded by zero (our model predicts negative failure rates within the observed data range).</p>
-<p>We COULD consider this as suitable for a Poisson model - but if we are really interested in determining the binary risk of <strong>having a flight with o-ring failure vs.&nbsp;no failure</strong>. Then we should implement a GLM with a Binomial distribution.</p>
-<p>We can use dplyr to generate a binary column of no incident ‘0’ and fail ‘1’ for anything &gt;0.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>challenger <span class="ot">&lt;-</span> challenger <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">oring_int =</span> oring_tot <span class="sc">-</span> oring_dt) <span class="co"># create variable containing orings left intact</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Predictions made from this model are also inadequate</p>
 </div>
-<p>Fitting a binary GLM</p>
+</div>
+</div>
+</section><section id="fitting-a-binomial-model" class="level2" data-number="29.3"><h2 data-number="29.3" class="anchored" data-anchor-id="fitting-a-binomial-model">
+<span class="header-section-number">29.3</span> Fitting a binomial model</h2>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>binary_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(oring_dt, oring_int) <span class="sc">~</span> temp, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">"logit"</span>), <span class="at">data =</span> challenger)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a>binary_model <span class="sc">|&gt;</span> </span>
-<span id="cb6-4"><a href="#cb6-4"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>binomial_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(number_killed,number_survived) <span class="sc">~</span> dose, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>                      <span class="at">family =</span> binomial, </span>
+<span id="cb5-3"><a href="#cb5-3"></a>                      <span class="at">data =</span> beetles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">summary</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">broom</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">summary</span>(binomial_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = cbind(number_killed, number_survived) ~ dose, family = binomial, 
+    data = beetles)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -14.57806    1.29846  -11.23   &lt;2e-16 ***
+dose          0.24554    0.02149   11.42   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 267.6624  on 7  degrees of freedom
+Residual deviance:   8.4379  on 6  degrees of freedom
+AIC: 38.613
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>binomial_model <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 15%">
 <col style="width: 13%">
 <col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 14%">
-<col style="width: 14%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">term</th>
@@ -818,24 +972,27 @@ p = \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}}
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">8.8169241</td>
-<td style="text-align: right;">3.6069715</td>
-<td style="text-align: right;">2.444412</td>
-<td style="text-align: right;">0.0145089</td>
-<td style="text-align: right;">1.9549041</td>
-<td style="text-align: right;">16.4913814</td>
+<td style="text-align: right;">-14.5780604</td>
+<td style="text-align: right;">1.2984622</td>
+<td style="text-align: right;">-11.22717</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-17.2645230</td>
+<td style="text-align: right;">-12.1608424</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">temp</td>
-<td style="text-align: right;">-0.1794922</td>
-<td style="text-align: right;">0.0582182</td>
-<td style="text-align: right;">-3.083096</td>
-<td style="text-align: right;">0.0020486</td>
-<td style="text-align: right;">-0.3073739</td>
-<td style="text-align: right;">-0.0725742</td>
+<td style="text-align: left;">dose</td>
+<td style="text-align: right;">0.2455399</td>
+<td style="text-align: right;">0.0214937</td>
+<td style="text-align: right;">11.42381</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.2056099</td>
+<td style="text-align: right;">0.2900912</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -846,19 +1003,16 @@ Y \sim Bern(p)
 \log\left[ \frac { P( \operatorname{oring\_binary} = fail) }{ 1 - P( \operatorname{oring\_binary} = fail) } \right] = \beta_{0} + \beta_{1}(\operatorname{temp})
 \]</span></p>
 <p>Which in R will look like this:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>binary_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(oring_dt, oring_int) <span class="sc">~</span> temp, <span class="at">family=</span>binomial, <span class="at">data=</span>challenger)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <ul>
-<li>Intercept = <span class="math inline">\(\beta_{0}\)</span> = 23.77</li>
+<li>Intercept = <span class="math inline">\(\beta_{0}\)</span> = -14.5</li>
 </ul>
-<p>When the temperature is 0°F the mean <em>log-odds</em> are 8.82 [95%CI: 1.95- 16.5] for a failure incident in the O-rings</p>
+<p>When pesticide dose is zero the mean <em>log-odds</em> are -14.5 [95%CI: -17.2 - -12.1] for a death in beetles</p>
 <ul>
-<li>Temp = <span class="math inline">\(\beta_{1}\)</span> = -0.179 [95%CI: -0.307 - -0.0726]</li>
+<li>dose = <span class="math inline">\(\beta_{1}\)</span> = 0.24 [95%CI: 0.2 - 0.29]</li>
 </ul>
-<p>For every rise in the temperature by 1°F, the <em>log-odds</em> of a critical incident fall by 0.179.</p>
-<section id="interpreting-model-coefficients" class="level3" data-number="16.1.1"><h3 data-number="16.1.1" class="anchored" data-anchor-id="interpreting-model-coefficients">
-<span class="header-section-number">16.1.1</span> Interpreting model coefficients</h3>
+<p>For every rise in the pesticide dose by 1mg, the <em>log-odds</em> of a death increase by 0.24.</p>
+<section id="interpreting-model-coefficients" class="level3" data-number="29.3.1"><h3 data-number="29.3.1" class="anchored" data-anchor-id="interpreting-model-coefficients">
+<span class="header-section-number">29.3.1</span> Interpreting model coefficients</h3>
 <p>We first consider why we are dealing with odds <span class="math inline">\(\frac{p}{1-p}\)</span> instead of just <span class="math inline">\(p\)</span>. They contain the same information, so the choice is somewhat arbitrary, however we’ve been using probabilities for so long that it feels unnatural to switch to odds. There are good reasons for this, however. Odds <span class="math inline">\(\frac{p}{1-p}\)</span> can take on any value from 0 to ∞ and so part of our translation of <span class="math inline">\(p\)</span> to an unrestricted domain is already done (<span class="math inline">\(P\)</span> is restricted to 0-1). Take a look at some examples below:</p>
 <table class="caption-top table">
 <colgroup>
@@ -908,100 +1062,256 @@ Y \sim Bern(p)
 \]</span></p>
 <p>We can interpret <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> as the increase in the log odds for every unit increase in <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>. We could alternatively interpret <span class="math inline">\(\beta_{1}\)</span> and <span class="math inline">\(\beta_{2}\)</span> using the notion that a one unit change in <span class="math inline">\(x_{1}\)</span> as a percent change of <span class="math inline">\(e^{\beta_{1}}\)</span> in the odds. That is to say, <span class="math inline">\(e^{\beta_{1}}\)</span> is the odds ratio of that change.</p>
 <p>If you want to find out more about <a href="https://www.youtube.com/watch?v=8nm0G-1uJzA">Odds and log-odds head here</a></p>
-</section></section><section id="probability" class="level2" data-number="16.2"><h2 data-number="16.2" class="anchored" data-anchor-id="probability">
-<span class="header-section-number">16.2</span> Probability</h2>
-<section id="making-predictions" class="level3" data-number="16.2.1"><h3 data-number="16.2.1" class="anchored" data-anchor-id="making-predictions">
-<span class="header-section-number">16.2.1</span> Making predictions</h3>
-<p>If we use the <code>emmeans()</code> function it will convert <em>log-odds</em> to estimate the probability of o-ring failure at the mean value of x (temperature). And add confidence intervals!</p>
-<div class="task">
-<div class="task-header">
-<p>A powerful use of logisitic regression is prediction. Can we predict the probability of an event occuring using our data?</p>
-</div>
-<div class="task-container">
-<ul>
-<li><p>Use emmeans to calculate the log-odds of O-ring failure?</p></li>
-<li><p>Specify the type argument to get the “probability” of o-ring failure</p></li>
+</section></section><section id="probability" class="level2" data-number="29.4"><h2 data-number="29.4" class="anchored" data-anchor-id="probability">
+<span class="header-section-number">29.4</span> Probability</h2>
+<section id="making-predictions" class="level3" data-number="29.4.1"><h3 data-number="29.4.1" class="anchored" data-anchor-id="making-predictions">
+<span class="header-section-number">29.4.1</span> Making predictions</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Augment</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Emmeans</a></li>
 </ul>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Solution
-</button>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binary_model, <span class="at">specs=</span><span class="sc">~</span>temp, </span>
-<span id="cb10-2"><a href="#cb10-2"></a>                 <span class="at">type=</span><span class="st">"response"</span>) <span class="co"># set type = "response to get calculated probabilities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>binomial_model <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>   broom<span class="sc">::</span><span class="fu">augment</span>(<span class="at">data =</span> beetles, </span>
+<span id="cb11-3"><a href="#cb11-3"></a>                  <span class="at">type.predict =</span> <span class="st">"response"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: right;">dose</th>
+<th style="text-align: right;">number_tested</th>
+<th style="text-align: right;">number_killed</th>
+<th style="text-align: right;">mortality_rate</th>
+<th style="text-align: right;">number_survived</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">49.06</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.1224490</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">0.0736536</td>
+<td style="text-align: right;">1.2025499</td>
+<td style="text-align: right;">0.2458459</td>
+<td style="text-align: right;">1.141959</td>
+<td style="text-align: right;">0.3695718</td>
+<td style="text-align: right;">1.3847554</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">52.99</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.2166667</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">0.1726583</td>
+<td style="text-align: right;">0.8747551</td>
+<td style="text-align: right;">0.3477614</td>
+<td style="text-align: right;">1.205381</td>
+<td style="text-align: right;">0.3324978</td>
+<td style="text-align: right;">1.0831366</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">56.91</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.2903226</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">0.3533406</td>
+<td style="text-align: right;">-1.0542088</td>
+<td style="text-align: right;">0.3104417</td>
+<td style="text-align: right;">1.168435</td>
+<td style="text-align: right;">0.3517707</td>
+<td style="text-align: right;">-1.2695246</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60.84</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.5000000</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.5891818</td>
+<td style="text-align: right;">-1.3455544</td>
+<td style="text-align: right;">0.2366298</td>
+<td style="text-align: right;">1.101468</td>
+<td style="text-align: right;">0.3736036</td>
+<td style="text-align: right;">-1.5400459</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">64.76</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">0.8253968</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.7896971</td>
+<td style="text-align: right;">0.7110658</td>
+<td style="text-align: right;">0.2848855</td>
+<td style="text-align: right;">1.243451</td>
+<td style="text-align: right;">0.1346649</td>
+<td style="text-align: right;">0.8408568</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">68.69</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">0.8983051</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.9078843</td>
+<td style="text-align: right;">-0.2506399</td>
+<td style="text-align: right;">0.2530093</td>
+<td style="text-align: right;">1.292579</td>
+<td style="text-align: right;">0.0146767</td>
+<td style="text-align: right;">-0.2899964</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">72.61</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">0.9838710</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.9626942</td>
+<td style="text-align: right;">0.9887023</td>
+<td style="text-align: right;">0.1992421</td>
+<td style="text-align: right;">1.201427</td>
+<td style="text-align: right;">0.1202801</td>
+<td style="text-align: right;">1.1048796</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">76.54</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.9854508</td>
+<td style="text-align: right;">1.3261731</td>
+<td style="text-align: right;">0.1221842</td>
+<td style="text-align: right;">1.134404</td>
+<td style="text-align: right;">0.0702320</td>
+<td style="text-align: right;">1.4154630</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binomial_model, </span>
+<span id="cb12-2"><a href="#cb12-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> dose, </span>
+<span id="cb12-3"><a href="#cb12-3"></a>                 <span class="at">at=</span><span class="fu">list</span>(<span class="at">dose=</span><span class="fu">c</span>(<span class="dv">49</span><span class="sc">:</span><span class="dv">77</span>)), </span>
+<span id="cb12-4"><a href="#cb12-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> temp   prob     SE  df asymp.LCL asymp.UCL
- 69.6 0.0249 0.0151 Inf   0.00745    0.0797
+<pre><code> dose   prob      SE  df asymp.LCL asymp.UCL
+   49 0.0727 0.01830 Inf    0.0439     0.118
+   50 0.0910 0.02100 Inf    0.0574     0.141
+   51 0.1135 0.02370 Inf    0.0747     0.169
+   52 0.1406 0.02640 Inf    0.0965     0.201
+   53 0.1730 0.02880 Inf    0.1236     0.237
+   54 0.2110 0.03090 Inf    0.1568     0.278
+   55 0.2548 0.03250 Inf    0.1965     0.323
+   56 0.3041 0.03340 Inf    0.2428     0.373
+   57 0.3584 0.03380 Inf    0.2951     0.427
+   58 0.4166 0.03370 Inf    0.3524     0.484
+   59 0.4772 0.03330 Inf    0.4128     0.542
+   60 0.5385 0.03260 Inf    0.4743     0.601
+   61 0.5987 0.03190 Inf    0.5349     0.659
+   62 0.6560 0.03100 Inf    0.5930     0.714
+   63 0.7091 0.03000 Inf    0.6471     0.764
+   64 0.7570 0.02860 Inf    0.6967     0.809
+   65 0.7993 0.02700 Inf    0.7412     0.847
+   66 0.8358 0.02500 Inf    0.7808     0.879
+   67 0.8668 0.02290 Inf    0.8153     0.906
+   68 0.8927 0.02050 Inf    0.8453     0.927
+   69 0.9141 0.01820 Inf    0.8710     0.944
+   70 0.9315 0.01600 Inf    0.8928     0.957
+   71 0.9456 0.01380 Inf    0.9113     0.967
+   72 0.9569 0.01180 Inf    0.9267     0.975
+   73 0.9660 0.01010 Inf    0.9396     0.981
+   74 0.9732 0.00851 Inf    0.9504     0.986
+   75 0.9789 0.00715 Inf    0.9593     0.989
+   76 0.9834 0.00597 Inf    0.9666     0.992
+   77 0.9870 0.00496 Inf    0.9727     0.994
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the logit scale </code></pre>
 </div>
 </div>
 </div>
-</section><section id="odds-and-probability" class="level3" data-number="16.2.2"><h3 data-number="16.2.2" class="anchored" data-anchor-id="odds-and-probability">
-<span class="header-section-number">16.2.2</span> Odds and Probability</h3>
-<p>But how do log-odds and probability actually relate?</p>
-<p>This is the equation to work out probability using the <strong>exponent</strong> of the linear regression equation:</p>
-<p><span class="math display">\[
-P(\operatorname{risk of failure at }  X=69.6)\left[ \frac{e^{8.81+(-0.18 \times 69.6)}}{1+e^{8.81+(-0.18 \times 69.6)}} \right]
-\]</span></p>
-<p>Which produces the following result and we can confirm the risk of an o-ring failure on an <em>average</em> day is 0.025</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>odds_at_69<span class="fl">.6</span> <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(binary_model)[<span class="dv">1</span>]<span class="sc">+</span><span class="fu">coef</span>(binary_model)[<span class="dv">2</span>]<span class="sc">*</span><span class="fl">69.6</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># To convert from odds to a probability, divide the odds by one plus the odds</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a>probability <span class="ot">&lt;-</span>  odds_at_69<span class="fl">.6</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_at_69<span class="fl">.6</span>)</span>
-<span id="cb12-5"><a href="#cb12-5"></a>probability</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept) 
- 0.02470508 </code></pre>
 </div>
-</div>
-</section><section id="changes-in-probability" class="level3" data-number="16.2.3"><h3 data-number="16.2.3" class="anchored" data-anchor-id="changes-in-probability">
-<span class="header-section-number">16.2.3</span> Changes in probability</h3>
-<p>A useful <em>rule-of-thumb</em> can be the <strong>divide-by-four</strong> rule.</p>
-<p>This can be described as the <strong>maximum</strong> difference in probability for a unit change in <span class="math inline">\(X\)</span> is <span class="math inline">\(\beta/4\)</span>.</p>
-<p>In our example the <strong>maximum difference</strong> in probability from a one degree change in Temp is <span class="math inline">\(-0.18/4 = -0.045\)</span></p>
-<p>So the <strong>maximum difference</strong> in probability of failure corresponding to a one degree change is 4.5%</p>
-</section><section id="emmeans" class="level3" data-number="16.2.4"><h3 data-number="16.2.4" class="anchored" data-anchor-id="emmeans">
-<span class="header-section-number">16.2.4</span> Emmeans</h3>
-<p>Alternatively we can also do this calculation via emmeans</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binary_model, </span>
-<span id="cb14-2"><a href="#cb14-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> temp, </span>
-<span id="cb14-3"><a href="#cb14-3"></a>                 <span class="at">at=</span><span class="fu">list</span>(<span class="at">temp=</span><span class="fu">c</span>(<span class="dv">66</span><span class="sc">:</span><span class="dv">27</span>)), </span>
-<span id="cb14-4"><a href="#cb14-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="task">
 <div class="task-header">
-<p>Make a ggplot of the change in probability of Oring failure against temperature</p>
+<p>Make a ggplot of the change in probability</p>
 </div>
 <div class="task-container">
 <ul>
-<li><p>Use emmeans to calculate the probability of failure at different temperatures?</p></li>
-<li><p>Add this to a ggplot</p></li>
-<li><p>Include 95% confidence intervals</p></li>
+<li><p>Take one of your model predictions</p></li>
+<li><p>If emmeans convert to <code>as_tibble()</code> first</p></li>
+<li><p>Plot this on a ggplot</p></li>
+<li><p>Include 95% confidence intervals (if possible)</p></li>
 </ul>
-</div>
-</div>
 <div class="webex-solution">
 <button>
 Solution
 </button>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Broom</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Emmeans</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binary_model, </span>
-<span id="cb15-2"><a href="#cb15-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> temp, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>                 <span class="at">at=</span><span class="fu">list</span>(<span class="at">temp=</span><span class="fu">c</span>(<span class="dv">27</span><span class="sc">:</span><span class="dv">80</span>)), </span>
-<span id="cb15-4"><a href="#cb15-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>temp, <span class="at">y=</span>prob))<span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>temp, <span class="at">y=</span>prob))<span class="sc">+</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>asymp.LCL, </span>
-<span id="cb15-9"><a href="#cb15-9"></a>                  <span class="at">ymax=</span>asymp.UCL), <span class="at">alpha=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>binomial_model <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>   broom<span class="sc">::</span><span class="fu">augment</span>(<span class="at">data =</span> beetles, </span>
+<span id="cb14-3"><a href="#cb14-3"></a>                  <span class="at">type.predict =</span> <span class="st">"response"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>                  <span class="at">se_fit =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose, <span class="at">y=</span>mortality_rate))<span class="sc">+</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>( <span class="at">x =</span> dose, <span class="at">y =</span> .fitted))<span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>.fitted <span class="sc">-</span> (<span class="fl">1.96</span> <span class="sc">*</span> .se.fit), <span class="at">ymax=</span> .fitted <span class="sc">+</span> (<span class="fl">1.96</span> <span class="sc">*</span> .se.fit), <span class="at">alpha=</span><span class="fl">0.2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
 </div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binomial_model, </span>
+<span id="cb15-2"><a href="#cb15-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> dose, </span>
+<span id="cb15-3"><a href="#cb15-3"></a>                 <span class="at">at=</span><span class="fu">list</span>(<span class="at">dose=</span><span class="fu">c</span>(<span class="dv">40</span><span class="sc">:</span><span class="dv">80</span>)), </span>
+<span id="cb15-4"><a href="#cb15-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose, <span class="at">y=</span>prob))<span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> beetles, <span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> mortality_rate))<span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose, <span class="at">y=</span>prob))<span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>asymp.LCL, <span class="at">ymax=</span>asymp.UCL), <span class="at">alpha=</span><span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1010,57 +1320,57 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="challenger-launch" class="level2" data-number="16.3"><h2 data-number="16.3" class="anchored" data-anchor-id="challenger-launch">
-<span class="header-section-number">16.3</span> Challenger launch</h2>
-<p>On the day the Challenger launched the outside air temperature was 36°F</p>
-<p>We can use our model to make predictions about the risk of o-ring failure</p>
-<section id="more-predictions" class="level3" data-number="16.3.1"><h3 data-number="16.3.1" class="anchored" data-anchor-id="more-predictions">
-<span class="header-section-number">16.3.1</span> More predictions</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="task">
 <div class="task-header">
-<p>Make a specific prediction about the probability of o-ring failure on the day of the Challenger launch</p>
+<p>Prediction</p>
 </div>
 <div class="task-container">
-<ul>
-<li>Use emmeans to calculate the probability of failure at this specific temperature?</li>
-</ul>
-</div>
-</div>
+<p>Can you edit your code to produce a prediction of the mortality rate at a pesticide dose of 0mg?</p>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<p>First - we make a new dataset with the temperature on the day of the Challenger Launch <strong>36°F</strong></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binary_model, </span>
-<span id="cb16-2"><a href="#cb16-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> temp, </span>
-<span id="cb16-3"><a href="#cb16-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">temp =</span> <span class="dv">36</span>),                  </span>
-<span id="cb16-4"><a href="#cb16-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(binomial_model, </span>
+<span id="cb16-2"><a href="#cb16-2"></a>                 <span class="at">specs =</span> <span class="sc">~</span> dose, </span>
+<span id="cb16-3"><a href="#cb16-3"></a>                 <span class="at">at=</span><span class="fu">list</span>(<span class="at">dose=</span><span class="dv">0</span>), </span>
+<span id="cb16-4"><a href="#cb16-4"></a>                 <span class="at">type=</span><span class="st">'response'</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> temp  prob    SE  df asymp.LCL asymp.UCL
-   36 0.913 0.122 Inf     0.338     0.995
+<pre><code> dose     prob       SE  df asymp.LCL asymp.UCL
+    0 4.66e-07 6.06e-07 Inf  3.66e-08  5.94e-06
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the logit scale </code></pre>
 </div>
 </div>
-<p>We can see from our fitted model, an O-ring failure on the day of the Challenger launch could have been predicted with a probability of</p>
-<blockquote class="blockquote">
-<p>0.91 [91.3%CI: 0.34-99.5]</p>
-</blockquote>
 </div>
-</section></section><section id="assumptions" class="level2" data-number="16.4"><h2 data-number="16.4" class="anchored" data-anchor-id="assumptions">
-<span class="header-section-number">16.4</span> Assumptions</h2>
+</div>
+</div>
+</section></section><section id="assumptions" class="level2" data-number="29.5"><h2 data-number="29.5" class="anchored" data-anchor-id="assumptions">
+<span class="header-section-number">29.5</span> Assumptions</h2>
 <p>The <code>performance</code> package detects and alters the checks. Pay particular attention to the binned residuals plot - this is your best estimate of possible overdispersion (requiring a quasi-likelihood fit). In this case there is likely not enough data for robust checks - we could consider a quasi-likelihood model in order to have more conservative confidence intervals.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binary_model,</span>
-<span id="cb18-2"><a href="#cb18-2"></a>                         <span class="at">residual_type =</span> <span class="st">"normal"</span>,</span>
-<span id="cb18-3"><a href="#cb18-3"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(binomial_model,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="17-binomial_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>performance<span class="sc">::</span><span class="fu">check_overdispersion</span>(binomial_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test
+
+ dispersion ratio = 1.002
+          p-value = 0.992</code></pre>
 </div>
 </div>
 <div class="task">
@@ -1069,51 +1379,20 @@ Intervals are back-transformed from the logit scale </code></pre>
 </div>
 <div class="task-container">
 <ul>
-<li><p>Fit a quasibinomial model</p></li>
-<li><p>How does this change the means, standard errors and significance tests</p></li>
-</ul>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-Solution
-</button>
-<ul>
-<li><p>Estimates from the model will not change</p></li>
-<li><p>Standard errors will be widened by a fixed dispersion parameter (&gt; 1)</p></li>
-<li><p>This may increase p-values, but here there is no change in interpretation</p></li>
+<li>Fit a quasibinomial model</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>quasibinary_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(oring_dt, oring_int) <span class="sc">~</span> temp, </span>
-<span id="cb19-2"><a href="#cb19-2"></a>                    <span class="at">family=</span>quasibinomial, <span class="co"># quasilikelihood</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>                    <span class="at">data=</span>challenger)</span>
-<span id="cb19-4"><a href="#cb19-4"></a></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">summary</span>(quasibinary_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-glm(formula = cbind(oring_dt, oring_int) ~ temp, family = quasibinomial, 
-    data = challenger)
-
-Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)   
-(Intercept)  8.81692    2.93149   3.008  0.00670 **
-temp        -0.17949    0.04732  -3.794  0.00106 **
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for quasibinomial family taken to be 0.6605263)
-
-    Null deviance: 20.706  on 22  degrees of freedom
-Residual deviance:  9.527  on 21  degrees of freedom
-AIC: NA
-
-Number of Fisher Scoring iterations: 6</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>quasibinomial_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(number_killed,number_survived) <span class="sc">~</span> dose, </span>
+<span id="cb21-2"><a href="#cb21-2"></a>                      <span class="at">family =</span> quasibinomial, </span>
+<span id="cb21-3"><a href="#cb21-3"></a>                      <span class="at">data =</span> beetles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>How does this change the means, standard errors and significance tests</li>
+</ul>
 </div>
 </div>
-</div>
-</section><section id="write-ups" class="level2" data-number="16.5"><h2 data-number="16.5" class="anchored" data-anchor-id="write-ups">
-<span class="header-section-number">16.5</span> Write-ups</h2>
+</section><section id="write-ups" class="level2" data-number="29.6"><h2 data-number="29.6" class="anchored" data-anchor-id="write-ups">
+<span class="header-section-number">29.6</span> Write-ups</h2>
 <div class="task">
 <div class="task-header">
 <p>Write up the results</p>
@@ -1122,37 +1401,57 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <ul>
 <li>How would you write up for findings from this analysis?</li>
 </ul>
-</div>
-</div>
 <div class="webex-solution">
 <button>
-Write-up
+Report
 </button>
-<p>Analysis: I used a Binomial logit-link Generalized Linear Model to analyse the effect of temperature on the likelihood of O-ring failure.</p>
-<p>All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages; tidyverse (Wickham et al 2019).</p>
-<p>Results: I found a significant negative relationship between temperature and probability of o-ring failure (logit-odds = -0.17 [95%CI: -0.31 - -0.07], <em>z</em> = -3.1, df = 21, <em>P</em> = 0.002). At an average temperature of 69.6°F the probability of o-ring failure was estimated at 0.025[0.007-0.08], but this rose to 0.91[0.34-1] at 36°F.</p>
-<blockquote class="blockquote">
-<p>Note you could use anova( test = “Chisq”) here, but as there is only one, continuous variable, we can also report directly from the summary table.</p>
-</blockquote>
+<p>The <code>report</code> package from <code>easystats</code> can help capture the information needed for full reporting of analytical models.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(report)</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="fu">report</span>(binomial_model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Can't calculate log-loss.
+`performance_pcp()` only works for models with binary response values.
+Can't calculate log-loss.
+`performance_pcp()` only works for models with binary response values.
+We fitted a logistic model (estimated using ML) to predict cbind(number_killed,
+number_survived) with dose (formula: cbind(number_killed, number_survived) ~
+dose). The model's intercept, corresponding to dose = 0, is at -14.58 (95% CI
+[-17.26, -12.16], p &lt; .001). Within this model:
+
+  - The effect of dose is statistically significant and positive (beta = 0.25,
+95% CI [0.21, 0.29], p &lt; .001; Std. beta = 2.32, 95% CI [1.95, 2.75])
+
+Standardized parameters were obtained by fitting the model on a standardized
+version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+computed using a Wald z-distribution approximation.</code></pre>
 </div>
-</section><section id="final-checklist" class="level2" data-number="16.6"><h2 data-number="16.6" class="anchored" data-anchor-id="final-checklist">
-<span class="header-section-number">16.6</span> Final checklist</h2>
-<ul>
-<li><p>Think carefully about the hypotheses to test, use your scientific knowledge and background reading to support this</p></li>
-<li><p>Import, clean and understand your dataset: use data visuals to investigate trends and determine if there is clear support for your hypotheses</p></li>
-<li><p><strong>Decide on the appropriate error structure for your model (Gaussian = continuous, Poisson = count, Binomial = binary)</strong></p></li>
-<li><p><strong>Start with canonical link functions, but these can be altered if needed</strong></p></li>
-<li><p>Fit a (generalized) linear model, including interaction terms with caution</p></li>
-<li><p>Investigate the fit of your model, understand that parameters may never be perfect, but that classic patterns in residuals may indicate a poorly fitting model - sometimes this can be fixed with careful consideration of missing variables or through data transformation</p></li>
-<li><p><strong>Check for overdispersion in models where variance is not estimated independently of the mean (Poisson and Binomial) - may have to use quasi-likelihood fitting</strong></p></li>
-<li><p>Test the removal of any interaction terms from a model, look at AIC and significance tests (Remember test = “F” for Gaussian and Quasilikelihood models, “Chisq” for Poisson and Binomial models)</p></li>
-<li><p>Make sure you understand the output of a model summary, sense check this against the graphs you have made - Do estimates need converting back to the original response scale?</p></li>
-<li><p>The direction and size of any effects are the priority - produce estimates and uncertainties. Make sure the observations are clear.</p></li>
-<li><p>Write-up your significance test results, taking care to report not just significance (and all required parts of a significance test). Do you know <em>what</em> to report? Within a complex model - reporting <em>t/z</em> will indicate the slope of the line for that single term against the intercept, <em>F/Chi</em> is the overall effect of a predictor across all levels, <em>post-hoc</em> if you wish to compare across all levels.</p></li>
-<li><p>Well described tables and figures can enhance your results sections - take the time to make sure these are informative and attractive.</p></li>
-</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section id="binomial-vs-linear-model" class="level2" data-number="29.7"><h2 data-number="29.7" class="anchored" data-anchor-id="binomial-vs-linear-model">
+<span class="header-section-number">29.7</span> Binomial vs Linear Model</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-collapse="true">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Comparison of R-squared</a></li></ul>
+<div class="tab-content" data-collapse="true">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>A comparison of linear vs binomial model shows better explanatory power (R-squared) for our correctly fitted model:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>DescTools<span class="sc">::</span><span class="fu">PseudoR2</span>(binomial_model)</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">summary</span>(model)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> McFadden 
+0.9979834 
+[1] 0.9435801</code></pre>
+</div>
+</div>
 
 
+</div>
+</div>
+</div>
 </section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */
@@ -1449,13 +1748,14 @@ window.onresize = move_sidebar;
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1798,12 +2098,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./16-poisson.html" class="pagination-link" aria-label="Poisson regression (for count data or rate data)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./mixed-model.html" class="pagination-link" aria-label="Foundations of Mixed Modelling">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

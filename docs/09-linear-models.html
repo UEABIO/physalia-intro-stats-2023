@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>7&nbsp; Linear models – Physalia</title>
+<title>19&nbsp; Linear models – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,18 +86,19 @@ div.csl-indent {
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a85b8e33ea8f0b235709a7eb17d07876.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19fea3fb2752d4c0d13dbb0336d0799e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -134,7 +135,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -308,6 +309,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -322,7 +324,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./09-linear-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./09-linear-models.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -354,168 +356,168 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Working with data in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data cleaning</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-data-bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data bias</span></span></a>
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Generalised Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Mixed Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -523,7 +525,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -531,14 +533,125 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -561,12 +674,6 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">ggplot extras</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -581,41 +688,45 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">7.0.1</span> Packages</a></li>
-  <li><a href="#a-linear-model-analysis-for-calculating-means" id="toc-a-linear-model-analysis-for-calculating-means" class="nav-link" data-scroll-target="#a-linear-model-analysis-for-calculating-means"><span class="header-section-number">7.1</span> A linear |&gt; model analysis for calculating means</a></li>
+<li><a href="#packages" id="toc-packages" class="nav-link active" data-scroll-target="#packages"><span class="header-section-number">19.0.1</span> Packages</a></li>
+  <li><a href="#a-linear-model-analysis-for-calculating-means" id="toc-a-linear-model-analysis-for-calculating-means" class="nav-link" data-scroll-target="#a-linear-model-analysis-for-calculating-means"><span class="header-section-number">19.1</span> A linear model analysis for calculating means</a></li>
   <li>
-<a href="#summaries-for-models" id="toc-summaries-for-models" class="nav-link" data-scroll-target="#summaries-for-models"><span class="header-section-number">7.2</span> Summaries for models</a>
+<a href="#summaries-for-models" id="toc-summaries-for-models" class="nav-link" data-scroll-target="#summaries-for-models"><span class="header-section-number">19.2</span> Summaries for models</a>
   <ul class="collapse">
-<li><a href="#broom" id="toc-broom" class="nav-link" data-scroll-target="#broom"><span class="header-section-number">7.2.1</span> Broom</a></li>
-  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">7.2.2</span> Model summary</a></li>
-  <li><a href="#compare-means" id="toc-compare-means" class="nav-link" data-scroll-target="#compare-means"><span class="header-section-number">7.2.3</span> Compare means</a></li>
-  <li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients"><span class="header-section-number">7.2.4</span> Coefficients</a></li>
-  <li><a href="#a-simple-write-up" id="toc-a-simple-write-up" class="nav-link" data-scroll-target="#a-simple-write-up"><span class="header-section-number">7.2.6</span> A simple write up</a></li>
+<li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">19.2.1</span> Model summary</a></li>
+  <li><a href="#compare-means" id="toc-compare-means" class="nav-link" data-scroll-target="#compare-means"><span class="header-section-number">19.2.2</span> Compare means</a></li>
+  <li><a href="#coefficients" id="toc-coefficients" class="nav-link" data-scroll-target="#coefficients"><span class="header-section-number">19.2.3</span> Coefficients</a></li>
   </ul>
 </li>
   <li>
-<a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">7.3</span> Confidence intervals</a>
+<a href="#assumptions-minimal-practical-checks" id="toc-assumptions-minimal-practical-checks" class="nav-link" data-scroll-target="#assumptions-minimal-practical-checks"><span class="header-section-number">19.3</span> Assumptions: minimal, practical checks</a>
   <ul class="collapse">
-<li><a href="#confidence-intervals-and-p-values" id="toc-confidence-intervals-and-p-values" class="nav-link" data-scroll-target="#confidence-intervals-and-p-values"><span class="header-section-number">7.3.1</span> Confidence intervals and p-values</a></li>
-  <li><a href="#confidence-intervals-ci-in-r" id="toc-confidence-intervals-ci-in-r" class="nav-link" data-scroll-target="#confidence-intervals-ci-in-r"><span class="header-section-number">7.3.2</span> Confidence intervals (CI) in R</a></li>
-  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">7.3.3</span> Answering the question</a></li>
-  <li><a href="#plausible-range-of-significant-difference" id="toc-plausible-range-of-significant-difference" class="nav-link" data-scroll-target="#plausible-range-of-significant-difference"><span class="header-section-number">7.3.4</span> Plausible range of significant difference</a></li>
+<li><a href="#a-simple-write-up" id="toc-a-simple-write-up" class="nav-link" data-scroll-target="#a-simple-write-up"><span class="header-section-number">19.3.1</span> A simple write up</a></li>
   </ul>
 </li>
   <li>
-<a href="#estimating-means" id="toc-estimating-means" class="nav-link" data-scroll-target="#estimating-means"><span class="header-section-number">7.4</span> Estimating means</a>
+<a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">19.4</span> Confidence intervals</a>
   <ul class="collapse">
-<li><a href="#changing-the-intercept" id="toc-changing-the-intercept" class="nav-link" data-scroll-target="#changing-the-intercept"><span class="header-section-number">7.4.1</span> Changing the intercept</a></li>
-  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><span class="header-section-number">7.4.2</span> Emmeans</a></li>
+<li><a href="#confidence-intervals-and-p-values" id="toc-confidence-intervals-and-p-values" class="nav-link" data-scroll-target="#confidence-intervals-and-p-values"><span class="header-section-number">19.4.1</span> Confidence intervals and p-values</a></li>
+  <li><a href="#confidence-intervals-ci-in-r" id="toc-confidence-intervals-ci-in-r" class="nav-link" data-scroll-target="#confidence-intervals-ci-in-r"><span class="header-section-number">19.4.2</span> Confidence intervals (CI) in R</a></li>
+  <li><a href="#answering-the-question" id="toc-answering-the-question" class="nav-link" data-scroll-target="#answering-the-question"><span class="header-section-number">19.4.3</span> Answering the question</a></li>
+  <li><a href="#plausible-range-of-significant-difference" id="toc-plausible-range-of-significant-difference" class="nav-link" data-scroll-target="#plausible-range-of-significant-difference"><span class="header-section-number">19.4.4</span> Plausible range of significant difference</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">7.5</span> Summary</a></li>
-  <li><a href="#write-up" id="toc-write-up" class="nav-link" data-scroll-target="#write-up"><span class="header-section-number">7.6</span> Write-up</a></li>
+  <li>
+<a href="#estimating-means" id="toc-estimating-means" class="nav-link" data-scroll-target="#estimating-means"><span class="header-section-number">19.5</span> Estimating means</a>
+  <ul class="collapse">
+<li><a href="#changing-the-intercept" id="toc-changing-the-intercept" class="nav-link" data-scroll-target="#changing-the-intercept"><span class="header-section-number">19.5.1</span> Changing the intercept</a></li>
+  <li><a href="#emmeans" id="toc-emmeans" class="nav-link" data-scroll-target="#emmeans"><span class="header-section-number">19.5.2</span> Emmeans</a></li>
+  </ul>
+</li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">19.6</span> Summary</a></li>
+  <li><a href="#write-up" id="toc-write-up" class="nav-link" data-scroll-target="#write-up"><span class="header-section-number">19.7</span> Write-up</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./09-linear-models.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-linear" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./09-linear-models.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-linear" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></h1>
 </div>
 
 
@@ -631,21 +742,21 @@ window.Quarto = {
 
 </header><p>In the last chapter we conducted a simple analysis of Darwin’s maize data using R. We worked out confidence intervals ‘by hand’. This simple method allowed us to learn more about analysis, estimates, standard error and confidence. But it is also slow, and it relied on the assumptions of a <em>z-distribution</em> to assess true differences between the groups.</p>
 <p>We will now work through a much more efficient way to carry out comparisons, we will use the functions in R that let us perform a <strong>linear model</strong> analysis.</p>
-<section id="packages" class="level3" data-number="7.0.1"><h3 data-number="7.0.1" class="anchored" data-anchor-id="packages">
-<span class="header-section-number">7.0.1</span> Packages</h3>
+<section id="packages" class="level3" data-number="19.0.1"><h3 data-number="19.0.1" class="anchored" data-anchor-id="packages">
+<span class="header-section-number">19.0.1</span> Packages</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(emmeans)</span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(performance)</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(broom.helpers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(broom.helpers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="a-linear-model-analysis-for-calculating-means" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="a-linear-model-analysis-for-calculating-means">
-<span class="header-section-number">7.1</span> A linear |&gt; model analysis for calculating means</h2>
+</section><section id="a-linear-model-analysis-for-calculating-means" class="level2" data-number="19.1"><h2 data-number="19.1" class="anchored" data-anchor-id="a-linear-model-analysis-for-calculating-means">
+<span class="header-section-number">19.1</span> A linear model analysis for calculating means</h2>
 <p>R has a general function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> for fitting linear models, this is part of base R (does not require the tidyverse packages). We will run through a few different iterations of the linear model increasing in complexity. We will often want to fit several models to our data, so a common way to work is to fit a model and assign it to a named R object, so that we can extract data from when we need it.</p>
 <p>In the example below I have called the model <code>lsmodel0</code>, short for “least-squares model 0”, this is because the linear-model uses a technique called <a href="https://www.youtube.com/watch?v=PaFPbb66DxQ">least squares</a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>lsmodel0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> height <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> darwin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>lsmodel0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> height <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> darwin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -659,35 +770,28 @@ Tip
 <div class="callout-body-container callout-body">
 <p>You can pipe into the lm() function, but when we use functions that are “outside” of the tidyverse family we need to put a <code>_</code> where the data should go (as it is usually not the first argument).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>lsmodel0 <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>             <span class="fu">lm</span>(height <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span> _)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>lsmodel0 <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>             <span class="fu">lm</span>(height <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span> _)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>The first argument of the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function is formula (we won’t write this out in full in the future) - and this specifies we want to analyse a <strong>response</strong> variable (height) as a function of an <strong>explanatory</strong> variable using the <em>tilde</em> symbol (~).</p>
 <p>The simplest possible model ignores any explanatory variables, instead the <code>1</code> indicates we just want to estimate an intercept.</p>
 <p>Without explanatory variables this means the formula will just estimate the overall mean height of <strong>all</strong> the plants in the dataset.</p>
-</section><section id="summaries-for-models" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="summaries-for-models">
-<span class="header-section-number">7.2</span> Summaries for models</h2>
-<p>When you have made a linear model, we can investigate a summary of the model using the base R function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. There is also a tidyverse option provided by the package <code>broom</code>(<span class="citation" data-cites="R-broom">Robinson et al. (<a href="references.html#ref-R-broom" role="doc-biblioref">2023</a>)</span>).</p>
-<section id="broom" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="broom">
-<span class="header-section-number">7.2.1</span> Broom</h3>
-<p>broom summarizes key information about models in tidy <code>tibble()s</code>. broom provides three verbs to make it convenient to interact with model objects:</p>
-<ul>
-<li><p><code><a href="https://generics.r-lib.org/reference/tidy.html">broom::tidy()</a></code> summarizes information about model components</p></li>
-<li><p><code><a href="https://generics.r-lib.org/reference/glance.html">broom::glance()</a></code> reports information about the entire model</p></li>
-<li><p><code><a href="https://generics.r-lib.org/reference/augment.html">broom::augment()</a></code> adds informations about individual observations to a dataset and it can be used to model predictions onto a new dataset.</p></li>
-</ul></section><section id="model-summary" class="level3" data-number="7.2.2"><h3 data-number="7.2.2" class="anchored" data-anchor-id="model-summary">
-<span class="header-section-number">7.2.2</span> Model summary</h3>
+</section><section id="summaries-for-models" class="level2" data-number="19.2"><h2 data-number="19.2" class="anchored" data-anchor-id="summaries-for-models">
+<span class="header-section-number">19.2</span> Summaries for models</h2>
+<p>When you have made a linear model, we can investigate a summary of the model using the base R function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>. There is also a tidyverse option provided by the package <code>broom</code>(<span class="citation" data-cites="R-broom">Robinson et al. (<a href="references.html#ref-R-broom" role="doc-biblioref">2025</a>)</span>).</p>
+<section id="model-summary" class="level3" data-number="19.2.1"><h3 data-number="19.2.1" class="anchored" data-anchor-id="model-summary">
+<span class="header-section-number">19.2.1</span> Model summary</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Broom</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Broom</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">summary</span>(lsmodel0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">summary</span>(lsmodel0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -709,7 +813,7 @@ Residual standard error: 3.181 on 29 degrees of freedom</code></pre>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -736,30 +840,30 @@ Residual standard error: 3.181 on 29 degrees of freedom</code></pre>
 </div>
 <p>The output above is called the <em>table of coefficients</em>. The 18.9 is the <em>estimate of the model coefficient</em> (in this case it is the overall mean), together with its standard error (SEM). The first row in any R model output is always labelled the ‘Intercept’ and the challenge is usually to workout what that represents. In this case we can prove that this is the same as the overall mean as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">mean</span>(darwin<span class="sc">$</span>height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">mean</span>(darwin<span class="sc">$</span>height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 18.88333</code></pre>
 </div>
 </div>
 <p>This simple model allows us to understand what the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function does.</p>
-</section><section id="compare-means" class="level3" data-number="7.2.3"><h3 data-number="7.2.3" class="anchored" data-anchor-id="compare-means">
-<span class="header-section-number">7.2.3</span> Compare means</h3>
+</section><section id="compare-means" class="level3" data-number="19.2.2"><h3 data-number="19.2.2" class="anchored" data-anchor-id="compare-means">
+<span class="header-section-number">19.2.2</span> Compare means</h3>
 <p>What we really want is a linear model that analyses the <em>difference</em> in average plant height (<code>type</code>) as a function of pollination type. We can use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to fit this as a linear model as follows:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Broom</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Broom</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lsmodel1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data=</span>darwin)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>lsmodel1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data=</span>darwin)</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co"># note that the following is identical</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
 <span id="cb9-5"><a href="#cb9-5"></a><span class="co"># lsmodel1 &lt;- lm(height ~ 1 + type, data=darwin)</span></span>
 <span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">summary</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="fu">summary</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -784,9 +888,9 @@ F-statistic:  5.94 on 1 and 28 DF,  p-value: 0.02141</code></pre>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>lsmodel1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data=</span>darwin)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>lsmodel1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data=</span>darwin)</span>
 <span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -821,8 +925,8 @@ F-statistic:  5.94 on 1 and 28 DF,  p-value: 0.02141</code></pre>
 </div>
 </div>
 <p>Now the model formula contains the pollination type in addition to an intercept.</p>
-</section><section id="coefficients" class="level3" data-number="7.2.4"><h3 data-number="7.2.4" class="anchored" data-anchor-id="coefficients">
-<span class="header-section-number">7.2.4</span> Coefficients</h3>
+</section><section id="coefficients" class="level3" data-number="19.2.3"><h3 data-number="19.2.3" class="anchored" data-anchor-id="coefficients">
+<span class="header-section-number">19.2.3</span> Coefficients</h3>
 <p>This is where the model results are reported.</p>
 <ul>
 <li><p><strong>Intercept</strong>: This is the predicted height when the plant type is “Cross” fertilised, which is the reference category). The estimate is 20.1917, which means the average height for plants that are not self-fertilised is about 20.19 inches.</p></li>
@@ -840,9 +944,9 @@ Note
 <div class="callout-body-container callout-body">
 <p>You can confirm this for yourself:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>darwin <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>darwin <span class="sc">|&gt;</span> </span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -885,8 +989,8 @@ Note
 The t-statistic
 </button>
 <p>The t-statistic is closely related to the z-statistic but is used in significance testing when the sample size is small or the population standard deviation is unknown. As we almost never know the “population” standard deviation, it is always safer to use the t-distribution for significance tests.</p>
-<section id="the-t-distribution" class="level3" data-number="7.2.5"><h3 data-number="7.2.5" class="anchored" data-anchor-id="the-t-distribution">
-<span class="header-section-number">7.2.5</span> The t-Distribution:</h3>
+<section id="the-t-distribution" class="level3" data-number="19.2.4"><h3 data-number="19.2.4" class="anchored" data-anchor-id="the-t-distribution">
+<span class="header-section-number">19.2.4</span> The t-Distribution:</h3>
 <p>The t-distribution is similar to the normal distribution but has more spread (wider tails), especially with smaller sample sizes. As the sample size increases, the t-distribution approaches the normal distribution.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -898,12 +1002,135 @@ The t-statistic
 </div>
 </section>
 </div>
-</section><section id="a-simple-write-up" class="level3" data-number="7.2.6"><h3 data-number="7.2.6" class="anchored" data-anchor-id="a-simple-write-up">
-<span class="header-section-number">7.2.6</span> A simple write up</h3>
+</section></section><section id="assumptions-minimal-practical-checks" class="level2" data-number="19.3"><h2 data-number="19.3" class="anchored" data-anchor-id="assumptions-minimal-practical-checks">
+<span class="header-section-number">19.3</span> Assumptions: minimal, practical checks</h2>
+<p>When we fit a linear model for a two-group comparison, we need to check whether the numbers we have generated are reliable by checking the fit of our model against some assumptions:</p>
+<ul>
+<li>Normality: The t-test and lm are fairly robust for moderate sample sizes. A quick check is still useful.</li>
+</ul>
+<blockquote class="blockquote">
+<p>The normality assumption mainly affects standard errors, confidence intervals, and p-values.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For moderate sample sizes, small deviations from normality are rarely problematic.</p>
+</blockquote>
+<ul>
+<li>Equal variances: In two-group comparisons, unequal variances are common and not automatically a concern. What matters is whether the difference in variability is large enough to distort uncertainty estimates.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Unequal variances do not bias the estimated means or their difference.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>They can, however, affect standard errors and therefore inference.</p>
+</blockquote>
+<p>Making these checks is simple and quick with <code><a href="https://easystats.github.io/performance/reference/check_model.html">performance::check_model()</a></code></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Base R</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># -------------------------------------------------------------------</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co"># Check the NORMALITY of residuals for the linear model 'lsmodel1'</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># -------------------------------------------------------------------</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># Purpose:</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#  - In linear regression, residuals should ideally be normally distributed.</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#    This affects the validity of confidence intervals and p-values.</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a>normality <span class="ot">&lt;-</span> <span class="fu">check_normality</span>(lsmodel1)</span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co"># Visualize the normality check with a Q–Q plot (quantile–quantile plot).</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># </span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co"># The plot() method for the object returned by 'check_normality()' creates:</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#   - A Q–Q plot comparing the quantiles of the residuals </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#     against the theoretical quantiles from a normal distribution.</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="co">#   - The line represents the "ideal" normal distribution.</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="co"># Argument:</span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#   detrend = FALSE → Shows the standard Q–Q plot (not detrended).</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#   If TRUE, it shows the residuals from the Q–Q line (useful for subtle deviations).</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="co"># Interpretation:</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#   - We look for large, systematic departures from the diagonal line</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="fu">plot</span>(normality, <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># -------------------------------------------------------------------</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># Check for HETEROSCEDASTICITY (unequal variances of residuals)</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># -------------------------------------------------------------------</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co"># The function 'check_heteroscedasticity()' tests whether the residuals </span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co"># from the model have constant variance (homoscedasticity).</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># </span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co"># Under the hood, it typically performs:</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#  - Breusch–Pagan test (default)</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co"># </span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co"># Purpose:</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">#  - In linear regression, we assume the variance of residuals is constant</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">#    across fitted values (homoscedasticity).</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">#  - Heteroscedasticity can bias standard errors and affect inference.</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a></span>
+<span id="cb14-16"><a href="#cb14-16"></a>heteroscedasticity <span class="ot">&lt;-</span> <span class="fu">check_heteroscedasticity</span>(lsmodel1)</span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co"># Visualize the results with a residuals-vs-fitted plot.</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="co"># The plot() method for 'check_heteroscedasticity()' creates:</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#   - A scatterplot of fitted values (x-axis) vs. residuals (y-axis)</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#   - A smoothing line (usually loess) that helps detect trends.</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co"># </span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co"># Interpretation:</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#   - Residuals versus fitted values plot.</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co"># A roughly constant spread suggests the assumption is reasonable;</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co"># strong patterns or funnel shapes suggest heteroscedasticity.</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="fu">plot</span>(heteroscedasticity)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>We don’t <em>have</em> to use performance, base R can visualise these with the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># ---------------------------------------------------------------</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co"># Plot 1: Normal Q–Q Plot</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co"># ---------------------------------------------------------------</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># ---------------------------------------------------------------</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># Plot 2: Residuals vs Fitted values</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># ---------------------------------------------------------------</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="a-simple-write-up" class="level3" data-number="19.3.1"><h3 data-number="19.3.1" class="anchored" data-anchor-id="a-simple-write-up">
+<span class="header-section-number">19.3.1</span> A simple write up</h3>
+<p>Once we have satisfied ourselves that there are no severe violations of model assumptions, we proceed to interpret the fitted model.</p>
 <p>From this summary model we can make conclusions about the effect of inbreeding and produce a simple write up:</p>
 <p>“The maize plants that have been cross pollinated had an average height (mean ±S.E.) of 20.19 (± 0.76) inches and were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 (±1.07) inches (t(28) = -2.44, p = 0.02)”</p>
-</section></section><section id="confidence-intervals" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="confidence-intervals">
-<span class="header-section-number">7.3</span> Confidence intervals</h2>
+</section></section><section id="confidence-intervals" class="level2" data-number="19.4"><h2 data-number="19.4" class="anchored" data-anchor-id="confidence-intervals">
+<span class="header-section-number">19.4</span> Confidence intervals</h2>
 <p>A confidence interval is a range of values that we expect to contain the true population parameter (like a mean or difference in means) with a certain level of confidence. In the case of a 95% confidence interval, this means we are 95% confident that the true parameter lies within the interval.</p>
 <p>The confidence interval is closely tied to the standard error (SE), which measures how much variability we expect in the sample estimates due to sampling randomness. The standard error depends on the sample size and the variability in the data, and it’s computed as:</p>
 <p><span class="math display">\[
@@ -916,8 +1143,8 @@ Confidence~Interval=Mean(\pm(criticial~t) \times SE)
 <li><p>critical t = is the critical value from the t-distribution that corresponds to a 95% confidence level</p></li>
 <li><p>Standard Error - the precision of the sample estimate</p></li>
 </ul>
-<section id="confidence-intervals-and-p-values" class="level3" data-number="7.3.1"><h3 data-number="7.3.1" class="anchored" data-anchor-id="confidence-intervals-and-p-values">
-<span class="header-section-number">7.3.1</span> Confidence intervals and p-values</h3>
+<section id="confidence-intervals-and-p-values" class="level3" data-number="19.4.1"><h3 data-number="19.4.1" class="anchored" data-anchor-id="confidence-intervals-and-p-values">
+<span class="header-section-number">19.4.1</span> Confidence intervals and p-values</h3>
 <p>A p-value and a confidence interval are inversely related, but they provide information in different ways:</p>
 <ul>
 <li><p>A <strong>p-value</strong> tells you how likely it is to observe your data (or something more extreme) if the null hypothesis is true. It’s a single number that quantifies the evidence against the null hypothesis. If the p-value is less than the significance level (typically 0.05), you reject the null hypothesis.</p></li>
@@ -927,18 +1154,18 @@ Confidence~Interval=Mean(\pm(criticial~t) \times SE)
 <ul>
 <li><p><strong>p-value &lt; 0.05</strong>: If the p-value is below 0.05, this typically means the null hypothesis (no effect or no difference) is rejected, suggesting a statistically significant result. In this case, a 95% confidence interval for the effect will not include 0, indicating the result is statistically significant.</p></li>
 <li><p><strong>p-value &gt; 0.05</strong>: If the p-value is greater than 0.05, this means we do not reject the null hypothesis. In this scenario, the 95% confidence interval will likely include 0, indicating that the true effect could be zero and the result is not statistically significant.</p></li>
-</ul></section><section id="confidence-intervals-ci-in-r" class="level3" data-number="7.3.2"><h3 data-number="7.3.2" class="anchored" data-anchor-id="confidence-intervals-ci-in-r">
-<span class="header-section-number">7.3.2</span> Confidence intervals (CI) in R</h3>
+</ul></section><section id="confidence-intervals-ci-in-r" class="level3" data-number="19.4.2"><h3 data-number="19.4.2" class="anchored" data-anchor-id="confidence-intervals-ci-in-r">
+<span class="header-section-number">19.4.2</span> Confidence intervals (CI) in R</h3>
 <p>With a wrapper function around our model we can generate accurate 95% confidence intervals from the SE and calculated t-distribution:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Base R</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Broom</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Broom</a></li>
 </ul>
 <div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">confint</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">confint</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               2.5 %     97.5 %
 (Intercept) 18.63651 21.7468231
@@ -946,9 +1173,9 @@ typeSelf    -4.81599 -0.4173433</code></pre>
 </div>
 </div>
 </div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -999,29 +1226,28 @@ typeSelf    -4.81599 -0.4173433</code></pre>
 </div>
 <p>Because this follows the same layout as the table of coefficients, the output intercept row gives a 95% CI for the height of the crossed plants and the second row gives a 95% interval for the <em>difference in height between crossed and selfed plants</em>. The lower and upper bounds are the 2.5% and 97.5% of a <em>t</em>-distribution.</p>
 <p>It is this difference in height in which we are specifically interested.</p>
-</section><section id="answering-the-question" class="level3" data-number="7.3.3"><h3 data-number="7.3.3" class="anchored" data-anchor-id="answering-the-question">
-<span class="header-section-number">7.3.3</span> Answering the question</h3>
+</section><section id="answering-the-question" class="level3" data-number="19.4.3"><h3 data-number="19.4.3" class="anchored" data-anchor-id="answering-the-question">
+<span class="header-section-number">19.4.3</span> Answering the question</h3>
 <p>Darwin’s original hypothesis was that self-pollination would reduce fitness (using height as a proxy for this). The null hypothesis is that there is no effect of pollination type, and therefore no difference in the average heights.</p>
 <p>We must ask ourselves if our experiment is consistent with this null hypothesis or can we reject it? If we choose to reject the null hypothesis, with what level of confidence can we do so?</p>
 <p>To do this, we can simply determine whether or not the predicted value of our null hypothesis (a difference of zero) lies inside the 95% CI for the difference of the mean.</p>
 <p>If our confidence intervals contain zero (or no difference), then we cannot establish a difference between our sample difference in height (-2.62 inches) from the null prediction of zero difference, given the level of variability (noise) in our data.</p>
 <p>In this case we can see that the upper and lower bounds of the confidence intervals <strong>do not contain zero</strong>. The difference in height is consistent with Darwin’s alternate hypothesis of inbreeding depression.</p>
-</section><section id="plausible-range-of-significant-difference" class="level3" data-number="7.3.4"><h3 data-number="7.3.4" class="anchored" data-anchor-id="plausible-range-of-significant-difference">
-<span class="header-section-number">7.3.4</span> Plausible range of significant difference</h3>
+</section><section id="plausible-range-of-significant-difference" class="level3" data-number="19.4.4"><h3 data-number="19.4.4" class="anchored" data-anchor-id="plausible-range-of-significant-difference">
+<span class="header-section-number">19.4.4</span> Plausible range of significant difference</h3>
 <ul>
-<li>A 95% CI provides a range of values where the true effect (like a difference between two group means) is likely to fall. Our analysis suggests that within the 95% confidence interval the true (population) difference could be between 0.42 and 4.8 inches in height difference between crossed and selfed plants.</li>
-<li>
-<strong>Minimum effect size</strong>: the value closest to zero gives a sense of the <strong>minimum effect size</strong> that is plausible at 95% confidence. This is important because it shows the smallest effect you might expect. Here the minimum effect size is 0.42 inches. Or that the cost of inbreeding could be as little as a 0.42 inch height difference.</li>
+<li><p>A 95% CI provides a range of values where the true effect (like a difference between two group means) is likely to fall. Our analysis suggests that within the 95% confidence interval the true (population) difference could be between 0.42 and 4.8 inches in height difference between crossed and selfed plants.</p></li>
+<li><p><strong>Minimum effect size</strong>: the value closest to zero gives a sense of the <strong>minimum effect size</strong> that is plausible at 95% confidence. This is important because it shows the smallest effect you might expect. Here the minimum effect size is 0.42 inches. Or that the cost of inbreeding could be as little as a 0.42 inch height difference.</p></li>
 </ul>
 <p>The <code>GGally</code> package has a handy <code>ggcoef_model()</code> function, that produces a graph of the estimated mean difference with an approx 95% CI. As we can see we are able to reject the null hypothesis at a 95% confidence level.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Generate a coefficient plot for the linear regression model using ggcoef_model</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(lsmodel1,</span>
-<span id="cb16-3"><a href="#cb16-3"></a>                     <span class="at">show_p_values =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb16-4"><a href="#cb16-4"></a>                     <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Generate a coefficient plot for the linear regression model using ggcoef_model</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(lsmodel1,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                     <span class="at">show_p_values =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                     <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1042,7 +1268,7 @@ Note
 <p>If we increase the level of confidence (from 95% to 99%, roughly 2 SE to 3 SE), then we may find that we cannot reject the null hypothesis at a higher threshold of confidence (p &lt; 0.01). Try altering the <code>conf.level</code> argument above for yourself to see this in action.</p>
 <p>We can also include this argument in the <code>tidy()</code> function if we wish to:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int=</span>T, <span class="at">conf.level=</span><span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int=</span>T, <span class="at">conf.level=</span><span class="fl">0.99</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1088,23 +1314,23 @@ Note
 </div>
 </div>
 </div>
-</section></section><section id="estimating-means" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="estimating-means">
-<span class="header-section-number">7.4</span> Estimating means</h2>
+</section></section><section id="estimating-means" class="level2" data-number="19.5"><h2 data-number="19.5" class="anchored" data-anchor-id="estimating-means">
+<span class="header-section-number">19.5</span> Estimating means</h2>
 <p>One limitation of the table of coefficients output is that it doesn’t provide the mean and standard error of the <em>other</em> treatment level (only the difference between them). If we wish to calculate the “other” mean and SE then we can get R to do this.</p>
-<section id="changing-the-intercept" class="level3" data-number="7.4.1"><h3 data-number="7.4.1" class="anchored" data-anchor-id="changing-the-intercept">
-<span class="header-section-number">7.4.1</span> Changing the intercept</h3>
+<section id="changing-the-intercept" class="level3" data-number="19.5.1"><h3 data-number="19.5.1" class="anchored" data-anchor-id="changing-the-intercept">
+<span class="header-section-number">19.5.1</span> Changing the intercept</h3>
 <p>One way to do this is to change the levels of the type variable as a factor:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Perform linear regression on darwin data with Self as the intercept</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="co"># Convert 'type' column to a factor</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type)) <span class="sc">|&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>  <span class="co"># Relevel 'type' column to specify the order of factor levels</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">fct_relevel</span>(type, <span class="fu">c</span>(<span class="st">"Self"</span>, <span class="st">"Cross"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a>  <span class="co"># Fit linear regression model with 'height' as the response variable and 'type' as the predictor</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>  <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data =</span> _) <span class="sc">|&gt;</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a>  <span class="co"># Tidy the model summary</span></span>
-<span id="cb18-10"><a href="#cb18-10"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Perform linear regression on darwin data with Self as the intercept</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>darwin <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="co"># Convert 'type' column to a factor</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type)) <span class="sc">|&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="co"># Relevel 'type' column to specify the order of factor levels</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">fct_relevel</span>(type, <span class="fu">c</span>(<span class="st">"Self"</span>, <span class="st">"Cross"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>  <span class="co"># Fit linear regression model with 'height' as the response variable and 'type' as the predictor</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">lm</span>(height <span class="sc">~</span> type, <span class="at">data =</span> _) <span class="sc">|&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a>  <span class="co"># Tidy the model summary</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1136,14 +1362,14 @@ Note
 </div>
 </div>
 <p>After releveling, the self treatment is now taken as the intercept, and we get the estimate for it’s mean and standard error</p>
-</section><section id="emmeans" class="level3" data-number="7.4.2"><h3 data-number="7.4.2" class="anchored" data-anchor-id="emmeans">
-<span class="header-section-number">7.4.2</span> Emmeans</h3>
+</section><section id="emmeans" class="level3" data-number="19.5.2"><h3 data-number="19.5.2" class="anchored" data-anchor-id="emmeans">
+<span class="header-section-number">19.5.2</span> Emmeans</h3>
 <p>We could also use the package <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/"><code>emmeans</code></a> and its function <code>emmeans()</code> to do a similar thing</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Calculate estimated marginal means (EMMs) using emmeans package</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(lsmodel1, <span class="at">specs =</span> <span class="sc">~</span> type)</span>
-<span id="cb19-3"><a href="#cb19-3"></a></span>
-<span id="cb19-4"><a href="#cb19-4"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Calculate estimated marginal means (EMMs) using emmeans package</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(lsmodel1, <span class="at">specs =</span> <span class="sc">~</span> type)</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a>means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> type  emmean    SE df lower.CL upper.CL
  Cross   20.2 0.759 28     18.6     21.7
@@ -1153,18 +1379,18 @@ Confidence level used: 0.95 </code></pre>
 </div>
 </div>
 <p>The advantage of emmeans is that it provides the mean, standard error and 95% confidence interval estimates of all levels from the model at once (e.g.&nbsp;it relevels the model multiple times behind the scenes).</p>
-<p><code>emmeans</code> also gives us a handy summary to include in data visuals that combine raw data and statistical inferences. These are standard <code>ggplot()</code> outputs so can be <a href="ggplot.html#intro-to-grammar">customised as much as you want</a>.</p>
+<p><code>emmeans</code> also gives us a handy summary to include in data visuals that combine raw data and statistical inferences. These are standard <code>ggplot()</code> outputs so can be <a href="#intro-to-grammar">customised as much as you want</a>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Convert the 'means' object to a tibble</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>means <span class="sc">|&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="co"># Create a plot using ggplot</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> emmean)) <span class="sc">+</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="co"># Add point estimates with error bars</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Convert the 'means' object to a tibble</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>means <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="co"># Create a plot using ggplot</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> emmean)) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  <span class="co"># Add point estimates with error bars</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1184,13 +1410,13 @@ Tip
 </div>
 </div>
 <p>Because of this pooled variance, there is an assumption that variance is equal across the groups, this and other assumptions of the linear model should be checked. We cannot trust our results if the assumptions of the model are not adequately met.</p>
-</section></section><section id="summary" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">7.5</span> Summary</h2>
+</section></section><section id="summary" class="level2" data-number="19.6"><h2 data-number="19.6" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">19.6</span> Summary</h2>
 <p>So remember a linear model sets one factor level as the ‘intercept’ estimates its mean, then draws a line from the first treatment to the second treatment, the slope of the line is the difference in means between the two treatments.</p>
 <p>The difference in means is always accompanied by a standard error of the difference (SED), and this can be used to calculate a 95% confidence interval. If this confidence interval does not contain the intercept value, we can reject the null hypothesis that there is ‘no effect’.</p>
 <p>Linear models make a variety of assumptions, including that the noise (residual differences) are approximately normally distributed, with roughly equal (homogenous) variance.</p>
-</section><section id="write-up" class="level2" data-number="7.6"><h2 data-number="7.6" class="anchored" data-anchor-id="write-up">
-<span class="header-section-number">7.6</span> Write-up</h2>
+</section><section id="write-up" class="level2" data-number="19.7"><h2 data-number="19.7" class="anchored" data-anchor-id="write-up">
+<span class="header-section-number">19.7</span> Write-up</h2>
 <p>Can you write an Analysis section? Add calculated 95% confidence intervals on top of the summary we produced earlier</p>
 <div class="webex-solution">
 <button>
@@ -1198,344 +1424,31 @@ Solution
 </button>
 <p>The maize plants that have been cross pollinated had an average height of 20.19 inches [18.63 - 21.74] and were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.42, 4.82] inches (mean [95% CI]) (t(28) = -2.44, p = 0.02).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Convert the 'means' object to a tibble</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>means <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="co"># Create a plot using ggplot</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> emmean, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>    <span class="co"># Add raw data</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">geom_jitter</span>(<span class="at">data =</span> darwin,</span>
-<span id="cb22-8"><a href="#cb22-8"></a>              <span class="fu">aes</span>(<span class="at">x =</span> type,</span>
-<span id="cb22-9"><a href="#cb22-9"></a>                  <span class="at">y =</span> height),</span>
-<span id="cb22-10"><a href="#cb22-10"></a>              <span class="at">width =</span> <span class="fl">0.1</span>,</span>
-<span id="cb22-11"><a href="#cb22-11"></a>              <span class="at">pch =</span> <span class="dv">21</span>,</span>
-<span id="cb22-12"><a href="#cb22-12"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13"></a>  <span class="co"># Add point estimates with 95% confidence error bars</span></span>
-<span id="cb22-14"><a href="#cb22-14"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, </span>
-<span id="cb22-15"><a href="#cb22-15"></a>                      <span class="at">ymax =</span> upper.CL),</span>
-<span id="cb22-16"><a href="#cb22-16"></a>                  <span class="at">pch =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Breeding Type"</span>,</span>
-<span id="cb22-18"><a href="#cb22-18"></a>       <span class="at">y =</span> <span class="st">"Height (inches) ± 95% CI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Convert the 'means' object to a tibble</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>means <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="co"># Create a plot using ggplot</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> emmean, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>    <span class="co"># Add raw data</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="fu">geom_jitter</span>(<span class="at">data =</span> darwin,</span>
+<span id="cb26-8"><a href="#cb26-8"></a>              <span class="fu">aes</span>(<span class="at">x =</span> type,</span>
+<span id="cb26-9"><a href="#cb26-9"></a>                  <span class="at">y =</span> height),</span>
+<span id="cb26-10"><a href="#cb26-10"></a>              <span class="at">width =</span> <span class="fl">0.1</span>,</span>
+<span id="cb26-11"><a href="#cb26-11"></a>              <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb26-12"><a href="#cb26-12"></a>              <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>  <span class="co"># Add point estimates with 95% confidence error bars</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower.CL, </span>
+<span id="cb26-15"><a href="#cb26-15"></a>                      <span class="at">ymax =</span> upper.CL),</span>
+<span id="cb26-16"><a href="#cb26-16"></a>                  <span class="at">pch =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Breeding Type"</span>,</span>
+<span id="cb26-18"><a href="#cb26-18"></a>       <span class="at">y =</span> <span class="st">"Height (inches) ± 95% CI"</span>)<span class="sc">+</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb26-20"><a href="#cb26-20"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="09-linear-models_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>List of 136
- $ line                            :List of 6
-  ..$ colour       : chr "black"
-  ..$ linewidth    : num 0.5
-  ..$ linetype     : num 1
-  ..$ lineend      : chr "butt"
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_line" "element"
- $ rect                            :List of 5
-  ..$ fill         : chr "white"
-  ..$ colour       : chr "black"
-  ..$ linewidth    : num 0.5
-  ..$ linetype     : num 1
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_rect" "element"
- $ text                            :List of 11
-  ..$ family       : chr ""
-  ..$ face         : chr "plain"
-  ..$ colour       : chr "black"
-  ..$ size         : num 11
-  ..$ hjust        : num 0.5
-  ..$ vjust        : num 0.5
-  ..$ angle        : num 0
-  ..$ lineheight   : num 0.9
-  ..$ margin       : 'margin' num [1:4] 0points 0points 0points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ title                           : NULL
- $ aspect.ratio                    : NULL
- $ axis.title                      : NULL
- $ axis.title.x                    :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 2.75points 0points 0points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.title.x.top                :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 0
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 0points 2.75points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.title.x.bottom             : NULL
- $ axis.title.y                    :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : num 90
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 2.75points 0points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.title.y.left               : NULL
- $ axis.title.y.right              :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : num -90
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 0points 0points 2.75points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text                       :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : chr "grey30"
-  ..$ size         : 'rel' num 0.8
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text.x                     :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 1
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 2.2points 0points 0points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text.x.top                 :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : NULL
-  ..$ vjust        : num 0
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 0points 2.2points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text.x.bottom              : NULL
- $ axis.text.y                     :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 1
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 2.2points 0points 0points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text.y.left                : NULL
- $ axis.text.y.right               :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 0points 0points 2.2points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.text.theta                 : NULL
- $ axis.text.r                     :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0.5
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : 'margin' num [1:4] 0points 2.2points 0points 2.2points
-  .. ..- attr(*, "unit")= int 8
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ axis.ticks                      :List of 6
-  ..$ colour       : chr "grey20"
-  ..$ linewidth    : NULL
-  ..$ linetype     : NULL
-  ..$ lineend      : NULL
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_line" "element"
- $ axis.ticks.x                    : NULL
- $ axis.ticks.x.top                : NULL
- $ axis.ticks.x.bottom             : NULL
- $ axis.ticks.y                    : NULL
- $ axis.ticks.y.left               : NULL
- $ axis.ticks.y.right              : NULL
- $ axis.ticks.theta                : NULL
- $ axis.ticks.r                    : NULL
- $ axis.minor.ticks.x.top          : NULL
- $ axis.minor.ticks.x.bottom       : NULL
- $ axis.minor.ticks.y.left         : NULL
- $ axis.minor.ticks.y.right        : NULL
- $ axis.minor.ticks.theta          : NULL
- $ axis.minor.ticks.r              : NULL
- $ axis.ticks.length               : 'simpleUnit' num 2.75points
-  ..- attr(*, "unit")= int 8
- $ axis.ticks.length.x             : NULL
- $ axis.ticks.length.x.top         : NULL
- $ axis.ticks.length.x.bottom      : NULL
- $ axis.ticks.length.y             : NULL
- $ axis.ticks.length.y.left        : NULL
- $ axis.ticks.length.y.right       : NULL
- $ axis.ticks.length.theta         : NULL
- $ axis.ticks.length.r             : NULL
- $ axis.minor.ticks.length         : 'rel' num 0.75
- $ axis.minor.ticks.length.x       : NULL
- $ axis.minor.ticks.length.x.top   : NULL
- $ axis.minor.ticks.length.x.bottom: NULL
- $ axis.minor.ticks.length.y       : NULL
- $ axis.minor.ticks.length.y.left  : NULL
- $ axis.minor.ticks.length.y.right : NULL
- $ axis.minor.ticks.length.theta   : NULL
- $ axis.minor.ticks.length.r       : NULL
- $ axis.line                       :List of 6
-  ..$ colour       : chr "black"
-  ..$ linewidth    : 'rel' num 1
-  ..$ linetype     : NULL
-  ..$ lineend      : NULL
-  ..$ arrow        : logi FALSE
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_line" "element"
- $ axis.line.x                     : NULL
- $ axis.line.x.top                 : NULL
- $ axis.line.x.bottom              : NULL
- $ axis.line.y                     : NULL
- $ axis.line.y.left                : NULL
- $ axis.line.y.right               : NULL
- $ axis.line.theta                 : NULL
- $ axis.line.r                     : NULL
- $ legend.background               :List of 5
-  ..$ fill         : NULL
-  ..$ colour       : logi NA
-  ..$ linewidth    : NULL
-  ..$ linetype     : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_rect" "element"
- $ legend.margin                   : 'margin' num [1:4] 5.5points 5.5points 5.5points 5.5points
-  ..- attr(*, "unit")= int 8
- $ legend.spacing                  : 'simpleUnit' num 11points
-  ..- attr(*, "unit")= int 8
- $ legend.spacing.x                : NULL
- $ legend.spacing.y                : NULL
- $ legend.key                      : NULL
- $ legend.key.size                 : 'simpleUnit' num 1.2lines
-  ..- attr(*, "unit")= int 3
- $ legend.key.height               : NULL
- $ legend.key.width                : NULL
- $ legend.key.spacing              : 'simpleUnit' num 5.5points
-  ..- attr(*, "unit")= int 8
- $ legend.key.spacing.x            : NULL
- $ legend.key.spacing.y            : NULL
- $ legend.frame                    : NULL
- $ legend.ticks                    : NULL
- $ legend.ticks.length             : 'rel' num 0.2
- $ legend.axis.line                : NULL
- $ legend.text                     :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : 'rel' num 0.8
-  ..$ hjust        : NULL
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ legend.text.position            : NULL
- $ legend.title                    :List of 11
-  ..$ family       : NULL
-  ..$ face         : NULL
-  ..$ colour       : NULL
-  ..$ size         : NULL
-  ..$ hjust        : num 0
-  ..$ vjust        : NULL
-  ..$ angle        : NULL
-  ..$ lineheight   : NULL
-  ..$ margin       : NULL
-  ..$ debug        : NULL
-  ..$ inherit.blank: logi TRUE
-  ..- attr(*, "class")= chr [1:2] "element_text" "element"
- $ legend.title.position           : NULL
- $ legend.position                 : chr "none"
- $ legend.position.inside          : NULL
- $ legend.direction                : NULL
- $ legend.byrow                    : NULL
- $ legend.justification            : chr "center"
- $ legend.justification.top        : NULL
- $ legend.justification.bottom     : NULL
- $ legend.justification.left       : NULL
- $ legend.justification.right      : NULL
- $ legend.justification.inside     : NULL
- $ legend.location                 : NULL
- $ legend.box                      : NULL
- $ legend.box.just                 : NULL
- $ legend.box.margin               : 'margin' num [1:4] 0cm 0cm 0cm 0cm
-  ..- attr(*, "unit")= int 1
- $ legend.box.background           : list()
-  ..- attr(*, "class")= chr [1:2] "element_blank" "element"
- $ legend.box.spacing              : 'simpleUnit' num 11points
-  ..- attr(*, "unit")= int 8
-  [list output truncated]
- - attr(*, "class")= chr [1:2] "theme" "gg"
- - attr(*, "complete")= logi TRUE
- - attr(*, "validate")= logi TRUE</code></pre>
 </div>
 </div>
 </div>
@@ -1556,7 +1469,7 @@ Note
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
 <div id="ref-R-broom" class="csl-entry" role="listitem">
-Robinson, D., Hayes, A., &amp; Couch, S. (2023). <em>Broom: Convert statistical objects into tidy tibbles</em>. <a href="https://broom.tidymodels.org/">https://broom.tidymodels.org/</a>
+Robinson, D., Hayes, A., Couch, S., &amp; Hvitfeldt, E. (2025). <em>Broom: Convert statistical objects into tidy tibbles</em>. <a href="https://broom.tidymodels.org/">https://broom.tidymodels.org/</a>
 </div>
 </div>
 </section></main><!-- /main --><script>
@@ -1855,13 +1768,14 @@ window.onresize = move_sidebar;
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -2204,12 +2118,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./08-inferential-statistics.html" class="pagination-link" aria-label="Inferential statistics">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./model-assumptions.html" class="pagination-link" aria-label="Model diagnostics">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

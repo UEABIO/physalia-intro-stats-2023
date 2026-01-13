@@ -133,14 +133,24 @@ darwin |>
   ggplot(aes(x=type,
          y=height))+
   geom_point()
-
-# you could also substitute (or combine) other geoms including
-# geom_boxplot()
-# geom_violin()
-# geom_histogram()
-# Why not have a go and see what you can make?
-
 ```
+
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+Can you substitute (or combine) other geoms to make changes to this figure?
+
+- `geom_boxplot`
+- `geom_violin`
+- `geom_histogram`
+- `geom_jitter`
+::::
+:::
+
 
 The graph clearly shows that the average height of the 'crossed' plants is greater than that of the 'selfed' plants. But we need to investigate further in order to determine whether the signal (any apparent differences in mean values) is greater than the level of noise (variance within the different groups). 
 
@@ -172,7 +182,7 @@ Summary statistics like these could be presented as figures or tables. We normal
 ```{r}
 
 # make a new object
-darwin_summary <-darwin |> 
+darwin_summary <- darwin |> 
   group_by(type) |> 
   summarise(mean=mean(height),
             sd=sd(height))
@@ -183,7 +193,14 @@ darwin_summary |>
              y=mean))+
   geom_pointrange(aes(ymin=mean-sd, ymax=mean+sd))+
   theme_bw()
+```
 
+```{r, eval = FALSE}
+darwin_summary
+
+```
+
+```{r, echo = FALSE}
 # put this at top of script
 library(kableExtra)
 
@@ -214,8 +231,11 @@ Darwin's data used match pairs - each pair shared one parent. So that in pair 1 
 
 In order to calculate the differences in height between each pair we need to do some data wrangling with `tidyr::pivot_wider()` {@sec-tidy} and calculations with `mutate`.
 
-## Activity 2: Differences
-
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant. 
 
 `r hide("Solution")`
@@ -231,18 +251,19 @@ darwin_wide <- darwin |>
 
 `r unhide()`
 
-
+::::
+:::
 
 We now have the difference in height for each pair, we can use this to calculate the **mean difference** in heights between paired plants, and the amount of variance (as standard deviation)
 
 ```{r}
 
-difference_summary <- darwin_wide |> 
+darwin_difference_summary <- darwin_wide |> 
   summarise(mean=mean(difference),
             sd=sd(difference),
             n=n())
 
-difference_summary
+darwin_difference_summary
 
 ```
 
@@ -270,31 +291,45 @@ Here is a great explainer video on [Standard Error](https://www.youtube.com/watc
 
 And try this [Shiny App on Sampling](http://pleft86.shinyapps.io/Sampling)
 
-We can calculate the standard error for our sample by applying this equation to our `difference_summary` object, can you complete this?
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+- Turn the equation for standard error into a simple `mutate` command.
+
+- How would you write a short sentence describing the difference in average heights and standard error?
 
 `r hide("Solution")`
 
+
 ```{r}
-difference_summary |> 
+darwin_difference_summary <- darwin_difference_summary |> 
   mutate(se= sd/sqrt(n))
+
+darwin_difference_summary
 
 ```
 
+
 `r unhide()`
-
-
-Our estimate of the mean is not really very useful without an accompanying measuring of *uncertainty* like the standard error, in fact estimates of averages or differences should **always** be accompanied by their measure of uncertainty. 
-
-### Activity 3: Communicate
 
 With the information above, how would you present a short sentence describing the average different in height?
 
-
-`r hide("solution")`
+`r hide("Write-up")`
 
 *... the average difference in height was 2.62 ± 1.22 inches (mean ± SE).*
 
 `r unhide()`
+
+::::
+:::
+
+
+Our estimate of the mean is not really very useful without an accompanying measuring of *uncertainty* like the standard error, in fact estimates of averages or differences should **always** be accompanied by their measure of uncertainty. 
+
 
 ## Uncertainty
 
@@ -329,7 +364,7 @@ Large standard deviations produce wide bell curves, with short peaks. Small stan
 
 The bell curve occurs frequently in nature, most circumstances where we can think of a continuous measure coming from a population e.g. human mass, penguin flipper lengths or plant heights. 
 
-As a *probability* distribution, the area within the curve sums to the whole population (e.g. the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g. 67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations of the mean. This *idealised* normal distribution is presented below:
+As a *probability* distribution, the area within the curve sums to the whole population (e.g. the probability that the curve contains every possible measurement is 1). Known proportions of the curve lie within certain distances from the centre e.g. 67.8% of observations should have values within one standard deviation of the mean. 95% of observations should have values within two standard deviations (1.96 to be precise) of the mean. This *idealised* normal distribution is presented below:
 
 ```{r, echo = FALSE, eval=TRUE}
 #Create a sequence of 100 equally spaced numbers between -4 and 4
@@ -349,7 +384,7 @@ How do we convert this information into how likely we are to observe a differenc
 
 The **central limit theorem** states that if you have a population with mean and standard deviation, and take sufficiently large random samples from the population, then the distribution of the sample means will be approximately normally distributed. Standard error then is our measure of variability around our sample mean, and we will assume that we can apply a normal distribution to our ability to estimate the mean. 
 
-So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 2 standard errors, and 99.8% will be within ± 3 standard errors.
+So if we now center our bell curve on the estimate of the mean (2.62), then just over two thirds of the area under the curve is ± 1.22 inches. 95% of it will be within ± 1.96 standard errors, and 99.8% will be within ± 3 standard errors.
 
 ```{r, eval=TRUE, echo=FALSE}
 plot(x,y, type = "l", lwd = 2, axes = FALSE, xlab = "difference in height (inches)", ylab = "")
@@ -371,17 +406,20 @@ You will probably be very used to a threshold for null hypothesis rejection of $
 
 ### Confidence Intervals
 
-Because ± 2 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%. 
+Because ± 1.96 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%. 
 
 We can work out the 95% confidence interval range of our estimated mean as follows:
 
 ```{r}
-lowerCI <- 2.62-(2*1.22)
 
-upperCI <- 2.62+(2*1.22)
+ci95 <- 1.96
 
-lowerCI
-upperCI
+darwin_difference_summary |> 
+  mutate(lower_CI = mean - (se*ci95),
+         upper_CI = mean + (se*ci95))
+
+darwin_difference_summary
+
 ```
 
 A common mistake it to state that we are 95% confident that the 'true' mean lies within our interval. But *technically* it refers to the fact that if we kept running this experiment again and again the intervals we calculate would capture the true mean in 95% of experiments. So really we are saying that we are confident we would capture the true mean in 95% of our experiments. 
@@ -390,11 +428,9 @@ How might we write this up?
 
 :::{.callout-tip}
 
-The maize plants that have been cross pollinated were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.18, 5.06] inches (mean [95% CI]).
+The maize plants that have been cross pollinated were taller on average than the self-pollinated plants, with a mean difference in height of 2.62 [0.23, 5.0] inches (mean [95% CI]).
 
 :::
-
-> Note that because it is possible to generate multiple types of average and confidence interval, we clearly state them in our write up. The same would be true if you were presenting the standard error (± S.E.) or the standard deviation (± S.D.) or a median and interquartile range (median [± IQR]). 
 
 The above is a good example of a simple but clear write-up because it clearly describes the *direction* of the difference, the *amount* and the *error* in our estimate. 
 

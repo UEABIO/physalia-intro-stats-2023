@@ -7,7 +7,6 @@ library(janitor)
 library(here)
 source("R/booktem_setup.R")
 source("R/my_setup.R")
-source("sims.R")
 ```
 
 
@@ -229,6 +228,8 @@ Fit a Poisson GLM
 
 - Set the family to poisson
 
+`glm(x ~ y, data = data, family = poisson)`
+
 ::::
 :::
 
@@ -257,10 +258,6 @@ Plot the mean regression for each species
 
 - Use the emmeans function to generate mean beg rates for different mass + species values
 
-::::
-:::
-
-
 
 `r hide("Solution")`
 
@@ -282,6 +279,8 @@ ggplot(data = means, aes(x=Mass, y= emmean, colour=Species)) +
 
 `r unhide()`
 
+::::
+:::
 
 However, it can be more useful to view data on the "response" or "original" scale. Once a model has been fitted we can "back-transform" estimates to produce predicitons on a non-linear response. In this case exponentiating the log-term. 
 
@@ -291,16 +290,13 @@ Plot the mean regression for each species *on the response scale*
 ::::
 ::::{.task-container}
 
-- Use the emmeans function to generate mean beg rates for different mass + species values
+- Use the `emmeans` function to generate mean beg rates for different mass + species values
 
-- This time include the argument `type = "response"
+- This time include the argument `type = "response"`
 
 - Include raw data points as well
 
 - Use the help menu if needed
-
-::::
-:::
 
 
 `r hide("Solution")`
@@ -328,6 +324,8 @@ ggplot(data = means_response, aes(x=Mass, y= rate, colour=Species)) +
 
 `r unhide()`
 
+::::
+:::
 
 ### Model checks
 
@@ -352,8 +350,6 @@ Discuss the model fit with a classmate
 
 - What is the predictive check like?
 
-::::
-:::
 
 
 ```{r, eval = T}
@@ -392,6 +388,9 @@ performance::check_model(cuckoo_glm1,
 
 `r unhide()`
 
+::::
+:::
+
 ### Model Summary
 
 ```{r}
@@ -412,20 +411,6 @@ A reminder of how to interpret the regression coefficients of a model with an in
 Because this is a Poisson distribution where variance is fixed with the mean we are using z scores. Estimates are on a log scale because of the link function - this means so are any S.E. or confidence intervals
 :::
 
-### Estimates and Intervals
-
-Remember that not only is this **Poisson** model fitting variance using a Poisson and not Normal distribution. It is also relating the predictors to the response variable with a "*log-link*" this means we need to exponentiate our estimates to get them on the same scale as the response (y) variable. Until you do this all the model estimates are logn(y).
-
-```{r}
-exp(coef(cuckoo_glm1)[1]) ### Intercept - Incidence rate at mean mass, and Species = Cuckoo
-
-exp(coef(cuckoo_glm1)[2]) ### Change in the average incidence rate with Mass 
-
-exp(coef(cuckoo_glm1)[3]) ### Change in the incidence rate intercept when Species = Warbler and Mass = 0
- 
-exp(coef(cuckoo_glm1)[4]) ### The extra change in incidence rate for each unit increase in Mass when Species = Warbler (the interaction effect)
-
-```
 
 Luckily when you tidy your models up with `broom` you can specify that you want to put model predictions on the *response* variable scale by specifying `exponentiate = T` which will remove the log transformation, and allow easy calculation of confidence intervals. 
 
@@ -468,15 +453,28 @@ emmeans::emmeans(cuckoo_glm1, specs = ~ Species:Mass, type = "response")
 
 There is one **extra** check we need to apply to a Poisson model and that's for **overdispersion**
 
-Poisson (and binomial models) assume that the variance is *equal to the mean.*  
+Poisson (and binomial models) assume that the variance is *equal to the mean.*
 
-However, if there is **residual deviance that is bigger than the residual degrees of freedom** then there is *more* variance than we expect from the prediction of the mean by our model. 
+Count data often violate the strict Poisson assumption of equal mean and variance. The negative binomial model allows extra variability (“overdispersion”) via an additional dispersion parameter.
 
-Overdispersion in Poisson models can be diagnosed by $\frac{residual~deviance}{residual~degrees~of~freedom}$ which from our example here 'summary()' is $\frac{436}{47} = 9.3$
+If there is **residual deviance that is bigger than the residual degrees of freedom** then there is *more* variance than we expect from the prediction of the mean by our model. 
+
+Overdispersion in Poisson models can be diagnosed by:
+
+$$
+\hat\phi = \frac{\text{Residual Deviance}}{\text{Residual Degrees of Freedom}}
+$$
 
 Overdispersion statistic values **> 1 = Overdispersed**
 
 Overdispersion is a result of larger than expected variance for that mean under a Poisson distribution, this is clearly an issue with our model!
+
+| Value of 𝜙̂      | Interpretation                                                                |
+| ----------------- | ----------------------------------------------------------------------------- |
+| ≈ 1               | Good fit — variance consistent with Poisson assumption.                       |
+| 2 to 4            | Moderate overdispersion — Quasipoisson.      |
+| > 4 (e.g., 6–8.7) | Severe overdispersion — observed variability far exceeds Poisson expectation - Negative Binomial. |
+
 
 Model checks that helped indicate this would be an issue was the "Misspecified dispersion" plot. We can also check whether this misspecified dispersion meets a formal threshold for overdispersion with a function: 
 
@@ -486,14 +484,14 @@ check_overdispersion(cuckoo_glm1)
 
 ```
 
-### Dealing with overdispersion
+### Minor overdispersion 2-4
 
 Luckily a simple fix is to fit a *quasi-likelihood* model which accounts for this, think of "quasi" as "sort of but not completely" Poisson. 
 
 ```{r}
-cuckoo_glm2 <- glm(Beg ~ Mass+Species+Mass:Species, data=cuckoo, family=quasipoisson(link="log"))
+cuckoo_quasi <- glm(Beg ~ Mass+Species+Mass:Species, data=cuckoo, family=quasipoisson(link="log"))
 
-summary(cuckoo_glm2)
+summary(cuckoo_quasi)
 
 ```
 
@@ -505,113 +503,187 @@ As you can see, while none of the estimates have changed, the standard errors (a
 Because we are now estimating the variance again, the test statistics have reverted to *t* distributions and anova and drop1 functions should specify the F-test again.
 :::
 
-## Activity 3: Write-up
+
+### Severe overdispersion > 4
+
+The initial Poisson model likely showed evidence of overdispersion (variance much greater than the mean). Using a **negative binomial (glm.nb)** allows the dispersion parameter to be estimated from the data rather than fixed at 1, providing a better fit when count variability is high.
+
+```{r}
+cuckoo_negbin <- MASS::glm.nb(Beg ~ Mass+Species+Mass:Species, data=cuckoo)
+
+```
 
 :::{.task}
 ::::{.task-header}
-How would you write up this up?
+Check the model
 ::::
 ::::{.task-container}
 
-- Try and write a short Analysis Methods Section
+Examine the dispersion ratio and residual plots in check_model(cuckoo_negbin) to confirm whether the negative binomial adequately captures that extra-Poisson variation.
 
-- Try and write a short Results Section
+
+`r hide("Solution")`
+
+```{r}
+
+check_model(cuckoo_negbin)
+
+```
+
+
+`r unhide()`
 
 ::::
 :::
 
 
-`r hide("Methods")`
+## Zero inflation
 
-I used a Poisson log-link Generalized Linear Model with quasi-likelihoods to account for overdispersion to analyse begging call rates in Warbler and Cuckoo chicks. The species of chick was included as a categorical predictor and mass was included as a continuous predictor. 
+Look at the negative binomial model checks - in particular the Posterior Predictive Check. Are there any issues with the observations against predictions?
 
-The initial model also included an interaction term between species and mass, but this was removed from the final model as removal of this term did not significantly alter the fit of the model (ANOVA). 
+`r hide("Solution")`
 
-All analyses were carried out in R (ver 4.1.3) (R Core Team 2021) with the following packages;  tidyverse (Wickham et al 2019), performance (Lüdecke et al 2021) for checking model assumptions, and MASS (Venables & Ripley 2002) for model comparisons.
-
-`r unhide()`
-
-
-`r hide("Results")`
-
-We found no statistically significant effect of the interaction between species and mass on begging rate F(1,47) = 6.76, P = 0.35, and therefore we removed this from the model to focus on the main effects of species and mass independently. From this model we showed that change in body mass was the only significant predictor of calling rate, with each unit in mass (g) producing an 8% increase in the rate of calling [95%CI; 6-10%]. 
+```{r}
+# We have more zeroes than expected under our model
+# this is known as zero-inflation
+check_zeroinflation(cuckoo_negbin)
+```
 
 `r unhide()`
 
 
-:::{.callout-note}
+The zero-inflated Poisson (ZIP) allows some zeros to arise from a separate “structural zero” process. `ziformula = ~1` specifies a constant zero-inflation probability across observations.
 
-In this example we had to widen our standard errors to avoid the inflated Type 1 error risk that comes from overdispersion. 
+This can be an alternate source of overdispersion:
 
-There are more complex approaches we could have taken to try and account for this overdispersion that might have provided better modelling approaches, these include:
+```{r}
+library(glmmTMB)
+cuckoo_zip <- glmmTMB(Beg ~ Mass+Species+Mass:Species, 
+                      family = poisson, 
+                      ziformula= ~1, # constant zero inflation
+                      data=cuckoo)
 
-- Checking and accounting for *zero-inflation*
+```
 
-> Zero-inflation can be another cause of overdispersion, where we have more than expected zero-values in our data
+```{r}
 
-- Alternative distributions that allow for alternative dispersions e.g. tweedie and negative binomial models
+check_model(cuckoo_zip)
 
-> These models have more flexible dispersion parameters
+```
 
-- Combinations of the above
 
-> Zero-inflated poisson (ZIP), negative binomial (ZINB) and tweedie (ZIT) models are all possible 
+### Compare models
 
-- Mixed models that can also account for overdispersion through structured data
+Compare AICs of the `cuckoo_negbin` and `cuckoo_zip`
 
-> Apparent overdispersion can be the result of group producing different starting points/intercepts. Accounting for this can reduce apparent overdispersion
+```{r}
+AIC(cuckoo_zip, cuckoo_negbin)
 
+```
+
+
+If overdispersion persists even with ZIP, it may reflect unmodeled heterogeneity rather than purely excess zeros and we can try a *zero-inflated negative binomial model*
+
+:::{.task}
+::::{.task-header}
+
+- Make and compare a zero-inflated negative binomial
+
+- Swap family = `poisson` for `nbinom`
+
+::::
+::::{.task-container}
+
+```{r}
+library(glmmTMB)
+cuckoo_zinb <- glmmTMB::glmmTMB(Beg ~ Mass+Species+Mass:Species, family = nbinom1, ziformula= ~1, data=cuckoo)
+
+```
+
+```{r, eval = FALSE}
+
+check_model(cuckoo_zinb)
+
+```
+
+```{r}
+AIC(cuckoo_zip, cuckoo_negbin, cuckoo_zinb)
+
+```
+
+::::
 :::
 
 
-## Summary
+### Modelling a pattern in the zeroes
 
-**GLMs** are powerful and flexible.
+Suppose inspection of residuals or exploratory plots suggests that zeros occur more often in some species or at particular mass ranges.
 
-They can be used to fit a wide variety of data types.
+So far a zinb model has produced the best model fit and AIC values. But we have assumed a constant and equal probability of generating zeroes throughout our data. 
 
-Model checking becomes trickier.
+`r hide("AIC")`
 
-Extensions include:
+- **What it is**: A statistical method for model selection that estimates the prediction error and relative quality of different statistical models for a given dataset. 
 
-* **mixed models**;
-* **survival models**;
-* **generalized additive models** (GAMs).
+- **How it works**: It provides a single numerical score that estimates the amount of information lost by a model. It balances the goodness of fit (how well the model fits the data) with the model's complexity (number of parameters). 
 
-For more information on Poisson and Binomial GLMs check out:
+- **How to use it**: When comparing multiple models **on the same data and with the same dependent variable**, the one with the lowest AIC score is preferred because it is considered the best relative fit for the data
 
-https://bookdown.org/dereksonderegger/571/11-binomial-regression.html#confidence-intervals-1
+`r unhide()`
 
+What if zeroes are related to our predictors?
 
-https://bookdown.org/ronsarafian/IntrotoDS/glm.html#poisson-regression
+:::{.task}
+::::{.task-header}
+Question
+::::
+::::{.task-container}
 
-## Final checklist
+- What formula might you provide to a zero inflated model to get better predictions?
 
-* Think carefully about the hypotheses to test, use your scientific knowledge and background reading to support this
+`r hide("Solution")`
 
-* Import, clean and understand your dataset: use data visuals to investigate trends and determine if there is clear support for your hypotheses
+```{r}
 
-* **Decide on the appropriate error structure for your model (Gaussian = continuous, Poisson = count, Binomial = binary)**
+cuckoo_zip2 <- glmmTMB::glmmTMB(Beg ~ Mass+Species+Mass:Species, family = poisson, ziformula= ~Mass:Species, data=cuckoo)
 
-* **Start with canonical link functions, but these can be altered if needed**
+cuckoo_zinb2 <- glmmTMB::glmmTMB(Beg ~ Mass+Species+Mass:Species, family = nbinom1, ziformula= ~Mass:Species, data=cuckoo)
 
-* Fit a (generalized) linear model, including interaction terms with caution
+AIC(cuckoo_zip, cuckoo_zip2, cuckoo_zinb, cuckoo_zinb2)
 
-* Investigate the fit of your model, understand that parameters may never be perfect, but that classic patterns in residuals may indicate a poorly fitting model - sometimes this can be fixed with careful consideration of missing variables or through data transformation
+```
 
-* **Check for overdispersion in models where variance is not estimated independently of the mean (Poisson and Binomial) - may have to use quasi-likelihood fitting** 
+Zero inflated negbin model beats zero inflated poisson model on AIC alone.
 
-* Test the removal of any interaction terms from a model, look at AIC and significance tests (Remember test = "F" for Gaussian and Quasilikelihood models, "Chisq" for Poisson and Binomial models)
-
-* Make sure you understand the output of a model summary, sense check this against the graphs you have made - Do estimates need converting back to the original response scale?
-
-* The direction and size of any effects are the priority - produce estimates and uncertainties. Make sure the observations are clear.
-
-* Write-up your significance test results, taking care to report not just significance (and all required parts of a significance test). Do you know *what* to report? Within a complex model - reporting *t/z* will indicate the slope of the line for that single term against the intercept, *F/Chi* is the overall effect of a predictor across all levels, *post-hoc* if you wish to compare across all levels. 
-
-* Well described tables and figures can enhance your results sections - take the time to make sure these are informative and attractive. 
+**But** the negbin variance shape is mis-matched, the data does not increase with variance as quickly as predicted by the negbin model.
 
 
+```{r}
+
+check_model(cuckoo_zip2)
 
 
+```
 
+```{r}
+
+check_model(cuckoo_zinb2)
+
+```
+
+
+`r unhide()`
+
+::::
+:::
+
+
+## Summary 
+
+- Begin by fitting a Poisson GLM to model count data (e.g., begging calls) using a log link, then inspect diagnostic plots to assess residuals, variance homogeneity, and dispersion.
+
+- If the model shows overdispersion (variance > mean), refit using a quasipoisson or negative binomial model to account for excess variability.
+
+- Examine model adequacy with `check_model()` and test for zero inflation; if extra zeros exist, fit zero-inflated Poisson or zero-inflated negative binomial models with `glmmTMB`.
+
+- Compare model fits using AIC and, if needed, include predictors in the zero-inflation component to capture structured patterns in zero counts.

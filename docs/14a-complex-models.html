@@ -1,0 +1,2340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="Statistical Skills for Biologists">
+<title>26&nbsp; Complex models – Physalia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-generalised-linear.html" rel="next">
+<link href="./14-complex-models.html" rel="prev">
+<link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+<link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="include/glossary.css">
+<link rel="stylesheet" href="include/style.css">
+</head>
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./14a-complex-models.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Physalia</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tidy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tidy data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary-table.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Summary tables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#experimental-design" id="toc-experimental-design" class="nav-link active" data-scroll-target="#experimental-design"><span class="header-section-number">26.1</span> Experimental Design</a></li>
+  <li><a href="#complex-model-interactions" id="toc-complex-model-interactions" class="nav-link" data-scroll-target="#complex-model-interactions"><span class="header-section-number">26.2</span> Complex model interactions</a></li>
+  <li><a href="#issues-with-interpreting-the-fitted-model" id="toc-issues-with-interpreting-the-fitted-model" class="nav-link" data-scroll-target="#issues-with-interpreting-the-fitted-model"><span class="header-section-number">26.3</span> Issues with interpreting the fitted model</a></li>
+  <li>
+<a href="#determining-a-minimally-sufficient-model" id="toc-determining-a-minimally-sufficient-model" class="nav-link" data-scroll-target="#determining-a-minimally-sufficient-model"><span class="header-section-number">26.4</span> Determining a minimally sufficient model</a>
+  <ul class="collapse">
+<li><a href="#refitting-to-produce-the-most-optimal-model" id="toc-refitting-to-produce-the-most-optimal-model" class="nav-link" data-scroll-target="#refitting-to-produce-the-most-optimal-model"><span class="header-section-number">26.4.1</span> Refitting to produce the most optimal model</a></li>
+  </ul>
+</li>
+  <li><a href="#pairwise-comparisons" id="toc-pairwise-comparisons" class="nav-link" data-scroll-target="#pairwise-comparisons"><span class="header-section-number">26.5</span> Pairwise comparisons</a></li>
+  <li><a href="#visualising-models" id="toc-visualising-models" class="nav-link" data-scroll-target="#visualising-models"><span class="header-section-number">26.6</span> Visualising models</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./14a-complex-models.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Required packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(performance)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="fu">library</span>(patchwork)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In the previous chapter <a href="14-complex-models.html" class="quarto-xref"><span>Chapter 25</span></a> we worked through the process of including/excluding variables based on our <strong>causal</strong> hypotheses. However, we did not consider the potential role of <em>complex interactions</em> and in this chapter we will work through potential complexity in <em>non-factorial</em> experimental designs.</p>
+<section id="experimental-design" class="level2" data-number="26.1"><h2 data-number="26.1" class="anchored" data-anchor-id="experimental-design">
+<span class="header-section-number">26.1</span> Experimental Design</h2>
+<p>In order to make clear hypothesis statements, and then test these - we need to have a good understanding of the experimental design</p>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>Write some quick code to understand the distribution of treatment types and partner numbers across the experimental design.</p>
+<p>Is the experiment a full <a class="glossary">factorial<span class="def">Every possible combination of levels for multiple factors is present, providing a complete understanding of individual factor effects and their interactions</span></a> design?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dros_clean <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">group_by</span>(partners, type) <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">partners</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">n</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Inseminated</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Virgin</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Inseminated</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Virgin</td>
+<td style="text-align: right;">25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>The experimental design is <select class="webex-select"><option value="blank"></option>
+<option value="">factorial</option>
+<option value="answer">non-factorial</option></select></p>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>Not all type x partner combinations exist:</p>
+<ul>
+<li><p>Partners = 0 exists only for Control</p></li>
+<li><p>Partners = 1,8 exist only for Virgin and Inseminated</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>This doesn’t affect our initial consideration of model structure, but we will revisit this later</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section><section id="complex-model-interactions" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="complex-model-interactions">
+<span class="header-section-number">26.2</span> Complex model interactions</h2>
+<p>Sometimes, the relationship between a covariate and the outcome <em>differs between groups</em>.</p>
+<p>We have previously investigated models to examine the causal effect of mating types on male longevity - with five experimental groups</p>
+<ul>
+<li><p>Control: Unmated flies (0 partners)</p></li>
+<li><p>Virgin - 1 partner: Males paired with a single unmated female</p></li>
+<li><p>Virgin - 8 partners: Males paired with multiple unmated females</p></li>
+<li><p>Inseminated - 1 partner: Males paired with a single previously mated female</p></li>
+<li><p>Inseminated - 8 partners: Males paired with multiple mated females</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>We now wish to consider some key questions in our experiment around interactions.</p>
+</blockquote>
+<ol type="1">
+<li><p>Does the number of females a male is paired with change the effect mating type has on male longevity?</p></li>
+<li><p>Does the size of a male change the effect of mating type on male longevity?</p></li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">partners</th>
+<th style="text-align: left;">type</th>
+<th style="text-align: right;">n</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Control</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Inseminated</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Virgin</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Inseminated</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Virgin</td>
+<td style="text-align: right;">25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p><strong>This is a non-factorial design</strong> - not all type × partner combinations exist. Control flies only appear at 0 partners, while Virgin and Inseminated flies only appear at 1 or 8 partners.</p>
+<p>Let’s start by fitting an interaction term with what seems like the obvious model:</p>
+<p><span class="math display">\[
+\text{longevity}_i = \beta_0 + \beta_1 \, \text{type}_i + \beta_2 \, \text{thorax}_i + \beta_3 \, \text{partners}_i + \beta_4 \, (\text{type}_i \times \text{thorax}_i) + \beta_5 \, (\text{type}_i \times \text{partners}_i) \varepsilon_i
+\]</span></p>
+<ul>
+<li><p>This allows the <strong>the effect of size on longevity to depend on mating partner</strong>.</p></li>
+<li><p>As a second interaction test it allows <strong>the effect of mating partner on longevity to depend on the number of partners</strong></p></li>
+</ul>
+<p>Before fitting new models, we should make sure our data is in the appropriate format:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Use mutate to set type and partners as factorial variables</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>dros_clean2 <span class="ot">&lt;-</span> dros_clean <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>         <span class="at">partners =</span> <span class="fu">factor</span>(partners))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Question 1.</strong> Why is it important for partners to be treated as a factor (rather than numeric)?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>Partners is a numeric column - but this does not make sense with our experimental design, there are only three treatments with respect to number of partners, 0,1 or 8. If we leave partners as a numeric in our model, R will attempt to fit a single slope to explain the variance explained by partners as though it is a continuous variable. We have no reason to think the effect of partners is strictly linear, and with only three different observations it makes much more sense to treat this as categorical.</p>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>Write a linear model that includes type, thorax and partners as main effects and include expressions to include an interaction effect between type:thorax and type:partners.</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>flyls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>               thorax <span class="sc">+</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>               partners <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>               type<span class="sc">:</span>thorax <span class="sc">+</span> <span class="co"># specifies the interaction effect</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>               type<span class="sc">:</span>partners, <span class="co"># specifies the interaction effect</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>             <span class="at">data =</span> dros_clean2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="issues-with-interpreting-the-fitted-model" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="issues-with-interpreting-the-fitted-model">
+<span class="header-section-number">26.3</span> Issues with interpreting the fitted model</h2>
+<p>Let’s take a look at the fitted model now we have included our interaction terms:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">summary</span>(flyls2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = longevity ~ type + thorax + partners + type:thorax + 
+    type:partners, data = dros_clean2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-26.4634  -6.5711  -0.9363   6.8499  30.1715 
+
+Coefficients: (4 not defined because of singularities)
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)               -50.2420    21.5582  -2.331  0.02149 *  
+typeInseminated             0.1163    27.0616   0.004  0.99658    
+typeVirgin                -15.3390    27.1769  -0.564  0.57355    
+thorax                    136.1268    25.6625   5.304 5.42e-07 ***
+partners1                  13.1379     3.0940   4.246 4.38e-05 ***
+partners8                       NA         NA      NA       NA    
+typeInseminated:thorax      4.7442    32.6180   0.145  0.88461    
+typeVirgin:thorax          -5.7505    32.8543  -0.175  0.86136    
+typeInseminated:partners1 -14.5153     4.3258  -3.356  0.00107 ** 
+typeVirgin:partners1            NA         NA      NA       NA    
+typeInseminated:partners8       NA         NA      NA       NA    
+typeVirgin:partners8            NA         NA      NA       NA    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.59 on 117 degrees of freedom
+Multiple R-squared:  0.6568,    Adjusted R-squared:  0.6362 
+F-statistic: 31.98 on 7 and 117 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The intercept is Control at partners=0 (the reference levels for both factors). But look at what the other parameters mean:</p>
+<ul>
+<li>typeInseminated = -0.116: Difference between Inseminated and Control at partners=0</li>
+</ul>
+<blockquote class="blockquote">
+<p>Problem: Inseminated flies don’t exist at partners=0! This is meaningless.</p>
+</blockquote>
+<ul>
+<li>partners1 = 13.14: Effect of having 1 partner for Control flies</li>
+</ul>
+<blockquote class="blockquote">
+<p>Problem: Control flies don’t exist at partners=1! This is also meaningless.</p>
+</blockquote>
+<p>Many NA values: R can’t estimate these parameters because the combinations don’t exist</p>
+<div class="{callout-note}">
+<p>While the model is technically functional - interpretation and coefficients are suboptimal. The Control level only exists at partners = 0, this creates a fundamental mismatch when trying to estimate values</p>
+</div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>We need to revisit our key hypotheses and fix our model accordingly.</p>
+<p>Can you write out specific testable questions we might have about interaction effects in our data?</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<ul>
+<li><p>Question 1: Within Virgin flies, does having 1 vs 8 partners affect longevity?</p></li>
+<li><p>Question 2: Within Inseminated flies, does having 1 vs 8 partners affect longevity?</p></li>
+<li><p>Question 3: At the same partner level, do Inseminated and Virgin flies differ in longevity?</p></li>
+<li><p>Question 4: How do our mated treatments compare to unmated Controls?</p></li>
+<li><p>Question 5: At the same body size, do Inseminated and Virgin flies differ in longevity?</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>With these questions in place we can “relevel” our factors to set the intercept to a different value - allowing for better comparisons</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># By setting Virgin and partners = 1 as the first level in the factors for type and partners this will become the new intercept</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>dros_clean3 <span class="ot">&lt;-</span> dros_clean2 <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">fct_relevel</span>(type, <span class="st">"Virgin"</span>),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>         <span class="at">partners =</span> <span class="fu">fct_relevel</span>(partners, <span class="st">"1"</span>))</span>
+<span id="cb7-6"><a href="#cb7-6"></a></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># Refit the model</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a>flyls3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> </span>
+<span id="cb7-10"><a href="#cb7-10"></a>               thorax <span class="sc">+</span> </span>
+<span id="cb7-11"><a href="#cb7-11"></a>               partners <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>               type<span class="sc">:</span>thorax <span class="sc">+</span> <span class="co"># specifies the interaction effect</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>               type<span class="sc">:</span>partners, <span class="co"># specifies the interaction effect</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>             <span class="at">data =</span> dros_clean3)</span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="fu">summary</span>(flyls3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = longevity ~ type + thorax + partners + type:thorax + 
+    type:partners, data = dros_clean3)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-26.4634  -6.5711  -0.9363   6.8499  30.1715 
+
+Coefficients: (4 not defined because of singularities)
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                -52.443     17.313  -3.029  0.00302 ** 
+typeControl                  2.201     27.649   0.080  0.93668    
+typeInseminated              0.940     24.094   0.039  0.96895    
+thorax                     130.376     20.514   6.355 4.15e-09 ***
+partners0                       NA         NA      NA       NA    
+partners8                  -13.138      3.094  -4.246 4.38e-05 ***
+typeControl:thorax           5.750     32.854   0.175  0.86136    
+typeInseminated:thorax      10.495     28.744   0.365  0.71569    
+typeControl:partners0           NA         NA      NA       NA    
+typeInseminated:partners0       NA         NA      NA       NA    
+typeControl:partners8           NA         NA      NA       NA    
+typeInseminated:partners8   14.515      4.326   3.356  0.00107 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.59 on 117 degrees of freedom
+Multiple R-squared:  0.6568,    Adjusted R-squared:  0.6362 
+F-statistic: 31.98 on 7 and 117 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The intercept is Virgin at partners=1 (the reference levels for both factors).</p>
+<ul>
+<li><p>typeControl = 2.2 Difference between Virgin and Control (note control only has 0 partners)</p></li>
+<li><p>typeInseminated = 0.940 Difference between Inseminated and Virgin at partners=1</p></li>
+</ul>
+<blockquote class="blockquote">
+<p>Correct: Both treatments have examples of 1 partner.</p>
+</blockquote>
+<ul>
+<li>partners8 = -13.14 Difference between Virgin flies with 8 partners compare to 1</li>
+</ul>
+<blockquote class="blockquote">
+<p>Correct</p>
+</blockquote>
+<ul>
+<li>Inseminated:partners8 = 14.515 Adjustment needed for estimating the effect of partners in Inseminated flies</li>
+</ul>
+<blockquote class="blockquote">
+<p>Correct: Total difference in partners8 between Inseminated1 and Inseminated8 = -13.1 + 14.5 = 1.4 Total difference in partners8 between Virgin8 and Inseminated8 = 0.9 + 13.1 + 14.5 = 28.5</p>
+</blockquote>
+<p>NA values: R can’t estimate these parameters because the combinations don’t exist</p>
+</div>
+</div>
+</div>
+</section><section id="determining-a-minimally-sufficient-model" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="determining-a-minimally-sufficient-model">
+<span class="header-section-number">26.4</span> Determining a minimally sufficient model</h2>
+<ul>
+<li>A significant interaction means the relationship between body size and longevity, and parners and longevity is <strong>not the same</strong> across partner types.</li>
+</ul>
+<p>R compares the nested models via a likelihood ratio test (LRT):</p>
+<ul>
+<li><p>H₀: β₃ = 0 (no interaction; same slope for all partner types)</p></li>
+<li><p>H₁: β₃ ≠ 0 (interaction; slopes differ)</p></li>
+</ul>
+<p>If the p-value is small (typically &lt; 0.05), the more complex model explains significantly more variation — implying the interaction is meaningful.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">drop1</span>(flyls3, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 4%">
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 14%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum of Sq</th>
+<th style="text-align: right;">RSS</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><none></none></td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">13129.69</td>
+<td style="text-align: right;">597.7897</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">type:thorax</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">14.98103</td>
+<td style="text-align: right;">13144.67</td>
+<td style="text-align: right;">593.9322</td>
+<td style="text-align: right;">0.0667487</td>
+<td style="text-align: right;">0.9354658</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">type:partners</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1263.55212</td>
+<td style="text-align: right;">14393.24</td>
+<td style="text-align: right;">607.2750</td>
+<td style="text-align: right;">11.2596451</td>
+<td style="text-align: right;">0.0010686</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="webex-solution">
+<button>
+Explanation
+</button>
+<p>The <code>drop1</code> function produces a series of LRT where a term is removed from the model and the difference in variance is compared to the maximal model with an F-test. A significant result indicates a statisticall significant reduction in variance explained.</p>
+<blockquote class="blockquote">
+<p>What does this mean?: We can safely remove terms that are non-significant as not helping explain variance in our data.</p>
+</blockquote>
+</div>
+<section id="refitting-to-produce-the-most-optimal-model" class="level3" data-number="26.4.1"><h3 data-number="26.4.1" class="anchored" data-anchor-id="refitting-to-produce-the-most-optimal-model">
+<span class="header-section-number">26.4.1</span> Refitting to produce the most optimal model</h3>
+<p>Having determined that there <em>is</em> evidence for an interaction effect between <code>type:partners</code> but there <em>is not</em> evidence for an interaction between <code>type:thorax</code> we can refit our model:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>flyls4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(longevity <span class="sc">~</span> type <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>               thorax <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>               partners <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>               type<span class="sc">:</span>partners, <span class="co"># specifies the interaction effect</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>             <span class="at">data =</span> dros_clean3)</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="fu">summary</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = longevity ~ type + thorax + partners + type:partners, 
+    data = dros_clean3)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-26.189  -6.599  -0.989   6.408  30.244 
+
+Coefficients: (4 not defined because of singularities)
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                -57.002     10.629  -5.363 4.08e-07 ***
+typeControl                  7.017      2.973   2.361 0.019874 *  
+typeInseminated              9.670      2.976   3.249 0.001507 ** 
+thorax                     135.819     12.439  10.919  &lt; 2e-16 ***
+partners0                       NA         NA      NA       NA    
+partners8                  -12.933      3.009  -4.298 3.55e-05 ***
+typeControl:partners0           NA         NA      NA       NA    
+typeInseminated:partners0       NA         NA      NA       NA    
+typeControl:partners8           NA         NA      NA       NA    
+typeInseminated:partners8   14.210      4.210   3.375 0.000996 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.51 on 119 degrees of freedom
+Multiple R-squared:  0.6564,    Adjusted R-squared:  0.6419 
+F-statistic: 45.46 on 5 and 119 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>This is our best fitting model - and the one we should report</p>
+</section></section><section id="pairwise-comparisons" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="pairwise-comparisons">
+<span class="header-section-number">26.5</span> Pairwise comparisons</h2>
+<p>Using the <a href="https://aosmith.rbind.io/2019/03/25/getting-started-with-emmeans/">emmeans</a> package is a very easy way to produce the estimate mean values (rather than mean differences) for different categories <code>emmeans</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>means <span class="ot">&lt;-</span> emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls4, <span class="at">specs =</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>                   <span class="sc">~</span> type <span class="sc">+</span> thorax <span class="sc">+</span> partners)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> type        thorax partners emmean   SE  df lower.CL upper.CL
+ Virgin       0.821 1          54.5 2.11 119     50.3     58.7
+ Control      0.821 1        nonEst   NA  NA       NA       NA
+ Inseminated  0.821 1          64.2 2.10 119     60.0     68.3
+ Virgin       0.821 0        nonEst   NA  NA       NA       NA
+ Control      0.821 0          61.5 2.11 119     57.3     65.7
+ Inseminated  0.821 0        nonEst   NA  NA       NA       NA
+ Virgin       0.821 8          41.6 2.12 119     37.4     45.8
+ Control      0.821 8        nonEst   NA  NA       NA       NA
+ Inseminated  0.821 8          65.4 2.11 119     61.3     69.6
+
+Confidence level used: 0.95 </code></pre>
+</div>
+</div>
+<p>If the term <code><a href="https://rdrr.io/r/graphics/pairs.html">pairs()</a></code> is included then it will also include post-hoc pairwise comparisons between all levels with a tukey test (adjustment for multiple comparisons), we can turn off p-value adjustments by including the argument <code>adjust = "none"</code>.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Raw comparisons</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Adjusted comparisons</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">pairs</span>(means,</span>
+<span id="cb14-2"><a href="#cb14-2"></a>      <span class="at">adjust =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                                                                 
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners1         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners1     
+ Virgin thorax0.82096 partners1 - Virgin thorax0.82096 partners0          
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners0         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners0     
+ Virgin thorax0.82096 partners1 - Virgin thorax0.82096 partners8          
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners1    
+ Control thorax0.82096 partners1 - Virgin thorax0.82096 partners0         
+ Control thorax0.82096 partners1 - Control thorax0.82096 partners0        
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners0    
+ Control thorax0.82096 partners1 - Virgin thorax0.82096 partners8         
+ Control thorax0.82096 partners1 - Control thorax0.82096 partners8        
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners1 - Virgin thorax0.82096 partners0     
+ Inseminated thorax0.82096 partners1 - Control thorax0.82096 partners0    
+ Inseminated thorax0.82096 partners1 - Inseminated thorax0.82096 partners0
+ Inseminated thorax0.82096 partners1 - Virgin thorax0.82096 partners8     
+ Inseminated thorax0.82096 partners1 - Control thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners1 - Inseminated thorax0.82096 partners8
+ Virgin thorax0.82096 partners0 - Control thorax0.82096 partners0         
+ Virgin thorax0.82096 partners0 - Inseminated thorax0.82096 partners0     
+ Virgin thorax0.82096 partners0 - Virgin thorax0.82096 partners8          
+ Virgin thorax0.82096 partners0 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners0 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners0 - Inseminated thorax0.82096 partners0    
+ Control thorax0.82096 partners0 - Virgin thorax0.82096 partners8         
+ Control thorax0.82096 partners0 - Control thorax0.82096 partners8        
+ Control thorax0.82096 partners0 - Inseminated thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners0 - Virgin thorax0.82096 partners8     
+ Inseminated thorax0.82096 partners0 - Control thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners0 - Inseminated thorax0.82096 partners8
+ Virgin thorax0.82096 partners8 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners8 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners8 - Inseminated thorax0.82096 partners8    
+ estimate   SE  df t.ratio p.value
+   nonEst   NA  NA      NA      NA
+    -9.67 2.98 119  -3.249  0.0015
+   nonEst   NA  NA      NA      NA
+    -7.02 2.97 119  -2.361  0.0199
+   nonEst   NA  NA      NA      NA
+    12.93 3.01 119   4.298 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+   -10.95 3.00 119  -3.650  0.0004
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+     2.65 2.98 119   0.891  0.3745
+   nonEst   NA  NA      NA      NA
+    22.60 2.99 119   7.560 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+    -1.28 2.98 119  -0.428  0.6695
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+    19.95 3.01 119   6.636 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+    -3.93 3.00 119  -1.311  0.1923
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   -23.88 2.97 119  -8.031 &lt;0.0001
+   nonEst   NA  NA      NA      NA</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>In this example a Tukey HSD test adjustment has been applied - the p-values have been adjusted for <em>a family of 5 estimates</em> representing the five different experimental groups</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">pairs</span>(means)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> contrast                                                                 
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners1         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners1     
+ Virgin thorax0.82096 partners1 - Virgin thorax0.82096 partners0          
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners0         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners0     
+ Virgin thorax0.82096 partners1 - Virgin thorax0.82096 partners8          
+ Virgin thorax0.82096 partners1 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners1 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners1    
+ Control thorax0.82096 partners1 - Virgin thorax0.82096 partners0         
+ Control thorax0.82096 partners1 - Control thorax0.82096 partners0        
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners0    
+ Control thorax0.82096 partners1 - Virgin thorax0.82096 partners8         
+ Control thorax0.82096 partners1 - Control thorax0.82096 partners8        
+ Control thorax0.82096 partners1 - Inseminated thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners1 - Virgin thorax0.82096 partners0     
+ Inseminated thorax0.82096 partners1 - Control thorax0.82096 partners0    
+ Inseminated thorax0.82096 partners1 - Inseminated thorax0.82096 partners0
+ Inseminated thorax0.82096 partners1 - Virgin thorax0.82096 partners8     
+ Inseminated thorax0.82096 partners1 - Control thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners1 - Inseminated thorax0.82096 partners8
+ Virgin thorax0.82096 partners0 - Control thorax0.82096 partners0         
+ Virgin thorax0.82096 partners0 - Inseminated thorax0.82096 partners0     
+ Virgin thorax0.82096 partners0 - Virgin thorax0.82096 partners8          
+ Virgin thorax0.82096 partners0 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners0 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners0 - Inseminated thorax0.82096 partners0    
+ Control thorax0.82096 partners0 - Virgin thorax0.82096 partners8         
+ Control thorax0.82096 partners0 - Control thorax0.82096 partners8        
+ Control thorax0.82096 partners0 - Inseminated thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners0 - Virgin thorax0.82096 partners8     
+ Inseminated thorax0.82096 partners0 - Control thorax0.82096 partners8    
+ Inseminated thorax0.82096 partners0 - Inseminated thorax0.82096 partners8
+ Virgin thorax0.82096 partners8 - Control thorax0.82096 partners8         
+ Virgin thorax0.82096 partners8 - Inseminated thorax0.82096 partners8     
+ Control thorax0.82096 partners8 - Inseminated thorax0.82096 partners8    
+ estimate   SE  df t.ratio p.value
+   nonEst   NA  NA      NA      NA
+    -9.67 2.98 119  -3.249  0.0129
+   nonEst   NA  NA      NA      NA
+    -7.02 2.97 119  -2.361  0.1336
+   nonEst   NA  NA      NA      NA
+    12.93 3.01 119   4.298  0.0003
+   nonEst   NA  NA      NA      NA
+   -10.95 3.00 119  -3.650  0.0035
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+     2.65 2.98 119   0.891  0.8996
+   nonEst   NA  NA      NA      NA
+    22.60 2.99 119   7.560 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+    -1.28 2.98 119  -0.428  0.9929
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+    19.95 3.01 119   6.636 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+    -3.93 3.00 119  -1.311  0.6849
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   nonEst   NA  NA      NA      NA
+   -23.88 2.97 119  -8.031 &lt;0.0001
+   nonEst   NA  NA      NA      NA
+
+P value adjustment: tukey method for comparing a family of 5 estimates </code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Should we use raw or adjusted p-values?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It depends - adjusted p-values are more conservative - and there is a good reason to use these (preventing Type 1 errors) - especially if we didn’t have a clear set of initial hypotheses. However, in this example we have a clear experimental design, and we aren’t actually interested in looking at every comparison possible. We are interested in the difference between the three treatment groups and whether partner number changes this. With these careful planned contrasts we should be ok using unadjusted p-values</p>
+</div>
+</div>
+</section><section id="visualising-models" class="level2" data-number="26.6"><h2 data-number="26.6" class="anchored" data-anchor-id="visualising-models">
+<span class="header-section-number">26.6</span> Visualising models</h2>
+<p>We can make visualisations of our models with <code>ggplot()</code>.</p>
+<p>Because we have included thorax as a stabilising predictor in our models we have some options on how to present our results:</p>
+<ol type="1">
+<li><p>Thorax does not interact with other predictors - as such it is a constant and <code>emmeans</code> has set these to the mean value within the dataset, so comparisons are constant between categories at the average value of all continuous variables.</p></li>
+<li><p>If we wish to model continuous predictions we need to specify these by asking for model predictions across the observed range of thorax values</p></li>
+</ol>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Type and partner differences across the average for thorax</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Type and partner differences across the observed range for thorax</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Model checking</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>means <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2"></a>    <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type, <span class="at">y =</span> emmean, <span class="at">colour =</span> partners, <span class="at">fill =</span> partners))<span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower.CL, <span class="at">ymax=</span>upper.CL), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span>.<span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> dros_clean3, </span>
+<span id="cb18-6"><a href="#cb18-6"></a>               <span class="fu">aes</span>(<span class="at">x =</span> type, </span>
+<span id="cb18-7"><a href="#cb18-7"></a>                   <span class="at">y =</span> longevity),</span>
+<span id="cb18-8"><a href="#cb18-8"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb18-9"><a href="#cb18-9"></a>               <span class="at">alpha =</span> .<span class="dv">2</span>, </span>
+<span id="cb18-10"><a href="#cb18-10"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span>.<span class="dv">2</span>))<span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="fu">scale_colour_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span> </span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_blank</span>())<span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span><span class="fu">factor</span>(type, </span>
+<span id="cb18-15"><a href="#cb18-15"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, </span>
+<span id="cb18-16"><a href="#cb18-16"></a>                                <span class="st">"Inseminated"</span>, </span>
+<span id="cb18-17"><a href="#cb18-17"></a>                                <span class="st">"Virgin"</span>)), </span>
+<span id="cb18-18"><a href="#cb18-18"></a>             <span class="at">scales =</span> <span class="st">"free_x"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="14a-complex-models_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># use the final model to produce model predictions set to the new dataframe</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(flyls4, </span>
+<span id="cb19-5"><a href="#cb19-5"></a>                 <span class="at">specs =</span> <span class="sc">~</span> type <span class="sc">+</span> thorax <span class="sc">+</span> partners,</span>
+<span id="cb19-6"><a href="#cb19-6"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">thorax =</span> <span class="fu">seq</span>(<span class="fl">0.64</span>,<span class="fl">0.94</span>, .<span class="dv">1</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb19-9"><a href="#cb19-9"></a>       <span class="fu">aes</span>(<span class="at">x=</span>thorax, </span>
+<span id="cb19-10"><a href="#cb19-10"></a>           <span class="at">y =</span> emmean, </span>
+<span id="cb19-11"><a href="#cb19-11"></a>           <span class="at">colour =</span> type, </span>
+<span id="cb19-12"><a href="#cb19-12"></a>           <span class="at">fill =</span> type))<span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>lower.CL, </span>
+<span id="cb19-14"><a href="#cb19-14"></a>                  <span class="at">ymax=</span>upper.CL), </span>
+<span id="cb19-15"><a href="#cb19-15"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>)<span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>    <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>, </span>
+<span id="cb19-17"><a href="#cb19-17"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dros_clean, </span>
+<span id="cb19-19"><a href="#cb19-19"></a>             <span class="fu">aes</span>(<span class="at">x =</span> thorax, </span>
+<span id="cb19-20"><a href="#cb19-20"></a>                 <span class="at">y =</span> longevity),</span>
+<span id="cb19-21"><a href="#cb19-21"></a>             <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="fu">scale_fill_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="fu">scale_colour_discrete_qualitative</span>() <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Lifespan in days"</span>,</span>
+<span id="cb19-25"><a href="#cb19-25"></a>       <span class="at">x =</span> <span class="st">"Thorax length (mm)"</span>,</span>
+<span id="cb19-26"><a href="#cb19-26"></a>       <span class="at">fill =</span> <span class="st">"Type of female exposure"</span>)<span class="sc">+</span></span>
+<span id="cb19-27"><a href="#cb19-27"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a>  <span class="fu">theme_classic</span>()<span class="sc">+</span></span>
+<span id="cb19-29"><a href="#cb19-29"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)<span class="sc">+</span></span>
+<span id="cb19-30"><a href="#cb19-30"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span><span class="fu">factor</span>(partners, </span>
+<span id="cb19-31"><a href="#cb19-31"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="14a-complex-models_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Before we can interpret the terms in our model, we should check to see if this is even a good way of fitting and measuring our data. We should check the assumptions of our model are being met.</p>
+<p>R has ways to do this with the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, but the <code>performance</code> packages <span class="citation" data-cites="R-performance">Lüdecke et al. (<a href="references.html#ref-R-performance" role="doc-biblioref">2025</a>)</span> from <code>easystats</code> also gives nice residual checks:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist">
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">base R</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">performance</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Set plotting area to 2x2 (four panels)</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co"># Plot diagnostic plots</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="fu">plot</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="14a-complex-models_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(flyls4,</span>
+<span id="cb21-2"><a href="#cb21-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="14a-complex-models_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Posterior Predictive Check – Assesses whether the model’s predicted values align well with the observed data, indicating good model fit.</p></li>
+<li><p>Linearity Check – Ensures that the relationship between predictor variables and the outcome is approximately linear, a key assumption of linear regression.</p></li>
+<li><p>Homogeneity of Variance Check – Tests whether residuals (errors) have constant variance across all levels of predictors, known as homoscedasticity.</p></li>
+<li><p>Influential Observation Check – Identifies individual data points that have a disproportionately large impact on the model’s estimates.</p></li>
+<li><p>Collinearity Check – Detects whether predictor variables are highly correlated with each other, which can distort model estimates and reduce interpretability.</p></li>
+<li><p>Normality Check – Examines whether the residuals of the model follow a normal distribution, an assumption necessary for reliable inference in linear regression.</p></li>
+</ul>
+<section id="homogeneity-of-variance" class="level3" data-number="26.6.1"><h3 data-number="26.6.1" class="anchored" data-anchor-id="homogeneity-of-variance">
+<span class="header-section-number">26.6.1</span> Homogeneity of variance</h3>
+<p><strong>Question - IS the assumption of homogeneity of variance met?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<ul>
+<li><p>Mostly - the reference line is fairly flat (there is a slight curve).</p></li>
+<li><p>It looks as though there might be some increasing heterogeneity with larger values, though very minor.</p></li>
+</ul>
+<p>VERDICT, pretty much ok, should be fine for making inferences.</p>
+<p>With a slight curvature this could indicate that you <em>might</em> get a better fit with a transformation, or perhaps that there is a missing variable that if included in the model would improve the residuals. In this instance I wouldn’t be overly concerned. See here for a great explainer on intepreting residuals<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># Runs a Breusch-Pagan Test for heteroscedasticity</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># Sensitive to outliers, non-normality and sample size</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.007).</code></pre>
+</div>
+</div>
+</div>
+</section><section id="normality-of-residuals" class="level3" data-number="26.6.2"><h3 data-number="26.6.2" class="anchored" data-anchor-id="normality-of-residuals">
+<span class="header-section-number">26.6.2</span> Normality of residuals</h3>
+<p><select class="webex-select"><option value="blank"></option>
+<option value="answer">Yes</option>
+<option value="">No</option></select></p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
+<p>Yes - the QQplot looks pretty good, a very minor indication of a right skew, but nothing to worry about.</p>
+<p>[Interpreting QQ plots][What is a Quantile-Quantile (QQ) plot?]</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Runs a Shapiro Wilk test of normality</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># Sensitive to outliers, sample size</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>OK: residuals appear as normally distributed (p = 0.680).</code></pre>
+</div>
+</div>
+</div>
+</section><section id="collinearity" class="level3" data-number="26.6.3"><h3 data-number="26.6.3" class="anchored" data-anchor-id="collinearity">
+<span class="header-section-number">26.6.3</span> Collinearity</h3>
+<p><strong>Question - IS their an issue with Collinearity?</strong> <select class="webex-select"><option value="blank"></option>
+<option value="">Yes</option>
+<option value="answer">No</option></select></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What does it mean to have (multi)collinearity?</p>
+<p>This is when one or more predictors are correlated - leading to increased uncertainty about their contributions to the outcome variable.</p>
+<p>The result is wider standard error and confidence intervals.</p>
+<p>While there are many discussions about what can be done with multicollinearity - I subscribed to the views outlined <a href="https://janhove.github.io/posts/2019-09-11-collinearity/">here</a>.</p>
+<p>It should be reported - but that’s it - it represents genuine uncertainty around the contributions of your predictors.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">check_collinearity</span>(flyls4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 16%">
+<col style="width: 17%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">VIF</th>
+<th style="text-align: right;">VIF_CI_low</th>
+<th style="text-align: right;">VIF_CI_high</th>
+<th style="text-align: right;">SE_factor</th>
+<th style="text-align: right;">Tolerance</th>
+<th style="text-align: right;">Tolerance_CI_low</th>
+<th style="text-align: right;">Tolerance_CI_high</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">type</td>
+<td style="text-align: right;">2.407136</td>
+<td style="text-align: right;">1.916931</td>
+<td style="text-align: right;">3.159412</td>
+<td style="text-align: right;">1.245590</td>
+<td style="text-align: right;">0.4154314</td>
+<td style="text-align: right;">0.3165146</td>
+<td style="text-align: right;">0.5216672</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">thorax</td>
+<td style="text-align: right;">1.042019</td>
+<td style="text-align: right;">1.000713</td>
+<td style="text-align: right;">3.475709</td>
+<td style="text-align: right;">1.020793</td>
+<td style="text-align: right;">0.9596755</td>
+<td style="text-align: right;">0.2877111</td>
+<td style="text-align: right;">0.9992873</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">partners</td>
+<td style="text-align: right;">2.459411</td>
+<td style="text-align: right;">1.954827</td>
+<td style="text-align: right;">3.230645</td>
+<td style="text-align: right;">1.252298</td>
+<td style="text-align: right;">0.4066014</td>
+<td style="text-align: right;">0.3095357</td>
+<td style="text-align: right;">0.5115541</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">type:partners</td>
+<td style="text-align: right;">3.208678</td>
+<td style="text-align: right;">2.499097</td>
+<td style="text-align: right;">4.254132</td>
+<td style="text-align: right;">1.791278</td>
+<td style="text-align: right;">0.3116548</td>
+<td style="text-align: right;">0.2350656</td>
+<td style="text-align: right;">0.4001445</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+</div>
+</div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-R-performance" class="csl-entry" role="listitem">
+Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., Wiernik, B. M., &amp; Thériault, R. (2025). <em>Performance: Assessment of regression models performance</em>. <a href="https://easystats.github.io/performance/">https://easystats.github.io/performance/</a>
+</div>
+</div>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./14-complex-models.html" class="pagination-link" aria-label="Causal models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./15-generalised-linear.html" class="pagination-link" aria-label="Generalised Linear Models">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>CC-BY (2024) Philip Leftwich</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

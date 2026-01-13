@@ -1,0 +1,337 @@
+# Summarise {#sec-summarise}
+
+```{r, echo = F, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+source("R/booktem_setup.R")
+source("R/my_setup.R")
+penguins_raw <- read_csv(here("files", "penguins_raw.csv"))
+```
+
+## Learning Objectives
+
+- Use summary functions to explore the structure and completeness of a dataset.
+
+- Create simple summaries and grouped summaries using `count()`, `group_by()`, and `summarise()`.
+
+- Calculate descriptive statistics (mean, SD) across groups.
+
+- Use `janitor` tools @R-janitor to quickly tabulate and summarise categorical data.
+
+## A first glimpse
+
+When starting with a new dataset, we want to get an initial idea:
+
+- How many rows and columns are there?
+
+- What are the column names?
+
+- What types of data are in each column?
+
+- What are their possible values or ranges?
+
+- These answers are useful to know before jumping into wrangling and cleaning data.
+
+There are several ways to return an overview of your data, ranging in how comprehensively you wish to summarise your data’s structure.
+
+::: {.panel-tabset}
+
+## glimpse
+
+```{r, eval = T}
+
+glimpse(penguins_raw)
+
+```
+
+## `str()`
+
+```{r, eval = T}
+
+str(penguins_raw)
+
+```
+
+## skim
+
+```{r, eval = T}
+library(skimr)
+
+skim(penguins_raw)
+
+```
+
+:::
+
+At this early stage, it’s helpful to assess whether your dataset meets your expectations. Consider if the data appear as anticipated. Are the values in each column reasonable? Are there any noticeable gaps or errors that might need to be corrected, or that could potentially render the data unusable?
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+The dataset has `r fitb(345)` rows (including the headers) and `r fitb(17)` 17 columns.
+
+It also provides information on the *type* of data in each column
+
+* `<chr>` - means character or text data
+
+* `<dbl>` - means numerical data
+
+**Q Based on our summary functions are any variables assigned to the wrong data type (should be character when numeric or vice versa)?**
+
+`r mcq(c("Yes", answer = "No"))`
+
+
+`r hide("Explanation")`
+
+Although some columns like date might not be correctly treated as character variables, they are not strictly numeric either, all other columns appear correct
+
+`r unhide()`
+
+
+**Q Based on our summary functions do we have complete data for all variables?**
+
+`r mcq(c("Yes", answer = "No"))`
+
+
+`r hide("Explanation")`
+
+No, they are 2 missing data points for body measurements (culmen, flipper, body mass), 11 missing data points for sex, 13/14 missing data points for blood isotopes (Delta N/C) and 290 missing data points for comments
+
+`r unhide()`
+
+::::
+:::
+
+
+We have just learned some ways to initially inspect our dataset. Keep in mind, we don’t expect everything to be perfect. This initial inspection is a good opportunity to identify where these issues might be and assess their severity.
+
+When you are confident that the dataset is largely as expected, you are ready to start summarising your data.
+
+## Summary counts
+
+In the previous section, we learned how to get an overview of our data’s structure, including the number of rows, the columns present, and any missing data. In this section, we will focus on summarising the data. Summarising data can provide insight into the scope and variation in our dataset, and help in evaluating its suitability for our analysis.
+
+With our data we can count the total number of occurrences for different groups either by:
+
+### Filtering
+
+```{r}
+penguins_raw |> 
+  filter(`Species` == "Adelie Penguin (Pygoscelis adeliae)") |> 
+  count()
+
+```
+### Grouping
+
+Or by grouping :
+
+```{r}
+penguins_raw |> 
+  group_by(Species) |> 
+  count()
+```
+
+## Frequency counts by subgroups
+
+We can apply multiple grouping parameters at the same time - for example if we wish to know the frequency of observations by species **and** sex. 
+
+We can do this using `dplyr` or with functions in the `janitor` package:
+
+:::{.panel-tabset}
+
+## Dplyr
+
+```{r}
+
+penguins_raw |> 
+  group_by(Species,Sex) |> 
+  count() |> 
+  arrange(desc(n))
+
+```
+
+
+## Janitor
+
+```{r}
+penguins_raw |>
+  tabyl(Sex, Species) |> 
+  adorn_percentages("all") |>
+  adorn_totals(c("row", "col")) |>
+  adorn_pct_formatting(digits = 1)
+
+```
+
+:::
+
+## Visualising Frequencies
+
+Graphs make summaries easier to interpret at a glance.
+
+:::{.panel-tabset}
+
+## Geom_col
+
+```{r}
+
+penguins_raw |> 
+  group_by(Species,Sex) |> 
+  count() |> 
+  arrange(desc(n)) |> 
+  ggplot(aes(x = Species,
+             y = n,
+             fill = Sex))+
+  geom_col(position=position_dodge2(preserve="single"))+
+  coord_flip()+
+  labs(x = "")+
+  theme(legend.position = "bottom")
+
+```
+
+## Geom_bar
+
+```{r}
+
+penguins_raw |> 
+  ggplot(aes(x = Species,
+             fill = Sex))+
+  geom_bar(position=position_dodge2(preserve="single"))+
+  coord_flip()+
+  labs(x = "")+
+  theme(legend.position = "bottom")
+
+```
+
+:::
+
+## Summary statistics
+
+We can extend our summaries to show not just counts, but also measures of central tendency (mean) and spread (standard deviation).
+
+These are powerful ways to understand variation within groups.
+
+```{r, eval = T, message = F, warning = F}
+
+penguins_raw |>
+group_by(Species) |> # Calculate withing groups
+summarise(
+mean_mass = mean(`Body Mass (g)`, na.rm = TRUE),
+sd_mass = sd(`Body Mass (g)`, na.rm = TRUE),
+n = n()
+)
+
+```
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Add Sex to the `group_by()` function to see how mean and SD of body mass differ by sex within species.
+
+`r hide("Solution")`
+
+
+```{r, eval = T, message = F, warning = F}
+
+penguins_raw |>
+group_by(Species, Sex) |> 
+drop_na(Sex) |> # Optional remove rows where Sex is unknown
+summarise(
+mean_mass_g = mean(`Body Mass (g)`, na.rm = TRUE),
+sd_mass_g = sd(`Body Mass (g)`, na.rm = TRUE),
+n = n()
+)
+
+```
+
+
+`r unhide()`
+
+::::
+:::
+
+
+### Summarise multiple variables
+
+- `summarise_at()`
+
+Summarise specific selected variables:
+
+```{r}
+penguins_raw |> 
+  group_by(Species) |> 
+  summarise_at(c("Flipper Length (mm)", "Culmen Length (mm)", "Culmen Depth (mm)"),
+               mean,
+               na.rm =T)
+
+```
+
+- `summarise_if()`
+
+```{r}
+penguins_raw |> 
+  group_by(Species) |> 
+  summarise_if(is.numeric, mean, na.rm =T)
+
+```
+
+
+
+### Useful `summary` functions
+
+#### Measure of location:
+
+- mean(x): sum of x divided by the length
+
+- median(x): 50% of x is above and 50% is below
+
+#### Measure of variation:
+
+- sd(x): standard deviation
+
+- IQR(x): interquartile range (robust equivalent of sd when outliers are present in the data)
+
+#### Measure of rank:
+
+- min(x): minimum value of x
+
+- max(x): maximum value of x
+
+- quantile(x, 0.25): 25% of x is below this value
+
+#### Counts:
+
+- n(x): the number of element in x
+
+- sum(!is.na(x)): count non-missing values
+
+- n_distinct(x): count the number of unique value
+
+
+## Summary
+
+In this section we learned to:
+
+- Inspect structure and completeness
+
+    - Use `glimpse()`, `str()`, and `skim()` to understand column types, missing data, and variable ranges.
+
+    - Confirm that variables are stored in appropriate formats (e.g. numeric vs character).
+
+- Summarise counts and categories
+
+    Count observations using `count()` and `group_by()` to explore dataset composition.
+
+    Use `janitor::tabyl()` for fast, readable cross-tabulations and percentages.
+
+- Calculate descriptive statistics
+
+    - Compute group-wise summaries with `summarise()` such as means, SDs, and counts.
+
+

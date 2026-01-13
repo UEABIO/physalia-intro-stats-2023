@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>8&nbsp; Model diagnostics – Physalia</title>
+<title>20&nbsp; Model diagnostics – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,18 +66,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-a85b8e33ea8f0b235709a7eb17d07876.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-9206d9c030161701b67a41faf3cec2af.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19fea3fb2752d4c0d13dbb0336d0799e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d394c05eec79cc8a56bb6dd2ae770f2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d7d11905500e7839d0ae783f44cd34c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -263,6 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -277,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./model-assumptions.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./model-assumptions.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -309,168 +311,168 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Working with data in R</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-penguin-project.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Meet the Penguins</span></span></a>
+  <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data cleaning</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-data-bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data bias</span></span></a>
+  <a href="./01-studio-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R Studio Basics</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Project &amp; Data Management</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spreadsheets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data Management</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import_penguins_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Dplyr</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Data Cleaning</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./columns.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./strings.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./factors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Multi factor ANOVA</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Generalised Linear Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Linear Mixed Models</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -478,7 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">Linear Models</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -486,14 +488,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Generalised Linear Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Linear Mixed Models</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Basics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./projects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Project workflows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -516,12 +629,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./advanced_ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">ggplot extras</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -537,58 +644,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#assumption-checking" id="toc-assumption-checking" class="nav-link active" data-scroll-target="#assumption-checking"><span class="header-section-number">9</span> Assumption checking</a>
+<a href="#assumption-checking" id="toc-assumption-checking" class="nav-link active" data-scroll-target="#assumption-checking"><span class="header-section-number">21</span> Assumption checking</a>
   <ul class="collapse">
 <li>
-<a href="#assumption-1-normality-of-residuals" id="toc-assumption-1-normality-of-residuals" class="nav-link" data-scroll-target="#assumption-1-normality-of-residuals"><span class="header-section-number">9.1</span> Assumption 1: Normality of Residuals</a>
+<a href="#assumption-1-normality-of-residuals" id="toc-assumption-1-normality-of-residuals" class="nav-link" data-scroll-target="#assumption-1-normality-of-residuals"><span class="header-section-number">21.1</span> Assumption 1: Normality of Residuals</a>
   <ul class="collapse">
-<li><a href="#understanding-residuals" id="toc-understanding-residuals" class="nav-link" data-scroll-target="#understanding-residuals"><span class="header-section-number">9.1.1</span> Understanding Residuals</a></li>
-  <li><a href="#graphical-checks-for-normality" id="toc-graphical-checks-for-normality" class="nav-link" data-scroll-target="#graphical-checks-for-normality"><span class="header-section-number">9.1.2</span> Graphical Checks for Normality</a></li>
-  <li><a href="#formal-test-of-normality" id="toc-formal-test-of-normality" class="nav-link" data-scroll-target="#formal-test-of-normality"><span class="header-section-number">9.1.3</span> Formal test of Normality</a></li>
+<li><a href="#understanding-residuals" id="toc-understanding-residuals" class="nav-link" data-scroll-target="#understanding-residuals"><span class="header-section-number">21.1.1</span> Understanding Residuals</a></li>
+  <li><a href="#graphical-checks-for-normality" id="toc-graphical-checks-for-normality" class="nav-link" data-scroll-target="#graphical-checks-for-normality"><span class="header-section-number">21.1.2</span> Graphical Checks for Normality</a></li>
+  <li><a href="#formal-test-of-normality" id="toc-formal-test-of-normality" class="nav-link" data-scroll-target="#formal-test-of-normality"><span class="header-section-number">21.1.3</span> Formal test of Normality</a></li>
   </ul>
 </li>
   <li>
-<a href="#assumption-2-homogeneity-of-variance" id="toc-assumption-2-homogeneity-of-variance" class="nav-link" data-scroll-target="#assumption-2-homogeneity-of-variance"><span class="header-section-number">9.2</span> Assumption 2: Homogeneity of Variance</a>
+<a href="#assumption-2-homogeneity-of-variance" id="toc-assumption-2-homogeneity-of-variance" class="nav-link" data-scroll-target="#assumption-2-homogeneity-of-variance"><span class="header-section-number">21.2</span> Assumption 2: Homogeneity of Variance</a>
   <ul class="collapse">
-<li><a href="#assessing-equal-variance" id="toc-assessing-equal-variance" class="nav-link" data-scroll-target="#assessing-equal-variance"><span class="header-section-number">9.2.1</span> Assessing Equal Variance</a></li>
-  <li><a href="#graphical-checks-for-homogeneity" id="toc-graphical-checks-for-homogeneity" class="nav-link" data-scroll-target="#graphical-checks-for-homogeneity"><span class="header-section-number">9.2.2</span> Graphical Checks for Homogeneity</a></li>
-  <li><a href="#formal-tests-for-homogeneity-of-variance" id="toc-formal-tests-for-homogeneity-of-variance" class="nav-link" data-scroll-target="#formal-tests-for-homogeneity-of-variance"><span class="header-section-number">9.2.3</span> Formal Tests for Homogeneity of Variance</a></li>
+<li><a href="#assessing-equal-variance" id="toc-assessing-equal-variance" class="nav-link" data-scroll-target="#assessing-equal-variance"><span class="header-section-number">21.2.1</span> Assessing Equal Variance</a></li>
+  <li><a href="#graphical-checks-for-homogeneity" id="toc-graphical-checks-for-homogeneity" class="nav-link" data-scroll-target="#graphical-checks-for-homogeneity"><span class="header-section-number">21.2.2</span> Graphical Checks for Homogeneity</a></li>
+  <li><a href="#formal-tests-for-homogeneity-of-variance" id="toc-formal-tests-for-homogeneity-of-variance" class="nav-link" data-scroll-target="#formal-tests-for-homogeneity-of-variance"><span class="header-section-number">21.2.3</span> Formal Tests for Homogeneity of Variance</a></li>
   </ul>
 </li>
   <li>
-<a href="#assumption-3-linearity" id="toc-assumption-3-linearity" class="nav-link" data-scroll-target="#assumption-3-linearity"><span class="header-section-number">9.3</span> Assumption 3: Linearity</a>
+<a href="#assumption-3-linearity" id="toc-assumption-3-linearity" class="nav-link" data-scroll-target="#assumption-3-linearity"><span class="header-section-number">21.3</span> Assumption 3: Linearity</a>
   <ul class="collapse">
-<li><a href="#graphical-checks-for-linearity" id="toc-graphical-checks-for-linearity" class="nav-link" data-scroll-target="#graphical-checks-for-linearity"><span class="header-section-number">9.3.1</span> Graphical checks for linearity</a></li>
+<li><a href="#graphical-checks-for-linearity" id="toc-graphical-checks-for-linearity" class="nav-link" data-scroll-target="#graphical-checks-for-linearity"><span class="header-section-number">21.3.1</span> Graphical checks for linearity</a></li>
   </ul>
 </li>
   <li>
-<a href="#outliers-and-their-impact" id="toc-outliers-and-their-impact" class="nav-link" data-scroll-target="#outliers-and-their-impact"><span class="header-section-number">9.4</span> Outliers and Their Impact</a>
+<a href="#outliers-and-their-impact" id="toc-outliers-and-their-impact" class="nav-link" data-scroll-target="#outliers-and-their-impact"><span class="header-section-number">21.4</span> Outliers and Their Impact</a>
   <ul class="collapse">
-<li><a href="#identifying-outliers" id="toc-identifying-outliers" class="nav-link" data-scroll-target="#identifying-outliers"><span class="header-section-number">9.4.1</span> Identifying Outliers</a></li>
-  <li><a href="#formal-tests-for-outliers" id="toc-formal-tests-for-outliers" class="nav-link" data-scroll-target="#formal-tests-for-outliers"><span class="header-section-number">9.4.2</span> Formal Tests for Outliers</a></li>
+<li><a href="#identifying-outliers" id="toc-identifying-outliers" class="nav-link" data-scroll-target="#identifying-outliers"><span class="header-section-number">21.4.1</span> Identifying Outliers</a></li>
+  <li><a href="#formal-tests-for-outliers" id="toc-formal-tests-for-outliers" class="nav-link" data-scroll-target="#formal-tests-for-outliers"><span class="header-section-number">21.4.2</span> Formal Tests for Outliers</a></li>
   </ul>
 </li>
-  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">9.5</span> Multicollinearity</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">9.6</span> Summary</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#bootstrapping-permutation-tests" id="toc-bootstrapping-permutation-tests" class="nav-link" data-scroll-target="#bootstrapping-permutation-tests"><span class="header-section-number">10</span> Bootstrapping &amp; Permutation tests</a>
-  <ul class="collapse">
-<li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="header-section-number">10.1</span> How it works</a></li>
-  <li>
-<a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">10.2</span> Practice</a>
-  <ul class="collapse">
-<li><a href="#get-confidence-intervals" id="toc-get-confidence-intervals" class="nav-link" data-scroll-target="#get-confidence-intervals"><span class="header-section-number">10.2.1</span> Get Confidence intervals</a></li>
-  <li><a href="#visualise-bootstrap-distributions" id="toc-visualise-bootstrap-distributions" class="nav-link" data-scroll-target="#visualise-bootstrap-distributions"><span class="header-section-number">10.2.2</span> Visualise bootstrap distributions</a></li>
+  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">21.5</span> Multicollinearity</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">21.6</span> Summary</a></li>
   </ul>
 </li>
   <li>
-<a href="#permutation-testing" id="toc-permutation-testing" class="nav-link" data-scroll-target="#permutation-testing"><span class="header-section-number">10.3</span> Permutation testing</a>
+<a href="#bootstrapping-permutation-tests" id="toc-bootstrapping-permutation-tests" class="nav-link" data-scroll-target="#bootstrapping-permutation-tests"><span class="header-section-number">22</span> Bootstrapping &amp; Permutation tests</a>
   <ul class="collapse">
-<li><a href="#logic" id="toc-logic" class="nav-link" data-scroll-target="#logic"><span class="header-section-number">10.3.1</span> Logic</a></li>
-  <li><a href="#manual-permutation" id="toc-manual-permutation" class="nav-link" data-scroll-target="#manual-permutation"><span class="header-section-number">10.3.2</span> Manual Permutation</a></li>
-  <li><a href="#using-the-coin-package" id="toc-using-the-coin-package" class="nav-link" data-scroll-target="#using-the-coin-package"><span class="header-section-number">10.3.3</span> Using the coin package</a></li>
+<li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="header-section-number">22.1</span> How it works</a></li>
+  <li>
+<a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">22.2</span> Practice</a>
+  <ul class="collapse">
+<li><a href="#get-confidence-intervals" id="toc-get-confidence-intervals" class="nav-link" data-scroll-target="#get-confidence-intervals"><span class="header-section-number">22.2.1</span> Get Confidence intervals</a></li>
+  <li><a href="#visualise-bootstrap-distributions" id="toc-visualise-bootstrap-distributions" class="nav-link" data-scroll-target="#visualise-bootstrap-distributions"><span class="header-section-number">22.2.2</span> Visualise bootstrap distributions</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#permutation-testing" id="toc-permutation-testing" class="nav-link" data-scroll-target="#permutation-testing"><span class="header-section-number">22.3</span> Permutation testing</a>
+  <ul class="collapse">
+<li><a href="#logic" id="toc-logic" class="nav-link" data-scroll-target="#logic"><span class="header-section-number">22.3.1</span> Logic</a></li>
+  <li><a href="#manual-permutation" id="toc-manual-permutation" class="nav-link" data-scroll-target="#manual-permutation"><span class="header-section-number">22.3.2</span> Manual Permutation</a></li>
+  <li><a href="#using-the-coin-package" id="toc-using-the-coin-package" class="nav-link" data-scroll-target="#using-the-coin-package"><span class="header-section-number">22.3.3</span> Using the coin package</a></li>
   </ul>
 </li>
   </ul>
@@ -596,8 +703,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./model-assumptions.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-assumption" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-inferential-statistics.html">Linear Models</a></li><li class="breadcrumb-item"><a href="./model-assumptions.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-assumption" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></h1>
 </div>
 
 
@@ -612,32 +719,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(performance)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(car)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="assumption-checking" class="level1" data-number="9"><h1 data-number="9">
-<span class="header-section-number">9</span> Assumption checking</h1>
+<section id="assumption-checking" class="level1" data-number="21"><h1 data-number="21">
+<span class="header-section-number">21</span> Assumption checking</h1>
 <p>After conducting a linear model analysis, we often find ourselves with results and inferences. However, before we can fully trust our analysis, it’s essential to check whether the underlying assumptions of the model are adequately met. In this chapter, we will focus on two critical assumptions: the normality of residuals and the homogeneity of variance. We will also discuss the impact of outliers on our model and the formal tests available for these assumptions.</p>
-<section id="assumption-1-normality-of-residuals" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="assumption-1-normality-of-residuals">
-<span class="header-section-number">9.1</span> Assumption 1: Normality of Residuals</h2>
-<section id="understanding-residuals" class="level3" data-number="9.1.1"><h3 data-number="9.1.1" class="anchored" data-anchor-id="understanding-residuals">
-<span class="header-section-number">9.1.1</span> Understanding Residuals</h3>
+<section id="assumption-1-normality-of-residuals" class="level2" data-number="21.1"><h2 data-number="21.1" class="anchored" data-anchor-id="assumption-1-normality-of-residuals">
+<span class="header-section-number">21.1</span> Assumption 1: Normality of Residuals</h2>
+<section id="understanding-residuals" class="level3" data-number="21.1.1"><h3 data-number="21.1.1" class="anchored" data-anchor-id="understanding-residuals">
+<span class="header-section-number">21.1.1</span> Understanding Residuals</h3>
 <p>Residuals are the differences between observed values and the fitted values produced by the model. In our case, this involves analyzing plant heights against treatment means. The normality of residuals is crucial because the linear model relies on this assumption to compute standard errors, which in turn affects confidence intervals and hypothesis testing.</p>
-</section><section id="graphical-checks-for-normality" class="level3" data-number="9.1.2"><h3 data-number="9.1.2" class="anchored" data-anchor-id="graphical-checks-for-normality">
-<span class="header-section-number">9.1.2</span> Graphical Checks for Normality</h3>
+</section><section id="graphical-checks-for-normality" class="level3" data-number="21.1.2"><h3 data-number="21.1.2" class="anchored" data-anchor-id="graphical-checks-for-normality">
+<span class="header-section-number">21.1.2</span> Graphical Checks for Normality</h3>
 <p>To visually assess the normality of residuals, we can utilize various plotting functions in R. Two effective methods are:</p>
 <p>Quantile-Quantile (QQ) Plot: This plot compares the distribution of residuals to a theoretical normal distribution. If the residuals follow a normal distribution, they should approximately align along a diagonal line.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="" aria-current="page">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -648,8 +755,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"normality"</span>,<span class="st">"qq"</span>),</span>
-<span id="cb3-2"><a href="#cb3-2"></a>                         <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"normality"</span>,<span class="st">"qq"</span>),</span>
+<span id="cb3-2"><a href="#cb3-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -660,17 +767,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section><section id="formal-test-of-normality" class="level3" data-number="9.1.3"><h3 data-number="9.1.3" class="anchored" data-anchor-id="formal-test-of-normality">
-<span class="header-section-number">9.1.3</span> Formal test of Normality</h3>
+</section><section id="formal-test-of-normality" class="level3" data-number="21.1.3"><h3 data-number="21.1.3" class="anchored" data-anchor-id="formal-test-of-normality">
+<span class="header-section-number">21.1.3</span> Formal test of Normality</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(lsmodel1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(lsmodel1))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -682,7 +789,7 @@ W = 0.83089, p-value = 0.0002531</code></pre>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>performance<span class="sc">::</span><span class="fu">check_normality</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
 </div>
@@ -690,23 +797,23 @@ W = 0.83089, p-value = 0.0002531</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="assumption-2-homogeneity-of-variance" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="assumption-2-homogeneity-of-variance">
-<span class="header-section-number">9.2</span> Assumption 2: Homogeneity of Variance</h2>
-<section id="assessing-equal-variance" class="level3" data-number="9.2.1"><h3 data-number="9.2.1" class="anchored" data-anchor-id="assessing-equal-variance">
-<span class="header-section-number">9.2.1</span> Assessing Equal Variance</h3>
+</section></section><section id="assumption-2-homogeneity-of-variance" class="level2" data-number="21.2"><h2 data-number="21.2" class="anchored" data-anchor-id="assumption-2-homogeneity-of-variance">
+<span class="header-section-number">21.2</span> Assumption 2: Homogeneity of Variance</h2>
+<section id="assessing-equal-variance" class="level3" data-number="21.2.1"><h3 data-number="21.2.1" class="anchored" data-anchor-id="assessing-equal-variance">
+<span class="header-section-number">21.2.1</span> Assessing Equal Variance</h3>
 <p>The assumption of homogeneity of variance (or homoscedasticity) states that the residual variance should be constant across all levels of the independent variable(s). This is important because linear models often pool variance across groups to make inferences.</p>
-</section><section id="graphical-checks-for-homogeneity" class="level3" data-number="9.2.2"><h3 data-number="9.2.2" class="anchored" data-anchor-id="graphical-checks-for-homogeneity">
-<span class="header-section-number">9.2.2</span> Graphical Checks for Homogeneity</h3>
+</section><section id="graphical-checks-for-homogeneity" class="level3" data-number="21.2.2"><h3 data-number="21.2.2" class="anchored" data-anchor-id="graphical-checks-for-homogeneity">
+<span class="header-section-number">21.2.2</span> Graphical Checks for Homogeneity</h3>
 <p>To assess this assumption, we can plot the residuals against the fitted values:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -723,7 +830,7 @@ W = 0.83089, p-value = 0.0002531</code></pre>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"homogeneity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"homogeneity"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -734,21 +841,21 @@ W = 0.83089, p-value = 0.0002531</code></pre>
 </div>
 </div>
 </div>
-</section><section id="formal-tests-for-homogeneity-of-variance" class="level3" data-number="9.2.3"><h3 data-number="9.2.3" class="anchored" data-anchor-id="formal-tests-for-homogeneity-of-variance">
-<span class="header-section-number">9.2.3</span> Formal Tests for Homogeneity of Variance</h3>
+</section><section id="formal-tests-for-homogeneity-of-variance" class="level3" data-number="21.2.3"><h3 data-number="21.2.3" class="anchored" data-anchor-id="formal-tests-for-homogeneity-of-variance">
+<span class="header-section-number">21.2.3</span> Formal Tests for Homogeneity of Variance</h3>
 <p>To formally test for homogeneity of variance, we can use:</p>
 <p>Breusch-Pagan Test: This test evaluates whether the variance of residuals is constant.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">library</span>(lmtest)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">library</span>(lmtest)</span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">bptest</span>(lsmodel1, <span class="at">varformula =</span> <span class="sc">~</span><span class="fu">fitted.values</span>(lsmodel1), <span class="at">studentize =</span> F )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="fu">bptest</span>(lsmodel1, <span class="at">varformula =</span> <span class="sc">~</span><span class="fu">fitted.values</span>(lsmodel1), <span class="at">studentize =</span> F )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Breusch-Pagan test
@@ -760,7 +867,7 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>performance<span class="sc">::</span><span class="fu">check_heteroscedasticity</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.047).</code></pre>
 </div>
@@ -768,21 +875,21 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="assumption-3-linearity" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="assumption-3-linearity">
-<span class="header-section-number">9.3</span> Assumption 3: Linearity</h2>
+</section></section><section id="assumption-3-linearity" class="level2" data-number="21.3"><h2 data-number="21.3" class="anchored" data-anchor-id="assumption-3-linearity">
+<span class="header-section-number">21.3</span> Assumption 3: Linearity</h2>
 <p>Linear regression assumes a linear relationship between the predictor(s) and the response variable. If this assumption is violated, the model may produce biased or inaccurate predictions.</p>
-<section id="graphical-checks-for-linearity" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="graphical-checks-for-linearity">
-<span class="header-section-number">9.3.1</span> Graphical checks for linearity</h3>
+<section id="graphical-checks-for-linearity" class="level3" data-number="21.3.1"><h3 data-number="21.3.1" class="anchored" data-anchor-id="graphical-checks-for-linearity">
+<span class="header-section-number">21.3.1</span> Graphical checks for linearity</h3>
 <p>To assess this assumption, we can plot the residuals against the fitted values:</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -799,7 +906,7 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"linearity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"linearity"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -814,21 +921,21 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 <ul>
 <li><p><strong>Limited Data Points</strong>: With only two levels, you have a limited number of data points, which may not adequately capture the underlying relationship. This makes it hard to assess linearity visually or statistically.</p></li>
 <li><p><strong>No Intermediate Values</strong>: A binary predictor means there are no intermediate values to examine. This limits the ability to see a continuous trend or relationship.</p></li>
-</ul></section></section><section id="outliers-and-their-impact" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="outliers-and-their-impact">
-<span class="header-section-number">9.4</span> Outliers and Their Impact</h2>
+</ul></section></section><section id="outliers-and-their-impact" class="level2" data-number="21.4"><h2 data-number="21.4" class="anchored" data-anchor-id="outliers-and-their-impact">
+<span class="header-section-number">21.4</span> Outliers and Their Impact</h2>
 <p>Outliers can significantly affect the estimates of a model, influencing both residuals and overall model fit. Therefore, it’s essential to assess the presence and impact of outliers on our analysis.</p>
-<section id="identifying-outliers" class="level3" data-number="9.4.1"><h3 data-number="9.4.1" class="anchored" data-anchor-id="identifying-outliers">
-<span class="header-section-number">9.4.1</span> Identifying Outliers</h3>
+<section id="identifying-outliers" class="level3" data-number="21.4.1"><h3 data-number="21.4.1" class="anchored" data-anchor-id="identifying-outliers">
+<span class="header-section-number">21.4.1</span> Identifying Outliers</h3>
 <p>To identify outliers, we can employ Cook’s Distance, which measures the influence of each data point on the model fit. Large values of Cook’s Distance suggest that a point may be having an outsized effect.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">plot</span>(lsmodel1, <span class="at">which=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -839,7 +946,7 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"outliers"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, <span class="at">check=</span><span class="fu">c</span>(<span class="st">"outliers"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -850,41 +957,41 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 </div>
 </div>
-</section><section id="formal-tests-for-outliers" class="level3" data-number="9.4.2"><h3 data-number="9.4.2" class="anchored" data-anchor-id="formal-tests-for-outliers">
-<span class="header-section-number">9.4.2</span> Formal Tests for Outliers</h3>
+</section><section id="formal-tests-for-outliers" class="level3" data-number="21.4.2"><h3 data-number="21.4.2" class="anchored" data-anchor-id="formal-tests-for-outliers">
+<span class="header-section-number">21.4.2</span> Formal Tests for Outliers</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_outliers</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_outliers</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>OK: No outliers detected.
 - Based on the following method and threshold: cook (0.5).
 - For variable: (Whole model)</code></pre>
 </div>
 </div>
-</section></section><section id="multicollinearity" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="multicollinearity">
-<span class="header-section-number">9.5</span> Multicollinearity</h2>
+</section></section><section id="multicollinearity" class="level2" data-number="21.5"><h2 data-number="21.5" class="anchored" data-anchor-id="multicollinearity">
+<span class="header-section-number">21.5</span> Multicollinearity</h2>
 <p>Check: Assess whether predictors are highly correlated with each other, which can affect the stability of coefficient estimates. In this model we only have a single predictor, so this test is not required - we will revisit this with more complex models later.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(car)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="co"># Won't run not enough terms</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># vif(lsmodel1) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># vif(lsmodel1) </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># performance::check_model(lsmodel1, check=c("vif"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># performance::check_model(lsmodel1, check=c("vif"))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 </div>
-</section><section id="summary" class="level2" data-number="9.6"><h2 data-number="9.6" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">9.6</span> Summary</h2>
+</section><section id="summary" class="level2" data-number="21.6"><h2 data-number="21.6" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">21.6</span> Summary</h2>
 <p>So what can we determine from this analysis? Our model is not perfect, however it is reasonably good. Many of the statistical violations are likely because of the small sample size - and collecting more data might be a good idea.</p>
 <p>Linear models are powerful tools for analyzing relationships between variables, but their validity hinges on several key assumptions. Checking these assumptions is crucial to ensure the reliability and interpretability of the model’s results.</p>
 <p>By systematically checking these assumptions, researchers can ensure that their linear models are robust, reliable, and capable of providing meaningful insights into the relationships between variables. Ignoring these checks can lead to flawed analyses and misguided conclusions, underscoring the necessity of thorough model evaluation.</p>
@@ -898,13 +1005,13 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 <p>We can check all our model assumptions at once, as well as looking at individual plots as shown above.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">Base</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">Performance</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true" href="">Base</a></li>
+<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false" href="">Performance</a></li>
 </ul>
 <div class="tab-content">
 <div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">plot</span>(lsmodel1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">plot</span>(lsmodel1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -933,8 +1040,8 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, </span>
-<span id="cb23-2"><a href="#cb23-2"></a>                         <span class="at">detrend =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(lsmodel1, </span>
+<span id="cb23-2"><a href="#cb23-2"></a>                         <span class="at">detrend =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -945,11 +1052,11 @@ BP = 3.9496, df = 1, p-value = 0.04688</code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="bootstrapping-permutation-tests" class="level1" data-number="10"><h1 data-number="10">
-<span class="header-section-number">10</span> Bootstrapping &amp; Permutation tests</h1>
+</section></section><section id="bootstrapping-permutation-tests" class="level1" data-number="22"><h1 data-number="22">
+<span class="header-section-number">22</span> Bootstrapping &amp; Permutation tests</h1>
 <p>Bootstrapping is a powerful, assumption-light statistical method used to estimate the uncertainty of an estimate — such as a mean, median, regression coefficient, or difference between groups — when traditional methods may not be reliable.</p>
-<section id="how-it-works" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="how-it-works">
-<span class="header-section-number">10.1</span> How it works</h2>
+<section id="how-it-works" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="how-it-works">
+<span class="header-section-number">22.1</span> How it works</h2>
 <p>Bootstrapping is a resampling-based method that helps estimate the uncertainty of a statistic — such as a group difference or a regression coefficient — without relying on strict assumptions like normally distributed residuals or equal variances.</p>
 <p>In a typical linear model, the accuracy of confidence intervals and p-values depends on assumptions of normality and homoscedasticity. These assumptions often break down in small samples, which can lead to misleading inferences.</p>
 <p>Bootstrapping addresses this by:</p>
@@ -978,12 +1085,12 @@ Warning
 </div>
 </div>
 <p>In our case, assumption checks revealed some <strong>heteroscedasticity</strong> and <strong>deviation from normality</strong>, likely due to <strong>small sample size</strong>. Bootstrapping allows us to continue with inference in a principled way, producing confidence intervals derived directly from the observed data distribution, rather than relying on theoretical models that may not hold.</p>
-</section><section id="practice" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="practice">
-<span class="header-section-number">10.2</span> Practice</h2>
+</section><section id="practice" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="practice">
+<span class="header-section-number">22.2</span> Practice</h2>
 <p>We’ll use the model <code>lsmodel1</code>, which compares plant heights across treatment type.</p>
 <p>We’ll resample rows of the dataset (case resampling), refit the model each time, and store the coefficients - for ease of use we will use the <code>car</code> package, but there are lots of ways to perform bootstrapping:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(car)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb24-2"><a href="#cb24-2"></a></span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb24-4"><a href="#cb24-4"></a></span>
@@ -993,7 +1100,7 @@ Warning
 <span id="cb24-8"><a href="#cb24-8"></a></span>
 <span id="cb24-9"><a href="#cb24-9"></a><span class="fu">summary</span>(boot_model)</span>
 <span id="cb24-10"><a href="#cb24-10"></a></span>
-<span id="cb24-11"><a href="#cb24-11"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(boot_model<span class="sc">$</span>t[,<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-11"><a href="#cb24-11"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(boot_model<span class="sc">$</span>t[,<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1037,7 +1144,7 @@ Warning
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(parameters)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(parameters)</span>
 <span id="cb26-2"><a href="#cb26-2"></a><span class="fu">library</span>(qqplotr)</span>
 <span id="cb26-3"><a href="#cb26-3"></a></span>
 <span id="cb26-4"><a href="#cb26-4"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
@@ -1049,7 +1156,7 @@ Warning
 <span id="cb26-10"><a href="#cb26-10"></a><span class="fu">ggplot</span>(parameters_model, <span class="fu">aes</span>(<span class="at">sample =</span> typeSelf))<span class="sc">+</span></span>
 <span id="cb26-11"><a href="#cb26-11"></a>    <span class="fu">stat_qq_band</span>() <span class="sc">+</span></span>
 <span id="cb26-12"><a href="#cb26-12"></a>    <span class="fu">stat_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a>    <span class="fu">stat_qq_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-13"><a href="#cb26-13"></a>    <span class="fu">stat_qq_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1086,11 +1193,11 @@ Warning
 </div>
 </div>
 </div>
-<section id="get-confidence-intervals" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="get-confidence-intervals">
-<span class="header-section-number">10.2.1</span> Get Confidence intervals</h3>
+<section id="get-confidence-intervals" class="level3" data-number="22.2.1"><h3 data-number="22.2.1" class="anchored" data-anchor-id="get-confidence-intervals">
+<span class="header-section-number">22.2.1</span> Get Confidence intervals</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">confint</span>(boot_model)</span>
-<span id="cb27-2"><a href="#cb27-2"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(boot_model, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">confint</span>(boot_model)</span>
+<span id="cb27-2"><a href="#cb27-2"></a>broom<span class="sc">::</span><span class="fu">tidy</span>(boot_model, <span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bootstrap bca confidence intervals
 
@@ -1132,12 +1239,12 @@ typeSelf    -4.442568 -0.08401808</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb29-2"><a href="#cb29-2"></a></span>
 <span id="cb29-3"><a href="#cb29-3"></a>b <span class="ot">&lt;-</span> <span class="fu">bootstrap_parameters</span>(lsmodel1, <span class="at">iterations =</span> <span class="dv">2000</span>)</span>
 <span id="cb29-4"><a href="#cb29-4"></a>b</span>
 <span id="cb29-5"><a href="#cb29-5"></a></span>
-<span id="cb29-6"><a href="#cb29-6"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(b, <span class="at">specs =</span> <span class="sc">~</span> type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-6"><a href="#cb29-6"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(b, <span class="at">specs =</span> <span class="sc">~</span> type)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1176,15 +1283,15 @@ Point estimate displayed: median
 HPD interval probability: 0.95 </code></pre>
 </div>
 </div>
-</section><section id="visualise-bootstrap-distributions" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="visualise-bootstrap-distributions">
-<span class="header-section-number">10.2.2</span> Visualise bootstrap distributions</h3>
+</section><section id="visualise-bootstrap-distributions" class="level3" data-number="22.2.2"><h3 data-number="22.2.2" class="anchored" data-anchor-id="visualise-bootstrap-distributions">
+<span class="header-section-number">22.2.2</span> Visualise bootstrap distributions</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Get model-based 95% CIs</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Get model-based 95% CIs</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a></span>
-<span id="cb31-3"><a href="#cb31-3"></a>orig_ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-3"><a href="#cb31-3"></a>orig_ci <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(lsmodel1, <span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Get bootstrapped coefficients from car::Boot()</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Get bootstrapped coefficients from car::Boot()</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a>boot_coefs <span class="ot">&lt;-</span> boot_model<span class="sc">$</span>t</span>
 <span id="cb32-3"><a href="#cb32-3"></a></span>
 <span id="cb32-4"><a href="#cb32-4"></a><span class="co"># Long format for plotting</span></span>
@@ -1198,10 +1305,10 @@ HPD interval probability: 0.95 </code></pre>
 <span id="cb32-12"><a href="#cb32-12"></a>quantile <span class="ot">&lt;-</span> boot_long <span class="sc">|&gt;</span> </span>
 <span id="cb32-13"><a href="#cb32-13"></a>  <span class="fu">group_by</span>(term) <span class="sc">|&gt;</span> </span>
 <span id="cb32-14"><a href="#cb32-14"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">quantile</span>(estimate, <span class="fu">c</span>(<span class="fl">0.025</span>)),</span>
-<span id="cb32-15"><a href="#cb32-15"></a>            <span class="at">max =</span> <span class="fu">quantile</span>(estimate, <span class="fu">c</span>(<span class="fl">0.975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-15"><a href="#cb32-15"></a>            <span class="at">max =</span> <span class="fu">quantile</span>(estimate, <span class="fu">c</span>(<span class="fl">0.975</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(boot_long, <span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(boot_long, <span class="fu">aes</span>(<span class="at">x =</span> estimate)) <span class="sc">+</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a>  <span class="co"># Add shaded CI region from original model</span></span>
 <span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">geom_rect</span>(<span class="at">data =</span> quantile,</span>
 <span id="cb33-4"><a href="#cb33-4"></a>            <span class="fu">aes</span>(<span class="at">xmin =</span> min, <span class="at">xmax =</span> max, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
@@ -1217,7 +1324,7 @@ HPD interval probability: 0.95 </code></pre>
 <span id="cb33-14"><a href="#cb33-14"></a>    <span class="at">title =</span> <span class="st">"Bootstrapped Coefficient Distributions with Model 95% CI"</span>,</span>
 <span id="cb33-15"><a href="#cb33-15"></a>    <span class="at">x =</span> <span class="st">"Coefficient Estimate"</span>,</span>
 <span id="cb33-16"><a href="#cb33-16"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span></span>
-<span id="cb33-17"><a href="#cb33-17"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-17"><a href="#cb33-17"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="model-assumptions_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
@@ -1225,21 +1332,21 @@ HPD interval probability: 0.95 </code></pre>
 </div>
 </div>
 </div>
-</section></section><section id="permutation-testing" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="permutation-testing">
-<span class="header-section-number">10.3</span> Permutation testing</h2>
+</section></section><section id="permutation-testing" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="permutation-testing">
+<span class="header-section-number">22.3</span> Permutation testing</h2>
 <p>Let’s now turn to permutation testing to evaluate the statistical significance of the group difference.</p>
-<section id="logic" class="level3" data-number="10.3.1"><h3 data-number="10.3.1" class="anchored" data-anchor-id="logic">
-<span class="header-section-number">10.3.1</span> Logic</h3>
+<section id="logic" class="level3" data-number="22.3.1"><h3 data-number="22.3.1" class="anchored" data-anchor-id="logic">
+<span class="header-section-number">22.3.1</span> Logic</h3>
 <p>Permutation tests:</p>
 <ul>
 <li><p>Randomly shuffle the type labels</p></li>
 <li><p>Refit the model with these shuffled labels</p></li>
 <li><p>Recalculate the typecross coefficient each time</p></li>
 <li><p>Compare the observed coefficient to the distribution of permuted coefficients</p></li>
-</ul></section><section id="manual-permutation" class="level3" data-number="10.3.2"><h3 data-number="10.3.2" class="anchored" data-anchor-id="manual-permutation">
-<span class="header-section-number">10.3.2</span> Manual Permutation</h3>
+</ul></section><section id="manual-permutation" class="level3" data-number="22.3.2"><h3 data-number="22.3.2" class="anchored" data-anchor-id="manual-permutation">
+<span class="header-section-number">22.3.2</span> Manual Permutation</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Observed test statistic</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Observed test statistic</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a>obs_stat <span class="ot">&lt;-</span> <span class="fu">coef</span>(lsmodel1)[<span class="st">"typeSelf"</span>]</span>
 <span id="cb34-3"><a href="#cb34-3"></a></span>
 <span id="cb34-4"><a href="#cb34-4"></a></span>
@@ -1255,19 +1362,19 @@ HPD interval probability: 0.95 </code></pre>
 <span id="cb34-14"><a href="#cb34-14"></a></span>
 <span id="cb34-15"><a href="#cb34-15"></a><span class="co"># Permutation-based p-value</span></span>
 <span id="cb34-16"><a href="#cb34-16"></a>perm_pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(perm_stats) <span class="sc">&gt;=</span> <span class="fu">abs</span>(obs_stat))</span>
-<span id="cb34-17"><a href="#cb34-17"></a>perm_pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-17"><a href="#cb34-17"></a>perm_pval</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.021</code></pre>
 </div>
 </div>
-</section><section id="using-the-coin-package" class="level3" data-number="10.3.3"><h3 data-number="10.3.3" class="anchored" data-anchor-id="using-the-coin-package">
-<span class="header-section-number">10.3.3</span> Using the coin package</h3>
+</section><section id="using-the-coin-package" class="level3" data-number="22.3.3"><h3 data-number="22.3.3" class="anchored" data-anchor-id="using-the-coin-package">
+<span class="header-section-number">22.3.3</span> Using the coin package</h3>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">library</span>(coin)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">library</span>(coin)</span>
 <span id="cb36-2"><a href="#cb36-2"></a></span>
 <span id="cb36-3"><a href="#cb36-3"></a><span class="fu">independence_test</span>(height <span class="sc">~</span> <span class="fu">as.factor</span>(type),</span>
 <span id="cb36-4"><a href="#cb36-4"></a>                  <span class="at">data =</span> darwin, </span>
-<span id="cb36-5"><a href="#cb36-5"></a>                  <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">5000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-5"><a href="#cb36-5"></a>                  <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">5000</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Approximative General Independence Test
@@ -1575,13 +1682,14 @@ window.onresize = move_sidebar;
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1924,12 +2032,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./09-linear-models.html" class="pagination-link" aria-label="Linear models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Linear models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./10-paired-design.html" class="pagination-link" aria-label="Paired tests">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Paired tests</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
