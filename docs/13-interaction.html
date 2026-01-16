@@ -664,7 +664,22 @@ window.Quarto = {
 <li><a href="#reporting-and-understanding-anova" id="toc-reporting-and-understanding-anova" class="nav-link" data-scroll-target="#reporting-and-understanding-anova"><span class="header-section-number">22.3.1</span> Reporting and understanding ANOVA</a></li>
   </ul>
 </li>
-  <li><a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects"><span class="header-section-number">22.4</span> Interaction effects</a></li>
+  <li>
+<a href="#interaction-effects" id="toc-interaction-effects" class="nav-link" data-scroll-target="#interaction-effects"><span class="header-section-number">22.4</span> Interaction effects</a>
+  <ul class="collapse">
+<li><a href="#modelling-an-interaction-effect" id="toc-modelling-an-interaction-effect" class="nav-link" data-scroll-target="#modelling-an-interaction-effect"><span class="header-section-number">22.4.1</span> Modelling an interaction effect</a></li>
+  <li><a href="#write-up" id="toc-write-up" class="nav-link" data-scroll-target="#write-up"><span class="header-section-number">22.4.2</span> Write-up</a></li>
+  <li><a href="#check-model-fit" id="toc-check-model-fit" class="nav-link" data-scroll-target="#check-model-fit"><span class="header-section-number">22.4.4</span> Check Model fit</a></li>
+  <li><a href="#post-hoc" id="toc-post-hoc" class="nav-link" data-scroll-target="#post-hoc"><span class="header-section-number">22.4.5</span> post-hoc</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#sec-ancova" id="toc-sec-ancova" class="nav-link" data-scroll-target="#sec-ancova"><span class="header-section-number">22.5</span> ANCOVA</a>
+  <ul class="collapse">
+<li><a href="#activity-build-your-own-analysis" id="toc-activity-build-your-own-analysis" class="nav-link" data-scroll-target="#activity-build-your-own-analysis"><span class="header-section-number">22.5.1</span> Activity: Build your own analysis</a></li>
+  </ul>
+</li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">22.6</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -953,6 +968,8 @@ Discussion
 <p>It’s not hard to imagine that Light might help with plant growth on its own, and fertiliser might help on its own, but the combined effect of fertiliser and light could be greater (or sometimes different) than what you’d expect just by adding up the effects of each one separately. That extra effect, due to the two variables interacting, is the <strong>interaction effect</strong>.</p>
 <p>If you don’t include an interaction effect when it’s needed, your model might be misleading. It could either underestimate or overestimate the true effect of each variable because it doesn’t account for how they work together. This could lead to wrong conclusions about the impact of each variable, making your predictions or understanding of the relationships less accurate.</p>
 <p>In our case I think it is <strong>highly likely</strong> that Light and Fertiliser have an interaction effect</p>
+</div>
+</div>
 </div>
 <section id="modelling-an-interaction-effect" class="level3" data-number="22.4.1"><h3 data-number="22.4.1" class="anchored" data-anchor-id="modelling-an-interaction-effect">
 <span class="header-section-number">22.4.1</span> Modelling an interaction effect</h3>
@@ -1249,7 +1266,7 @@ Conf-level adjustment: tukey method for comparing a family of 4 estimates </code
 </div>
 </div>
 </div>
-</section><section id="sec-ancova" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="sec-ancova">
+</section></section><section id="sec-ancova" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="sec-ancova">
 <span class="header-section-number">22.5</span> ANCOVA</h2>
 <p>The previous section looked at an interaction between two categorical variables, we can also examine interactions between a factor and a continuous variable. Often referred to as ANCOVA.</p>
 <div class="cell" data-layout-align="center">
@@ -1693,9 +1710,6 @@ Solution
 </ul>
 
 
-</section>
-</div>
-</div>
 </section></main><!-- /main --><script>
 
 /* update total correct if #webex-total_correct exists */

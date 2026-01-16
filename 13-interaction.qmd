@@ -274,6 +274,9 @@ In our case I think it is **highly likely** that Light and Fertiliser have an in
 
 `r unhide()`
 
+::::
+:::
+
 ### Modelling an interaction effect
 
 
