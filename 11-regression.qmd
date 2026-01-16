@@ -109,11 +109,15 @@ janka <- read_csv("data/janka.csv")
 
 ```
 
-## Activity 1: Exploratory Analysis
+## Exploratory Analysis & Correlation
 
-:::{.callout-note}
-Make a plot. Is there any visual evidence for a linear association between wood density and timber hardness?
-:::
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Make a plot. Is there any visual evidence for a linear association between wood density and timber hardness?
 
 `r hide("Solution")`
 
@@ -130,31 +134,28 @@ Wood density and timber hardness appear to be positively related, and the relati
 `r unhide()`
 
 
-## Activity 2: Correlation - Generate Pearson's R
+* [ ] Can you work out the code needed to generate a correlation coefficient? 
 
-Can you work out the code needed to generate Pearson's R? - Try using a google search, then check your code and answer against the solution.
-
-> Hint try the rstatix package?
+> Hint see @sec-cor
 
 `r hide("Solution")`
 
 
 ```{r}
-# cor() does not have a data option so need to use the with() function
-with(janka, cor(dens, hardness))
-```
-
-
-```{r}
-library(rstatix)
 
 janka |> 
-  cor_test(dens, hardness)
+  summarise(cor(dens,
+                hardness),
+            n = n())
 
 ```
+
+
 
 `r unhide()`
 
+::::
+:::
 
 Correlation coefficients range from -1 to 1 for perfectly negative to perfectly positive linear relationships. The relationship here appears to be strongly positive. Correlation looks at the **association** between two variables, but we want to go further - we are arguing that wood density *causes* higher values of timber hardness. In order to test that hypothesis we need to go further than correlation and use regression.
 
@@ -162,15 +163,6 @@ Correlation coefficients range from -1 to 1 for perfectly negative to perfectly 
 
 We can fit the regression model in exactly the same way as we fit the linear model for Darwin's maize data. The *only* difference is that here our predictor variable is continuous rather than categorical. 
 
-```{block, type = "warning"}
-Be careful when ordering variables here:
-
-* the left of the 'tilde' is the response variable, 
-
-* on the right is the predictor. 
-
-Get them the wrong way round and it will reverse your hypothesis. 
-```
 
 ```{r, eval=T}
 
@@ -178,9 +170,24 @@ janka_ls1 <- lm(hardness ~ dens, data = janka)
 
 ```
 
+
+
 This linear model will estimate a 'line of best fit' using the method of 'least squares' to minimise the error sums of squares (the average distance between the data points and the regression line). 
 
+:::{.callout-warning
+Be careful when ordering variables here:
+
+* the left of the 'tilde' is the response variable, 
+
+* on the right is the predictor. 
+
+Get them the wrong way round and it will reverse your hypothesis. 
+
+:::
+
 We can add a regression line to our ggplots very easily with the function `geom_smooth()`.
+
+- When we specify the argument `method = lm` we restrict line fitting to an OLS regression
 
 ```{r}
 
@@ -195,19 +202,11 @@ janka |>
 
 ```
 
-**Q. The blue line represents the regression line, and the shaded interval is the 95% confidence interval band. What do you notice about the width of the interval band as you move along the regression line?**
+:::{.callout-note}
 
-`r hide("Explain this")`
+`geom_smooth()` is a simple way to plot regressions, but it is limited to single predictor models, and should not be used for more complex analyses
 
-The 95% confidence interval band is narrowest in the middle and widest at either end of the regression line. But why?
-
-When performing a linear regression, there are **two** types of uncertainty in the prediction.
-
-First is the prediction of the overall mean of the estimate (ie the center of the fit). The second is the uncertainly in the estimate calculating the slope.
-
-So when you combine both uncertainties of the prediction there is a spread between the high and low estimates. The further away from the center of the data you get (in either direction), the uncertainty of the slope becomes a large and more noticeable factor, thus the limits widen.
-
-`r unhide()`
+:::
 
 #### Summary
 
@@ -237,40 +236,70 @@ janka_ls1 |>
 This output should look very familiar to you, because it's the same output produced for the analysis of the maize data. Including a column for the coefficient estimates, standard error, *t*-statistic and *P*-value. The first row is the intercept, and the second row is the difference in the mean from the intercept caused by our explanatory variable. 
 
 
-In a test of difference, the intercept represented the mean of one group and the coefficient tells you how much higher or lower the average of one group is compared to another group. In regression analysis, the intercept is the value when the predictor variable is *zero* and the coefficient shows how much the response variable changes when the predictor variable increases by one unit, while keeping other predictors constant. This might mean the effect looks small - but it is cumulative.
+- **In a test of difference**, the intercept represented the mean of one group and the coefficient tells you how much higher or lower the average of one group is compared to another group. 
 
-::: {.callout-info}
+- **In regression analysis**, the intercept is the value when the predictor variable is *zero* and the coefficient shows how much the response variable changes when the predictor variable increases by one unit, while keeping other predictors constant. This might mean the effect looks small - but it is cumulative.
 
-In many ways the intercept makes more intuitive sense in a regression model than a difference model. Here the intercept describes the value of *y* (timber hardness) when *x* (wood density) = 0. The standard error is standard error of this calculated mean value. The only wrinkle here is that that value of *y* is an impossible value - timber hardness obviously cannot be a negative value (anti-hardness???). This does not affect the fit of our line, it just means a regression line (being an infinite straight line) can move into impossible value ranges.
 
-One way in which the intercept can be made more valuable is to use a technique known as 'centering'. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. This is known as mean-centered regression 
 
-:::
+## Mean-centering
 
-## Activity 3:  Mean-centering
+In many ways the intercept makes more intuitive sense in a regression model than a difference model. 
 
-::: {.callout-note}
+- Here the intercept describes the value of *y* (timber hardness) when *x* (wood density) = 0. The standard error is the standard error of this calculated mean value. The only wrinkle here is that that value of *y* is an impossible value - timber hardness obviously cannot be a negative value (anti-hardness???). This does not affect the fit of our line, it just means a regression line (being an infinite straight line) can move into impossible value ranges.
+
+- One way in which the intercept can be made more valuable is to use a technique known as **mean-centering**. By subtracting the average (mean) value of *x* from every data point, the intercept (when *x* is 0) can effectively be right-shifted into the centre of the data. This is known as mean-centered regression 
+
+
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
 Can you use your data wrangling skills to mean centre the density predictor and produce a more realistic model intercept?
 
-:::
-
+Compare the two models, what is the same and what has changed?
 
 `r hide("Solution")`
 
 ```{r}
 
 janka_centered <-  janka |> 
-  mutate(centered_dens = dens - mean(dens))
+  mutate(centered_dens = dens - mean(dens)) 
+# mutate creates a new column where each value of dens is subtracted from the overall mean
 
 centered_model <- lm(hardness ~ centered_dens, data = janka_centered) 
-
-summary(centered_model)
+# model uses the new variable
 
 ```
 
 
+:::{.panel-tabset}
+
+## Mean-centered regression
+
+```{r}
+summary(centered_model)
+```
+
+
+## Standard regression
+
+```{r}
+summary(janka_ls1)
+```
+
+:::
+
+
+We should note that our slope of regression and the statistics associated with it are **unchanged** - that makes sense our relationship is unaltered. Only the starting point for drawing our straight line (the intercept) has moved. 
+
 `r unhide()`
+
+::::
+:::
 
 #### Confidence intervals
 
@@ -298,14 +327,13 @@ broom::tidy(janka_ls1, conf.int=T, conf.level=0.95)
 
 
 
-- What would you say is the minimum effect size (at 95% confidence) of density on the janka scale?
+- What would you say is the minimum effect size (at 95% confidence) of density on the janka scale? `r mcq(c(answer = "52.9", "62.1", "57.5", "2.28"))`
 
+`r hide("Explanation")`
 
-`r mcq(c(answer = "52.9", "62.1", "57.5", "2.28"))`
+Here we can say that at $\alpha$ = 0.05 we think the mean change is *at least* a 52.9 unit increase on the janka scale for every unit increase in density. 
 
-`r hide("Solution")`
-
-Here we can say that at $\alpha$ = 0.05 we think there is at least a 52.9 unit increase on the janka scale for every unit increase in density ($\rho$). Because our 95% confidence intervals do not span 0, we know that there is a significant relationship at $\alpha$ = 0.05. 
+Because our 95% confidence intervals do not span 0, we can also say that there is a significant relationship at $\alpha$ < 0.05. 
 
 `r unhide()`
 
@@ -333,24 +361,10 @@ janka_ls1 |>
 :::
 
 
-
-```{r, eval=T, echo=F}
-library(kableExtra)
-
-`r^2` <- c(0.1, 0.3, 0.5)
-`Effect size` <- c("small", "medium", "large")
-tibble_table <- tibble(`Effect size`, `r^2`)
-
-tibble_table |> 
-    kbl(caption="R squared effect size") |> 
-  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
-
-```
-
-
 ## Prediction
 
 Using the coefficients of the intercept and the slope we can make predictions on new data. 
+
 The estimates of the intercept and the slope are:
 
 ```{r}
@@ -360,7 +374,7 @@ coef(janka_ls1)
 ```
 
 
-Now imagine we have a new wood samples with a density of 65, how can we use the equation for a linear regression to predict what the timber hardness for this wood sample should be?
+Now imagine we have a new wood samples with a density of 70, how can we use the equation for a linear regression to predict what the timber hardness for this wood sample should be?
 
 $$ y = a + bx $$
 
@@ -369,23 +383,26 @@ $$ y = a + bx $$
 ```{r}
 # a + bx
 
--1160.49970 + 57.50667 * 65
+-1160.49970 + 57.50667 * 70
 
 ```
 
-`r unhide()`
 
 
 Rather than work out the values manually, we can also use the coefficients of the model directly
 
 ```{r}
 
-coef(janka_ls1)[1] + coef(janka_ls1)[2] * 65
+coef(janka_ls1)[1] + coef(janka_ls1)[2] * 70
 
 ```
 
+`r unhide()`
 
-But most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `broom::augment()`
+
+
+
+Most of the time we are unlikely to want to work out predicted values by hand, instead we can use functions like `predict()` and `broom::augment()`
 
 ::: {.panel-tabset}
 
@@ -393,7 +410,7 @@ But most of the time we are unlikely to want to work out predicted values by han
 
 ```{r}
 
-predict(janka_ls1, newdata=list(dens=c(22,35,65)))
+predict(janka_ls1, newdata=list(dens=c(22,35,70)))
 ```
 
 ## Tidyverse
@@ -401,7 +418,7 @@ predict(janka_ls1, newdata=list(dens=c(22,35,65)))
 ```{r}
 
 broom::augment(janka_ls1, 
-               newdata=tibble(dens=c(22,35,65)))
+               newdata=tibble(dens=c(22,35,70)))
 
 ```
 
@@ -415,7 +432,9 @@ broom::augment(janka_ls1,
 
 ```{r}
 
-broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65)), se=TRUE)
+broom::augment(janka_ls1, 
+               newdata = tibble(dens=c(22,35,70)), 
+               se=TRUE)
 
 ```
 
@@ -423,36 +442,114 @@ broom::augment(janka_ls1, newdata = tibble(dens=c(22,35,65)), se=TRUE)
 
 ```{r}
 
-broom::augment(janka_ls1, newdata=tibble(dens=c(22,35,65)), interval="confidence")
+broom::augment(janka_ls1, 
+               newdata=tibble(dens=c(22,35,70)), 
+               interval="confidence")
 
 ```
 
 
-I really like the `emmeans` package - it is very good for producing quick predictions for categorical data - it can also do this for continuous variables. By default it will produce a single mean-centered prediction. But a list can be provided - it will produce confidence intervals as standard.
+I really like the `emmeans::emmeans()` function - it is very good for producing quick predictions for categorical data - it can also do this for continuous variables. By default it will produce a single mean-centered prediction. But a list can be provided - it will produce confidence intervals as standard.
 
 `r hide("emmeans")`
+
+:::{.panel-tabset}
+
+## Specific predictions
 
 ```{r}
 emmeans::emmeans(janka_ls1, 
                  specs = "dens", 
-                 at = list(dens = c(22, 35, 65)))
+                 at = list(dens = c(22, 
+                                    35, 
+                                    70)))
 
 ```
+
+## Sequence of predictions
+
+```{r}
+emmeans::emmeans(janka_ls1, 
+                 specs = "dens", 
+                 at = list(seq = c(22,
+                                   70,
+                                   by = 1)))
+
+```
+
+:::
 
 `r unhide()`
 
 
-## Activity 4: Results
+## Results
 
-- Can you write a summary of the **Results**?
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+* [ ] Can you write a summary of the **Results**?
+
+* [ ] Make a prediction plot from the fitted model
+
+> Hint - use augment or emmeans to make your predictions and 95%CI - try to add raw data to the plot as well.
+
+> Remember if using emmeans it must be converted to a tibble for plotting
 
 
-
-`r hide("Solution")`
+`r hide("Results")`
 
 We analysed the relationship between wood density and timber hardness on the janka scale with a linear regression model and found that wood density is an excellent predictor of timber harndess (R^2 = 0.95). With an average wood density of 45.7, this produced a timber hardness of 1469 [1407, 1531]  (mean [95% CI]) on the janka scale, and for every unit of density, timber hardness increases by 57.5 [52.9, 62.1] (t(34) = 25.24, p <0.001).
 
 `r unhide()`
+
+`r hide("Figure")`
+
+:::{.panel-tabset}
+
+## Augment
+
+```{r}
+
+broom::augment(janka_ls1,
+               interval="confidence") |> 
+  ggplot(aes(x = dens,
+             y = .fitted))+
+  geom_ribbon(aes(ymin = .lower,
+                  ymax = .upper),
+              alpha = .4)+
+  geom_line()+
+  geom_point(aes(x = dens,
+                 y = hardness))
+
+```
+
+## Emmeans
+
+```{r}
+
+emmeans::emmeans(janka_ls1, 
+                 specs = "dens", 
+                 at = list(dens = seq(22, 70, by = 1))) |> 
+  as_tibble() |> 
+    ggplot(aes(x = dens,
+             y = emmean))+
+  geom_ribbon(aes(ymin = lower.CL,
+                  ymax = upper.CL),
+              alpha = .4)+
+  geom_line()+
+  geom_point(data = janka,
+    aes(x = dens,
+        y = hardness))
+
+```
+:::
+
+`r unhide()`
+
+::::
+:::
 
 ## Summary
 
@@ -461,7 +558,7 @@ As with all linear models, regression assumes that the unexplained variability a
 
 Once the regression has been fitted it is possible to predict values of *y* from values of *x*, the uncertainty around these predictions can be captured with confidence intervals. 
 
-## Activity 5: Assumption checking
+## Assumption checking
 
 After conducting a linear model analysis, we often find ourselves with results and inferences. However, before we can fully trust our analysis, it’s essential to check whether the underlying assumptions of the model are adequately met.
 

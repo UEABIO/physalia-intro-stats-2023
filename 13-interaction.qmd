@@ -20,7 +20,7 @@ library(here)
 library(GGally)
 library(performance)
 library(patchwork)
-
+library(ggbeeswarm)
 ```
 
 
@@ -41,11 +41,13 @@ downloadthis::download_link(
 )
 ```
 
+
 ```{r, echo = F, eval=T, warning = F, message = F}
 
 biomass <- read_csv(here::here("files", "biomass.csv"))
 
 ```
+
 
 ```{r,  eval=F}
 
@@ -54,7 +56,25 @@ biomass <- read_csv(here("data", "biomass.csv"))
 ```
 
 
-You should first check the data and look at the top rows, we can see that this shows the application or non-application of fertiliser and light additions, because *all four* possible combinations are present, this is known as a *fully factorial design*:
+You should first check the data and look at the top rows, we can see that this shows the application or non-application of fertiliser and light additions:
+
+```{r, eval = FALSE}
+head(biomass)
+```
+
+
+Inspection of the dataset shows that the same data is presented in *two* ways:
+
+* Column **Fert** shows the status of Fertiliser only (F +/-) (two levels)
+
+* Column **Light** shows the status of Light only (L +/-) (two levels)
+
+* Column **FL** shows whether fertiliser **and** light have been applied (four levels, a combination of the previous two columns)
+
+* Column **Biomass.m2** shows the biomass per metre squared of coverage
+
+
+A simple analysis of the dataset will show that we have *all four* possible combinations are present, this is known as a *fully factorial design*:
 
 * control (F- L-, no added light or fertiliser)
 
@@ -64,75 +84,42 @@ You should first check the data and look at the top rows, we can see that this s
 
 * addition of both (F+ L+)
 
-Close inspection of the dataset shows that the same data is presented in *two* ways:
+There are `r fitb(16)` observations for each treatment combination.
 
-* Column 1 shows the status of Fertiliser only (F +/-) (two levels)
-
-* Column 2 shows the status of Light only (L +/-) (two levels)
-
-* Column 3 shows the biomass
-
-#### Task: Use your R  data wrangling skills to check the data after import.
-
-
-
-`r hide("Solution")`
-
-
-```{r}
-# check the structure of the data
-glimpse(biomass)
-
-# check data is in a tidy format
-head(biomass)
-
-# check variable names
-colnames(biomass)
-
-# check for duplication
-biomass |>  
-  duplicated() |>  
-  sum()
-
-# check for typos - by looking at impossible values
-biomass |>  
-  summarise(min=min(Biomass.m2, na.rm=TRUE), 
-            max=max(Biomass.m2, na.rm=TRUE))
-
-# check for typos by looking at distinct characters/values
-biomass |>  
-  distinct(Fert)
-
-biomass |>  
-  distinct(Light)
-
-# missing values
-biomass |>  
-  is.na() |>  
-  sum()
-
-# quick summary
-
-summary(biomass)
-
+:::{.task}
+::::{.task-header}
+Run the code to count the combinations of data levels
+::::
+::::{.task-container}
+```{r, eval = FALSE}
+biomass |> 
+  group_by(Fert, Light) |> 
+  summarise(n = n())
 ```
+::::
 
-`r unhide()`
+:::
 
 
-### Data summary
 
-So we have 64 observations with three variables, the last column is the response variable (biomass) and the other columns are predictor variables. 
+## Data visualisation
 
-- Light
+Before we start any analysis or modelling it is a good idea to visualise our data:
 
-- Fertiliser
+:::{.task}
+::::{.task-header}
+Data visualisation
+::::
+::::{.task-container}
 
-- Biomass.m2
+Produce a simple plot of the group level differences between treatments
 
-## One-way ANOVA
+`r hide("Possible Solution")`
 
-```{r, eval=T, echo = T, fig.cap = "Boxplot and individual biomass values (black points) with treatment means (red diamonds)"}
+:::{.panel-tabset}
+
+## Using Fert and Light columns
+```{r}
 biomass |>  
   ggplot(aes(x=Fert, y=Biomass.m2))+
   geom_boxplot(aes(fill=Light), 
@@ -141,22 +128,52 @@ biomass |>
                outlier.shape = NA)+
   geom_point(aes(colour = Light),
               position = position_jitterdodge(dodge.width =.5,
-                                              jitter.width = .2)) 
-
+                                              jitter.width = .2)) # Dodge and jitter data points
+ # biomass |>  
+ #  ggplot(aes(x=Fert, y=Biomass.m2))+
+ #  geom_boxplot(aes(fill=Light), 
+ #               width = .5,
+ #               alpha = .4,
+ #               outlier.shape = NA)+
+ #  geom_beeswarm(aes(colour = Light),
+ #              dodge.width = .5)
 ```
 
-Plotting the data  produces the graph shown above. Now we are confident there is a difference in our sample means, we can begin a linear model to quantify this and test it against a null hypothesis. 
 
-If we use the `Fert` and `Light` column as predictor(s) then this is equivalent to a four-level one way ANOVA.
+## Using FL columns
 
 ```{r}
-ls_1 <- lm(Biomass.m2 ~ Fert + Light, data = biomass)
+biomass |>  
+  ggplot(aes(x=FL, y=Biomass.m2))+
+  geom_boxplot(width = .5,
+               alpha = .4,
+               outlier.shape = NA)+
+  geom_beeswarm() 
+```
+
+:::
+
+`r unhide()`
+::::
+
+:::
+
+## ANOVA
+
+If we use the `FL` column as a predictor then this is equivalent to a four-level **one way ANOVA**.
+
+```{r}
+ls_1 <- lm(Biomass.m2 ~ FL, data = biomass)
 summary(ls_1)
 ```
 
-We can see that the control treatment (F- L-) is the intercept with a mean of 331.94g and standard error of 20.57g. The Light treatment adds an average of 77.83g to the biomass. In contrast the addition of fertiliser adds 141.4g to the biomass. 
+- We can see that the control treatment `F- L-` is the intercept with a mean of 356g and standard error of 23g. 
 
-The p-values of both suggest that both variables have a statistically significant effect on biomass. And the adjusted R-squared suggests 41.2% of variance in biomass can be explained by the model.
+- The Light treatment adds an average of 30g to the biomass (but this close to the standard error of this estimated mean difference - 32.72g). 
+
+- In contrast the addition of fertiliser `F+L-` adds 93g to the biomass. 
+
+- The `F+ L+` Treatment effect adds 219g of biomass compared to the no fertiliser and no light treatment. 
 
 :::{.callout-note}
 
@@ -164,9 +181,9 @@ Remember the intercept represents the value of y when x = 0, when applied to fac
 
 :::
 
-If we wanted to get the precise confidence intervals we could use `broom::tidy(ls_1, conf.int = T)` or `confint(ls1)`. 
+If we wanted to get the precise confidence intervals of effect sizes we could use `broom::tidy(ls_1, conf.int = T)` or `confint(ls1)`. 
 
-We can visualise these differences with a coefficient plot, and see clearly that adding light by itself produced an increase in the mean biomass of our samples **but** fertiliser has a larger effect.
+We can visualise these differences with a coefficient plot, and see clearly that adding light by itself produce a slight increase in the mean biomass of our samples **but** the 95% confidence interval includes zero, so we don't have any real confidence that this is a consistent/true effect.
 
 ```{r, eval = T, fig.cap = "Effects of light and fertiliser treatments on biomass relative to an untreated control (error bars = 95% CI)"}
 GGally::ggcoef_model(ls_1,
@@ -175,59 +192,52 @@ GGally::ggcoef_model(ls_1,
                      conf.level=0.95)
 ```
 
-## Interaction effects
+### Reporting and understanding ANOVA
 
-But what about combining fertiliser and light treatments? 
+Our model summary provides a lot of information, can you identify this information?
 
-An interaction effect in a linear model is when the effect of one variable depends on the level of another variable. 
+- Raw variance in Biomass explained: 
 
-It's not hard to imagine that Light might help with plant growth on its own, and fertiliser might help on its own, but the combined effect of fertiliser and light could be greater (or sometimes different) than what you’d expect just by adding up the effects of each one separately. That extra effect, due to the two variables interacting, is the **interaction effect**.
+`r hide("Solution")`
+Multiple R-squared is 0.47, 47% of the total variance in biomass can be explained by the Fert and Light treatments
+`r unhide()`
 
-If you don’t include an interaction effect when it's needed, your model might be misleading. It could either underestimate or overestimate the true effect of each variable because it doesn't account for how they work together. This could lead to wrong conclusions about the impact of each variable, making your predictions or understanding of the relationships less accurate. 
+- Adjusted variance in Biomass explained: 
 
-Compare the model predictions below against the position of our boxplots. It seems like it *overestimates* the difference in biomass between Light +/- when no fertiliser is present and *underestimates* this when fertiliser is present.
+`r hide("Solution")`
+Accounting for the number of different categories in the model (complexity) the adjusted variance explained is 44%
+`r unhide()`
+
+- Whether variance explained by treatments is statistically significant?
+
+`r hide("Solution")`
+
+We can read this directly from the model summary *or* 
 
 ```{r}
+anova(ls_1)
 
-model_summary <- emmeans::emmeans(ls_1, specs = ~ Fert + Light) |> 
-  as_tibble() 
-
-
-biomass |>  
-  ggplot(aes(x=Fert, y=Biomass.m2))+
-  geom_boxplot(aes(fill=Light), 
-               width = .3,
-              alpha = .4,
-               outlier.shape = NA,
-              position = position_dodge(width = .9))+
-  geom_point(aes(colour = Light),
-              position = position_jitterdodge(dodge.width =.5,
-                                              jitter.width = .2)) +
-  geom_linerange(data = model_summary,
-                 aes(x = Fert,
-                     y = emmean,
-                     ymin = lower.CL,
-                      ymax = upper.CL,
-                     group = Light),
-                 position = position_dodge(width =.5),
-                 colour = "black",
-                 linewidth=1.1) +
-  geom_point(data = model_summary,
-             aes(x = Fert,
-                 y = emmean,
-                 fill = Light),
-             position = position_dodge(width =.5),
-             size = 3,
-             shape = 21,
-             colour = "black")
-
+# drop1(ls_1)
 
 ```
 
+The overall effect of treatments *is* statistically significant F~3,60~=17.64, P<0.001
 
-### Testing for interactions
+
+`r unhide()`
+
+
+## Interaction effects
+
+Looking at the estimates from the four different treatments - do you think the effects of Fertiliser and Light on Biomass are *independent* of each other? 
+
+An interaction effect in a linear model is when the effect of one variable depends on the level of another variable. 
+
+Below are two figures that show the slope or effect we might expect to see if Fertiliser and Light have only *additive* effects (they each affect Biomass but do not interact with each other) or if they have an *interaction* effect (fertiliser and light *each* have more of an effect in the presence of each other).
+
 
 ```{r, eval = T, echo = F, warning = F, message = F, fig.cap = "Left an illustration of an additive model, Right an illustration of a model with an interaction effect."}
+
 ls_2 <- lm(Biomass.m2 ~ Fert + # main effect
              Light + # main effect
              Fert:Light, # interaction term
@@ -247,28 +257,27 @@ additive + interaction + plot_layout(guides = "collect")
 
 ```
 
-When the data can be best explained by an additive model, we expect new terms to shift the intercept up or down but the slope of the line to remain the same. An interaction effect *changes* the relationship as such we should see *different* gradients.
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
 
-#### Task: Look at the figure and determine whether you think there is evidence for an interaction effect? 
+Look at the plots you made previously, and the estimates of your original model - do you think there is evidence of an interaction effect?
+
+`r hide("Discussion")`
+It's not hard to imagine that Light might help with plant growth on its own, and fertiliser might help on its own, but the combined effect of fertiliser and light could be greater (or sometimes different) than what you’d expect just by adding up the effects of each one separately. That extra effect, due to the two variables interacting, is the **interaction effect**.
+
+If you don’t include an interaction effect when it's needed, your model might be misleading. It could either underestimate or overestimate the true effect of each variable because it doesn't account for how they work together. This could lead to wrong conclusions about the impact of each variable, making your predictions or understanding of the relationships less accurate. 
+
+In our case I think it is **highly likely** that Light and Fertiliser have an interaction effect
+
+`r unhide()`
+
+### Modelling an interaction effect
 
 
-```{r}
-biomass |>  ggplot(aes(x=Fert, y=Biomass.m2, colour = Light, fill = Light, group = Light))+
-    geom_jitter(width=0.1) +
-    stat_summary(
-        geom = "point",
-        fun = "mean",
-        size = 3,
-        shape = 23
-    )+stat_summary(
-        geom = "line",
-        fun = "mean",
-        linewidth = 1, linetype = "dashed"
-    )
-
-```
-
-To produce an interactive model, we need to use the *separate* factors for fertiliser and light an then to include an interaction term we add this as `Light:Fert` written out as follows:
+To produce an interaction model, we need to use the *separate* columns for fertiliser and light and then to include an interaction term we add this as `Light:Fert` written out as follows:
 
 ```{r}
 ls_2 <- lm(Biomass.m2 ~ Fert + # main effect
@@ -281,17 +290,26 @@ summary(ls_2)
 ```
 
 
-Notice that the estimated mean differences have changed from the previous model. Now:
+Notice that estimates in the model for the effect of Fert:Light have changed. All of the other estimates and terms have stayed the same on every other row *except this one*. Why has this changed?
 
-The second and third lines show the estimated effect of each treatment on its own.
-The fourth line shows how much the combination of the two treatments changes the mean.
-Also, the standard error is now larger, meaning it's harder to accurately estimate the effect of the interaction compared to the effect of each treatment alone. This is because interactions generally require more data to measure precisely.
+An interaction model changes the hypothesis we are asking - rather than trying to make an estimate of the mean difference for `F+L+` vs `F-L-` as in our first model, *now* we testing explicitly whether there is **more of an effect** on Biomass when Fert and Light are combined than we might expect from simply adding their effects together. 
 
-:::{.callout-note}
+Here the model is quantifying that we are finding an *extra* 95.4 g/m^2 of Biomass when we combine Fertiliser and Light treatments than we would predict from each effect individually. 
 
-Note that our R-squared and adjusted R squared values have both increased, this is a good sign that the interaction effect adds to the explanatory power of our model
+`r hide("The maths")`
 
-:::
+So in model 2 we have separated the treatment of `F+L+` into three parts, the effect of adding light, the effect of adding fertiliser and the effect of combining them. Add these together and it should match our original estimate from model 1.
+
+```{r}
+# model 2
+coef(ls_2)[2] + coef(ls_2)[3] + coef(ls_2)[4]
+
+```
+
+
+`r unhide()`
+
+This effect appears to be statistically significant (but only just): 
 
 ```{r, eval = T, warning = F, message = F}
 GGally::ggcoef_model(ls_2,
@@ -300,36 +318,7 @@ GGally::ggcoef_model(ls_2,
                      conf.level=0.95)
 ```
 
-To interpret an interaction term in a model, you need to understand that it represents how the effect of one variable on the outcome changes depending on the level of another variable. Here's a step-by-step guide to interpreting it correctly:
 
-- Understand the baseline effects: Look first at the coefficients of each main effect. These show how each variable impacts the outcome when the other variable is at its baseline (often set to zero or its reference level). For example, if you’re looking at the effect of exercise and diet on weight loss, the main effect of exercise shows its impact when diet is at the baseline (e.g., no diet change).
-
-- Interpret the interaction term: The interaction term tells you how the effect of one variable (e.g., exercise) changes when the level of the other variable (e.g., diet) changes. A positive interaction means the two variables amplify each other’s effects, while a negative interaction means they offset each other.
-
-- Combine the effects: To find the total effect when both variables are present (e.g., someone exercises and diets), add up:
-
-    - The main effect of the first variable,
-    - The main effect of the second variable,
-    - And the interaction term.
-    
-So when we calculate the new predicted biomass yield when Fert+ and Light + we need to add three coefficients: 
-
-```{r}
-# model 2
-coef(ls_2)[2] + coef(ls_2)[3] + coef(ls_2)[4]
-
-```
-
-
-#### Model estimates and confidence intervals
-
-When we compare this to our one-way ANOVA model, we must add the single terms and the interaction term, this should add up to the combined treatment from our first model: 
-
-```{r}
-# model 2
-coef(ls_2)[2] + coef(ls_2)[3] + coef(ls_2)[4]
-
-```
 
 :::{callout-warning}
 
@@ -339,20 +328,15 @@ So, if you have a significant interaction term, you must consider the main effec
 
 :::
 
+### Write-up
 
-### Check Model fit
+We could now write this up as follows:
 
-We need to make sure that any model we make fits our data and our assumptions well, as described in @sec-fit. It is important to do this *before* analysing any statistical tests or interpreting our results:
+> There was an interaction effect of light and fertiliser treatments (ANOVA *F*~1,60~ = 4.25, *P* = 0.044) in which combining treatments produced substantially more biomass (95.4g [95% CI: 2.8 - 188]) than expected from the additive effects alone (Fertiliser 93.7g [28.2 - 159.2], Light 30.1g [-35.3 - 95.6]). 
 
-```{r}
+Do not make the mistake of *just* reporting the statistics, the interesting bit is the size of the effect (estimate) and the uncertainty (confidence intervals). 
 
-performance::check_model(ls_2,
-                         detrend = FALSE)
-
-```
-
-In this case it looks like our model is a good fit and we can happily proceed:
-
+`r hide("reporting ANOVA")`
 
 ### ANOVA tables
 
@@ -388,32 +372,53 @@ drop1(ls_2, test = "F")
 
 This *F*-test is testing the *null hypothesis* that there is no true interaction effect. The significance test rejects the null hypothesis (just). It also provides the **Akaike information criterion (AIC)**, an alternative method of model selection (more on this later). 
 
-### Write-up
 
-We could now write this up as follows:
 
-> There was an interaction effect of light and fertiliser treatments (ANOVA *F*~1,60~ = 4.25, *P* = 0.044) in which combining treatments produced substantially more biomass (95.4g [95% CI: 2.8 - 188]) than expected from the additive effects alone (Fertiliser 93.7g [28.2 - 159.2], Light 30.1g [-35.3 - 95.6]). 
+`r unhide()`
 
-Do not make the mistake of *just* reporting the statistics, the interesting bit is the size of the effect (estimate) and the uncertainty (confidence intervals). 
 
-```{block, type="warning"}
+### Check Model fit
 
-Remember to check the assumptions of your full model
+We need to make sure that any model we make fits our data and our assumptions well. It is important to do this *before* analysing any statistical tests or interpreting our results:
+
+```{r}
+
+performance::check_model(ls_2,
+                         detrend = FALSE)
 
 ```
 
+In this case it looks like our model is a good fit and we can happily proceed:
+
 ### post-hoc
+
 
 In this example it is unnecessary to spend time looking at pairwise comparisons between the four possible levels, the interesting finding is to report the strength of the interaction effect. **But** it is possible to generate estimated means, and produce pairwise comparisons with the `emmeans()` package
 
+
+:::{.panel-tabset}
+
+## Estimated means
+
 ```{r}
-emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert + Light:Fert) |>  
+emmeans::emmeans(ls_2, specs = ~ Light + Fert) |>  
+  confint()
+```
+
+## Contrasts
+
+```{r}
+
+emmeans::emmeans(ls_2, specs = pairwise ~ Light + Fert) |>  
   confint()
 # including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.
  # $emmeans contains the estimate mean values for each possible combination (with confidence intervals)
  # $ contrasts contains tukey test post hoc comparisons between levels
 
 ```
+
+:::
+
 
 
 ## ANCOVA {#sec-ancova}

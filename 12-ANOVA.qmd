@@ -383,7 +383,7 @@ Start by using functions such as `skimr::skim()` or `glimpse()` or simple inspec
 
 `r unhide()`
 
-`r hide("Solution")`
+`r hide("Make tidy data")`
 
 ```{r, eval = FALSE}
 #___________________________----
@@ -429,6 +429,7 @@ frogs <- frogs |>
 
 ```
 
+`r unhide()`
 
 :::{.task}
 ::::{.task-header}

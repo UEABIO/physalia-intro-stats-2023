@@ -46,7 +46,6 @@ book:
     - spreadsheets.qmd
     - projects.qmd
     - import_penguins_data.qmd
-    - summarise.qmd
   - part: "Dplyr"
     chapters:
     - 05-dplyr.qmd
@@ -59,18 +58,17 @@ book:
     - dates.qmd
     - factors.qmd
     - scripts.qmd
-  - part: "Descriptive Statistics"
-    chapters:
-    - 07-data-insights.qmd
   - part: "Data Visualisation"
     chapters:
     - ggplot.qmd
     - ggplot2.qmd
+  - part: "Descriptive Statistics"
+    chapters:
+    - summarise.qmd
   - part: "Linear Models"
     chapters:
     - 08-inferential-statistics.qmd
     - 09-linear-models.qmd
-    - model-assumptions.qmd
     - 10-paired-design.qmd
     - 11-regression.qmd
     - 12-ANOVA.qmd

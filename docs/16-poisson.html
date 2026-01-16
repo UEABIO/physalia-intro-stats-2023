@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>28&nbsp; Poisson regression (for count data or rate data) – Physalia</title>
+<title>26&nbsp; Poisson regression (for count data or rate data) – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -304,7 +304,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./16-poisson.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./16-poisson.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -384,12 +384,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -404,7 +398,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
   </div>
 </li>
       </ul>
@@ -421,43 +415,43 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
@@ -465,7 +459,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Descriptive Statistics</span></a>
+ <span class="menu-text">Data Visualisation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -473,8 +467,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,7 +482,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Visualisation</span></a>
+ <span class="menu-text">Descriptive Statistics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -490,14 +490,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
@@ -514,55 +508,49 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
   </div>
 </li>
       </ul>
@@ -579,19 +567,19 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-poisson.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
   </div>
 </li>
       </ul>
@@ -608,7 +596,7 @@ window.Quarto = {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -668,37 +656,37 @@ window.Quarto = {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#example-cuckoos" id="toc-example-cuckoos" class="nav-link active" data-scroll-target="#example-cuckoos"><span class="header-section-number">28.1</span> Example: Cuckoos</a></li>
-  <li><a href="#activity-1-fit-the-model" id="toc-activity-1-fit-the-model" class="nav-link" data-scroll-target="#activity-1-fit-the-model"><span class="header-section-number">28.2</span> Activity 1: Fit the model</a></li>
+<li><a href="#example-cuckoos" id="toc-example-cuckoos" class="nav-link active" data-scroll-target="#example-cuckoos"><span class="header-section-number">26.1</span> Example: Cuckoos</a></li>
+  <li><a href="#activity-1-fit-the-model" id="toc-activity-1-fit-the-model" class="nav-link" data-scroll-target="#activity-1-fit-the-model"><span class="header-section-number">26.2</span> Activity 1: Fit the model</a></li>
   <li>
-<a href="#plot-the-mean-regression-line-for-each-species" id="toc-plot-the-mean-regression-line-for-each-species" class="nav-link" data-scroll-target="#plot-the-mean-regression-line-for-each-species"><span class="header-section-number">28.3</span> Plot the mean regression line for each species:</a>
+<a href="#plot-the-mean-regression-line-for-each-species" id="toc-plot-the-mean-regression-line-for-each-species" class="nav-link" data-scroll-target="#plot-the-mean-regression-line-for-each-species"><span class="header-section-number">26.3</span> Plot the mean regression line for each species:</a>
   <ul class="collapse">
-<li><a href="#model-checks" id="toc-model-checks" class="nav-link" data-scroll-target="#model-checks"><span class="header-section-number">28.3.1</span> Model checks</a></li>
-  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">28.3.2</span> Model Summary</a></li>
-  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">28.3.3</span> Interpretation</a></li>
+<li><a href="#model-checks" id="toc-model-checks" class="nav-link" data-scroll-target="#model-checks"><span class="header-section-number">26.3.1</span> Model checks</a></li>
+  <li><a href="#model-summary" id="toc-model-summary" class="nav-link" data-scroll-target="#model-summary"><span class="header-section-number">26.3.2</span> Model Summary</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation"><span class="header-section-number">26.3.3</span> Interpretation</a></li>
   </ul>
 </li>
   <li>
-<a href="#overdispersion" id="toc-overdispersion" class="nav-link" data-scroll-target="#overdispersion"><span class="header-section-number">28.4</span> Overdispersion</a>
+<a href="#overdispersion" id="toc-overdispersion" class="nav-link" data-scroll-target="#overdispersion"><span class="header-section-number">26.4</span> Overdispersion</a>
   <ul class="collapse">
-<li><a href="#minor-overdispersion-2-4" id="toc-minor-overdispersion-2-4" class="nav-link" data-scroll-target="#minor-overdispersion-2-4"><span class="header-section-number">28.4.1</span> Minor overdispersion 2-4</a></li>
-  <li><a href="#severe-overdispersion-4" id="toc-severe-overdispersion-4" class="nav-link" data-scroll-target="#severe-overdispersion-4"><span class="header-section-number">28.4.2</span> Severe overdispersion &gt; 4</a></li>
+<li><a href="#minor-overdispersion-2-4" id="toc-minor-overdispersion-2-4" class="nav-link" data-scroll-target="#minor-overdispersion-2-4"><span class="header-section-number">26.4.1</span> Minor overdispersion 2-4</a></li>
+  <li><a href="#severe-overdispersion-4" id="toc-severe-overdispersion-4" class="nav-link" data-scroll-target="#severe-overdispersion-4"><span class="header-section-number">26.4.2</span> Severe overdispersion &gt; 4</a></li>
   </ul>
 </li>
   <li>
-<a href="#zero-inflation" id="toc-zero-inflation" class="nav-link" data-scroll-target="#zero-inflation"><span class="header-section-number">28.5</span> Zero inflation</a>
+<a href="#zero-inflation" id="toc-zero-inflation" class="nav-link" data-scroll-target="#zero-inflation"><span class="header-section-number">26.5</span> Zero inflation</a>
   <ul class="collapse">
-<li><a href="#compare-models" id="toc-compare-models" class="nav-link" data-scroll-target="#compare-models"><span class="header-section-number">28.5.1</span> Compare models</a></li>
-  <li><a href="#modelling-a-pattern-in-the-zeroes" id="toc-modelling-a-pattern-in-the-zeroes" class="nav-link" data-scroll-target="#modelling-a-pattern-in-the-zeroes"><span class="header-section-number">28.5.2</span> Modelling a pattern in the zeroes</a></li>
+<li><a href="#compare-models" id="toc-compare-models" class="nav-link" data-scroll-target="#compare-models"><span class="header-section-number">26.5.1</span> Compare models</a></li>
+  <li><a href="#modelling-a-pattern-in-the-zeroes" id="toc-modelling-a-pattern-in-the-zeroes" class="nav-link" data-scroll-target="#modelling-a-pattern-in-the-zeroes"><span class="header-section-number">26.5.2</span> Modelling a pattern in the zeroes</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">28.6</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">26.6</span> Summary</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./16-poisson.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-generalised-linear.html">Generalised Linear Models</a></li><li class="breadcrumb-item"><a href="./16-poisson.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></a></li></ol></nav><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span>
+<span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span>
 </h1>
 </div>
 
@@ -767,8 +755,8 @@ Y &amp; \sim \mathcal{Pois}(\lambda) \\
 \lambda &amp; = e^{\beta_0 + \beta_1X }
 \end{aligned}
 \]</span> Thus we are effectively modelling the observed counts (on the original scale) using an exponential mean function.</p>
-<section id="example-cuckoos" class="level2" data-number="28.1"><h2 data-number="28.1" class="anchored" data-anchor-id="example-cuckoos">
-<span class="header-section-number">28.1</span> Example: Cuckoos</h2>
+<section id="example-cuckoos" class="level2" data-number="26.1"><h2 data-number="26.1" class="anchored" data-anchor-id="example-cuckoos">
+<span class="header-section-number">26.1</span> Example: Cuckoos</h2>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -913,8 +901,8 @@ S_i = \left\{\begin{array}{ll}
     \log{\lambda} &amp; = \beta_0 + \beta_1 M_i + \beta_2 + \beta_3M_i\\
 \end{aligned}
 \]</span></p>
-</section><section id="activity-1-fit-the-model" class="level2" data-number="28.2"><h2 data-number="28.2" class="anchored" data-anchor-id="activity-1-fit-the-model">
-<span class="header-section-number">28.2</span> Activity 1: Fit the model</h2>
+</section><section id="activity-1-fit-the-model" class="level2" data-number="26.2"><h2 data-number="26.2" class="anchored" data-anchor-id="activity-1-fit-the-model">
+<span class="header-section-number">26.2</span> Activity 1: Fit the model</h2>
 <div class="task">
 <div class="task-header">
 <p>Fit a Poisson GLM</p>
@@ -963,8 +951,8 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <p>Note there appears to be a negative interaction effect for Species:Mass, indicating that Begging calls do not increase with mass as much as you would expect for Warblers as compared to Cuckoos.</p>
 </blockquote>
 </div>
-</section><section id="plot-the-mean-regression-line-for-each-species" class="level2" data-number="28.3"><h2 data-number="28.3" class="anchored" data-anchor-id="plot-the-mean-regression-line-for-each-species">
-<span class="header-section-number">28.3</span> Plot the mean regression line for each species:</h2>
+</section><section id="plot-the-mean-regression-line-for-each-species" class="level2" data-number="26.3"><h2 data-number="26.3" class="anchored" data-anchor-id="plot-the-mean-regression-line-for-each-species">
+<span class="header-section-number">26.3</span> Plot the mean regression line for each species:</h2>
 <p>When we have fitted a model we can use it to generate predictions and see the fit of the regression line (on a log scale)</p>
 <div class="task">
 <div class="task-header">
@@ -1043,8 +1031,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="model-checks" class="level3" data-number="28.3.1"><h3 data-number="28.3.1" class="anchored" data-anchor-id="model-checks">
-<span class="header-section-number">28.3.1</span> Model checks</h3>
+<section id="model-checks" class="level3" data-number="26.3.1"><h3 data-number="26.3.1" class="anchored" data-anchor-id="model-checks">
+<span class="header-section-number">26.3.1</span> Model checks</h3>
 <p>Before attempting to interpret our model, we should check that it meets model assumptions and is a good fit for our data. Unlike with OLS linear models, we can only use visual checks - we can no longer carry out checks for normality or heterogeneity as these no longer apply.</p>
 <div class="task">
 <div class="task-header">
@@ -1113,8 +1101,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="model-summary" class="level3" data-number="28.3.2"><h3 data-number="28.3.2" class="anchored" data-anchor-id="model-summary">
-<span class="header-section-number">28.3.2</span> Model Summary</h3>
+</section><section id="model-summary" class="level3" data-number="26.3.2"><h3 data-number="26.3.2" class="anchored" data-anchor-id="model-summary">
+<span class="header-section-number">26.3.2</span> Model Summary</h3>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">summary</span>(cuckoo_glm1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1229,8 +1217,8 @@ Note
 </div>
 </div>
 </div>
-</section><section id="interpretation" class="level3" data-number="28.3.3"><h3 data-number="28.3.3" class="anchored" data-anchor-id="interpretation">
-<span class="header-section-number">28.3.3</span> Interpretation</h3>
+</section><section id="interpretation" class="level3" data-number="26.3.3"><h3 data-number="26.3.3" class="anchored" data-anchor-id="interpretation">
+<span class="header-section-number">26.3.3</span> Interpretation</h3>
 <p>It is <strong>very important</strong> to remember whether you are describing the results on the log-link scale or the original scale. It would usually make more sense to provide answers on the original scale, but this means you must first exponentiate the relationship between response predictors as described above when writing the results.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1296,8 +1284,8 @@ Confidence level used: 0.95
 Intervals are back-transformed from the log scale </code></pre>
 </div>
 </div>
-</section></section><section id="overdispersion" class="level2" data-number="28.4"><h2 data-number="28.4" class="anchored" data-anchor-id="overdispersion">
-<span class="header-section-number">28.4</span> Overdispersion</h2>
+</section></section><section id="overdispersion" class="level2" data-number="26.4"><h2 data-number="26.4" class="anchored" data-anchor-id="overdispersion">
+<span class="header-section-number">26.4</span> Overdispersion</h2>
 <p>There is one <strong>extra</strong> check we need to apply to a Poisson model and that’s for <strong>overdispersion</strong></p>
 <p>Poisson (and binomial models) assume that the variance is <em>equal to the mean.</em></p>
 <p>Count data often violate the strict Poisson assumption of equal mean and variance. The negative binomial model allows extra variability (“overdispersion”) via an additional dispersion parameter.</p>
@@ -1344,8 +1332,8 @@ Intervals are back-transformed from the log scale </code></pre>
                 p-value = &lt; 0.001</code></pre>
 </div>
 </div>
-<section id="minor-overdispersion-2-4" class="level3" data-number="28.4.1"><h3 data-number="28.4.1" class="anchored" data-anchor-id="minor-overdispersion-2-4">
-<span class="header-section-number">28.4.1</span> Minor overdispersion 2-4</h3>
+<section id="minor-overdispersion-2-4" class="level3" data-number="26.4.1"><h3 data-number="26.4.1" class="anchored" data-anchor-id="minor-overdispersion-2-4">
+<span class="header-section-number">26.4.1</span> Minor overdispersion 2-4</h3>
 <p>Luckily a simple fix is to fit a <em>quasi-likelihood</em> model which accounts for this, think of “quasi” as “sort of but not completely” Poisson.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>cuckoo_quasi <span class="ot">&lt;-</span> <span class="fu">glm</span>(Beg <span class="sc">~</span> Mass<span class="sc">+</span>Species<span class="sc">+</span>Mass<span class="sc">:</span>Species, <span class="at">data=</span>cuckoo, <span class="at">family=</span><span class="fu">quasipoisson</span>(<span class="at">link=</span><span class="st">"log"</span>))</span>
@@ -1392,8 +1380,8 @@ Warning
 <p>Because we are now estimating the variance again, the test statistics have reverted to <em>t</em> distributions and anova and drop1 functions should specify the F-test again.</p>
 </div>
 </div>
-</section><section id="severe-overdispersion-4" class="level3" data-number="28.4.2"><h3 data-number="28.4.2" class="anchored" data-anchor-id="severe-overdispersion-4">
-<span class="header-section-number">28.4.2</span> Severe overdispersion &gt; 4</h3>
+</section><section id="severe-overdispersion-4" class="level3" data-number="26.4.2"><h3 data-number="26.4.2" class="anchored" data-anchor-id="severe-overdispersion-4">
+<span class="header-section-number">26.4.2</span> Severe overdispersion &gt; 4</h3>
 <p>The initial Poisson model likely showed evidence of overdispersion (variance much greater than the mean). Using a <strong>negative binomial (glm.nb)</strong> allows the dispersion parameter to be estimated from the data rather than fixed at 1, providing a better fit when count variability is high.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>cuckoo_negbin <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">glm.nb</span>(Beg <span class="sc">~</span> Mass<span class="sc">+</span>Species<span class="sc">+</span>Mass<span class="sc">:</span>Species, <span class="at">data=</span>cuckoo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1420,8 +1408,8 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="zero-inflation" class="level2" data-number="28.5"><h2 data-number="28.5" class="anchored" data-anchor-id="zero-inflation">
-<span class="header-section-number">28.5</span> Zero inflation</h2>
+</section></section><section id="zero-inflation" class="level2" data-number="26.5"><h2 data-number="26.5" class="anchored" data-anchor-id="zero-inflation">
+<span class="header-section-number">26.5</span> Zero inflation</h2>
 <p>Look at the negative binomial model checks - in particular the Posterior Predictive Check. Are there any issues with the observations against predictions?</p>
 <div class="webex-solution">
 <button>
@@ -1458,8 +1446,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="compare-models" class="level3" data-number="28.5.1"><h3 data-number="28.5.1" class="anchored" data-anchor-id="compare-models">
-<span class="header-section-number">28.5.1</span> Compare models</h3>
+<section id="compare-models" class="level3" data-number="26.5.1"><h3 data-number="26.5.1" class="anchored" data-anchor-id="compare-models">
+<span class="header-section-number">26.5.1</span> Compare models</h3>
 <p>Compare AICs of the <code>cuckoo_negbin</code> and <code>cuckoo_zip</code></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">AIC</span>(cuckoo_zip, cuckoo_negbin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1536,8 +1524,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="modelling-a-pattern-in-the-zeroes" class="level3" data-number="28.5.2"><h3 data-number="28.5.2" class="anchored" data-anchor-id="modelling-a-pattern-in-the-zeroes">
-<span class="header-section-number">28.5.2</span> Modelling a pattern in the zeroes</h3>
+</section><section id="modelling-a-pattern-in-the-zeroes" class="level3" data-number="26.5.2"><h3 data-number="26.5.2" class="anchored" data-anchor-id="modelling-a-pattern-in-the-zeroes">
+<span class="header-section-number">26.5.2</span> Modelling a pattern in the zeroes</h3>
 <p>Suppose inspection of residuals or exploratory plots suggests that zeros occur more often in some species or at particular mass ranges.</p>
 <p>So far a zinb model has produced the best model fit and AIC values. But we have assumed a constant and equal probability of generating zeroes throughout our data.</p>
 <div class="webex-solution">
@@ -1626,8 +1614,8 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="summary" class="level2" data-number="28.6"><h2 data-number="28.6" class="anchored" data-anchor-id="summary">
-<span class="header-section-number">28.6</span> Summary</h2>
+</section></section><section id="summary" class="level2" data-number="26.6"><h2 data-number="26.6" class="anchored" data-anchor-id="summary">
+<span class="header-section-number">26.6</span> Summary</h2>
 <ul>
 <li><p>Begin by fitting a Poisson GLM to model count data (e.g., begging calls) using a log link, then inspect diagnostic plots to assess residuals, variance homogeneity, and dispersion.</p></li>
 <li><p>If the model shows overdispersion (variance &gt; mean), refit using a quasipoisson or negative binomial model to account for excess variability.</p></li>
@@ -2282,12 +2270,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./15-generalised-linear.html" class="pagination-link" aria-label="Generalised Linear Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./17-binomial.html" class="pagination-link" aria-label="Logistic regression (for binary data)">
-        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

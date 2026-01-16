@@ -10,12 +10,13 @@ source("R/my_setup.R")
 
 ```
 
-### Save scripts {#sec-save-script}
 
-* Make sure you have **saved your script 💾**  and given it the filename `01_import_penguins_data.R` it should be saved in your **scripts folder**
+### Writing a script {#sec-save-script}
+
+An R script is a plain text file containing R code that can be run from top to bottom. Scripts allow analyses to be reproduced from a blank R session, shared with others, and rerun without manual intervention. In this tutorial, you will save, run, and check a simple data import and cleaning script.
 
 
-`r hide("Check your script")`
+`r hide("Example script")`
 
 ```{r, eval = F, echo = T, fig.height=6, fig.width=6, out.width = "60%"}
 #___________________________----
@@ -48,7 +49,7 @@ penguins_raw
 
 # clean all variable names to snake_case 
 # using the clean_names function from the janitor package
-# note we are using assign <- 
+# note we are using <- 
 # to overwrite the old version of penguins 
 # with a version that has updated names
 # this changes the data in our R workspace 
@@ -73,12 +74,10 @@ penguins <- penguins_clean_names |>
                              species == "Gentoo penguin (Pygoscelis papua)" ~ "Gentoo",
                              species == "Chinstrap penguin (Pygoscelis antarctica)" ~ "Chinstrap"))
 
-# use mutate and if_else
-# for a statement that conditionally changes 
-# the names of the values in a variable
+# use mutate and case_when to correct typos 
 penguins <- penguins |> 
-  mutate(sex = if_else(
-    sex == "MALE", "Male", "Female"
+  mutate(sex = case_when( sex == "MALE" ~  "Male", 
+                          .default = as.character(sex)
   )
   )
 
@@ -89,23 +88,7 @@ penguins <- penguins |>
 penguins <- penguins |> 
   mutate(year = lubridate::year(date_egg))
 
-# Set body mass ranges
-penguins <- penguins |> 
-  mutate(mass_range = case_when(
-    body_mass_g <= 3500 ~ "smol penguin",
-    body_mass_g >3500 & body_mass_g < 4500 ~ "mid penguin",
-    body_mass_g >= 4500 ~ "chonk penguin",
-    .default = NA)
-  )
 
-# Assign these to an ordered factor
-
-penguins <- penguins |> 
-  mutate(mass_range = fct_relevel(mass_range, 
-                                  "smol penguin", 
-                                  "mid penguin", 
-                                  "chonk penguin")
-         )
 
 # WRITE CLEAN DATA ----
 ## Optional ----
@@ -116,6 +99,18 @@ write_csv(penguins, here::here("data", "clean", "penguins_clean.csv"))
 
 `r unhide()`
 
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+
+* [ ] Copy paste the above into a .R file
+
+* [ ] If you previously started putting a .R file together check you aren't duplicating code
+
+* [ ] Make sure you **save your script 💾**  and given it the filename `01_import_penguins_data.R` it should be saved in your **scripts folder**
 
 - Does your workspace look like the below? 
 
@@ -127,24 +122,9 @@ knitr::include_graphics("images/project_penguin.png")
 knitr::include_graphics("images/r_script.png")
 ```
 
-- Does your script run from a `blank slate` without errors?
+::::
+:::
 
-### Checklist for data checking
-
-- Is our dataframe in a tidy format?
-
-- Is each column assigned to the correct data type?
-    
-    - Are dates formatted correctly?
-    - Are factors set where needed, are the levels in the correct order?
-    
-- Are variables consistently named (e.g. using a naming convention such as snake_case)?
-
-- Are text values in an appropriate format?
-
-- Do we have any data duplication?
-
-- Are there any typos or mistakes in character strings?
 
 ## Running a script from console
 
@@ -158,9 +138,10 @@ Your turn
 
 * [ ] Restart your R session - (does your Environment clear?)
 
-* [ ] Using the `source()` function in your console type the filepath of your script and hit `enter`.
+* [ ] Using the `source()` function in your console type the filepath of your script and hit `enter`. This will run your *entire script* from top-to-bottom.
 
-`r hide("Solution")`
+* [ ] Confirm that penguins appears in the Environment
+
 
 ```{r, eval = F}
 source("scripts/01_import_penguins_data.R") # must specify dir
@@ -170,7 +151,6 @@ source("scripts/01_import_penguins_data.R") # must specify dir
 
 ```
 
-`r unhide()`
 
 ::::
 :::
@@ -273,11 +253,11 @@ saveRDS(penguins, file = here("files", "chapter5.RDS"))
 
 ## Reading
 
-- [Dplyr](https://dplyr.tidyverse.org/index.html)
+Well-commented and clearly structured scripts make analytical decisions explicit and allow analyses to be rerun, checked, and modified reliably. This supports reproducibility by ensuring that results do not depend on undocumented assumptions or hidden steps ).
 
-- [Lubridate](https://lubridate.tidyverse.org/)
+Clear sectioning and brief comments also reduce cognitive load, making it easier to understand program flow and to identify and fix errors when scripts are run from a blank R session. For these reasons, using consistent headings, logical ordering, and concise comments is an essential part of writing reliable R scripts.
 
-- [Stringr](https://stringr.tidyverse.org/)
+- [BES Guide tp better science: reproducible code](https://www.britishecologicalsociety.org/applied-ecology-resources/document/20220264713/)
 
-
+- [TADA! Simple guidelines to improve code sharing](https://ecoevorxiv.org/repository/view/9806/)
 

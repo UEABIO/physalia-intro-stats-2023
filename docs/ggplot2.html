@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>17&nbsp; ggplot2 – Physalia</title>
+<title>15&nbsp; ggplot2 – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-inferential-statistics.html" rel="next">
+<link href="./summarise.html" rel="next">
 <link href="./ggplot.html" rel="prev">
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -299,7 +299,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -379,12 +379,6 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -399,7 +393,7 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
   </div>
 </li>
       </ul>
@@ -416,83 +410,83 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Descriptive Statistics</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
-  </div>
-</li>
-      </ul>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Data Visualisation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ggplot2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Descriptive Statistics</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
@@ -509,55 +503,49 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
   </div>
 </li>
       </ul>
@@ -574,19 +562,19 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
   </div>
 </li>
       </ul>
@@ -603,7 +591,7 @@ div.csl-indent {
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -663,56 +651,56 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">17.1</span> Learning Objectives</a></li>
+<li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">15.1</span> Learning Objectives</a></li>
   <li>
-<a href="#colours-palettes-and-extensions" id="toc-colours-palettes-and-extensions" class="nav-link" data-scroll-target="#colours-palettes-and-extensions"><span class="header-section-number">17.2</span> Colours, palettes and extensions</a>
+<a href="#colours-palettes-and-extensions" id="toc-colours-palettes-and-extensions" class="nav-link" data-scroll-target="#colours-palettes-and-extensions"><span class="header-section-number">15.2</span> Colours, palettes and extensions</a>
   <ul class="collapse">
-<li><a href="#how-colour-works-in-ggplot2" id="toc-how-colour-works-in-ggplot2" class="nav-link" data-scroll-target="#how-colour-works-in-ggplot2"><span class="header-section-number">17.2.1</span> How colour works in <code>ggplot2</code></a></li>
+<li><a href="#how-colour-works-in-ggplot2" id="toc-how-colour-works-in-ggplot2" class="nav-link" data-scroll-target="#how-colour-works-in-ggplot2"><span class="header-section-number">15.2.1</span> How colour works in <code>ggplot2</code></a></li>
   </ul>
 </li>
   <li>
-<a href="#choosing-effective-palettes" id="toc-choosing-effective-palettes" class="nav-link" data-scroll-target="#choosing-effective-palettes"><span class="header-section-number">17.3</span> Choosing Effective Palettes</a>
+<a href="#choosing-effective-palettes" id="toc-choosing-effective-palettes" class="nav-link" data-scroll-target="#choosing-effective-palettes"><span class="header-section-number">15.3</span> Choosing Effective Palettes</a>
   <ul class="collapse">
-<li><a href="#using-predefined-palettes-from-colorspace" id="toc-using-predefined-palettes-from-colorspace" class="nav-link" data-scroll-target="#using-predefined-palettes-from-colorspace"><span class="header-section-number">17.3.1</span> Using Predefined Palettes from colorspace</a></li>
-  <li><a href="#other-palettes" id="toc-other-palettes" class="nav-link" data-scroll-target="#other-palettes"><span class="header-section-number">17.3.2</span> Other palettes</a></li>
-  <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility"><span class="header-section-number">17.3.3</span> Accessibility</a></li>
-  <li><a href="#guides-to-visual-accessibility" id="toc-guides-to-visual-accessibility" class="nav-link" data-scroll-target="#guides-to-visual-accessibility"><span class="header-section-number">17.3.4</span> Guides to visual accessibility</a></li>
+<li><a href="#using-predefined-palettes-from-colorspace" id="toc-using-predefined-palettes-from-colorspace" class="nav-link" data-scroll-target="#using-predefined-palettes-from-colorspace"><span class="header-section-number">15.3.1</span> Using Predefined Palettes from colorspace</a></li>
+  <li><a href="#other-palettes" id="toc-other-palettes" class="nav-link" data-scroll-target="#other-palettes"><span class="header-section-number">15.3.2</span> Other palettes</a></li>
+  <li><a href="#accessibility" id="toc-accessibility" class="nav-link" data-scroll-target="#accessibility"><span class="header-section-number">15.3.3</span> Accessibility</a></li>
+  <li><a href="#guides-to-visual-accessibility" id="toc-guides-to-visual-accessibility" class="nav-link" data-scroll-target="#guides-to-visual-accessibility"><span class="header-section-number">15.3.4</span> Guides to visual accessibility</a></li>
   </ul>
 </li>
   <li>
-<a href="#scales-axes-and-ordering" id="toc-scales-axes-and-ordering" class="nav-link" data-scroll-target="#scales-axes-and-ordering"><span class="header-section-number">17.4</span> Scales, Axes and Ordering</a>
+<a href="#scales-axes-and-ordering" id="toc-scales-axes-and-ordering" class="nav-link" data-scroll-target="#scales-axes-and-ordering"><span class="header-section-number">15.4</span> Scales, Axes and Ordering</a>
   <ul class="collapse">
-<li><a href="#axes-limits" id="toc-axes-limits" class="nav-link" data-scroll-target="#axes-limits"><span class="header-section-number">17.4.1</span> Axes limits</a></li>
-  <li><a href="#zooming-in-and-out" id="toc-zooming-in-and-out" class="nav-link" data-scroll-target="#zooming-in-and-out"><span class="header-section-number">17.4.2</span> Zooming in and out</a></li>
+<li><a href="#axes-limits" id="toc-axes-limits" class="nav-link" data-scroll-target="#axes-limits"><span class="header-section-number">15.4.1</span> Axes limits</a></li>
+  <li><a href="#zooming-in-and-out" id="toc-zooming-in-and-out" class="nav-link" data-scroll-target="#zooming-in-and-out"><span class="header-section-number">15.4.2</span> Zooming in and out</a></li>
   </ul>
 </li>
   <li>
-<a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets"><span class="header-section-number">17.5</span> Facets</a>
+<a href="#facets" id="toc-facets" class="nav-link" data-scroll-target="#facets"><span class="header-section-number">15.5</span> Facets</a>
   <ul class="collapse">
-<li><a href="#cluttered-plots" id="toc-cluttered-plots" class="nav-link" data-scroll-target="#cluttered-plots"><span class="header-section-number">17.5.1</span> Cluttered plots</a></li>
-  <li><a href="#nested-facets" id="toc-nested-facets" class="nav-link" data-scroll-target="#nested-facets"><span class="header-section-number">17.5.2</span> Nested Facets</a></li>
+<li><a href="#cluttered-plots" id="toc-cluttered-plots" class="nav-link" data-scroll-target="#cluttered-plots"><span class="header-section-number">15.5.1</span> Cluttered plots</a></li>
+  <li><a href="#nested-facets" id="toc-nested-facets" class="nav-link" data-scroll-target="#nested-facets"><span class="header-section-number">15.5.2</span> Nested Facets</a></li>
   </ul>
 </li>
   <li>
-<a href="#theme" id="toc-theme" class="nav-link" data-scroll-target="#theme"><span class="header-section-number">17.6</span> Theme</a>
+<a href="#theme" id="toc-theme" class="nav-link" data-scroll-target="#theme"><span class="header-section-number">15.6</span> Theme</a>
   <ul class="collapse">
-<li><a href="#applying-a-pre-defined-theme" id="toc-applying-a-pre-defined-theme" class="nav-link" data-scroll-target="#applying-a-pre-defined-theme"><span class="header-section-number">17.6.1</span> Applying a pre-defined theme</a></li>
-  <li><a href="#customising-a-theme" id="toc-customising-a-theme" class="nav-link" data-scroll-target="#customising-a-theme"><span class="header-section-number">17.6.2</span> Customising a theme</a></li>
+<li><a href="#applying-a-pre-defined-theme" id="toc-applying-a-pre-defined-theme" class="nav-link" data-scroll-target="#applying-a-pre-defined-theme"><span class="header-section-number">15.6.1</span> Applying a pre-defined theme</a></li>
+  <li><a href="#customising-a-theme" id="toc-customising-a-theme" class="nav-link" data-scroll-target="#customising-a-theme"><span class="header-section-number">15.6.2</span> Customising a theme</a></li>
   </ul>
 </li>
-  <li><a href="#patchwork" id="toc-patchwork" class="nav-link" data-scroll-target="#patchwork"><span class="header-section-number">17.7</span> Patchwork</a></li>
+  <li><a href="#patchwork" id="toc-patchwork" class="nav-link" data-scroll-target="#patchwork"><span class="header-section-number">15.7</span> Patchwork</a></li>
   <li>
-<a href="#exporting-safely" id="toc-exporting-safely" class="nav-link" data-scroll-target="#exporting-safely"><span class="header-section-number">17.8</span> Exporting safely</a>
+<a href="#exporting-safely" id="toc-exporting-safely" class="nav-link" data-scroll-target="#exporting-safely"><span class="header-section-number">15.8</span> Exporting safely</a>
   <ul class="collapse">
-<li><a href="#ggsave" id="toc-ggsave" class="nav-link" data-scroll-target="#ggsave"><span class="header-section-number">17.8.1</span> <code>ggsave</code></a></li>
-  <li><a href="#svg" id="toc-svg" class="nav-link" data-scroll-target="#svg"><span class="header-section-number">17.8.2</span> <code>svg</code></a></li>
+<li><a href="#ggsave" id="toc-ggsave" class="nav-link" data-scroll-target="#ggsave"><span class="header-section-number">15.8.1</span> <code>ggsave</code></a></li>
+  <li><a href="#svg" id="toc-svg" class="nav-link" data-scroll-target="#svg"><span class="header-section-number">15.8.2</span> <code>svg</code></a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-ggplot2" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ggplot.html">Data Visualisation</a></li><li class="breadcrumb-item"><a href="./ggplot2.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-ggplot2" class="quarto-section-identifier"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></span></h1>
 </div>
 
 
@@ -726,8 +714,8 @@ div.csl-indent {
   
 
 
-</header><section id="learning-objectives" class="level2" data-number="17.1"><h2 data-number="17.1" class="anchored" data-anchor-id="learning-objectives">
-<span class="header-section-number">17.1</span> Learning Objectives</h2>
+</header><section id="learning-objectives" class="level2" data-number="15.1"><h2 data-number="15.1" class="anchored" data-anchor-id="learning-objectives">
+<span class="header-section-number">15.1</span> Learning Objectives</h2>
 <p>By the end of this chapter, you will be able to:</p>
 <ul>
 <li><p>Prepare and summarise data for advanced plotting.</p></li>
@@ -737,11 +725,11 @@ div.csl-indent {
 <li><p>Use facets effectively for multi-dimensional comparisons.</p></li>
 <li><p>Arrange and enhance plots using patchwork and marginal plots.</p></li>
 <li><p>Export and enhance visualisations with camcorder and plotly.</p></li>
-</ul></section><section id="colours-palettes-and-extensions" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="colours-palettes-and-extensions">
-<span class="header-section-number">17.2</span> Colours, palettes and extensions</h2>
+</ul></section><section id="colours-palettes-and-extensions" class="level2" data-number="15.2"><h2 data-number="15.2" class="anchored" data-anchor-id="colours-palettes-and-extensions">
+<span class="header-section-number">15.2</span> Colours, palettes and extensions</h2>
 <p>Colour is one of the most powerful visual cues we can use in data visualisation. In <code>ggplot2</code>, colours can communicate categories, highlight relationships, and guide the viewer’s attention. However, it’s also one of the most common sources of confusion and inaccessibility.</p>
-<section id="how-colour-works-in-ggplot2" class="level3" data-number="17.2.1"><h3 data-number="17.2.1" class="anchored" data-anchor-id="how-colour-works-in-ggplot2">
-<span class="header-section-number">17.2.1</span> How colour works in <code>ggplot2</code>
+<section id="how-colour-works-in-ggplot2" class="level3" data-number="15.2.1"><h3 data-number="15.2.1" class="anchored" data-anchor-id="how-colour-works-in-ggplot2">
+<span class="header-section-number">15.2.1</span> How colour works in <code>ggplot2</code>
 </h3>
 <p><code>ggplot2</code> applies colour in two main ways:</p>
 <ul>
@@ -792,8 +780,8 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="choosing-effective-palettes" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="choosing-effective-palettes">
-<span class="header-section-number">17.3</span> Choosing Effective Palettes</h2>
+</section></section><section id="choosing-effective-palettes" class="level2" data-number="15.3"><h2 data-number="15.3" class="anchored" data-anchor-id="choosing-effective-palettes">
+<span class="header-section-number">15.3</span> Choosing Effective Palettes</h2>
 <p>Colour choices can make or break your plot. Good palettes emphasise contrast, group differences, and remain readable for all audiences.</p>
 <p>In <code>ggplot2</code>, colours that are assigned to variables are modified via the <code>scale_colour_*</code> and the <code>scale_fill_*</code> functions. In order to use colour with your data, most importantly you need to know if you are dealing with a categorical or continuous variable. The color palette should be chosen depending on type of the variable:</p>
 <ul>
@@ -825,8 +813,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="using-predefined-palettes-from-colorspace" class="level3" data-number="17.3.1"><h3 data-number="17.3.1" class="anchored" data-anchor-id="using-predefined-palettes-from-colorspace">
-<span class="header-section-number">17.3.1</span> Using Predefined Palettes from colorspace</h3>
+<section id="using-predefined-palettes-from-colorspace" class="level3" data-number="15.3.1"><h3 data-number="15.3.1" class="anchored" data-anchor-id="using-predefined-palettes-from-colorspace">
+<span class="header-section-number">15.3.1</span> Using Predefined Palettes from colorspace</h3>
 <p>The <code>colorspace</code> <span class="citation" data-cites="R-colorspace">Ihaka et al. (<a href="references.html#ref-R-colorspace" role="doc-biblioref">2025</a>)</span> package offers curated, perceptually balanced palettes designed for clarity and accessibility.</p>
 <p>You can select qualitative, sequential, or diverging palettes using <code>scale_*_discrete_qualitative(palette = "*")</code> or similar functions.</p>
 <div class="cell" data-layout-align="center">
@@ -874,15 +862,15 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="other-palettes" class="level3" data-number="17.3.2"><h3 data-number="17.3.2" class="anchored" data-anchor-id="other-palettes">
-<span class="header-section-number">17.3.2</span> Other palettes</h3>
+</section><section id="other-palettes" class="level3" data-number="15.3.2"><h3 data-number="15.3.2" class="anchored" data-anchor-id="other-palettes">
+<span class="header-section-number">15.3.2</span> Other palettes</h3>
 <ul>
 <li><p><a href="https://mycolor.space/">Generate a palette</a></p></li>
 <li><p><a href="https://github.com/karthik/wesanderson">Wes Anderson palettes</a></p></li>
 <li><p><a href="https://malcolmbarrett.github.io/ggokabeito/">ggokabeito</a></p></li>
 <li><p><a href="https://malcolmbarrett.github.io/ggokabeito/">scico</a></p></li>
-</ul></section><section id="accessibility" class="level3" data-number="17.3.3"><h3 data-number="17.3.3" class="anchored" data-anchor-id="accessibility">
-<span class="header-section-number">17.3.3</span> Accessibility</h3>
+</ul></section><section id="accessibility" class="level3" data-number="15.3.3"><h3 data-number="15.3.3" class="anchored" data-anchor-id="accessibility">
+<span class="header-section-number">15.3.3</span> Accessibility</h3>
 <p>It’s very easy to get carried away with colour palettes, but you should remember at all times that your figures must be accessible. One way to check how accessible your figures are is to use a colour blindness checker <code>colorBlindness</code> <span class="citation" data-cites="R-colorBlindness">Ou (<a href="references.html#ref-R-colorBlindness" role="doc-biblioref">2021</a>)</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="do">## Check accessibility ----</span></span>
@@ -896,8 +884,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="guides-to-visual-accessibility" class="level3" data-number="17.3.4"><h3 data-number="17.3.4" class="anchored" data-anchor-id="guides-to-visual-accessibility">
-<span class="header-section-number">17.3.4</span> Guides to visual accessibility</h3>
+</section><section id="guides-to-visual-accessibility" class="level3" data-number="15.3.4"><h3 data-number="15.3.4" class="anchored" data-anchor-id="guides-to-visual-accessibility">
+<span class="header-section-number">15.3.4</span> Guides to visual accessibility</h3>
 <p>Using colours to tell categories apart can be useful, but as we can see in the example above, you should choose carefully. Other aesthetics which you can access in your geoms include shape, and size - you can combine these in complimentary ways to enhance the accessibility of your plots. Here is a hierarchy of “interpretability” for different types of data</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -946,8 +934,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="colour-redundancy" class="level3" data-number="17.3.5"><h3 data-number="17.3.5" class="anchored" data-anchor-id="colour-redundancy">
-<span class="header-section-number">17.3.5</span> Colour Redundancy</h3>
+<section id="colour-redundancy" class="level3" data-number="15.3.5"><h3 data-number="15.3.5" class="anchored" data-anchor-id="colour-redundancy">
+<span class="header-section-number">15.3.5</span> Colour Redundancy</h3>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>penguins <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>flipper_length_mm, </span>
@@ -969,10 +957,10 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="scales-axes-and-ordering" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="scales-axes-and-ordering">
-<span class="header-section-number">17.4</span> Scales, Axes and Ordering</h2>
-<section id="axes-limits" class="level3" data-number="17.4.1"><h3 data-number="17.4.1" class="anchored" data-anchor-id="axes-limits">
-<span class="header-section-number">17.4.1</span> Axes limits</h3>
+</section></section><section id="scales-axes-and-ordering" class="level2" data-number="15.4"><h2 data-number="15.4" class="anchored" data-anchor-id="scales-axes-and-ordering">
+<span class="header-section-number">15.4</span> Scales, Axes and Ordering</h2>
+<section id="axes-limits" class="level3" data-number="15.4.1"><h3 data-number="15.4.1" class="anchored" data-anchor-id="axes-limits">
+<span class="header-section-number">15.4.1</span> Axes limits</h3>
 <p>Now, we’ll use <code>scale_x_continuous()</code> and <code>scale_y_continuous()</code> for setting our desired values on the axes.</p>
 <p>The key parameters in both functions are:</p>
 <ul>
@@ -1036,8 +1024,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="zooming-in-and-out" class="level3" data-number="17.4.2"><h3 data-number="17.4.2" class="anchored" data-anchor-id="zooming-in-and-out">
-<span class="header-section-number">17.4.2</span> Zooming in and out</h3>
+</section><section id="zooming-in-and-out" class="level3" data-number="15.4.2"><h3 data-number="15.4.2" class="anchored" data-anchor-id="zooming-in-and-out">
+<span class="header-section-number">15.4.2</span> Zooming in and out</h3>
 <p>We have seen how we can set the parameters for the axes for both continuous and discrete scales.</p>
 <p>It can be very beneficial to be able to zoom in and out of figures, mainly to focus the frame on a given section.</p>
 <p>One function we can use to do this is the <code>coord_cartesian()</code>, in ggplot2.</p>
@@ -1100,11 +1088,11 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="facets" class="level2" data-number="17.5"><h2 data-number="17.5" class="anchored" data-anchor-id="facets">
-<span class="header-section-number">17.5</span> Facets</h2>
+</section></section><section id="facets" class="level2" data-number="15.5"><h2 data-number="15.5" class="anchored" data-anchor-id="facets">
+<span class="header-section-number">15.5</span> Facets</h2>
 <p>At the point where it becomes difficult to see the trends or differences in your plot then we want to break up a single plot into sub-plots; this is called ‘faceting’. Facets are commonly used when there is too much data to display clearly in a single plot</p>
-<section id="cluttered-plots" class="level3" data-number="17.5.1"><h3 data-number="17.5.1" class="anchored" data-anchor-id="cluttered-plots">
-<span class="header-section-number">17.5.1</span> Cluttered plots</h3>
+<section id="cluttered-plots" class="level3" data-number="15.5.1"><h3 data-number="15.5.1" class="anchored" data-anchor-id="cluttered-plots">
+<span class="header-section-number">15.5.1</span> Cluttered plots</h3>
 <p>In the example below it is hard to see the exact distribution of each histogram:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>penguins <span class="sc">|&gt;</span> </span>
@@ -1134,8 +1122,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="nested-facets" class="level3" data-number="17.5.2"><h3 data-number="17.5.2" class="anchored" data-anchor-id="nested-facets">
-<span class="header-section-number">17.5.2</span> Nested Facets</h3>
+</section><section id="nested-facets" class="level3" data-number="15.5.2"><h3 data-number="15.5.2" class="anchored" data-anchor-id="nested-facets">
+<span class="header-section-number">15.5.2</span> Nested Facets</h3>
 <p>The <code><a href="https://teunbrand.github.io/ggh4x/reference/facet_nested.html">ggh4x::facet_nested()</a></code> function in the <code>ggh4x</code> <span class="citation" data-cites="R-ggh4x">van den Brand (<a href="references.html#ref-R-ggh4x" role="doc-biblioref">2025</a>)</span> package is used for creating nested or hierarchical faceting in <code>ggplot2</code> plots. Nested faceting allows you to further subdivide these panels into smaller panels, creating a hierarchy of facets.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(ggh4x)</span>
@@ -1156,8 +1144,8 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="theme" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="theme">
-<span class="header-section-number">17.6</span> Theme</h2>
+</section></section><section id="theme" class="level2" data-number="15.6"><h2 data-number="15.6" class="anchored" data-anchor-id="theme">
+<span class="header-section-number">15.6</span> Theme</h2>
 <p>A theme controls the non-data elements of a plot:</p>
 <ul>
 <li><p>background colour</p></li>
@@ -1167,8 +1155,8 @@ Solution
 <li><p>font size and family</p></li>
 </ul>
 <p>Using themes effectively helps make plots readable, professional, and publication-ready, without changing the data or statistical mappings.</p>
-<section id="applying-a-pre-defined-theme" class="level3" data-number="17.6.1"><h3 data-number="17.6.1" class="anchored" data-anchor-id="applying-a-pre-defined-theme">
-<span class="header-section-number">17.6.1</span> Applying a pre-defined theme</h3>
+<section id="applying-a-pre-defined-theme" class="level3" data-number="15.6.1"><h3 data-number="15.6.1" class="anchored" data-anchor-id="applying-a-pre-defined-theme">
+<span class="header-section-number">15.6.1</span> Applying a pre-defined theme</h3>
 <p>ggplot2 provides several built-in themes. The most common include:</p>
 <ul>
 <li><p><code>theme_minimal()</code> — clean, uncluttered</p></li>
@@ -1187,8 +1175,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="customising-a-theme" class="level3" data-number="17.6.2"><h3 data-number="17.6.2" class="anchored" data-anchor-id="customising-a-theme">
-<span class="header-section-number">17.6.2</span> Customising a theme</h3>
+</section><section id="customising-a-theme" class="level3" data-number="15.6.2"><h3 data-number="15.6.2" class="anchored" data-anchor-id="customising-a-theme">
+<span class="header-section-number">15.6.2</span> Customising a theme</h3>
 <p>Customising elements with <code>theme()</code></p>
 <p>Themes are modular. You can override individual elements using <code>theme()</code>:</p>
 <ul>
@@ -1225,8 +1213,8 @@ Solution
 <p>Have a play with different theme elements until you think your figure is optimal</p>
 </div>
 </div>
-</section></section><section id="patchwork" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="patchwork">
-<span class="header-section-number">17.7</span> Patchwork</h2>
+</section></section><section id="patchwork" class="level2" data-number="15.7"><h2 data-number="15.7" class="anchored" data-anchor-id="patchwork">
+<span class="header-section-number">15.7</span> Patchwork</h2>
 <p>Sometimes, one plot can’t tell the whole story. <code>patchwork</code> <span class="citation" data-cites="R-patchwork">Pedersen (<a href="references.html#ref-R-patchwork" role="doc-biblioref">2025</a>)</span> lets you combine multiple ggplots — side by side or stacked — without exporting to another program.</p>
 <p>It’s quick, simple, and keeps everything reproducible inside R</p>
 <ul>
@@ -1281,8 +1269,8 @@ Solution
 </div>
 </div>
 </div>
-<section id="marginal-plots" class="level4" data-number="17.7.0.1"><h4 data-number="17.7.0.1" class="anchored" data-anchor-id="marginal-plots">
-<span class="header-section-number">17.7.0.1</span> Marginal plots</h4>
+<section id="marginal-plots" class="level4" data-number="15.7.0.1"><h4 data-number="15.7.0.1" class="anchored" data-anchor-id="marginal-plots">
+<span class="header-section-number">15.7.0.1</span> Marginal plots</h4>
 <p>A <em>marginal plot</em> augments a two-dimensional plot (usually a scatterplot) with one-dimensional summaries along its margins—typically histograms, density curves, or boxplots.</p>
 <p>They let readers inspect the joint relationship and each variable’s distribution simultaneously.</p>
 <p>Conceptually:</p>
@@ -1340,10 +1328,10 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="exporting-safely" class="level2" data-number="17.8"><h2 data-number="17.8" class="anchored" data-anchor-id="exporting-safely">
-<span class="header-section-number">17.8</span> Exporting safely</h2>
-<section id="ggsave" class="level3" data-number="17.8.1"><h3 data-number="17.8.1" class="anchored" data-anchor-id="ggsave">
-<span class="header-section-number">17.8.1</span> <code>ggsave</code>
+</section></section><section id="exporting-safely" class="level2" data-number="15.8"><h2 data-number="15.8" class="anchored" data-anchor-id="exporting-safely">
+<span class="header-section-number">15.8</span> Exporting safely</h2>
+<section id="ggsave" class="level3" data-number="15.8.1"><h3 data-number="15.8.1" class="anchored" data-anchor-id="ggsave">
+<span class="header-section-number">15.8.1</span> <code>ggsave</code>
 </h3>
 <p>One of the easiest ways to save a figure you have made is with the <code>ggsave()</code> function. By default it will save the last plot you made on the screen.</p>
 <p>You should specify the output path to your figures folder, then provide a file name. Here I have decided to call my plot <code>plot</code> (imaginative!) and I want to save it as a .PNG image file. I can also specify the resolution (dpi 300 is good enough for most computer screens).</p>
@@ -1353,8 +1341,8 @@ Solution
 <span id="cb22-3"><a href="#cb22-3"></a></span>
 <span id="cb22-4"><a href="#cb22-4"></a><span class="fu">ggsave</span>(<span class="st">"outputs/figures/YYYYMMDD_ggplot_workshop_final_plot.png"</span>, <span class="at">dpi=</span><span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="svg" class="level3" data-number="17.8.2"><h3 data-number="17.8.2" class="anchored" data-anchor-id="svg">
-<span class="header-section-number">17.8.2</span> <code>svg</code>
+</section><section id="svg" class="level3" data-number="15.8.2"><h3 data-number="15.8.2" class="anchored" data-anchor-id="svg">
+<span class="header-section-number">15.8.2</span> <code>svg</code>
 </h3>
 <p>Not exactly programmatic, but occasionally a lifesaver. If you save your ggplot image in .svg format then it becomes vectorised.</p>
 <p>What does this mean?</p>
@@ -2032,12 +2020,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./ggplot.html" class="pagination-link" aria-label="ggplot">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-inferential-statistics.html" class="pagination-link" aria-label="Inferential statistics">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./summarise.html" class="pagination-link" aria-label="Data insights">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data insights</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

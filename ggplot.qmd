@@ -741,6 +741,66 @@ ggplot(penguins, aes(x = species, y = body_mass_g, fill = species))+
 :::
 
 
+## Strip plots
+
+A strip plot (or individual value plot) displays individual data points as dots along a single axis, showing the distribution of a continuous variable, often across different categories, revealing patterns, density, and outliers that summary plots might hide. 
+
+Unlike previous examples these show all of the raw data, unlike summaries such as violin or boxplots.
+
+```{r}
+# default strip plot
+ggplot(penguins, aes(x = species, y = body_mass_g, colour = species))+
+  geom_point()
+```
+
+### Overlapping data
+
+When we have plenty of data, it becomes highly likes that the points will overlap. This obscures the actual number of data points and has the potential to be misleading. To overcome this we can add slight random displacement (*jitter*) to prevent overlap and make sure all the data points are visible
+
+```{r}
+
+ggplot(penguins, aes(x = species, y = body_mass_g, colour = species))+
+  geom_jitter(width = .2)
+
+
+```
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Alter the width argument to see how it affects the plot
+
+::::
+:::
+
+
+### Beeswarms
+
+A beeswarm plot, also known as a swarmplot, is a graph type that presents individual data points without overlap, creating a distinct "swarming" effect reminiscent of a bee swarm. Here the amount of jitter on the x-axis is directly proportional to the density of points at any given y-value. These can be a great way of combining features of `geom_violin` while still presenting raw data. 
+To generate beeswarm plots we need to use the function `ggbeeswarm::geom_beeswarm()`
+
+```{r}
+
+ggplot(penguins, aes(x = species, y = body_mass_g, colour = species))+
+  ggbeeswarm::geom_beeswarm()
+
+```
+
+:::{.task}
+::::{.task-header}
+Your turn
+::::
+::::{.task-container}
+
+* [ ] Remove the legend
+* [ ] add a theme
+
+::::
+:::
+
 ## Line plots `geom_line()`
 
 A line plot is used to display **ordered continuous data**, most commonly to show change over time or another meaningful ordering on the x-axis. Unlike scatterplots, line plots impose a strong structural assumption: points are connected in sequence.
@@ -1018,12 +1078,14 @@ The `viridis` palettes are designed to:
 - print well in greyscale.
 
 ```{r}
-library(viridis)
+library(colorspace)
 
 # Heatmap for pH levels by lake and month
 ggplot(heat_data, aes(x = month, y = lake, fill = ph)) +
     geom_tile(color = "white", linewidth =.7) +
-    scale_fill_viridis(name = "pH Level") +
+    scale_fill_continuous_sequential(
+      palette = "viridis",
+      name = "pH Level") +
     labs(title = "Monthly pH Levels by Lake", x = "Month", y = "Lake") +
     theme_minimal()
 

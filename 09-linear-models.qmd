@@ -457,6 +457,10 @@ The advantage of emmeans is that it provides the mean, standard error and 95% co
 
 `emmeans` also gives us a handy summary to include in data visuals that combine raw data and statistical inferences. These are standard `ggplot()` outputs so can be [customised as much as you want](#intro-to-grammar).
 
+
+:::{.panel-tabset}
+
+## Means & 95%CI
 ```{r}
 
 # Convert the 'means' object to a tibble
@@ -469,6 +473,27 @@ means |>
 
 
 ```
+
+## Means & 95CI with raw data
+
+```{r}
+# Convert the 'means' object to a tibble
+means |>
+  as_tibble() |>
+  # Create a plot using ggplot
+  ggplot(aes(x = type, y = emmean)) +
+  # Add point estimates with error bars
+  geom_pointrange(aes(ymin = lower.CL, ymax = upper.CL))+
+  # add raw data
+  geom_jitter(data = darwin,
+              aes(x = type,
+                  y = height),
+              width = .1,
+              alpha = .4)
+
+```
+
+:::
 
 Notice that no matter how we calculate the estimated SE (and therefore the 95% CI) of both treatments is the same. This is because as mentioned earlier the variance is a pooled estimate, e.g. variance is not being calculate separately for each group. The only difference you should see in SE across treatments will be if there is a difference in *sample size* between groups. 
 

@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
-<title>14&nbsp; Scripts – Physalia</title>
+<title>13&nbsp; Scripts – Physalia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-data-insights.html" rel="next">
+<link href="./ggplot.html" rel="next">
 <link href="./factors.html" rel="prev">
 <link href="./images/logos/logo.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./scripts.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./scripts.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -359,12 +359,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Import penguins data</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summarise</span></span></a>
-  </div>
-</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -379,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to dplyr</span></span></a>
   </div>
 </li>
       </ul>
@@ -396,43 +390,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./columns.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Column classes &amp; names</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./strings.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Strings</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./duplicates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Duplicates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-missing-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Missing data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./dates.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./factors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./scripts.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></a>
   </div>
 </li>
       </ul>
@@ -440,7 +434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
- <span class="menu-text">Descriptive Statistics</span></a>
+ <span class="menu-text">Data Visualisation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -448,8 +442,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-data-insights.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
+  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -457,7 +457,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
- <span class="menu-text">Data Visualisation</span></a>
+ <span class="menu-text">Descriptive Statistics</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -465,14 +465,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ggplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ggplot2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
+  <a href="./summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data insights</span></span></a>
   </div>
 </li>
       </ul>
@@ -489,55 +483,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-inferential-statistics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inferential statistics</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-linear-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./model-assumptions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Linear models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-paired-design.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Paired tests</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-ANOVA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">ANOVA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Causal models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14a-complex-models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Complex models</span></span></a>
   </div>
 </li>
       </ul>
@@ -554,19 +542,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-generalised-linear.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Generalised Linear Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-poisson.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Poisson regression (for count data or rate data)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-binomial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Logistic regression (for binary data)</span></span></a>
   </div>
 </li>
       </ul>
@@ -583,7 +571,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./mixed-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Foundations of Mixed Modelling</span></span></a>
   </div>
 </li>
       </ul>
@@ -643,17 +631,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#sec-save-script" id="toc-sec-save-script" class="nav-link active" data-scroll-target="#sec-save-script"><span class="header-section-number">14.0.1</span> Save scripts</a></li>
-  <li><a href="#checklist-for-data-checking" id="toc-checklist-for-data-checking" class="nav-link" data-scroll-target="#checklist-for-data-checking"><span class="header-section-number">14.0.2</span> Checklist for data checking</a></li>
-  <li><a href="#running-a-script-from-console" id="toc-running-a-script-from-console" class="nav-link" data-scroll-target="#running-a-script-from-console"><span class="header-section-number">14.1</span> Running a script from console</a></li>
-  <li><a href="#essential-shortcuts" id="toc-essential-shortcuts" class="nav-link" data-scroll-target="#essential-shortcuts"><span class="header-section-number">14.2</span> Essential shortcuts</a></li>
-  <li><a href="#layout" id="toc-layout" class="nav-link" data-scroll-target="#layout"><span class="header-section-number">14.3</span> Layout</a></li>
-  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading"><span class="header-section-number">14.4</span> Reading</a></li>
+<li><a href="#sec-save-script" id="toc-sec-save-script" class="nav-link active" data-scroll-target="#sec-save-script"><span class="header-section-number">13.0.1</span> Writing a script</a></li>
+  <li><a href="#running-a-script-from-console" id="toc-running-a-script-from-console" class="nav-link" data-scroll-target="#running-a-script-from-console"><span class="header-section-number">13.1</span> Running a script from console</a></li>
+  <li><a href="#essential-shortcuts" id="toc-essential-shortcuts" class="nav-link" data-scroll-target="#essential-shortcuts"><span class="header-section-number">13.2</span> Essential shortcuts</a></li>
+  <li><a href="#layout" id="toc-layout" class="nav-link" data-scroll-target="#layout"><span class="header-section-number">13.3</span> Layout</a></li>
+  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading"><span class="header-section-number">13.4</span> Reading</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./scripts.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-summary-scripts" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Scripts</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./columns.html">Data Cleaning</a></li><li class="breadcrumb-item"><a href="./scripts.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-summary-scripts" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Scripts</span></span></h1>
 </div>
 
 
@@ -667,15 +654,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><section id="sec-save-script" class="level3" data-number="14.0.1"><h3 data-number="14.0.1" class="anchored" data-anchor-id="sec-save-script">
-<span class="header-section-number">14.0.1</span> Save scripts</h3>
-<ul>
-<li>Make sure you have <strong>saved your script 💾</strong> and given it the filename <code>01_import_penguins_data.R</code> it should be saved in your <strong>scripts folder</strong>
-</li>
-</ul>
+</header><section id="sec-save-script" class="level3" data-number="13.0.1"><h3 data-number="13.0.1" class="anchored" data-anchor-id="sec-save-script">
+<span class="header-section-number">13.0.1</span> Writing a script</h3>
+<p>An R script is a plain text file containing R code that can be run from top to bottom. Scripts allow analyses to be reproduced from a blank R session, shared with others, and rerun without manual intervention. In this tutorial, you will save, run, and check a simple data import and cleaning script.</p>
 <div class="webex-solution">
 <button>
-Check your script
+Example script
 </button>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#___________________________----</span></span>
@@ -708,7 +692,7 @@ Check your script
 <span id="cb1-28"><a href="#cb1-28"></a></span>
 <span id="cb1-29"><a href="#cb1-29"></a><span class="co"># clean all variable names to snake_case </span></span>
 <span id="cb1-30"><a href="#cb1-30"></a><span class="co"># using the clean_names function from the janitor package</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a><span class="co"># note we are using assign &lt;- </span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co"># note we are using &lt;- </span></span>
 <span id="cb1-32"><a href="#cb1-32"></a><span class="co"># to overwrite the old version of penguins </span></span>
 <span id="cb1-33"><a href="#cb1-33"></a><span class="co"># with a version that has updated names</span></span>
 <span id="cb1-34"><a href="#cb1-34"></a><span class="co"># this changes the data in our R workspace </span></span>
@@ -733,48 +717,38 @@ Check your script
 <span id="cb1-53"><a href="#cb1-53"></a>                             species <span class="sc">==</span> <span class="st">"Gentoo penguin (Pygoscelis papua)"</span> <span class="sc">~</span> <span class="st">"Gentoo"</span>,</span>
 <span id="cb1-54"><a href="#cb1-54"></a>                             species <span class="sc">==</span> <span class="st">"Chinstrap penguin (Pygoscelis antarctica)"</span> <span class="sc">~</span> <span class="st">"Chinstrap"</span>))</span>
 <span id="cb1-55"><a href="#cb1-55"></a></span>
-<span id="cb1-56"><a href="#cb1-56"></a><span class="co"># use mutate and if_else</span></span>
-<span id="cb1-57"><a href="#cb1-57"></a><span class="co"># for a statement that conditionally changes </span></span>
-<span id="cb1-58"><a href="#cb1-58"></a><span class="co"># the names of the values in a variable</span></span>
-<span id="cb1-59"><a href="#cb1-59"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-60"><a href="#cb1-60"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">if_else</span>(</span>
-<span id="cb1-61"><a href="#cb1-61"></a>    sex <span class="sc">==</span> <span class="st">"MALE"</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span></span>
-<span id="cb1-62"><a href="#cb1-62"></a>  )</span>
-<span id="cb1-63"><a href="#cb1-63"></a>  )</span>
-<span id="cb1-64"><a href="#cb1-64"></a></span>
-<span id="cb1-65"><a href="#cb1-65"></a><span class="co"># use lubridate to format date and extract the year</span></span>
-<span id="cb1-66"><a href="#cb1-66"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
-<span id="cb1-67"><a href="#cb1-67"></a>  <span class="fu">mutate</span>(<span class="at">date_egg =</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(date_egg))</span>
-<span id="cb1-68"><a href="#cb1-68"></a></span>
-<span id="cb1-69"><a href="#cb1-69"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-70"><a href="#cb1-70"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(date_egg))</span>
+<span id="cb1-56"><a href="#cb1-56"></a><span class="co"># use mutate and case_when to correct typos </span></span>
+<span id="cb1-57"><a href="#cb1-57"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb1-58"><a href="#cb1-58"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>( sex <span class="sc">==</span> <span class="st">"MALE"</span> <span class="sc">~</span>  <span class="st">"Male"</span>, </span>
+<span id="cb1-59"><a href="#cb1-59"></a>                          <span class="at">.default =</span> <span class="fu">as.character</span>(sex)</span>
+<span id="cb1-60"><a href="#cb1-60"></a>  )</span>
+<span id="cb1-61"><a href="#cb1-61"></a>  )</span>
+<span id="cb1-62"><a href="#cb1-62"></a></span>
+<span id="cb1-63"><a href="#cb1-63"></a><span class="co"># use lubridate to format date and extract the year</span></span>
+<span id="cb1-64"><a href="#cb1-64"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb1-65"><a href="#cb1-65"></a>  <span class="fu">mutate</span>(<span class="at">date_egg =</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(date_egg))</span>
+<span id="cb1-66"><a href="#cb1-66"></a></span>
+<span id="cb1-67"><a href="#cb1-67"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb1-68"><a href="#cb1-68"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(date_egg))</span>
+<span id="cb1-69"><a href="#cb1-69"></a></span>
+<span id="cb1-70"><a href="#cb1-70"></a></span>
 <span id="cb1-71"><a href="#cb1-71"></a></span>
-<span id="cb1-72"><a href="#cb1-72"></a><span class="co"># Set body mass ranges</span></span>
-<span id="cb1-73"><a href="#cb1-73"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-74"><a href="#cb1-74"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-75"><a href="#cb1-75"></a>    body_mass_g <span class="sc">&lt;=</span> <span class="dv">3500</span> <span class="sc">~</span> <span class="st">"smol penguin"</span>,</span>
-<span id="cb1-76"><a href="#cb1-76"></a>    body_mass_g <span class="sc">&gt;</span><span class="dv">3500</span> <span class="sc">&amp;</span> body_mass_g <span class="sc">&lt;</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"mid penguin"</span>,</span>
-<span id="cb1-77"><a href="#cb1-77"></a>    body_mass_g <span class="sc">&gt;=</span> <span class="dv">4500</span> <span class="sc">~</span> <span class="st">"chonk penguin"</span>,</span>
-<span id="cb1-78"><a href="#cb1-78"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
-<span id="cb1-79"><a href="#cb1-79"></a>  )</span>
-<span id="cb1-80"><a href="#cb1-80"></a></span>
-<span id="cb1-81"><a href="#cb1-81"></a><span class="co"># Assign these to an ordered factor</span></span>
-<span id="cb1-82"><a href="#cb1-82"></a></span>
-<span id="cb1-83"><a href="#cb1-83"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-84"><a href="#cb1-84"></a>  <span class="fu">mutate</span>(<span class="at">mass_range =</span> <span class="fu">fct_relevel</span>(mass_range, </span>
-<span id="cb1-85"><a href="#cb1-85"></a>                                  <span class="st">"smol penguin"</span>, </span>
-<span id="cb1-86"><a href="#cb1-86"></a>                                  <span class="st">"mid penguin"</span>, </span>
-<span id="cb1-87"><a href="#cb1-87"></a>                                  <span class="st">"chonk penguin"</span>)</span>
-<span id="cb1-88"><a href="#cb1-88"></a>         )</span>
-<span id="cb1-89"><a href="#cb1-89"></a></span>
-<span id="cb1-90"><a href="#cb1-90"></a><span class="co"># WRITE CLEAN DATA ----</span></span>
-<span id="cb1-91"><a href="#cb1-91"></a><span class="do">## Optional ----</span></span>
-<span id="cb1-92"><a href="#cb1-92"></a></span>
-<span id="cb1-93"><a href="#cb1-93"></a><span class="fu">write_csv</span>(penguins, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"penguins_clean.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-72"><a href="#cb1-72"></a><span class="co"># WRITE CLEAN DATA ----</span></span>
+<span id="cb1-73"><a href="#cb1-73"></a><span class="do">## Optional ----</span></span>
+<span id="cb1-74"><a href="#cb1-74"></a></span>
+<span id="cb1-75"><a href="#cb1-75"></a><span class="fu">write_csv</span>(penguins, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"penguins_clean.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
 <ul>
-<li>Does your workspace look like the below?</li>
+<li><p><label><input type="checkbox">Copy paste the above into a .R file</label></p></li>
+<li><p><label><input type="checkbox">If you previously started putting a .R file together check you aren’t duplicating code</label></p></li>
+<li><p><label><input type="checkbox">Make sure you <strong>save your script 💾</strong> and given it the filename <code>01_import_penguins_data.R</code> it should be saved in your <strong>scripts folder</strong></label></p></li>
+<li><p>Does your workspace look like the below?</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -792,25 +766,10 @@ Check your script
 </div>
 </div>
 </div>
-<ul>
-<li>Does your script run from a <code>blank slate</code> without errors?</li>
-</ul></section><section id="checklist-for-data-checking" class="level3" data-number="14.0.2"><h3 data-number="14.0.2" class="anchored" data-anchor-id="checklist-for-data-checking">
-<span class="header-section-number">14.0.2</span> Checklist for data checking</h3>
-<ul>
-<li><p>Is our dataframe in a tidy format?</p></li>
-<li>
-<p>Is each column assigned to the correct data type?</p>
-<ul>
-<li>Are dates formatted correctly?</li>
-<li>Are factors set where needed, are the levels in the correct order?</li>
-</ul>
-</li>
-<li><p>Are variables consistently named (e.g.&nbsp;using a naming convention such as snake_case)?</p></li>
-<li><p>Are text values in an appropriate format?</p></li>
-<li><p>Do we have any data duplication?</p></li>
-<li><p>Are there any typos or mistakes in character strings?</p></li>
-</ul></section><section id="running-a-script-from-console" class="level2" data-number="14.1"><h2 data-number="14.1" class="anchored" data-anchor-id="running-a-script-from-console">
-<span class="header-section-number">14.1</span> Running a script from console</h2>
+</div>
+</div>
+</section><section id="running-a-script-from-console" class="level2" data-number="13.1"><h2 data-number="13.1" class="anchored" data-anchor-id="running-a-script-from-console">
+<span class="header-section-number">13.1</span> Running a script from console</h2>
 <p>Now that we have made an import and cleaning script, we can check our blank slates set-up and that our script runs without errors:</p>
 <div class="task">
 <div class="task-header">
@@ -819,12 +778,9 @@ Check your script
 <div class="task-container">
 <ul class="task-list">
 <li><p><label><input type="checkbox">Restart your R session - (does your Environment clear?)</label></p></li>
-<li><p><label><input type="checkbox">Using the <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> function in your console type the filepath of your script and hit <code>enter</code>.</label></p></li>
+<li><p><label><input type="checkbox">Using the <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> function in your console type the filepath of your script and hit <code>enter</code>. This will run your <em>entire script</em> from top-to-bottom.</label></p></li>
+<li><p><label><input type="checkbox">Confirm that penguins appears in the Environment</label></p></li>
 </ul>
-<div class="webex-solution">
-<button>
-Solution
-</button>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">source</span>(<span class="st">"scripts/01_import_penguins_data.R"</span>) <span class="co"># must specify dir</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
@@ -833,9 +789,8 @@ Solution
 </div>
 </div>
 </div>
-</div>
-</section><section id="essential-shortcuts" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="essential-shortcuts">
-<span class="header-section-number">14.2</span> Essential shortcuts</h2>
+</section><section id="essential-shortcuts" class="level2" data-number="13.2"><h2 data-number="13.2" class="anchored" data-anchor-id="essential-shortcuts">
+<span class="header-section-number">13.2</span> Essential shortcuts</h2>
 <ul>
 <li>
 <p>Comment/uncomment - <code>Ctrl/Cmd + Shift + c</code></p>
@@ -849,18 +804,19 @@ Solution
 <li>Highlight an R object then use this shortcut key to rename all examples in the script</li>
 </ul>
 </li>
-</ul></section><section id="layout" class="level2" data-number="14.3"><h2 data-number="14.3" class="anchored" data-anchor-id="layout">
-<span class="header-section-number">14.3</span> Layout</h2>
+</ul></section><section id="layout" class="level2" data-number="13.3"><h2 data-number="13.3" class="anchored" data-anchor-id="layout">
+<span class="header-section-number">13.3</span> Layout</h2>
 <ul>
 <li><p>Define logical regions of scripts with either <code>----</code> or <code>====</code> after <code>#</code></p></li>
 <li><p>This uses markdown logic, #, ##, ### to define titles, headers and subheaders</p></li>
 <li><p>Use <code>styler</code> to help format code and keep it neat</p></li>
-</ul></section><section id="reading" class="level2" data-number="14.4"><h2 data-number="14.4" class="anchored" data-anchor-id="reading">
-<span class="header-section-number">14.4</span> Reading</h2>
+</ul></section><section id="reading" class="level2" data-number="13.4"><h2 data-number="13.4" class="anchored" data-anchor-id="reading">
+<span class="header-section-number">13.4</span> Reading</h2>
+<p>Well-commented and clearly structured scripts make analytical decisions explicit and allow analyses to be rerun, checked, and modified reliably. This supports reproducibility by ensuring that results do not depend on undocumented assumptions or hidden steps ).</p>
+<p>Clear sectioning and brief comments also reduce cognitive load, making it easier to understand program flow and to identify and fix errors when scripts are run from a blank R session. For these reasons, using consistent headings, logical ordering, and concise comments is an essential part of writing reliable R scripts.</p>
 <ul>
-<li><p><a href="https://dplyr.tidyverse.org/index.html">Dplyr</a></p></li>
-<li><p><a href="https://lubridate.tidyverse.org/">Lubridate</a></p></li>
-<li><p><a href="https://stringr.tidyverse.org/">Stringr</a></p></li>
+<li><p><a href="https://www.britishecologicalsociety.org/applied-ecology-resources/document/20220264713/">BES Guide tp better science: reproducible code</a></p></li>
+<li><p><a href="https://ecoevorxiv.org/repository/view/9806/">TADA! Simple guidelines to improve code sharing</a></p></li>
 </ul>
 
 
@@ -1510,12 +1466,12 @@ window.onresize = move_sidebar;
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./factors.html" class="pagination-link" aria-label="Factors">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factors</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Factors</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-data-insights.html" class="pagination-link" aria-label="Data insights">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data insights</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ggplot.html" class="pagination-link" aria-label="ggplot">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">ggplot</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
