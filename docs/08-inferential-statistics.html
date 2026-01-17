@@ -104,8 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+}</script><script src="site_libs/font-awesome-6.7.2/js/script.js"></script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -659,7 +658,7 @@ window.Quarto = {
   <ul>
 <li><a href="#darwins-maize-data" id="toc-darwins-maize-data" class="nav-link active" data-scroll-target="#darwins-maize-data"><span class="header-section-number">17.1</span> Darwin’s maize data</a></li>
   <li>
-<a href="#activity-1-carry-out-some-basic-exploratory-data-analysis" id="toc-activity-1-carry-out-some-basic-exploratory-data-analysis" class="nav-link" data-scroll-target="#activity-1-carry-out-some-basic-exploratory-data-analysis"><span class="header-section-number">17.2</span> Activity 1: Carry out some basic exploratory data analysis</a>
+<a href="#look-at-the-data" id="toc-look-at-the-data" class="nav-link" data-scroll-target="#look-at-the-data"><span class="header-section-number">17.2</span> Look at the data</a>
   <ul class="collapse">
 <li><a href="#visualisation" id="toc-visualisation" class="nav-link" data-scroll-target="#visualisation"><span class="header-section-number">17.2.1</span> Visualisation</a></li>
   <li><a href="#comparing-groups" id="toc-comparing-groups" class="nav-link" data-scroll-target="#comparing-groups"><span class="header-section-number">17.2.2</span> Comparing groups</a></li>
@@ -735,9 +734,9 @@ Important
 <p>Use the File &gt; New Script menu item and select an R Script.</p>
 </div>
 </div>
-</section><section id="activity-1-carry-out-some-basic-exploratory-data-analysis" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="activity-1-carry-out-some-basic-exploratory-data-analysis">
-<span class="header-section-number">17.2</span> Activity 1: Carry out some basic exploratory data analysis</h2>
-<p>The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic data check <strong>without</strong> prompts.</p>
+</section><section id="look-at-the-data" class="level2" data-number="17.2"><h2 data-number="17.2" class="anchored" data-anchor-id="look-at-the-data">
+<span class="header-section-number">17.2</span> Look at the data</h2>
+<p>The first thing we should know by now is to always start by exploring our data. If you want to stretch yourself, see if you can perform a basic check of column names. Make sure they are in <code>snake_case</code> and review the number of observations:</p>
 <div class="webex-solution">
 <button>
 Solution
@@ -748,41 +747,16 @@ Solution
 <span id="cb2-3"><a href="#cb2-3"></a></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="co"># check data is in a tidy format</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="fu">head</span>(darwin)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># check variable names</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">colnames</span>(darwin)</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co"># clean up column names</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a>darwin <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(darwin)</span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># check for duplication</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb2-17"><a href="#cb2-17"></a>  <span class="fu">duplicated</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb2-18"><a href="#cb2-18"></a>  <span class="fu">sum</span>()</span>
-<span id="cb2-19"><a href="#cb2-19"></a></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># check for typos - by looking at impossible values</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb2-22"><a href="#cb2-22"></a>  <span class="fu">summarise</span>(<span class="at">min=</span><span class="fu">min</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>), </span>
-<span id="cb2-23"><a href="#cb2-23"></a>            <span class="at">max=</span><span class="fu">max</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb2-24"><a href="#cb2-24"></a></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co"># check for typos by looking at distinct characters/values</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a></span>
-<span id="cb2-27"><a href="#cb2-27"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb2-28"><a href="#cb2-28"></a>  <span class="fu">distinct</span>(pair)</span>
-<span id="cb2-29"><a href="#cb2-29"></a></span>
-<span id="cb2-30"><a href="#cb2-30"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb2-31"><a href="#cb2-31"></a>  <span class="fu">distinct</span>(type)</span>
-<span id="cb2-32"><a href="#cb2-32"></a></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="co"># missing values</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a>darwin <span class="sc">|&gt;</span> </span>
-<span id="cb2-35"><a href="#cb2-35"></a>  <span class="fu">is.na</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb2-36"><a href="#cb2-36"></a>  <span class="fu">sum</span>()</span>
-<span id="cb2-37"><a href="#cb2-37"></a></span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="co"># quick summary</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="fu">summary</span>(darwin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># check variable names</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">colnames</span>(darwin)</span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># clean up column names</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>darwin <span class="ot">&lt;-</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>(darwin)</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co"># Simple summary statistics</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>darwin <span class="sc">|&gt;</span> </span>
+<span id="cb2-14"><a href="#cb2-14"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
+<span id="cb2-15"><a href="#cb2-15"></a>  <span class="fu">summarise</span>(<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <section id="visualisation" class="level3" data-number="17.2.1"><h3 data-number="17.2.1" class="anchored" data-anchor-id="visualisation">
@@ -819,12 +793,24 @@ Solution
 </section><section id="comparing-groups" class="level3" data-number="17.2.2"><h3 data-number="17.2.2" class="anchored" data-anchor-id="comparing-groups">
 <span class="header-section-number">17.2.2</span> Comparing groups</h3>
 <p>As we have seen previously we can use various tidy functions to determine the mean and standard deviations of our groups.</p>
+<div class="task">
+<div class="task-header">
+<p>Your turn</p>
+</div>
+<div class="task-container">
+<p>Calculate the mean and sd of for the two crosses:</p>
+<div class="webex-solution">
+<button>
+Solution
+</button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>darwin <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>darwin_summary <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
-<span id="cb4-4"><a href="#cb4-4"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height)</span>
-<span id="cb4-5"><a href="#cb4-5"></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-4"><a href="#cb4-4"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>            <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb4-6"><a href="#cb4-6"></a>            )</span>
+<span id="cb4-7"><a href="#cb4-7"></a>darwin_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -832,20 +818,40 @@ Solution
 <th style="text-align: left;">type</th>
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
+<th style="text-align: right;">n</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Cross</td>
 <td style="text-align: right;">20.19167</td>
 <td style="text-align: right;">3.616945</td>
+<td style="text-align: right;">15</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Self</td>
 <td style="text-align: right;">17.57500</td>
 <td style="text-align: right;">2.051676</td>
+<td style="text-align: right;">15</td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># make a summary plot</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>darwin_summary <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,</span>
+<span id="cb5-4"><a href="#cb5-4"></a>             <span class="at">y=</span>mean))<span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd))<span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -862,55 +868,6 @@ Tip
 <p>You should (re)familiarise yourself with how (and why) we calculate standard deviation.</p>
 </div>
 </div>
-<p>Summary statistics like these could be presented as figures or tables. We normally reserve tables for <strong>very</strong> simple sets of numbers, and this instance we could present both.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># make a new object</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>darwin_summary <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">group_by</span>(type) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(height),</span>
-<span id="cb5-5"><a href="#cb5-5"></a>            <span class="at">sd=</span><span class="fu">sd</span>(height))</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># make a summary plot</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>darwin_summary <span class="sc">|&gt;</span> </span>
-<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,</span>
-<span id="cb5-10"><a href="#cb5-10"></a>             <span class="at">y=</span>mean))<span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd))<span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>darwin_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="table table-striped caption-top table-sm small">
-<caption>Summary statistics of crossed and selfed maize plants</caption>
-<thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">type</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">sd</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Cross</td>
-<td style="text-align: right;">20.19167</td>
-<td style="text-align: right;">3.616945</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Self</td>
-<td style="text-align: right;">17.57500</td>
-<td style="text-align: right;">2.051676</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Descriptive statistics and careful data checking are often skipped steps in the rush to answer the <strong>big</strong> questions. However, description is an essential part of early phase analysis.</p>
 </section></section><section id="estimation" class="level2" data-number="17.3"><h2 data-number="17.3" class="anchored" data-anchor-id="estimation">
 <span class="header-section-number">17.3</span> Estimation</h2>
 <p>In the section above we concentrated on description. But the hypothesis Darwin aimed to test was whether ‘inbreeding reduced the fitness of the selfed plants’. To do this we will use the height of the plants as a proxy for fitness and explicitly address whether there is a <strong>difference</strong> in the mean heights of the plants between these two groups.</p>
@@ -924,35 +881,23 @@ Tip
 <span class="header-section-number">17.3.1</span> Differences between groups</h3>
 <p>Darwin’s data used match pairs - each pair shared one parent. So that in pair 1 the same parent plant was either ‘selfed’ or ‘crossed’ to produce offspring. This is a powerful approach to experimental design, as it means that we can look at the differences in heights across each of the 15 pairs of plants - rather than having to infer differences from two randomly derived groups.</p>
 <p>In order to calculate the differences in height between each pair we need to do some data wrangling with <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">tidyr::pivot_wider()</a></code> {<a href="tidy-data.html" class="quarto-xref"><span>Appendix C</span></a>} and calculations with <code>mutate</code>.</p>
-<div class="task">
-<div class="task-header">
-<p>Your turn</p>
-</div>
-<div class="task-container">
 <p>Create a new column called difference with the height of the selfed plant in each pair subtracted from the crossed plant.</p>
-<div class="webex-solution">
-<button>
-Solution
-</button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># pivot data to wide format then subtract Selfed plant heights from Crossed plant heights</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a></span>
-<span id="cb7-3"><a href="#cb7-3"></a>darwin_wide <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, </span>
-<span id="cb7-5"><a href="#cb7-5"></a>              <span class="at">values_from =</span> height) <span class="sc">|&gt;</span> </span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">mutate</span>(<span class="at">difference =</span> Cross <span class="sc">-</span> Self)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># pivot data to wide format then subtract Selfed plant heights from Crossed plant heights</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>darwin_wide <span class="ot">&lt;-</span> darwin <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>              <span class="at">values_from =</span> height) <span class="sc">|&gt;</span> </span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">mutate</span>(<span class="at">difference =</span> Cross <span class="sc">-</span> Self)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We now have the difference in height for each pair, we can use this to calculate the <strong>mean difference</strong> in heights between paired plants, and the amount of variance (as standard deviation)</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_wide <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(difference),</span>
-<span id="cb8-3"><a href="#cb8-3"></a>            <span class="at">sd=</span><span class="fu">sd</span>(difference),</span>
-<span id="cb8-4"><a href="#cb8-4"></a>            <span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_wide <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(difference),</span>
+<span id="cb7-3"><a href="#cb7-3"></a>            <span class="at">sd=</span><span class="fu">sd</span>(difference),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>            <span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1007,10 +952,10 @@ SE = \frac{s}{\sqrt(n)}
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_difference_summary <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">mutate</span>(<span class="at">se=</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>darwin_difference_summary <span class="ot">&lt;-</span> darwin_difference_summary <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">mutate</span>(<span class="at">se=</span> sd<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1046,8 +991,8 @@ Write-up
 <p>With a mean and standard error of the difference in heights between inbred and crossed plants - how do we work out how much confidence we have in their being a difference between our <strong>population means</strong>?</p>
 <p>Standard error is a measure of uncertainty, the larger the standard error the more <em>noise</em> around our data and the more uncertainty we have. The smaller the standard error the more confidence we can have that our difference in means is <em>real</em>.</p>
 <ul>
-<li><p>Null hypothesis - there is no difference in the mean height of self vs crossed plants</p></li>
-<li><p>Alternate hypothesis - inbreeding reduces the fitness of the selfed plants, observed as selfed plants on average being smaller than crossed plants</p></li>
+<li><p><strong>Null hypothesis</strong> - there is no difference in the mean height of self vs crossed plants</p></li>
+<li><p><strong>Alternate hypothesis</strong> - inbreeding reduces the fitness of the selfed plants, observed as selfed plants on average being smaller than crossed plants</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1075,7 +1020,7 @@ Tip
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1086,7 +1031,7 @@ Tip
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="08-inferential-statistics_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1104,13 +1049,13 @@ Tip
 <p>Because ± 1.96 standard errors covers the central 95% of the area under the normal curve, we refer to this as our 95% confidence interval. We can calculate confidence intervals for any level, but commonly we refer to standard error (68% CI), 95% and 99%.</p>
 <p>We can work out the 95% confidence interval range of our estimated mean as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>ci95 <span class="ot">&lt;-</span> <span class="fl">1.96</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a>darwin_difference_summary <span class="sc">|&gt;</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">mutate</span>(<span class="at">lower_CI =</span> mean <span class="sc">-</span> (se<span class="sc">*</span>ci95),</span>
-<span id="cb10-5"><a href="#cb10-5"></a>         <span class="at">upper_CI =</span> mean <span class="sc">+</span> (se<span class="sc">*</span>ci95))</span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ci95 <span class="ot">&lt;-</span> <span class="fl">1.96</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>darwin_difference_summary <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">mutate</span>(<span class="at">lower_CI =</span> mean <span class="sc">-</span> (se<span class="sc">*</span>ci95),</span>
+<span id="cb9-5"><a href="#cb9-5"></a>         <span class="at">upper_CI =</span> mean <span class="sc">+</span> (se<span class="sc">*</span>ci95))</span>
+<span id="cb9-6"><a href="#cb9-6"></a></span>
+<span id="cb9-7"><a href="#cb9-7"></a>darwin_difference_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">

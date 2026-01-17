@@ -512,7 +512,8 @@ penguins |>
              fill = species))+
   geom_histogram()+
   scale_fill_discrete_qualitative()+
-  facet_wrap(~species) # make facets by species
+  facet_wrap(~species, # make facets by species
+             ncol = 1) # stack the plots for easier comparison
 
 ```
 
@@ -552,6 +553,27 @@ penguins |>
 
 - `n_distinct(x)`: count the number of unique value
 
+
+## GGally
+
+GGally is an invaluable tool in a researcher's toolkit. It seamlessly extends the capabilities of the widely used ggplot2 package. With GGally, you can effortlessly create a variety of visualizations to explore and understand distributions and correlations among your variables. Its flexibility and ease of use make it a go-to choice for streamlining the process of creating insightful plots and charts for data analysis.
+
+```{r, message = FALSE, warning = FALSE}
+library(GGally)
+penguins |> 
+  select(species, island, culmen_length_mm, culmen_depth_mm, flipper_length_mm, body_mass_g, sex) |> 
+  ggpairs()
+
+```
+
+If we want to focus our exploration or include important grouping variables then this is also supported.
+
+
+```{r, message = FALSE, warning = FALSE}
+penguins |> 
+  ggpairs(columns = 10:12, ggplot2::aes(colour = species))
+
+```
 
 ## Summary
 
