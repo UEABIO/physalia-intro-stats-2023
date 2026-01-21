@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
 <title>13&nbsp; Scripts – Physalia</title>
@@ -71,9 +71,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-de8274a4d1ecc1e6aaeaf6e5564b5074.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -719,24 +719,25 @@ Example script
 <span id="cb1-55"><a href="#cb1-55"></a></span>
 <span id="cb1-56"><a href="#cb1-56"></a><span class="co"># use mutate and case_when to correct typos </span></span>
 <span id="cb1-57"><a href="#cb1-57"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-58"><a href="#cb1-58"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>( sex <span class="sc">==</span> <span class="st">"MALE"</span> <span class="sc">~</span>  <span class="st">"Male"</span>, </span>
-<span id="cb1-59"><a href="#cb1-59"></a>                          <span class="at">.default =</span> <span class="fu">as.character</span>(sex)</span>
-<span id="cb1-60"><a href="#cb1-60"></a>  )</span>
+<span id="cb1-58"><a href="#cb1-58"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>( sex <span class="sc">==</span> <span class="st">"MALE"</span> <span class="sc">~</span>  <span class="st">"Male"</span>,</span>
+<span id="cb1-59"><a href="#cb1-59"></a>                          sex <span class="sc">==</span> <span class="st">"FEMALE"</span> <span class="sc">~</span> <span class="st">"Female"</span></span>
+<span id="cb1-60"><a href="#cb1-60"></a>                          <span class="at">.default =</span> <span class="fu">as.character</span>(sex)</span>
 <span id="cb1-61"><a href="#cb1-61"></a>  )</span>
-<span id="cb1-62"><a href="#cb1-62"></a></span>
-<span id="cb1-63"><a href="#cb1-63"></a><span class="co"># use lubridate to format date and extract the year</span></span>
-<span id="cb1-64"><a href="#cb1-64"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
-<span id="cb1-65"><a href="#cb1-65"></a>  <span class="fu">mutate</span>(<span class="at">date_egg =</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(date_egg))</span>
-<span id="cb1-66"><a href="#cb1-66"></a></span>
-<span id="cb1-67"><a href="#cb1-67"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb1-68"><a href="#cb1-68"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(date_egg))</span>
-<span id="cb1-69"><a href="#cb1-69"></a></span>
+<span id="cb1-62"><a href="#cb1-62"></a>  )</span>
+<span id="cb1-63"><a href="#cb1-63"></a></span>
+<span id="cb1-64"><a href="#cb1-64"></a><span class="co"># use lubridate to format date and extract the year</span></span>
+<span id="cb1-65"><a href="#cb1-65"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb1-66"><a href="#cb1-66"></a>  <span class="fu">mutate</span>(<span class="at">date_egg =</span> lubridate<span class="sc">::</span><span class="fu">dmy</span>(date_egg))</span>
+<span id="cb1-67"><a href="#cb1-67"></a></span>
+<span id="cb1-68"><a href="#cb1-68"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb1-69"><a href="#cb1-69"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> lubridate<span class="sc">::</span><span class="fu">year</span>(date_egg))</span>
 <span id="cb1-70"><a href="#cb1-70"></a></span>
 <span id="cb1-71"><a href="#cb1-71"></a></span>
-<span id="cb1-72"><a href="#cb1-72"></a><span class="co"># WRITE CLEAN DATA ----</span></span>
-<span id="cb1-73"><a href="#cb1-73"></a><span class="do">## Optional ----</span></span>
-<span id="cb1-74"><a href="#cb1-74"></a></span>
-<span id="cb1-75"><a href="#cb1-75"></a><span class="fu">write_csv</span>(penguins, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"penguins_clean.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-72"><a href="#cb1-72"></a></span>
+<span id="cb1-73"><a href="#cb1-73"></a><span class="co"># WRITE CLEAN DATA ----</span></span>
+<span id="cb1-74"><a href="#cb1-74"></a><span class="do">## Optional ----</span></span>
+<span id="cb1-75"><a href="#cb1-75"></a></span>
+<span id="cb1-76"><a href="#cb1-76"></a><span class="fu">write_csv</span>(penguins, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"penguins_clean.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="task">

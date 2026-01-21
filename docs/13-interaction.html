@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
 <title>22&nbsp; Interactions – Physalia</title>
@@ -71,9 +71,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-de8274a4d1ecc1e6aaeaf6e5564b5074.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -698,7 +698,15 @@ window.Quarto = {
   
 
 
-</header><p>So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one possible explanatory variable? Extra terms can easily be incorporated into linear models in order to test this.</p>
+</header><div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(performance)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(emmeans)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>So far we have worked almost exclusively with single explanatory variables either continuous (regression) or categorical (t-test or ANOVA). But what about analyses where we have more than one possible explanatory variable? Extra terms can easily be incorporated into linear models in order to test this.</p>
 <section id="factorial-linear-models" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="factorial-linear-models">
 <span class="header-section-number">22.1</span> Factorial linear models</h2>
 <blockquote class="blockquote">
@@ -712,11 +720,11 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>biomass <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"biomass.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>biomass <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"biomass.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should first check the data and look at the top rows, we can see that this shows the application or non-application of fertiliser and light additions:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(biomass)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">head</span>(biomass)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Inspection of the dataset shows that the same data is presented in <em>two</em> ways:</p>
 <ul>
@@ -739,9 +747,9 @@ window.Quarto = {
 </div>
 <div class="task-container">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>biomass <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">group_by</span>(Fert, Light) <span class="sc">|&gt;</span> </span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>biomass <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">group_by</span>(Fert, Light) <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -766,45 +774,40 @@ Possible Solution
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>biomass <span class="sc">|&gt;</span>  </span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fert, <span class="at">y=</span>Biomass.m2))<span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>Light), </span>
-<span id="cb4-4"><a href="#cb4-4"></a>               <span class="at">width =</span> .<span class="dv">5</span>,</span>
-<span id="cb4-5"><a href="#cb4-5"></a>               <span class="at">alpha =</span> .<span class="dv">4</span>,</span>
-<span id="cb4-6"><a href="#cb4-6"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Light),</span>
-<span id="cb4-8"><a href="#cb4-8"></a>              <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span>.<span class="dv">5</span>,</span>
-<span id="cb4-9"><a href="#cb4-9"></a>                                              <span class="at">jitter.width =</span> .<span class="dv">2</span>)) <span class="co"># Dodge and jitter data points</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a> <span class="co"># biomass |&gt;  </span></span>
-<span id="cb5-2"><a href="#cb5-2"></a> <span class="co">#  ggplot(aes(x=Fert, y=Biomass.m2))+</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a> <span class="co">#  geom_boxplot(aes(fill=Light), </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a> <span class="co">#               width = .5,</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a> <span class="co">#               alpha = .4,</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a> <span class="co">#               outlier.shape = NA)+</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a> <span class="co">#  geom_beeswarm(aes(colour = Light),</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a> <span class="co">#              dodge.width = .5)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>biomass <span class="sc">|&gt;</span>  </span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>FL, <span class="at">y=</span>Biomass.m2))<span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">5</span>,</span>
-<span id="cb6-4"><a href="#cb6-4"></a>               <span class="at">alpha =</span> .<span class="dv">4</span>,</span>
-<span id="cb6-5"><a href="#cb6-5"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_beeswarm</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>biomass <span class="sc">|&gt;</span>  </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fert, <span class="at">y=</span>Biomass.m2))<span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>Light), </span>
+<span id="cb5-4"><a href="#cb5-4"></a>               <span class="at">width =</span> .<span class="dv">5</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>               <span class="at">alpha =</span> .<span class="dv">4</span>,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Light),</span>
+<span id="cb5-8"><a href="#cb5-8"></a>              <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">dodge.width =</span>.<span class="dv">5</span>,                                    <span class="at">jitter.width =</span> .<span class="dv">2</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Dodge and jitter data points</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Here dodge is required to separate light groups left and right on the x-axis</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># jitter prevents data overlap</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>biomass <span class="sc">|&gt;</span>  </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>FL, <span class="at">y=</span>Biomass.m2))<span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">5</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>               <span class="at">alpha =</span> .<span class="dv">4</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>               <span class="at">outlier.shape =</span> <span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a> <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Here only jitter is required as each treatment combination has its own x-axis position</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -816,8 +819,8 @@ Possible Solution
 <span class="header-section-number">22.3</span> ANOVA</h2>
 <p>If we use the <code>FL</code> column as a predictor then this is equivalent to a four-level <strong>one way ANOVA</strong>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ls_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> FL, <span class="at">data =</span> biomass)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">summary</span>(ls_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ls_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> FL, <span class="at">data =</span> biomass)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">summary</span>(ls_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -863,13 +866,13 @@ Note
 <p>If we wanted to get the precise confidence intervals of effect sizes we could use <code>broom::tidy(ls_1, conf.int = T)</code> or <code>confint(ls1)</code>.</p>
 <p>We can visualise these differences with a coefficient plot, and see clearly that adding light by itself produce a slight increase in the mean biomass of our samples <strong>but</strong> the 95% confidence interval includes zero, so we don’t have any real confidence that this is a consistent/true effect.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(ls_1,</span>
-<span id="cb9-2"><a href="#cb9-2"></a>                      <span class="at">show_p_values=</span><span class="cn">FALSE</span>,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>                      <span class="at">signif_stars =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>                     <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(ls_1,</span>
+<span id="cb11-2"><a href="#cb11-2"></a>                      <span class="at">show_p_values=</span><span class="cn">FALSE</span>,</span>
+<span id="cb11-3"><a href="#cb11-3"></a>                      <span class="at">signif_stars =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-4"><a href="#cb11-4"></a>                     <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Effects of light and fertiliser treatments on biomass relative to an untreated control (error bars = 95% CI)</figcaption></figure>
 </div>
 </div>
@@ -904,9 +907,9 @@ Solution
 </button>
 <p>We can read this directly from the model summary <em>or</em></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">anova</span>(ls_1)</span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># drop1(ls_1)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">anova</span>(ls_1)</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># drop1(ls_1)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -950,7 +953,7 @@ Solution
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption>Left an illustration of an additive model, Right an illustration of a model with an interaction effect.</figcaption></figure>
 </div>
 </div>
@@ -975,12 +978,12 @@ Discussion
 <span class="header-section-number">22.4.1</span> Modelling an interaction effect</h3>
 <p>To produce an interaction model, we need to use the <em>separate</em> columns for fertiliser and light and then to include an interaction term we add this as <code>Light:Fert</code> written out as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>ls_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> Fert <span class="sc">+</span> <span class="co"># main effect</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>             Light <span class="sc">+</span> <span class="co"># main effect</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>             Fert<span class="sc">:</span>Light, <span class="co"># interaction term</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>           <span class="at">data =</span> biomass)</span>
-<span id="cb11-5"><a href="#cb11-5"></a></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="fu">summary</span>(ls_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ls_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> Fert <span class="sc">+</span> <span class="co"># main effect</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>             Light <span class="sc">+</span> <span class="co"># main effect</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>             Fert<span class="sc">:</span>Light, <span class="co"># interaction term</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>           <span class="at">data =</span> biomass)</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">summary</span>(ls_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -1013,8 +1016,8 @@ The maths
 </button>
 <p>So in model 2 we have separated the treatment of <code>F+L+</code> into three parts, the effect of adding light, the effect of adding fertiliser and the effect of combining them. Add these together and it should match our original estimate from model 1.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># model 2</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">coef</span>(ls_2)[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">coef</span>(ls_2)[<span class="dv">3</span>] <span class="sc">+</span> <span class="fu">coef</span>(ls_2)[<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># model 2</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">coef</span>(ls_2)[<span class="dv">2</span>] <span class="sc">+</span> <span class="fu">coef</span>(ls_2)[<span class="dv">3</span>] <span class="sc">+</span> <span class="fu">coef</span>(ls_2)[<span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> FertF+ 
 219.225 </code></pre>
@@ -1023,13 +1026,13 @@ The maths
 </div>
 <p>This effect appears to be statistically significant (but only just):</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(ls_2,</span>
-<span id="cb15-2"><a href="#cb15-2"></a>                      <span class="at">show_p_values=</span><span class="cn">FALSE</span>,</span>
-<span id="cb15-3"><a href="#cb15-3"></a>                      <span class="at">signif_stars =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb15-4"><a href="#cb15-4"></a>                     <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>GGally<span class="sc">::</span><span class="fu">ggcoef_model</span>(ls_2,</span>
+<span id="cb17-2"><a href="#cb17-2"></a>                      <span class="at">show_p_values=</span><span class="cn">FALSE</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>                      <span class="at">signif_stars =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>                     <span class="at">conf.level=</span><span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1065,11 +1068,11 @@ reporting ANOVA
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># A simpler model with the interaction term removed</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>ls_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> Fert <span class="sc">+</span> Light, <span class="at">data =</span> biomass)</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Put the simpler model first</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">anova</span>(ls_3, ls_2,  <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># A simpler model with the interaction term removed</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>ls_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Biomass.m2 <span class="sc">~</span> Fert <span class="sc">+</span> Light, <span class="at">data =</span> biomass)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># Put the simpler model first</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">anova</span>(ls_3, ls_2,  <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1106,9 +1109,9 @@ reporting ANOVA
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># An equivalent function can be performed with drop1 which will do this automatically</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="fu">drop1</span>(ls_2, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># An equivalent function can be performed with drop1 which will do this automatically</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">drop1</span>(ls_2, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1155,11 +1158,11 @@ reporting ANOVA
 <span class="header-section-number">22.4.4</span> Check Model fit</h3>
 <p>We need to make sure that any model we make fits our data and our assumptions well. It is important to do this <em>before</em> analysing any statistical tests or interpreting our results:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(ls_2,</span>
-<span id="cb18-2"><a href="#cb18-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(ls_2,</span>
+<span id="cb20-2"><a href="#cb20-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1176,8 +1179,8 @@ reporting ANOVA
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(ls_2, <span class="at">specs =</span> <span class="sc">~</span> Light <span class="sc">+</span> Fert) <span class="sc">|&gt;</span>  </span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">confint</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(ls_2, <span class="at">specs =</span> <span class="sc">~</span> Light <span class="sc">+</span> Fert) <span class="sc">|&gt;</span>  </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">confint</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1235,11 +1238,11 @@ reporting ANOVA
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(ls_2, <span class="at">specs =</span> pairwise <span class="sc">~</span> Light <span class="sc">+</span> Fert) <span class="sc">|&gt;</span>  </span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">confint</span>()</span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a> <span class="co"># $emmeans contains the estimate mean values for each possible combination (with confidence intervals)</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a> <span class="co"># $ contrasts contains tukey test post hoc comparisons between levels</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(ls_2, <span class="at">specs =</span> pairwise <span class="sc">~</span> Light <span class="sc">+</span> Fert) <span class="sc">|&gt;</span>  </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">confint</span>()</span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co"># including the argument pairwise in front of the ~ prompts the post-hoc pairwise comparisons.</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a> <span class="co"># $emmeans contains the estimate mean values for each possible combination (with confidence intervals)</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a> <span class="co"># $ contrasts contains tukey test post hoc comparisons between levels</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$emmeans
  Light Fert emmean   SE df lower.CL upper.CL
@@ -1288,34 +1291,34 @@ Conf-level adjustment: tukey method for comparing a family of 4 estimates </code
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># check the structure of the data</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">glimpse</span>(pollution)</span>
-<span id="cb22-3"><a href="#cb22-3"></a></span>
-<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># check data is in a tidy format</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a><span class="fu">head</span>(pollution)</span>
-<span id="cb22-6"><a href="#cb22-6"></a></span>
-<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># check variable names</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a><span class="fu">colnames</span>(pollution)</span>
-<span id="cb22-9"><a href="#cb22-9"></a></span>
-<span id="cb22-10"><a href="#cb22-10"></a><span class="co"># check for duplication</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>pollution <span class="sc">|&gt;</span>  </span>
-<span id="cb22-12"><a href="#cb22-12"></a>  <span class="fu">duplicated</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb22-13"><a href="#cb22-13"></a>  <span class="fu">sum</span>()</span>
-<span id="cb22-14"><a href="#cb22-14"></a></span>
-<span id="cb22-15"><a href="#cb22-15"></a><span class="co"># check for typos - by looking at impossible values</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a><span class="co"># quick summary</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a></span>
-<span id="cb22-18"><a href="#cb22-18"></a><span class="fu">summary</span>(biomass)</span>
-<span id="cb22-19"><a href="#cb22-19"></a></span>
-<span id="cb22-20"><a href="#cb22-20"></a><span class="co"># check for typos by looking at distinct characters/values</span></span>
-<span id="cb22-21"><a href="#cb22-21"></a>pollution <span class="sc">|&gt;</span>  </span>
-<span id="cb22-22"><a href="#cb22-22"></a>  <span class="fu">distinct</span>(Stress)</span>
-<span id="cb22-23"><a href="#cb22-23"></a></span>
-<span id="cb22-24"><a href="#cb22-24"></a></span>
-<span id="cb22-25"><a href="#cb22-25"></a><span class="co"># missing values</span></span>
-<span id="cb22-26"><a href="#cb22-26"></a>biomass <span class="sc">|&gt;</span>  </span>
-<span id="cb22-27"><a href="#cb22-27"></a>  <span class="fu">is.na</span>() <span class="sc">|&gt;</span>  </span>
-<span id="cb22-28"><a href="#cb22-28"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># check the structure of the data</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">glimpse</span>(pollution)</span>
+<span id="cb24-3"><a href="#cb24-3"></a></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># check data is in a tidy format</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="fu">head</span>(pollution)</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co"># check variable names</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="fu">colnames</span>(pollution)</span>
+<span id="cb24-9"><a href="#cb24-9"></a></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co"># check for duplication</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>pollution <span class="sc">|&gt;</span>  </span>
+<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">duplicated</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb24-13"><a href="#cb24-13"></a>  <span class="fu">sum</span>()</span>
+<span id="cb24-14"><a href="#cb24-14"></a></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="co"># check for typos - by looking at impossible values</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="co"># quick summary</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a></span>
+<span id="cb24-18"><a href="#cb24-18"></a><span class="fu">summary</span>(biomass)</span>
+<span id="cb24-19"><a href="#cb24-19"></a></span>
+<span id="cb24-20"><a href="#cb24-20"></a><span class="co"># check for typos by looking at distinct characters/values</span></span>
+<span id="cb24-21"><a href="#cb24-21"></a>pollution <span class="sc">|&gt;</span>  </span>
+<span id="cb24-22"><a href="#cb24-22"></a>  <span class="fu">distinct</span>(Stress)</span>
+<span id="cb24-23"><a href="#cb24-23"></a></span>
+<span id="cb24-24"><a href="#cb24-24"></a></span>
+<span id="cb24-25"><a href="#cb24-25"></a><span class="co"># missing values</span></span>
+<span id="cb24-26"><a href="#cb24-26"></a>biomass <span class="sc">|&gt;</span>  </span>
+<span id="cb24-27"><a href="#cb24-27"></a>  <span class="fu">is.na</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb24-28"><a href="#cb24-28"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 30
 Columns: 3
@@ -1407,15 +1410,15 @@ $ William &lt;dbl&gt; 8.623533, 8.690642, 8.360071, 8.151910, 8.032685, 8.535426
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>pollution <span class="sc">|&gt;</span>  </span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> O3, <span class="at">y =</span> William))<span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Stress)<span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(Ozone<span class="sc">~</span>mu<span class="sc">~</span>L<span class="sc">~</span>L<span class="sc">^-</span><span class="dv">1</span>)),</span>
-<span id="cb26-6"><a href="#cb26-6"></a>       <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(Log<span class="sc">~</span>Yield<span class="sc">~</span>(kg<span class="sc">~</span>ha<span class="sc">^-</span><span class="dv">1</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>pollution <span class="sc">|&gt;</span>  </span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> O3, <span class="at">y =</span> William))<span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Stress)<span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(Ozone<span class="sc">~</span>mu<span class="sc">~</span>L<span class="sc">~</span>L<span class="sc">^-</span><span class="dv">1</span>)),</span>
+<span id="cb28-6"><a href="#cb28-6"></a>       <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(Log<span class="sc">~</span>Yield<span class="sc">~</span>(kg<span class="sc">~</span>ha<span class="sc">^-</span><span class="dv">1</span>))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1429,10 +1432,10 @@ Solution
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>William_ls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3 <span class="sc">+</span> Stress <span class="sc">+</span> O3<span class="sc">:</span>Stress, <span class="at">data =</span> pollution)</span>
-<span id="cb27-2"><a href="#cb27-2"></a></span>
-<span id="cb27-3"><a href="#cb27-3"></a>William_ls1 <span class="sc">|&gt;</span>  </span>
-<span id="cb27-4"><a href="#cb27-4"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>William_ls1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3 <span class="sc">+</span> Stress <span class="sc">+</span> O3<span class="sc">:</span>Stress, <span class="at">data =</span> pollution)</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>William_ls1 <span class="sc">|&gt;</span>  </span>
+<span id="cb29-4"><a href="#cb29-4"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1505,11 +1508,11 @@ Solution
 Solution
 </button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(William_ls1,</span>
-<span id="cb28-2"><a href="#cb28-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>performance<span class="sc">::</span><span class="fu">check_model</span>(William_ls1,</span>
+<span id="cb30-2"><a href="#cb30-2"></a>                         <span class="at">detrend =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="13-interaction_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1524,9 +1527,9 @@ Solution
 </button>
 <p>Testing that dropping the interaction term does not significantly reduce the variance explained</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>William_ls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3 <span class="sc">+</span> Stress, <span class="at">data =</span> pollution)</span>
-<span id="cb29-2"><a href="#cb29-2"></a></span>
-<span id="cb29-3"><a href="#cb29-3"></a><span class="fu">anova</span>(William_ls2, William_ls1, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>William_ls2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3 <span class="sc">+</span> Stress, <span class="at">data =</span> pollution)</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">anova</span>(William_ls2, William_ls1, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1562,11 +1565,11 @@ Solution
 </div>
 <p>Get the F values of the simpler model</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>William_ls3a <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> Stress, <span class="at">data =</span> pollution)</span>
-<span id="cb30-2"><a href="#cb30-2"></a>William_ls3b <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3, <span class="at">data =</span> pollution)</span>
-<span id="cb30-3"><a href="#cb30-3"></a></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="fu">anova</span>(William_ls3a, William_ls2, <span class="at">test =</span> <span class="st">"F"</span>)</span>
-<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">anova</span>(William_ls3b, William_ls2, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>William_ls3a <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> Stress, <span class="at">data =</span> pollution)</span>
+<span id="cb32-2"><a href="#cb32-2"></a>William_ls3b <span class="ot">&lt;-</span> <span class="fu">lm</span>(William <span class="sc">~</span> O3, <span class="at">data =</span> pollution)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="fu">anova</span>(William_ls3a, William_ls2, <span class="at">test =</span> <span class="st">"F"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="fu">anova</span>(William_ls3b, William_ls2, <span class="at">test =</span> <span class="st">"F"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -1634,8 +1637,8 @@ Solution
 </section><section id="report-the-estimates-and-confidence-intervals-of-the-new-model" class="level4" data-number="22.5.1.6"><h4 data-number="22.5.1.6" class="anchored" data-anchor-id="report-the-estimates-and-confidence-intervals-of-the-new-model">
 <span class="header-section-number">22.5.1.6</span> Report the estimates and confidence intervals of the new model</h4>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>William_ls2 <span class="sc">|&gt;</span>  </span>
-<span id="cb31-2"><a href="#cb31-2"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>William_ls2 <span class="sc">|&gt;</span>  </span>
+<span id="cb33-2"><a href="#cb33-2"></a>    broom<span class="sc">::</span><span class="fu">tidy</span>(<span class="at">conf.int =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">

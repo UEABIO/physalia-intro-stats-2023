@@ -68,6 +68,22 @@ knitr::include_graphics("images/gglayers.png")
 :::
 
 
+### Load the data
+
+You will need to run the script from @sec-summary-scripts or read in the cleaned dataframe directly
+
+`r hide("Load the data")`
+
+```{r, eval = FALSE, echo = TRUE}
+library(tidyverse)
+library(here)
+
+penguins <- read_csv(here("data", "raw", "penguins_clean.csv"))
+# Assuming data is in the data/raw directory
+
+```
+
+`r unhide()`
 
 ```{r}
 head(penguins)
@@ -366,7 +382,7 @@ ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mm)) +
   geom_point() +
   geom_smooth()
 
-ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mmx)) +
+ggplot(data = penguins, aes(x=culmen_length_mm, y=culmen_depth_mm)) +
   geom_point() +
   geom_smooth(method = lm)
 ```

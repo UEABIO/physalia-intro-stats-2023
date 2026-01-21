@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
 <title>14&nbsp; ggplot – Physalia</title>
@@ -91,9 +91,9 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-de8274a4d1ecc1e6aaeaf6e5564b5074.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -652,7 +652,12 @@ div.csl-indent {
    
   <ul>
 <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">14.1</span> Learning Objectives</a></li>
-  <li><a href="#building-plots" id="toc-building-plots" class="nav-link" data-scroll-target="#building-plots">Building plots</a></li>
+  <li>
+<a href="#building-plots" id="toc-building-plots" class="nav-link" data-scroll-target="#building-plots">Building plots</a>
+  <ul class="collapse">
+<li><a href="#load-the-data" id="toc-load-the-data" class="nav-link" data-scroll-target="#load-the-data"><span class="header-section-number">14.1.1</span> Load the data</a></li>
+  </ul>
+</li>
   <li><a href="#common-ggplot2-geoms-by-data-structure-and-analytical-purpose" id="toc-common-ggplot2-geoms-by-data-structure-and-analytical-purpose" class="nav-link" data-scroll-target="#common-ggplot2-geoms-by-data-structure-and-analytical-purpose"><span class="header-section-number">14.2</span> Common ggplot2 geoms by data structure and analytical purpose</a></li>
   <li><a href="#sec-hist" id="toc-sec-hist" class="nav-link" data-scroll-target="#sec-hist"><span class="header-section-number">14.3</span> Histogram <code>geom_histogram()</code></a></li>
   <li><a href="#sec-scatter" id="toc-sec-scatter" class="nav-link" data-scroll-target="#sec-scatter"><span class="header-section-number">14.4</span> Scatterplot <code>geom_point()</code></a></li>
@@ -759,8 +764,23 @@ Tip
 </div>
 </div>
 </div>
+<section id="load-the-data" class="level3" data-number="14.1.1"><h3 data-number="14.1.1" class="anchored" data-anchor-id="load-the-data">
+<span class="header-section-number">14.1.1</span> Load the data</h3>
+<p>You will need to run the script from <a href="scripts.html" class="quarto-xref"><span>Chapter 13</span></a> or read in the cleaned dataframe directly</p>
+<div class="webex-solution">
+<button>
+Load the data
+</button>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"penguins_clean.csv"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Assuming data is in the data/raw directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="caption-top table table-sm table-striped small">
@@ -978,10 +998,10 @@ Tip
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">ggplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -990,10 +1010,10 @@ Tip
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1012,7 +1032,7 @@ Tip
 <p>You won’t need to add <code>data =</code> or <code>mapping =</code> if you keep those arguments in exactly that order. Likewise, the first column name you enter within the <code>aes()</code> function will always be interpreted as x, and the second as y, so you could omit them if you wish.</p>
 <p>You don’t need to include <code>data =</code> or <code>mapping =</code> if you keep those arguments in the default order. Similarly, the first column name you enter in the <code>aes()</code> function will automatically be interpreted as the x variable, and the second as y, so you can omit specifying <code>x</code> and <code>y</code> if you prefer.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(body_mass_g, flipper_length_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(body_mass_g, flipper_length_mm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>will give you the same output as the code above.</p>
 </div>
@@ -1020,11 +1040,11 @@ Tip
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1034,15 +1054,15 @@ Tip
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="co"># changes colour palette</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="co"># add breaks from 2500 to 6500 in increasing steps of 500</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2500</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">y =</span> flipper_length_mm, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="co"># changes colour palette</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="co"># add breaks from 2500 to 6500 in increasing steps of 500</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2500</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1051,14 +1071,14 @@ Tip
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="co"># split main plot up into different subplots by species </span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="co"># split main plot up into different subplots by species </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1067,15 +1087,15 @@ Tip
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  <span class="co"># limits the range of the y axis</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">250</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="co"># limits the range of the y axis</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">250</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1084,16 +1104,16 @@ Tip
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body Mass (in g)"</span>, <span class="co"># labels the x axis</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a>       <span class="at">y =</span> <span class="st">"Flipper length (in mm)"</span>, <span class="co"># labels the y axis</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>       <span class="at">colour =</span> <span class="st">"Sex"</span>) <span class="co"># labels the grouping variable in the legend</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body Mass (in g)"</span>, <span class="co"># labels the x axis</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>       <span class="at">y =</span> <span class="st">"Flipper length (in mm)"</span>, <span class="co"># labels the y axis</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>       <span class="at">colour =</span> <span class="st">"Sex"</span>) <span class="co"># labels the grouping variable in the legend</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1102,18 +1122,18 @@ Tip
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
-<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body Mass (in g)"</span>, </span>
-<span id="cb10-6"><a href="#cb10-6"></a>       <span class="at">y =</span> <span class="st">"Flipper length (in mm)"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7"></a>       <span class="at">colour =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="co"># add a theme</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x=</span>body_mass_g, <span class="at">y=</span>flipper_length_mm, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> species) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body Mass (in g)"</span>, </span>
+<span id="cb11-6"><a href="#cb11-6"></a>       <span class="at">y =</span> <span class="st">"Flipper length (in mm)"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7"></a>       <span class="at">colour =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="co"># add a theme</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1135,7 +1155,7 @@ Important
 <p>You need to stick to the first three layers to create your base plot. Everything else is optional, meaning you don’t need to use all eight layers. Additionally, layers 4-8 can be added in any order (more or less), whereas layers 1-3 must follow a fixed sequence.</p>
 </div>
 </div>
-</section><section id="common-ggplot2-geoms-by-data-structure-and-analytical-purpose" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="common-ggplot2-geoms-by-data-structure-and-analytical-purpose">
+</section></section><section id="common-ggplot2-geoms-by-data-structure-and-analytical-purpose" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="common-ggplot2-geoms-by-data-structure-and-analytical-purpose">
 <span class="header-section-number">14.2</span> Common ggplot2 geoms by data structure and analytical purpose</h2>
 <table class="caption-top table">
 <colgroup>
@@ -1199,8 +1219,8 @@ Important
 <p>A histogram divides the data into “bins” (i.e., groupings displayed in a single bar). These bins are plotted along the x-axis, with the y-axis showing the count of observations in each bin. It’s basically a barchart for continuous variables.</p>
 <p>Let’s have a look at the weight distribution in our dataset.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_histogram</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_histogram</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-hist" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1215,13 +1235,13 @@ Figure&nbsp;14.1: Default histogram
 <p>The default <strong>number of bins</strong> is 30 (as shown in <a href="#fig-hist" class="quarto-xref">Figure&nbsp;<span>14.1</span></a> above). Changing the number of bins (argument <code>bins</code>) allows for more or less fine-tuning of the data. A higher number of bins results in more detailed granularity.</p>
 <p>Perhaps it’s more intuitive to modify the <strong>width of each bin</strong> using the <code>binwidth</code> argument. For example, <code>binwidth = 1</code> for the weight category would mean each “weight group” represents 1g, while <code>binwidth = 50</code> would group ages into 50g spans. The plots below show modifications for both <code>bins</code> and <code>binwidth</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">#less finetuning</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) </span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># more fineturning</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">#less finetuning</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">10</span>) </span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co"># more fineturning</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1250,11 +1270,11 @@ Figure&nbsp;14.2: Bins vs binwidth arguments
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>We can change the plot colours by adding a <strong>fill argument</strong> and a <strong>colour argument</strong>. The <code>fill</code> argument changes the colour of the bars, while the <code>colour</code> argument modifies the outline of the bars. Note that these arguments are <strong>added directly to the <code>geom_histogram()</code></strong>, rather than within the overall <code>aes()</code>, as we did with the barchart.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1282,33 +1302,6 @@ Tip
 <p>Notice how the <code>breaks =</code> argument changes the labels of the break ticks but not the scale limits. You can adjust the limits of the scale using the <code>limits =</code> argument. To exaggerate, we set the limits to 15 and 50. See how the values from 15 to 19, and 44 to 50 do not have labels? You would need to adjust that using the <code>breaks =</code> argument.</p>
 <p>The <code>expansion()</code> function removes the gap between the x-axis and the bars.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass in (g)"</span>, <span class="co"># renaming x axis label</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> <span class="co"># removing the y axis label</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb14-6"><a href="#cb14-6"></a>    <span class="co"># remove the space below the bars (first number), but keep a tiny bit (5%) above (second number)</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>)),</span>
-<span id="cb14-8"><a href="#cb14-8"></a>    <span class="co"># changing break points on y axis</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">5</span>)</span>
-<span id="cb14-10"><a href="#cb14-10"></a>    ) <span class="sc">+</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a>  <span class="fu">scale_x_continuous</span>(</span>
-<span id="cb14-12"><a href="#cb14-12"></a>    <span class="co"># changing break points on x axis</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2500</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>),</span>
-<span id="cb14-14"><a href="#cb14-14"></a>    <span class="co"># Experimenting with</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">7000</span>)</span>
-<span id="cb14-16"><a href="#cb14-16"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
-<p>Let’s experiment with the themes. For this plot we have chosen <code>theme_bw()</code></p>
-<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>) <span class="sc">+</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass in (g)"</span>, <span class="co"># renaming x axis label</span></span>
@@ -1324,11 +1317,38 @@ Tip
 <span id="cb15-13"><a href="#cb15-13"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2500</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>),</span>
 <span id="cb15-14"><a href="#cb15-14"></a>    <span class="co"># Experimenting with</span></span>
 <span id="cb15-15"><a href="#cb15-15"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">7000</span>)</span>
-<span id="cb15-16"><a href="#cb15-16"></a>    )<span class="sc">+</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-16"><a href="#cb15-16"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Let’s experiment with the themes. For this plot we have chosen <code>theme_bw()</code></p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">50</span>, <span class="at">fill =</span> <span class="st">"#586cfd"</span>, <span class="at">colour =</span> <span class="st">"#FC58BE"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Body mass in (g)"</span>, <span class="co"># renaming x axis label</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>       <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span> <span class="co"># removing the y axis label</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="co"># remove the space below the bars (first number), but keep a tiny bit (5%) above (second number)</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>)),</span>
+<span id="cb16-8"><a href="#cb16-8"></a>    <span class="co"># changing break points on y axis</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">20</span>, <span class="at">by =</span> <span class="dv">5</span>)</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    ) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb16-12"><a href="#cb16-12"></a>    <span class="co"># changing break points on x axis</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">2500</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">by =</span> <span class="dv">500</span>),</span>
+<span id="cb16-14"><a href="#cb16-14"></a>    <span class="co"># Experimenting with</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">7000</span>)</span>
+<span id="cb16-16"><a href="#cb16-16"></a>    )<span class="sc">+</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1341,13 +1361,13 @@ Tip
 </h2>
 <p>Scatterplots are appropriate when you want to plot <strong>two continuous variables</strong>. We can also <strong>add a trendline</strong> by using <code>geom_smooth()</code>. The default trendline is <code>loess</code>. If you want a linear trendline, you would need to add <code>method = "lm"</code> inside the <code>geom_smooth()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">geom_smooth</span>()</span>
-<span id="cb16-4"><a href="#cb16-4"></a></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mmx)) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_smooth</span>()</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1373,13 +1393,13 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <p>If we want to <strong>change the colour of all the points</strong>, we can add the <code>colour</code> argument to the <code>geom_point()</code> function. Likewise, to change the <strong>colour of the trendline</strong>, we would also use the <code>colour</code> argument. Here, we used pre-defined colour names, but HEX codes would work just as well.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># colour of all points and the trendline</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>)<span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"darkblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># colour of all points and the trendline</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>)<span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">colour =</span> <span class="st">"darkblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1388,14 +1408,14 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <p>If we want the points to <strong>change colour based on another grouping variable</strong>, the <code>colour</code> argument should go inside the <code>aes()</code>. If you don’t want to define the colours manually, you can use a colour palette like Brewer (<code>scale_colour_brewer()</code>) or Viridis (<code>scale_colour_viridis_d()</code>).</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="do">## adding grouping variable and changing the colour values manually</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="do">## adding grouping variable and changing the colour values manually</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1422,15 +1442,15 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
 <p>You can tidy the legend title and group labels using the <code>scale_colour_?</code> function, depending on the palette you’re using (e.g., <code>scale_colour_manual()</code>, <code>scale_colour_brewer</code> and many more).</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>                      <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)<span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>                      <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1478,19 +1498,19 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span> <span class="co"># stop this layer from appearing in the legend.</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>),</span>
-<span id="cb20-6"><a href="#cb20-6"></a>                      <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb20-7"><a href="#cb20-7"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>))<span class="sc">+</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill depth (mm)"</span>)<span class="sc">+</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># place before moving the legend position</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="co"># move legend to the top</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x=</span>culmen_length_mm, <span class="at">y=</span>culmen_depth_mm, <span class="at">colour =</span> species)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>)<span class="sc">+</span> <span class="co"># stop this layer from appearing in the legend.</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkorange"</span>, <span class="st">"cyan"</span>, <span class="st">"purple"</span>),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>                      <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>))<span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bill length (mm)"</span>, <span class="at">y =</span> <span class="st">"Bill depth (mm)"</span>)<span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># place before moving the legend position</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="co"># move legend to the top</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1505,12 +1525,12 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 </h2>
 <p>A boxplot is one of the options to display a <strong>continuous variable with categorical grouping variable</strong>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># default boxplot</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g))<span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># default boxplot</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1526,13 +1546,13 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <p>We can change the colour by adding a <code>fill</code> argument inside the <code>aes()</code>. To customise the colours further, we can add a <code>scale_fill_?</code> layer. If you have specific colours in mind, use <code>scale_fill_manual()</code>. If you prefer pre-defined palettes, such as Brewer, you can use <code>scale_fill_brewer()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="co"># customise colour</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="co"># customise colour</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1541,23 +1561,23 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
 <p>We need to relabel the axes. The function to use depends on the variable type. Here, we need <code>scale_x_discrete()</code> for the x-axis and <code>scale_y_continuous()</code> for the y-axis. We can also tidy up the group labels and adjust the breaks on the y-axis (e.g., in steps of 1 instead of 2) within these same functions.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb23-5"><a href="#cb23-5"></a>    <span class="co"># changing the label of x</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb23-7"><a href="#cb23-7"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
-<span id="cb23-9"><a href="#cb23-9"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb23-10"><a href="#cb23-10"></a>    <span class="co"># changing name of the y axis</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
-<span id="cb23-12"><a href="#cb23-12"></a>    <span class="co"># changing break labels</span></span>
-<span id="cb23-13"><a href="#cb23-13"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
-<span id="cb23-14"><a href="#cb23-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)<span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb24-5"><a href="#cb24-5"></a>    <span class="co"># changing the label of x</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb24-10"><a href="#cb24-10"></a>    <span class="co"># changing name of the y axis</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12"></a>    <span class="co"># changing break labels</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb24-14"><a href="#cb24-14"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1567,24 +1587,24 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <p>The legend is superfluous; best to take it off. We can remove the legend by adding the argument <code>guide = "none"</code> to the <code>scale_fill_?</code> function.</p>
 <p>Let’s pick a theme we haven’t used yet: <code>theme_dark()</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb24-6"><a href="#cb24-6"></a>    <span class="co"># changing the label of x</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb24-8"><a href="#cb24-8"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
-<span id="cb24-9"><a href="#cb24-9"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
-<span id="cb24-10"><a href="#cb24-10"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb24-11"><a href="#cb24-11"></a>    <span class="co"># changing name of the y axis</span></span>
-<span id="cb24-12"><a href="#cb24-12"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
-<span id="cb24-13"><a href="#cb24-13"></a>    <span class="co"># changing break labels</span></span>
-<span id="cb24-14"><a href="#cb24-14"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
-<span id="cb24-15"><a href="#cb24-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="co"># changing the label of x</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
+<span id="cb25-10"><a href="#cb25-10"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb25-11"><a href="#cb25-11"></a>    <span class="co"># changing name of the y axis</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13"></a>    <span class="co"># changing break labels</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb25-15"><a href="#cb25-15"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1597,12 +1617,12 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 </h2>
 <p>An alternative way to display a <strong>continuous variable with a categorical grouping variable</strong> is a violin plot.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># default boxplot</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># default boxplot</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1632,25 +1652,25 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
-<span id="cb26-4"><a href="#cb26-4"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb26-6"><a href="#cb26-6"></a>    <span class="co"># changing the label of x</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb26-8"><a href="#cb26-8"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
-<span id="cb26-10"><a href="#cb26-10"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb26-11"><a href="#cb26-11"></a>    <span class="co"># changing name of the y axis</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
-<span id="cb26-13"><a href="#cb26-13"></a>    <span class="co"># changing break labels</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
-<span id="cb26-15"><a href="#cb26-15"></a>  )<span class="sc">+</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb27-6"><a href="#cb27-6"></a>    <span class="co"># changing the label of x</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb27-11"><a href="#cb27-11"></a>    <span class="co"># changing name of the y axis</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
+<span id="cb27-13"><a href="#cb27-13"></a>    <span class="co"># changing break labels</span></span>
+<span id="cb27-14"><a href="#cb27-14"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb27-15"><a href="#cb27-15"></a>  )<span class="sc">+</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1665,14 +1685,14 @@ Figure&nbsp;14.3: Default Scatterplot with added trendline - loess (left) and li
 <p>So far, we’ve only added one <code>geom_?</code> layer to our plots. However, thanks to ggplot’s layered system, we can add multiple geoms, for example, when creating a violin-boxplot.</p>
 <p>Remember, the order of the layers can sometimes make a difference. We’ve seen this already - adding a theme at the end can override earlier arguments like the legend position. Similarly, <code>ggplot + violinplot + boxplot</code> will look different from <code>ggplot + boxplot + violinplot</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb27-4"><a href="#cb27-4"></a></span>
-<span id="cb27-5"><a href="#cb27-5"></a></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a></span>
+<span id="cb28-6"><a href="#cb28-6"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1696,9 +1716,9 @@ Figure&nbsp;14.4: Default violin-boxplot: Order of the layer matters
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <p>If we want to get any information from the boxplot, we need to place it “on top of” the violin plot. But still, the boxplot is pretty wide and covers important details from the violin plot. To make the information more visible, we can <strong>adjust the width of the boxes</strong>. Finding an appropriate width might take some trial and error.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_violin</span>()<span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-vb_width" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-vb_width-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1715,10 +1735,10 @@ Figure&nbsp;14.5: Default violin-boxplot: adjusting width of the box
 <p>Adding colour should be pretty straightforward by now. The code is no different from what we used for the boxplot or violin plot. We need to add the <code>fill</code> argument within the <code>aes()</code>, along with a <code>scale_fill_?</code> layer.</p>
 <p>However, we can further customise the plot by adding an <strong>opacity argument</strong> using <code>alpha</code> to the violin plot geom.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co"># alpha for opacity</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># change width of the boxes</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="co"># customise colour</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co"># alpha for opacity</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># change width of the boxes</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="co"># customise colour</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-vb_colour" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-vb_colour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1756,25 +1776,25 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>    <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
-<span id="cb30-5"><a href="#cb30-5"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb30-7"><a href="#cb30-7"></a>    <span class="co"># changing the label of x</span></span>
-<span id="cb30-8"><a href="#cb30-8"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
-<span id="cb30-9"><a href="#cb30-9"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
-<span id="cb30-10"><a href="#cb30-10"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
-<span id="cb30-11"><a href="#cb30-11"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb30-12"><a href="#cb30-12"></a>    <span class="co"># changing name of the y axis</span></span>
-<span id="cb30-13"><a href="#cb30-13"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
-<span id="cb30-14"><a href="#cb30-14"></a>    <span class="co"># changing break labels</span></span>
-<span id="cb30-15"><a href="#cb30-15"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
-<span id="cb30-16"><a href="#cb30-16"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">fill =</span> species))<span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>    <span class="fu">geom_violin</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5"></a>                    <span class="at">guide =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="co"># changing the label of x</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>    <span class="at">name =</span> <span class="st">"Species"</span>,</span>
+<span id="cb31-9"><a href="#cb31-9"></a>    <span class="co"># changing the group labels of the 2 groups</span></span>
+<span id="cb31-10"><a href="#cb31-10"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Adelie penguin"</span>, <span class="st">"Chinstrap penguin"</span>, <span class="st">"Gentoo penguin"</span>)) <span class="sc">+</span> </span>
+<span id="cb31-11"><a href="#cb31-11"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb31-12"><a href="#cb31-12"></a>    <span class="co"># changing name of the y axis</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a>    <span class="at">name =</span> <span class="st">"Body mass (g)"</span>,</span>
+<span id="cb31-14"><a href="#cb31-14"></a>    <span class="co"># changing break labels</span></span>
+<span id="cb31-15"><a href="#cb31-15"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3000</span>, <span class="at">to =</span> <span class="dv">6000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb31-16"><a href="#cb31-16"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1789,12 +1809,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <p>A strip plot (or individual value plot) displays individual data points as dots along a single axis, showing the distribution of a continuous variable, often across different categories, revealing patterns, density, and outliers that summary plots might hide.</p>
 <p>Unlike previous examples these show all of the raw data, unlike summaries such as violin or boxplots.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># default strip plot</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># default strip plot</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1803,11 +1823,11 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <span class="header-section-number">14.8.1</span> Overlapping data</h3>
 <p>When we have plenty of data, it becomes highly likes that the points will overlap. This obscures the actual number of data points and has the potential to be misleading. To overcome this we can add slight random displacement (<em>jitter</em>) to prevent overlap and make sure all the data points are visible</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1826,11 +1846,11 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <span class="header-section-number">14.8.2</span> Beeswarms</h3>
 <p>A beeswarm plot, also known as a swarmplot, is a graph type that presents individual data points without overlap, creating a distinct “swarming” effect reminiscent of a bee swarm. Here the amount of jitter on the x-axis is directly proportional to the density of points at any given y-value. These can be a great way of combining features of <code>geom_violin</code> while still presenting raw data. To generate beeswarm plots we need to use the function <code><a href="https://rdrr.io/pkg/ggbeeswarm/man/geom_beeswarm.html">ggbeeswarm::geom_beeswarm()</a></code></p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>  ggbeeswarm<span class="sc">::</span><span class="fu">geom_beeswarm</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> body_mass_g, <span class="at">colour =</span> species))<span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  ggbeeswarm<span class="sc">::</span><span class="fu">geom_beeswarm</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1853,11 +1873,11 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <p>Because of this, grouping logic is central to using <code>geom_line()</code> correctly.</p>
 <p>If it cannot infer groups, it will connect every point in order of x, producing meaningless zigzags.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm)) <span class="sc">+</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>    <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm)) <span class="sc">+</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>    <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1875,12 +1895,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <span class="header-section-number">14.9.1.1</span> Implicit grouping via colour or linetype</h4>
 <p>Discrete aesthetics such as <code>color</code>, <code>fill</code>, or <code>linetype</code> automatically define groups.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="at">color =</span> species)) <span class="sc">+</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1893,12 +1913,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <li><p>grouping variables are not meant to be shown.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="at">group =</span> species)) <span class="sc">+</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="at">group =</span> species)) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1913,12 +1933,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <li><p>Colours represent species</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="at">colour =</span> species, <span class="at">group =</span> individual_id)) <span class="sc">+</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> culmen_length_mm, <span class="at">y =</span> flipper_length_mm,</span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="at">colour =</span> species, <span class="at">group =</span> individual_id)) <span class="sc">+</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1948,12 +1968,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
 <p>This plot shows the number of penguins per species, with bar heights computed internally by ggplot2. This behaviour is convenient but can obscure what is actually being plotted.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># counts computed internally</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># counts computed internally</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1962,13 +1982,13 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
 <p>Here, the counts are explicitly computed by the user. For teaching and reproducibility, this approach is often preferable, as it makes the statistical transformation transparent.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>penguins <span class="sc">|&gt;</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">count</span>(species) <span class="sc">|&gt;</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">count</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1982,12 +2002,12 @@ Figure&nbsp;14.6: Violin-boxplot with a different colour palette
 <p>For example, ordering categories by value can emphasize trends, such as showing which groups have the highest or lowest measurements, while random or inconsistent ordering can make comparisons confusing and obscure key insights.</p>
 <p>By default R will order categories along the axis in alphabetical order:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2015,13 +2035,13 @@ Explanation
 <span class="header-section-number">14.10.2.1</span> Reordering manually</h4>
 <p>If we wanted to switch the order we would use the <code>scale_x_discrete()</code> function and set the limits within it (limits = c(“category”,“category”)) as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb41-2"><a href="#cb41-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
-<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>,<span class="st">"Chinstrap"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>,<span class="st">"Chinstrap"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2034,13 +2054,13 @@ Explanation
 <li><p><code>fct_reorder()</code> — orders by another numeric variable (e.g., mean body mass)</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span> </span>
-<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2060,22 +2080,22 @@ Solution
 <li><p>Rotating plots can improve readability of labels</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span> </span>
-<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
-<span id="cb43-5"><a href="#cb43-5"></a>  <span class="co"># Direct annotation</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a>  <span class="fu">geom_label</span>(<span class="at">stat=</span><span class="st">'count'</span>, <span class="fu">aes</span>(<span class="at">label=</span>..count..))<span class="sc">+</span></span>
-<span id="cb43-7"><a href="#cb43-7"></a>  <span class="co"># reverse order</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> rev)<span class="sc">+</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a>  <span class="co"># Rotated axis to enhance readability</span></span>
-<span id="cb43-10"><a href="#cb43-10"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb43-11"><a href="#cb43-11"></a>  <span class="co"># Redundant titles removed</span></span>
-<span id="cb43-12"><a href="#cb43-12"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb43-13"><a href="#cb43-13"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">mutate</span>(<span class="at">species =</span> forcats<span class="sc">::</span><span class="fu">fct_infreq</span>(species)) <span class="sc">|&gt;</span> </span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="fu">geom_bar</span>()<span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="co"># Direct annotation</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="fu">geom_label</span>(<span class="at">stat=</span><span class="st">'count'</span>, <span class="fu">aes</span>(<span class="at">label=</span>..count..))<span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a>  <span class="co"># reverse order</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> rev)<span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a>  <span class="co"># Rotated axis to enhance readability</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11"></a>  <span class="co"># Redundant titles removed</span></span>
+<span id="cb44-12"><a href="#cb44-12"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb44-13"><a href="#cb44-13"></a>       <span class="at">y =</span> <span class="st">"Count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2102,32 +2122,32 @@ Solution
 </ol>
 <p>In this example, we simulate water-quality measurements across lakes and months</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Set seed for reproducibility</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb44-3"><a href="#cb44-3"></a></span>
-<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># Simulate data</span></span>
-<span id="cb44-5"><a href="#cb44-5"></a>heat_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
-<span id="cb44-6"><a href="#cb44-6"></a>  <span class="at">lake =</span> <span class="fu">paste</span>(<span class="st">"Lake"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),          <span class="co"># 5 different lake locations</span></span>
-<span id="cb44-7"><a href="#cb44-7"></a>  <span class="at">month =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">labels =</span> month.abb)  <span class="co"># 12 months (Jan, Feb, ... Dec)</span></span>
-<span id="cb44-8"><a href="#cb44-8"></a>)</span>
-<span id="cb44-9"><a href="#cb44-9"></a></span>
-<span id="cb44-10"><a href="#cb44-10"></a><span class="co"># Add simulated measurements for water quality</span></span>
-<span id="cb44-11"><a href="#cb44-11"></a>heat_data<span class="sc">$</span>ph <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="fu">nrow</span>(heat_data), <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="fl">0.5</span>), <span class="dv">2</span>)        <span class="co"># pH levels around neutral, with some variability</span></span>
-<span id="cb44-12"><a href="#cb44-12"></a>heat_data<span class="sc">$</span>dissolved_oxygen <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="fu">nrow</span>(heat_data), <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="dv">1</span>) <span class="co"># Dissolved oxygen levels in mg/L</span></span>
-<span id="cb44-13"><a href="#cb44-13"></a>heat_data<span class="sc">$</span>nutrients <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(heat_data), <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="dv">2</span>)    <span class="co"># Nutrient concentration, scaled from 0 to 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb45-3"><a href="#cb45-3"></a></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="co"># Simulate data</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a>heat_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb45-6"><a href="#cb45-6"></a>  <span class="at">lake =</span> <span class="fu">paste</span>(<span class="st">"Lake"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>),          <span class="co"># 5 different lake locations</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>  <span class="at">month =</span> <span class="fu">factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">labels =</span> month.abb)  <span class="co"># 12 months (Jan, Feb, ... Dec)</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a>)</span>
+<span id="cb45-9"><a href="#cb45-9"></a></span>
+<span id="cb45-10"><a href="#cb45-10"></a><span class="co"># Add simulated measurements for water quality</span></span>
+<span id="cb45-11"><a href="#cb45-11"></a>heat_data<span class="sc">$</span>ph <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="fu">nrow</span>(heat_data), <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="fl">0.5</span>), <span class="dv">2</span>)        <span class="co"># pH levels around neutral, with some variability</span></span>
+<span id="cb45-12"><a href="#cb45-12"></a>heat_data<span class="sc">$</span>dissolved_oxygen <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="fu">nrow</span>(heat_data), <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">1</span>), <span class="dv">1</span>) <span class="co"># Dissolved oxygen levels in mg/L</span></span>
+<span id="cb45-13"><a href="#cb45-13"></a>heat_data<span class="sc">$</span>nutrients <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">runif</span>(<span class="fu">nrow</span>(heat_data), <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>), <span class="dv">2</span>)    <span class="co"># Nutrient concentration, scaled from 0 to 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="basic-heatmap" class="level3" data-number="14.11.2"><h3 data-number="14.11.2" class="anchored" data-anchor-id="basic-heatmap">
 <span class="header-section-number">14.11.2</span> Basic heatmap</h3>
 <p>A minimal heatmap maps the continuous variable to fill. Each tile represents a single lake–month combination, with colour encoding pH level.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="co"># Heatmap for pH levels by lake and month</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a><span class="fu">ggplot</span>(heat_data, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> lake, <span class="at">fill =</span> ph)) <span class="sc">+</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
-<span id="cb45-4"><a href="#cb45-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Monthly pH Levels by Lake"</span>, <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Lake"</span>) <span class="sc">+</span></span>
-<span id="cb45-5"><a href="#cb45-5"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co"># Heatmap for pH levels by lake and month</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="fu">ggplot</span>(heat_data, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> lake, <span class="at">fill =</span> ph)) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Monthly pH Levels by Lake"</span>, <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Lake"</span>) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -2142,19 +2162,19 @@ Solution
 <li><p>print well in greyscale.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">library</span>(colorspace)</span>
-<span id="cb46-2"><a href="#cb46-2"></a></span>
-<span id="cb46-3"><a href="#cb46-3"></a><span class="co"># Heatmap for pH levels by lake and month</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="fu">ggplot</span>(heat_data, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> lake, <span class="at">fill =</span> ph)) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a>    <span class="fu">scale_fill_continuous_sequential</span>(</span>
-<span id="cb46-7"><a href="#cb46-7"></a>      <span class="at">palette =</span> <span class="st">"viridis"</span>,</span>
-<span id="cb46-8"><a href="#cb46-8"></a>      <span class="at">name =</span> <span class="st">"pH Level"</span>) <span class="sc">+</span></span>
-<span id="cb46-9"><a href="#cb46-9"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Monthly pH Levels by Lake"</span>, <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Lake"</span>) <span class="sc">+</span></span>
-<span id="cb46-10"><a href="#cb46-10"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">library</span>(colorspace)</span>
+<span id="cb47-2"><a href="#cb47-2"></a></span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="co"># Heatmap for pH levels by lake and month</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="fu">ggplot</span>(heat_data, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> lake, <span class="at">fill =</span> ph)) <span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span>.<span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>    <span class="fu">scale_fill_continuous_sequential</span>(</span>
+<span id="cb47-7"><a href="#cb47-7"></a>      <span class="at">palette =</span> <span class="st">"viridis"</span>,</span>
+<span id="cb47-8"><a href="#cb47-8"></a>      <span class="at">name =</span> <span class="st">"pH Level"</span>) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Monthly pH Levels by Lake"</span>, <span class="at">x =</span> <span class="st">"Month"</span>, <span class="at">y =</span> <span class="st">"Lake"</span>) <span class="sc">+</span></span>
+<span id="cb47-10"><a href="#cb47-10"></a>    <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="ggplot_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>

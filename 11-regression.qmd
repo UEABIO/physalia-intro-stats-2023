@@ -21,16 +21,6 @@ library(performance)
 ```
 
 
-:::{.callout-warning}
-
-Set this up as a new R project, with organised folders. 
-
-This week's assignment will be to submit this analysis, so make it clear and well organised! 
-
-Make sure to include some data checking in your script.
-
-:::
-
 
 ## Introduction to Regression
 
@@ -39,7 +29,7 @@ So far we have used linear models for analyses between *two* 'categorical' expla
 ```{r, eval=F, echo=T}
 
 library(tidyverse)
-library(rstatix)
+library(here)
 library(performance)
 
 ```
@@ -97,15 +87,11 @@ downloadthis::download_link(
 )
 ```
 
-```{block, type  = "try"}
 
-Check the data is imported correctly and make sure it is 'tidy' with no obvious errors or missing data
-
-```
 
 ```{r, eval = FALSE}
 
-janka <- read_csv("data/janka.csv")
+janka <- read_csv(here("data", "clean", "janka.csv")
 
 ```
 
@@ -471,9 +457,9 @@ emmeans::emmeans(janka_ls1,
 ```{r}
 emmeans::emmeans(janka_ls1, 
                  specs = "dens", 
-                 at = list(seq = c(22,
-                                   70,
-                                   by = 1)))
+                 at = list(dens = seq (from = 22,
+                                       to = 70,
+                                      by = 1)))
 
 ```
 

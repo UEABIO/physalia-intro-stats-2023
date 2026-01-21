@@ -20,7 +20,18 @@ library(here)
 library(GGally)
 library(performance)
 library(patchwork)
-library(ggbeeswarm)
+
+```
+
+```{r, eval=FALSE, echo=TRUE}
+
+library(tidyverse)
+library(here)
+library(GGally)
+library(performance)
+library(patchwork)
+library(emmeans)
+
 ```
 
 
@@ -51,7 +62,7 @@ biomass <- read_csv(here::here("files", "biomass.csv"))
 
 ```{r,  eval=F}
 
-biomass <- read_csv(here("data", "biomass.csv"))
+biomass <- read_csv(here("data", "clean", "biomass.csv"))
 
 ```
 
@@ -127,16 +138,11 @@ biomass |>
                alpha = .4,
                outlier.shape = NA)+
   geom_point(aes(colour = Light),
-              position = position_jitterdodge(dodge.width =.5,
-                                              jitter.width = .2)) # Dodge and jitter data points
- # biomass |>  
- #  ggplot(aes(x=Fert, y=Biomass.m2))+
- #  geom_boxplot(aes(fill=Light), 
- #               width = .5,
- #               alpha = .4,
- #               outlier.shape = NA)+
- #  geom_beeswarm(aes(colour = Light),
- #              dodge.width = .5)
+              position = position_jitterdodge(dodge.width =.5,                                    jitter.width = .2)) 
+# Dodge and jitter data points
+# Here dodge is required to separate light groups left and right on the x-axis
+# jitter prevents data overlap
+
 ```
 
 
@@ -148,7 +154,8 @@ biomass |>
   geom_boxplot(width = .5,
                alpha = .4,
                outlier.shape = NA)+
-  geom_beeswarm() 
+ geom_jitter(width = .2) 
+# Here only jitter is required as each treatment combination has its own x-axis position
 ```
 
 :::

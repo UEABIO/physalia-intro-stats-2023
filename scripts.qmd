@@ -76,7 +76,8 @@ penguins <- penguins_clean_names |>
 
 # use mutate and case_when to correct typos 
 penguins <- penguins |> 
-  mutate(sex = case_when( sex == "MALE" ~  "Male", 
+  mutate(sex = case_when( sex == "MALE" ~  "Male",
+                          sex == "FEMALE" ~ "Female"
                           .default = as.character(sex)
   )
   )

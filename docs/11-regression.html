@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.8.27">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="Statistical Skills for Biologists">
 <title>20&nbsp; Regression – Physalia</title>
@@ -71,9 +71,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d6a2ae2cb249da1580f0a11f71b8f854.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-d640c705e8c17715bca3574aa719063f.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-de8274a4d1ecc1e6aaeaf6e5564b5074.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-b754b9fd3853d7e56faef54c29c5d52b.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-e0a43ceb7c9e63dd117097429fd00833.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -694,27 +694,12 @@ window.Quarto = {
   
 
 
-</header><div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Set this up as a new R project, with organised folders.</p>
-<p>This week’s assignment will be to submit this analysis, so make it clear and well organised!</p>
-<p>Make sure to include some data checking in your script.</p>
-</div>
-</div>
-<section id="introduction-to-regression" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="introduction-to-regression">
+</header><section id="introduction-to-regression" class="level2" data-number="20.1"><h2 data-number="20.1" class="anchored" data-anchor-id="introduction-to-regression">
 <span class="header-section-number">20.1</span> Introduction to Regression</h2>
 <p>So far we have used linear models for analyses between <em>two</em> ‘categorical’ explanatory variables e.g.&nbsp;<em>t</em>-tests. But what about when we have a ‘continuous’ explanatory variable? For that we need to use a regression analysis, luckily this is just another ‘special case’ of the linear model, so we can use the same <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function we have already been using, and we can interpret the outputs in the same way.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(rstatix)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(here)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(performance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="linear-regression" class="level2" data-number="20.2"><h2 data-number="20.2" class="anchored" data-anchor-id="linear-regression">
@@ -746,15 +731,8 @@ Warning
 </a>
 </div>
 </div>
-<div class="cell" data-layout-align="center" type="try">
-<div class="try">
-<p>
-Check the data is imported correctly and make sure it is ‘tidy’ with no obvious errors or missing data
-</p>
-</div>
-</div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>janka <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/janka.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>janka <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"clean"</span>, <span class="st">"janka.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="exploratory-analysis-correlation" class="level2" data-number="20.4"><h2 data-number="20.4" class="anchored" data-anchor-id="exploratory-analysis-correlation">
 <span class="header-section-number">20.4</span> Exploratory Analysis &amp; Correlation</h2>
@@ -776,7 +754,7 @@ Solution
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -845,7 +823,7 @@ Solution
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1391,12 +1369,60 @@ Confidence level used: 0.95 </code></pre>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>emmeans<span class="sc">::</span><span class="fu">emmeans</span>(janka_ls1, </span>
 <span id="cb34-2"><a href="#cb34-2"></a>                 <span class="at">specs =</span> <span class="st">"dens"</span>, </span>
-<span id="cb34-3"><a href="#cb34-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">seq =</span> <span class="fu">c</span>(<span class="dv">22</span>,</span>
-<span id="cb34-4"><a href="#cb34-4"></a>                                   <span class="dv">70</span>,</span>
-<span id="cb34-5"><a href="#cb34-5"></a>                                   <span class="at">by =</span> <span class="dv">1</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-3"><a href="#cb34-3"></a>                 <span class="at">at =</span> <span class="fu">list</span>(<span class="at">dens =</span> <span class="fu">seq</span> (<span class="at">from =</span> <span class="dv">22</span>,</span>
+<span id="cb34-4"><a href="#cb34-4"></a>                                       <span class="at">to =</span> <span class="dv">70</span>,</span>
+<span id="cb34-5"><a href="#cb34-5"></a>                                      <span class="at">by =</span> <span class="dv">1</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> dens emmean   SE df lower.CL upper.CL
- 45.7   1469 30.5 34     1407     1531
+   22    105 62.1 34    -21.5      231
+   23    162 60.1 34     40.0      284
+   24    220 58.2 34    101.5      338
+   25    277 56.2 34    162.9      391
+   26    335 54.3 34    224.2      445
+   27    392 52.5 34    285.6      499
+   28    450 50.6 34    346.8      553
+   29    507 48.8 34    408.0      606
+   30    565 47.1 34    469.0      660
+   31    622 45.4 34    530.0      714
+   32    680 43.7 34    590.9      769
+   33    737 42.1 34    651.7      823
+   34    795 40.6 34    712.3      877
+   35    852 39.1 34    772.8      932
+   36    910 37.7 34    833.1      986
+   37    967 36.4 34    893.2     1041
+   38   1025 35.2 34    953.2     1096
+   39   1082 34.2 34   1012.9     1152
+   40   1140 33.2 34   1072.3     1207
+   41   1197 32.4 34   1131.5     1263
+   42   1255 31.7 34   1190.4     1319
+   43   1312 31.1 34   1249.0     1376
+   44   1370 30.8 34   1307.3     1432
+   45   1427 30.6 34   1365.2     1489
+   46   1485 30.5 34   1422.8     1547
+   47   1542 30.6 34   1480.0     1605
+   48   1600 30.9 34   1536.9     1663
+   49   1657 31.4 34   1593.5     1721
+   50   1715 32.0 34   1649.8     1780
+   51   1772 32.8 34   1705.7     1839
+   52   1830 33.7 34   1761.4     1898
+   53   1887 34.7 34   1816.8     1958
+   54   1945 35.9 34   1872.0     2018
+   55   2002 37.1 34   1927.0     2078
+   56   2060 38.4 34   1981.7     2138
+   57   2117 39.9 34   2036.3     2198
+   58   2175 41.4 34   2090.8     2259
+   59   2232 42.9 34   2145.1     2320
+   60   2290 44.6 34   2199.3     2381
+   61   2347 46.3 34   2253.4     2441
+   62   2405 48.0 34   2307.4     2502
+   63   2462 49.8 34   2361.2     2564
+   64   2520 51.6 34   2415.1     2625
+   65   2577 53.5 34   2468.8     2686
+   66   2635 55.3 34   2522.5     2747
+   67   2692 57.3 34   2576.1     2809
+   68   2750 59.2 34   2629.6     2870
+   69   2807 61.2 34   2683.2     2932
+   70   2865 63.2 34   2736.6     2993
 
 Confidence level used: 0.95 </code></pre>
 </div>
@@ -1452,7 +1478,7 @@ Figure
 <span id="cb36-10"><a href="#cb36-10"></a>                 <span class="at">y =</span> hardness))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1475,7 +1501,7 @@ Figure
 <span id="cb37-13"><a href="#cb37-13"></a>        <span class="at">y =</span> hardness))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
@@ -1502,7 +1528,7 @@ Figure
 <span id="cb38-6"><a href="#cb38-6"></a>                       <span class="st">"qq"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figure class="figure"><p><img src="11-regression_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
 </figure>
 </div>
 </div>
